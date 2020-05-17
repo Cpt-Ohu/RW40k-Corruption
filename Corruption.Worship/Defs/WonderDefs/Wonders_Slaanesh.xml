@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <Corruption.Worship.Wonders.WonderDef Abstract="True" Name="SlaaneshWonder">
+    <associatedGods>
+      <li>Slaanesh</li>
+    </associatedGods>
+  </Corruption.Worship.Wonders.WonderDef>
+
+  <Corruption.Worship.Wonders.WonderDef  ParentName="SlaaneshWonder">
+    <defName>SlaaneshOrgy</defName>
+    <label>Orgy</label>
+    <description>Start an orgy in your colony to please the Prince of pleasures.</description>
+    <workerClass>Corruption.Worship.Wonders.WonderWorker_FireIncident</workerClass>
+    <wonderIconPath>UI/Wonders/WondersNurgleBreath</wonderIconPath>
+    <favourCost>0</favourCost>
+    <incident>SlaaneshOrgy</incident>
+    <incidentPoints>3000</incidentPoints>
+  </Corruption.Worship.Wonders.WonderDef>
+   
+
+
+</Defs>

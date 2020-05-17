@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+  <WorshipStandingUnknown>Unknown</WorshipStandingUnknown>
+  <WorshipStandingNoticed>Noticed</WorshipStandingNoticed>
+  <WorshipStandingAcknowledged>Acknowledged</WorshipStandingAcknowledged>
+  <WorshipStandingFavoured>Favoured</WorshipStandingFavoured>
+  <WorshipStandingBlessed>Blessed</WorshipStandingBlessed>
+
+  <AfflictionPure>Pure</AfflictionPure>
+  <AfflictionIntrigued>Intrigued</AfflictionIntrigued>
+  <AfflictionWarptouched>Warptouched</AfflictionWarptouched>
+  <AfflictionTainted>Tainted</AfflictionTainted>
+  <AfflictionCorrupted>Corrupted</AfflictionCorrupted>
+  <AfflictionLost>Lost</AfflictionLost>
+  
+  
+  
+  <TabSoul>Soul</TabSoul>
+  <NextLevel>Next Level</NextLevel>  
+</LanguageData>

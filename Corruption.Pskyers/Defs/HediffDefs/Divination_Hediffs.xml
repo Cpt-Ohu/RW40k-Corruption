@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+  <HediffDef Name="DivinationPsykerHediff" Abstract="True">
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.0, 0.25, 0.85)</defaultLabelColor>
+  </HediffDef>
+
+  <HediffDef ParentName="HediffPsykerBuff">
+    <defName>DiviForewarning</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <label>forewarning</label>
+    <description>The Psyker prophetic powers allow him to walk through a hail of fire or a flurry of blows, dodging and deflecting incoming strikes by knowing their exact trajectories in advance.</description>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>3600~3600</disappearsAfterTicks>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <label>forewarning (minor)</label>
+        <minSeverity>0</minSeverity>
+        <statOffsets>
+          <MeleeDodgeChance>0.2</MeleeDodgeChance>
+          <ArmorRating_Sharp>0.2</ArmorRating_Sharp>
+        </statOffsets>
+      </li>
+      <li>
+        <label>forewarning (timely)</label>
+        <minSeverity>1</minSeverity>
+        <statOffsets>
+          <MeleeDodgeChance>0.3</MeleeDodgeChance>
+          <ArmorRating_Sharp>0.3</ArmorRating_Sharp>
+        </statOffsets>
+      </li>
+      <li>
+        <label>forewarning (insightful)</label>
+        <minSeverity>2</minSeverity>
+        <statOffsets>
+          <MeleeDodgeChance>0.4</MeleeDodgeChance>
+          <ArmorRating_Sharp>0.4</ArmorRating_Sharp>
+        </statOffsets>
+      </li>
+      <li>
+        <label>forewarning (prophetic)</label>
+        <minSeverity>3</minSeverity>
+        <statOffsets>
+          <MeleeDodgeChance>0.5</MeleeDodgeChance>
+          <ArmorRating_Sharp>0.5</ArmorRating_Sharp>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  
+  <HediffDef ParentName="DivinationPsykerHediff">
+    <defName>DiviMisfortune</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <label>misfortune</label>    
+    <description>This pawn's luck has run out, as bullets and strikes seem to find their way through even the thickest armor.</description>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>3600~3600</disappearsAfterTicks>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <label>misfortune (minor)</label>
+        <minSeverity>0</minSeverity>
+        <statOffsets>
+          <ArmorRating_Sharp>-0.05</ArmorRating_Sharp>
+        </statOffsets>
+      </li>
+      <li>
+        <label>misfortune (major)</label>
+        <minSeverity>1</minSeverity>
+        <statOffsets>
+          <ArmorRating_Sharp>-0.2</ArmorRating_Sharp>
+        </statOffsets>
+      </li>
+      <li>
+        <label>misfortune (critical)</label>
+        <minSeverity>2</minSeverity>
+        <statOffsets>
+          <ArmorRating_Sharp>-0.5</ArmorRating_Sharp>
+        </statOffsets>
+      </li>
+      <li>
+        <label>misfortune (lethal)</label>
+        <minSeverity>3</minSeverity>
+        <statOffsets>
+          <ArmorRating_Sharp>-0.85</ArmorRating_Sharp>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName="DivinationPsykerHediff">
+    <defName>DiviPrescience</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <label>prescience</label>
+    <description>A sense of prescience allows this pawns strikes and shots to more reliably hit its target.</description>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>3600~3600</disappearsAfterTicks>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <label>prescience (minor)</label>
+        <minSeverity>0</minSeverity>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.05</ShootingAccuracyPawn>
+          <MeleeHitChance>0.05</MeleeHitChance>
+        </statOffsets>
+      </li>
+      <li>
+        <label>prescience (major)</label>
+        <minSeverity>1</minSeverity>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.1</ShootingAccuracyPawn>
+          <MeleeHitChance>0.1</MeleeHitChance>
+        </statOffsets>
+      </li>
+      <li>
+        <label>prescience (prophetic)</label>
+        <minSeverity>2</minSeverity>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.2</ShootingAccuracyPawn>
+          <MeleeHitChance>0.2</MeleeHitChance>
+        </statOffsets>
+      </li>
+      <li>
+        <label>prescience (divine)</label>
+        <minSeverity>3</minSeverity>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.5</ShootingAccuracyPawn>
+          <MeleeHitChance>0.5</MeleeHitChance>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  
+  <HediffDef ParentName="DivinationPsykerHediff">
+    <defName>DiviInsight</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <label>insight</label>
+    <description>Taking a glimpse at potential reactions allows this pawns conversations to go their desired way.</description>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>3600~3600</disappearsAfterTicks>
+      </li>
+      <li Class="Corruption.Psykers.HediffCompProperties_AffectSkill">
+        <skill>Social</skill>
+        <severityOffsetFactor>10</severityOffsetFactor>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <label>insight (minor)</label>
+        <minSeverity>0</minSeverity>
+        <statOffsets>
+          <SocialImpact>0.1</SocialImpact>
+        </statOffsets>
+      </li>
+      <li>
+        <label>insight (major)</label>
+        <minSeverity>0.3</minSeverity>
+        <statOffsets>
+          <SocialImpact>0.4</SocialImpact>
+        </statOffsets>
+      </li>
+      <li>
+        <label>insight (prophetic)</label>
+        <minSeverity>0.7</minSeverity>
+        <statOffsets>
+          <SocialImpact>0.7</SocialImpact>
+        </statOffsets>
+      </li>
+      <li>
+        <label>insight (divine)</label>
+        <minSeverity>1.0</minSeverity>
+        <statOffsets>
+          <SocialImpact>1.0</SocialImpact>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

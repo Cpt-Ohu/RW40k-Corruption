@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+  <WorshipStandingUnkown>Unknown</WorshipStandingUnkown>
+  <WorshipStandingNoticed>Noticed</WorshipStandingNoticed>
+  <WorshipStandingAcknowledged>Acknowledged</WorshipStandingAcknowledged>
+  <WorshipStandingFavoured>Favoured</WorshipStandingFavoured>
+  <WorshipStandingBlessed>Blessed</WorshipStandingBlessed>
+
+  <NextLevel>Next Level</NextLevel>
+</LanguageData>

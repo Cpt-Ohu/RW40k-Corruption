@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <TraitDef>
+    <defName>Devotion</defName>
+    <ignoreConfigErrors>true</ignoreConfigErrors>
+    <degreeDatas>
+      <li>
+        <label>atheist</label>
+        <description>[PAWN_nameDef] does not believe in divinity. There are no gods among the stars, only cruel and powerful forces worthy of contempt.</description>
+        <degree>-2</degree>
+      </li>
+      <li>
+        <label>agnostic</label>
+        <description>[PAWN_nameDef] holds that one cannot encompass the divine, therefore worshipping gods is a fallacy.</description>
+        <degree>-1</degree>
+      </li>
+      <li>
+        <label>fervent believer</label>
+        <description>[PAWN_nameDef] strongly believes in the divine.</description>
+        <degree>1</degree>
+      </li>
+      <li>
+        <label>fanatic</label>
+        <description>[PAWN_nameDef] dedicates HIS life to the divine and will go to war for HIS believes.</description>
+        <degree>2</degree>
+      </li>
+    </degreeDatas>
+    <commonality>0</commonality>
+  </TraitDef>
+
+</Defs>

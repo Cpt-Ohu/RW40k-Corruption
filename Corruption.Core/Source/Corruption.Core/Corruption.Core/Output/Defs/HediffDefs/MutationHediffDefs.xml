@@ -1,0 +1,1396 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffDef Name="ChaosMutationSource" Abstract="True">
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.32, 0.05, 0.53)</defaultLabelColor>
+    <isBad>true</isBad>
+  </HediffDef>
+  
+  <HediffDef ParentName="ChaosMutationSource">
+    <defName>BoltOfChangeMutationSource</defName>
+    <label>mutation source</label>
+    <stages>
+      <li>
+        <label>mutating (Tzeentch)</label>
+        <description>This pawn was hit by a Bolt of Change, mutating its body and melting its equipment.</description>
+        <painOffset>0.5</painOffset>
+      </li>
+    </stages>
+    <comps>
+      <li Class="Corruption.Core.HediffCompProperties_Mutate">
+        <severityGainPerSecond>0.05</severityGainPerSecond>
+        <mutationHediffs>
+          <li>ChaosMutationClaw</li>
+          <li>ChaosMutationClawedFeet</li>
+          <li>ChaosMutationFeathers</li>
+          <li>ChaosMutationMoreEyes</li>
+          <li>ChaosMutationBeak</li>
+        </mutationHediffs>
+      </li>
+      <li Class="Corruption.Core.HediffCompProperties_DamageEquipment">
+        <damagePerSecond>5</damagePerSecond>
+        <damageDef>Burn</damageDef>
+        <categoriesToDamage>
+          <li>ApparelArmor</li>
+        </categoriesToDamage>
+      </li>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>120~240</disappearsAfterTicks>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef Name="ChaosMutationPart" Abstract="True">
+    <hediffClass>Hediff_AddedPart</hediffClass>
+    <defaultLabelColor>(0.32, 0.05, 0.53)</defaultLabelColor>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="HediffComp_GetsPermanent">
+        <isPermanentInt>True</isPermanentInt>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="ChaosMutationPart">
+    <defName>ChaosMutationClaw</defName>
+    <label>chaos mutation</label>
+    <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
+    <maxSeverity>3</maxSeverity>
+    <stages>
+      <li>
+        <label>mutation (additional digits)</label>
+        <painOffset>0.01</painOffset>
+        <capMods>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>0.05</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>mutation (additional joints)</label>
+        <painOffset>0.05</painOffset>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>0.05</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-0.25</value>
+          </li>
+          <li>
+            <stat>WorkSpeedGlobal</stat>
+            <value>0.03</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (claw)</label>
+        <painOffset>0.1</painOffset>
+        <minSeverity>2</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>-0.05</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>WorkSpeedGlobal</stat>
+            <value>-0.01</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-0.5</value>
+          </li>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>0.05</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (monstrous claw)</label>
+        <painOffset>0.15</painOffset>
+        <minSeverity>3</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>WorkSpeedGlobal</stat>
+            <value>-0.05</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-1</value>
+          </li>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>0.25</value>
+          </li>
+        </statOffsets>
+      </li>
+    </stages>
+    <addedPartProps>
+      <solid>true</solid>
+      <partEfficiency>1.00</partEfficiency>
+    </addedPartProps>
+    <comps>
+      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
+        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+        <partToReplace>Hand</partToReplace>
+        <severityOnExisting>0.5</severityOnExisting>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="ChaosMutationPart">
+    <defName>ChaosMutationTentacledHand</defName>
+    <label>chaos mutation</label>
+    <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
+    <maxSeverity>10</maxSeverity>
+    <stages>
+      <li>
+        <label>mutation (additional digits)</label>
+        <painOffset>0.01</painOffset>
+        <capMods>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>0.05</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>mutation (additional joints)</label>
+        <painOffset>0.05</painOffset>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>0.05</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>WorkSpeedGlobal</stat>
+            <value>0.03</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-0.25</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (tentacled fingers)</label>
+        <painOffset>0.1</painOffset>
+        <minSeverity>2</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>WorkSpeedGlobal</stat>
+            <value>0.11</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-0.5</value>
+          </li>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>-0.01</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (tentacled hand)</label>
+        <painOffset>0.15</painOffset>
+        <minSeverity>3</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>0.13</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>WorkSpeedGlobal</stat>
+            <value>0.15</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-1</value>
+          </li>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>0.25</value>
+          </li>
+        </statOffsets>
+      </li>
+    </stages>
+    <addedPartProps>
+      <solid>false</solid>
+      <partEfficiency>1.00</partEfficiency>
+    </addedPartProps>
+    <comps>
+      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
+        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+        <partToReplace>Hand</partToReplace>
+        <severityOnExisting>0.5</severityOnExisting>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- ========================= Feet ===================================== -->
+
+  <HediffDef ParentName="ChaosMutationPart">
+    <defName>ChaosMutationTentacledFeet</defName>
+    <label>chaos mutation</label>
+    <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
+    <maxSeverity>3</maxSeverity>
+    <stages>
+      <li>
+        <label>mutation (additional digits)</label>
+        <painOffset>0.01</painOffset>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>mutation (additional joints)</label>
+        <painOffset>0.05</painOffset>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>MoveSpeed</stat>
+            <value>-0.2</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (tentacled toes)</label>
+        <painOffset>0.1</painOffset>
+        <minSeverity>2</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>MoveSpeed</stat>
+            <value>-0.11</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-0.5</value>
+          </li>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>0.05</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (tentacled foot)</label>
+        <painOffset>0.15</painOffset>
+        <minSeverity>3</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>MoveSpeed</stat>
+            <value>-0.11</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-1</value>
+          </li>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>0.1</value>
+          </li>
+        </statOffsets>
+      </li>
+    </stages>
+    <addedPartProps>
+      <solid>false</solid>
+      <partEfficiency>1.00</partEfficiency>
+    </addedPartProps>
+    <comps>
+      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
+        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+        <partToReplace>Foot</partToReplace>
+        <severityOnExisting>0.5</severityOnExisting>
+      </li>
+    </comps>
+  </HediffDef>
+  
+  <HediffDef ParentName="ChaosMutationPart">
+    <defName>ChaosMutationClawedFeet</defName>
+    <label>chaos mutation</label>
+    <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
+    <maxSeverity>3</maxSeverity>
+    <stages>
+      <li>
+        <label>mutation (additional digits)</label>
+        <painOffset>0.01</painOffset>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>mutation (additional joints)</label>
+        <painOffset>0.05</painOffset>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>MoveSpeed</stat>
+            <value>-0.2</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (clawed toes)</label>
+        <painOffset>0.1</painOffset>
+        <minSeverity>2</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>MoveSpeed</stat>
+            <value>-0.11</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-0.3</value>
+          </li>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>0.05</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (clawed foot)</label>
+        <painOffset>0.15</painOffset>
+        <minSeverity>3</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>MoveSpeed</stat>
+            <value>-0.05</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-1</value>
+          </li>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>0.25</value>
+          </li>
+        </statOffsets>
+      </li>
+    </stages>
+    <addedPartProps>
+      <solid>false</solid>
+      <partEfficiency>1.00</partEfficiency>
+    </addedPartProps>
+    <comps>
+      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
+        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+        <partToReplace>Foot</partToReplace>
+        <severityOnExisting>0.5</severityOnExisting>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="ChaosMutationPart">
+    <defName>ChaosMutationHooves</defName>
+    <label>chaos mutation</label>
+    <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
+    <maxSeverity>2</maxSeverity>
+    <stages>
+      <li>
+        <label>mutation (webbed foot)</label>
+        <painOffset>0.01</painOffset>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>mutation (proto-hoof)</label>
+        <painOffset>0.05</painOffset>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>0.05</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>MoveSpeed</stat>
+            <value>0.05</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (hoof)</label>
+        <painOffset>0.1</painOffset>
+        <minSeverity>2</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>MoveSpeed</stat>
+            <value>0.1</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-0.5</value>
+          </li>
+        </statOffsets>
+      </li>
+    </stages>
+    <addedPartProps>
+      <solid>false</solid>
+      <partEfficiency>1.00</partEfficiency>
+    </addedPartProps>
+    <comps>
+      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
+        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+        <partToReplace>Foot</partToReplace>
+        <severityOnExisting>0.5</severityOnExisting>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- ========================= Skin ===================================== -->
+
+
+  <HediffDef ParentName="ChaosMutationPart">
+    <defName>ChaosMutationFeathers</defName>
+    <label>chaos mutation</label>
+    <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
+    <maxSeverity>4</maxSeverity>
+    <stages>
+      <li>
+        <label>mutation (stain)</label>
+        <painOffset>0.05</painOffset>
+      </li>
+      <li>
+        <label>mutation (rashes)</label>
+        <painOffset>0.2</painOffset>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>mutation (hardened skinflakes)</label>
+        <painOffset>0.1</painOffset>
+        <minSeverity>2</minSeverity>
+        <statOffsets>
+          <li>
+            <stat>ArmorRating_Sharp</stat>
+            <value>0.05</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-0.3</value>
+          </li>
+          <li>
+            <stat>Insulation_Cold</stat>
+            <value>0.1</value>
+          </li>          
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (proto-feathers)</label>
+        <painOffset>0.05</painOffset>
+        <minSeverity>3</minSeverity>
+        <statOffsets>
+          <li>
+            <stat>ArmorRating_Sharp</stat>
+            <value>0.25</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>0.5</value>
+          </li>
+          <li>
+            <stat>Insulation_Cold</stat>
+            <value>0.2</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (feathering)</label>
+        <painOffset>0.15</painOffset>
+        <minSeverity>4</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>MoveSpeed</stat>
+            <value>0.05</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>1</value>
+          </li>
+          <li>
+            <stat>Insulation_Cold</stat>
+            <value>0.3</value>
+          </li>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName="ChaosMutationPart">
+    <defName>ChaosMutationScalySkin</defName>
+    <label>chaos mutation</label>
+    <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
+    <maxSeverity>4</maxSeverity>
+    <stages>
+      <li>
+        <label>mutation (stain)</label>
+        <painOffset>0.05</painOffset>
+      </li>
+      <li>
+        <label>mutation (rashes)</label>
+        <painOffset>0.2</painOffset>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>mutation (hardened skinflakes)</label>
+        <painOffset>0.1</painOffset>
+        <minSeverity>2</minSeverity>
+        <statOffsets>
+          <li>
+            <stat>ArmorRating_Sharp</stat>
+            <value>0.05</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-0.3</value>
+          </li>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>0.02</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (scaly skin)</label>
+        <painOffset>0.15</painOffset>
+        <minSeverity>3</minSeverity>
+        <statOffsets>
+          <li>
+            <stat>ArmorRating_Sharp</stat>
+            <value>0.25</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-1</value>
+          </li>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>0.05</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (dragonscales)</label>
+        <painOffset>0.15</painOffset>
+        <minSeverity>4</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>MoveSpeed</stat>
+            <value>-0.05</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-1</value>
+          </li>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>0.25</value>
+          </li>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  
+  <HediffDef ParentName="ChaosMutationPart">
+    <defName>ChaosMutationBulbousSkin</defName>
+    <label>chaos mutation</label>
+    <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
+    <maxSeverity>4</maxSeverity>
+    <stages>
+      <li>
+        <label>mutation (stain)</label>
+        <painOffset>0.05</painOffset>
+      </li>
+      <li>
+        <label>mutation (rashes)</label>
+        <painOffset>0.2</painOffset>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>mutation (skingrowths)</label>
+        <painOffset>0.1</painOffset>
+        <minSeverity>2</minSeverity>
+        <statOffsets>
+          <li>
+            <stat>MaxHitPoints</stat>
+            <value>20</value>
+          </li>
+          <li>
+            <stat>ArmorRating_Blunt</stat>
+            <value>0.05</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-1</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (second skin)</label>
+        <painOffset>0.15</painOffset>
+        <minSeverity>3</minSeverity>
+        <statOffsets>
+          <li>
+            <stat>MaxHitPoints</stat>
+            <value>40</value>
+          </li>
+          <li>
+            <stat>ArmorRating_Blunt</stat>
+            <value>0.1</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-2</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (bulbous hide)</label>
+        <painOffset>0.15</painOffset>
+        <minSeverity>4</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>MaxHitPoints</stat>
+            <value>70</value>
+          </li>
+          <li>
+            <stat>ArmorRating_Blunt</stat>
+            <value>0.15</value>
+          </li>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-3</value>
+          </li>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ========================= Head ===================================== -->
+  
+  <HediffDef ParentName="ChaosMutationPart">
+    <defName>ChaosMutationHornedHead</defName>
+    <label>chaos mutation</label>
+    <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
+    <maxSeverity>2</maxSeverity>
+    <stages>
+      <li>
+        <label>mutation (itching)</label>
+        <painOffset>0.1</painOffset>
+      </li>
+      <li>
+        <label>mutation (thorny forehead)</label>
+        <painOffset>0.03</painOffset>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.05</offset>
+          </li>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>-0.03</offset>
+          </li>             
+        </capMods>     
+        <statOffsets>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>0.1</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (horned head)</label>
+        <painOffset>0.05</painOffset>
+        <minSeverity>2</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.05</offset>
+          </li>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>-0.1</offset>
+          </li>             
+        </capMods>      
+        <statOffsets>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>0.3</value>
+          </li>
+        </statOffsets>    
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <HediffDef ParentName="ChaosMutationPart">
+    <defName>ChaosMutationMoreEyes</defName>
+    <label>chaos mutation</label>
+    <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
+    <maxSeverity>3</maxSeverity>
+    <stages>
+      <li>
+        <label>mutation (itching)</label>
+        <painOffset>0.1</painOffset>
+      </li>
+      <li>
+        <label>mutation (spotted forehead)</label>
+        <painOffset>0.03</painOffset>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.05</offset>
+          </li>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>-0.03</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>0.1</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (third eye)</label>
+        <painOffset>0.05</painOffset>
+        <minSeverity>2</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.05</offset>
+          </li>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>0.5</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>MeleeDodgeChance</stat>
+            <value>0.1</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (warpspawned eyes)</label>
+        <painOffset>0.05</painOffset>
+        <minSeverity>3</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.05</offset>
+          </li>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>0.5</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>MeleeDodgeChance</stat>
+            <value>0.2</value>
+          </li>
+          <li>
+            <stat>PsychicEntropyMax</stat>
+            <value>20</value>
+          </li>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ========================= Mouth ===================================== -->
+  
+  <HediffDef ParentName="ChaosMutationPart">
+    <defName>ChaosMutationMaw</defName>
+    <label>chaos mutation</label>
+    <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
+    <maxSeverity>3</maxSeverity>
+    <stages>
+      <li>
+        <label>mutation (enlarged mouth)</label>
+        <painOffset>0.05</painOffset>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.05</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>0.1</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>mutation (additional teeth)</label>
+        <painOffset>0.05</painOffset>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.1</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>0.05</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-0.25</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (fanged mouth)</label>
+        <painOffset>0.05</painOffset>
+        <minSeverity>2</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.15</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-0.55</value>
+          </li>
+          <li>
+            <stat>EatingSpeed</stat>
+            <value>1</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (maw)</label>
+        <painOffset>0.1</painOffset>
+        <minSeverity>3</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.3</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>0.3</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-2</value>
+          </li>
+          <li>
+            <stat>EatingSpeed</stat>
+            <value>3</value>
+          </li>
+          <li>
+            <stat>HungerRateMultiplier</stat>
+            <value>1</value>
+          </li>          
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (monstrous maw)</label>
+        <painOffset>0.1</painOffset>
+        <minSeverity>3</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.5</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>0.5</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-3</value>
+          </li>
+          <li>
+            <stat>EatingSpeed</stat>
+            <value>5</value>
+          </li>
+          <li>
+            <stat>HungerRateMultiplier</stat>
+            <value>2</value>
+          </li>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>0.5</value>
+          </li>
+        </statOffsets>
+      </li>
+    </stages>
+    <addedPartProps>
+      <solid>true</solid>
+      <partEfficiency>1.00</partEfficiency>
+    </addedPartProps>
+    <comps>
+      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
+        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+        <partToReplace>Jaw</partToReplace>
+        <severityOnExisting>0.5</severityOnExisting>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="ChaosMutationPart">
+    <defName>ChaosMutationTentacledMouth</defName>
+    <label>chaos mutation</label>
+    <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
+    <maxSeverity>3</maxSeverity>
+    <stages>
+      <li>
+        <label>mutation (enlarged lips)</label>
+        <painOffset>0.05</painOffset>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.05</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>0.5</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (mouth flaps)</label>
+        <painOffset>0.1</painOffset>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.2</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-1</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (tentacled mouth)</label>
+        <painOffset>0.15</painOffset>
+        <minSeverity>2</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.3</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>0.2</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-2</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (tentacled mouth)</label>
+        <painOffset>0.1</painOffset>
+        <minSeverity>3</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.3</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>0.3</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-3</value>
+          </li>
+          <li>
+            <stat>SocialImpact</stat>
+            <value>-0.3</value>
+          </li>
+        </statOffsets>
+      </li>
+    </stages>
+    <addedPartProps>
+      <solid>true</solid>
+      <partEfficiency>1.00</partEfficiency>
+    </addedPartProps>
+    <comps>
+      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
+        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+        <partToReplace>Jaw</partToReplace>
+        <severityOnExisting>0.5</severityOnExisting>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="ChaosMutationPart">
+    <defName>ChaosMutationMandibles</defName>
+    <label>chaos mutation</label>
+    <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
+    <maxSeverity>3</maxSeverity>
+    <stages>
+      <li>
+        <label>mutation (enlarged lips)</label>
+        <painOffset>0.05</painOffset>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.05</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>0.5</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (mouth flaps)</label>
+        <painOffset>0.1</painOffset>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.2</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-1</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (vertical mouth)</label>
+        <painOffset>0.15</painOffset>
+        <minSeverity>2</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.3</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>0.2</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-2</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (mandibles)</label>
+        <painOffset>0.1</painOffset>
+        <minSeverity>3</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.1</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-2</value>
+          </li>
+          <li>
+            <stat>SocialImpact</stat>
+            <value>-0.3</value>
+          </li>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>0.3</value>
+          </li>
+        </statOffsets>
+      </li>
+    </stages>
+    <addedPartProps>
+      <solid>true</solid>
+      <partEfficiency>1.00</partEfficiency>
+    </addedPartProps>
+    <comps>
+      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
+        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+        <partToReplace>Jaw</partToReplace>
+        <severityOnExisting>0.5</severityOnExisting>
+      </li>
+    </comps>
+  </HediffDef>
+  
+  <HediffDef ParentName="ChaosMutationPart">
+    <defName>ChaosMutationBeak</defName>
+    <label>chaos mutation</label>
+    <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
+    <maxSeverity>3</maxSeverity>
+    <stages>
+      <li>
+        <label>mutation (enlarged lips)</label>
+        <painOffset>0.05</painOffset>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.05</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>0.5</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (mouth flaps)</label>
+        <painOffset>0.1</painOffset>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.2</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-1</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (protruded mouthflaps)</label>
+        <painOffset>0.15</painOffset>
+        <minSeverity>2</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.3</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>-0.2</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-2</value>
+          </li>
+        </statOffsets>
+      </li>
+      <li>
+        <label>mutation (beak)</label>
+        <painOffset>0.1</painOffset>
+        <minSeverity>3</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <offset>-0.5</offset>
+          </li>
+          <li>
+            <capacity>Eating</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <li>
+            <stat>PawnBeauty</stat>
+            <value>-1</value>
+          </li>
+          <li>
+            <stat>SocialImpact</stat>
+            <value>-0.3</value>
+          </li>
+          <li>
+            <stat>MeleeDPS</stat>
+            <value>0.1</value>
+          </li>
+        </statOffsets>
+      </li>
+    </stages>
+    <addedPartProps>
+      <solid>true</solid>
+      <partEfficiency>1.00</partEfficiency>
+    </addedPartProps>
+    <comps>
+      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
+        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+        <partToReplace>Jaw</partToReplace>
+        <severityOnExisting>0.5</severityOnExisting>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>

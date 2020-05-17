@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+  <Corruption.Core.Gods.GodDef>
+    <defName>Emperor</defName>
+    <label>Emperor</label>
+    <description>The Emperor of Mankind is the sovereign of the Imperium of Man, and Father, Guardian, and God of the human race. He has sat immobile within the Golden Throne of Terra for ten thousand years.</description>
+    <texturePath>UI/Emperor_bg</texturePath>
+    <smallTexturePath>UI/Emperor_bg</smallTexturePath>
+    <mainColor>(0.93, 0.78, 0.19)</mainColor>
+    <patronTraits>
+      <li>Emperor_Hope</li>
+    </patronTraits>
+    <psykerPowers>
+    </psykerPowers>
+  </Corruption.Core.Gods.GodDef>
+
+  <Corruption.Core.Gods.GodDef>
+    <defName>Khorne</defName>
+    <label>Khorne</label>
+    <description>Khorne, also called the Blood God and the Lord of Skulls, is the Chaos God of blood, war and murder.</description>
+    <texturePath>UI/Khorne_bg</texturePath>
+    <smallTexturePath>UI/Khorne_bg</smallTexturePath>
+    <worshipBarPath>UI/Background/WorshipBarKhorne</worshipBarPath>
+    <mainColor>(0.7, 0.0, 0.0)</mainColor>
+    <patronTraits>
+      <li>Khorne_Fervor</li>
+    </patronTraits>
+  </Corruption.Core.Gods.GodDef>
+
+  <Corruption.Core.Gods.GodDef>
+    <defName>Nurgle</defName>
+    <label>Nurgle</label>
+    <description>Nurgle, also known as the Plague Lord, is the Chaos God of disease, decay, death and destruction.</description>
+    <texturePath>UI/Nurgle_bg</texturePath>
+    <smallTexturePath>UI/Nurgle_bg</smallTexturePath>
+    <worshipBarPath>UI/Background/WorshipBarNurgle</worshipBarPath>
+    <mainColor>(0.43, 0.78, 0.43)</mainColor>
+    <patronTraits>
+      <li>Nurgle_Fervor</li>
+    </patronTraits>
+  </Corruption.Core.Gods.GodDef>
+
+  <Corruption.Core.Gods.GodDef>
+    <defName>Tzeentch</defName>
+    <label>Tzeentch</label>
+    <description>Tzeentch, also known as the Changer of Ways, and the Architect of Fate, is the Chaos God of change, evolution, intrigue and sorcery, he who weaves the threads that connect every action, plot and subtle intrigue in a galaxy-wide game of manipulation and subterfuge.</description>
+    <texturePath>UI/Tzeentch_bg</texturePath>
+    <smallTexturePath>UI/Tzeentch_bg</smallTexturePath>
+    <worshipBarPath>UI/Background/WorshipBarTzeentch</worshipBarPath>
+    <mainColor>(0.42, 0.7, 1.0)</mainColor>
+    <patronTraits>
+      <li>Tzeentch_Fervor</li>
+    </patronTraits>
+    <psykerPowers>
+    </psykerPowers>
+  </Corruption.Core.Gods.GodDef>
+
+  <Corruption.Core.Gods.GodDef>
+    <defName>Slaanesh</defName>
+    <label>Slaanesh</label>
+    <description>Slaanesh, also known as the Dark Prince, is the Chaos God of pleasure, excess and decadence. Lust, pride and self-indulgence are the hallmarks of all who follow him.</description>
+    <texturePath>UI/Slaanesh_bg</texturePath>
+    <smallTexturePath>UI/Slaanesh_bg</smallTexturePath>
+    <worshipBarPath>UI/Background/WorshipBarSlaanesh</worshipBarPath>
+    <mainColor>(1.0, 0.5, 1.0)</mainColor>
+    <patronTraits>
+      <li>Slaanesh_Fervor</li>
+    </patronTraits>
+  </Corruption.Core.Gods.GodDef>
+
+
+  
+
+</Defs>

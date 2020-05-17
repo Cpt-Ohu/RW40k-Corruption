@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <HediffDef ParentName="HediffPsykerBuff">
+    <defName>KhorneBerserkerTrance</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.9, 0.1, 0.1)</defaultLabelColor>
+    <label>khornate berserker trance</label>
+    <description>The pawn is in a state of murderous rage in the name of the Bloodgod</description>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>3600~3600</disappearsAfterTicks>
+      </li>
+      <li Class="Corruption.Core.HediffCompProperties_GiveTrait">
+        <trait>Bloodlust</trait>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <capMods>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>1.5</offset>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>0.5</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <ToxicSensitivity>-0.5</ToxicSensitivity>
+          <PainShockThreshold>20.5</PainShockThreshold>
+          <MeleeHitChance>2.5</MeleeHitChance>
+          <MeleeDodgeChance>0.4</MeleeDodgeChance>
+        </statOffsets>
+        <mentalStateGivers>
+          <li>
+            <mentalState>Berserk</mentalState>
+            <mtbDays>1</mtbDays>
+          </li>
+        </mentalStateGivers>
+      </li>
+    </stages>
+  </HediffDef>
+</Defs>

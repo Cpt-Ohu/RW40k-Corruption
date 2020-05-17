@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+  <ColonyPantheon>Colony Religion: {RELIGION}</ColonyPantheon>
+  <FavourCost>Favour Required: {FAVOUR_COST}</FavourCost>
+  <PantheonMembers>Members of the Pantheon</PantheonMembers>
+  <PantheonAttributes>Attributes</PantheonAttributes>
+  <FavourTab>Favour</FavourTab>
+  <WorshippersTab>Worshippers</WorshippersTab>
+  <Followers>Followers</Followers>
+  <PlacesOfWorship>Places of Worship</PlacesOfWorship>
+  <GrowingFlockMessage>Your colony has been joined by {COUNT} believers.</GrowingFlockMessage>
+  <LetterLabelGrowingFlock>Growing Flock</LetterLabelGrowingFlock>
+</LanguageData>

@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <AbilityDef ParentName="PsykerAbilityBase">
+    <defName>Doombolt</defName>
+    <label>doombolt</label>
+    <description>The casters spite and loathing given form as bolts of dark energy launched against an enemy.</description>
+    <level>20</level>
+    <iconPath>UI/Abilities/Doombolt</iconPath>
+    <hotKey>Misc6</hotKey>
+    <statBases>
+      <Ability_EntropyGain>20</Ability_EntropyGain>
+      <Ability_Duration>8</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <defaultProjectile>PSYDoomBolt</defaultProjectile>
+      <warmupTime>5.0</warmupTime>
+      <range>25.9</range>
+      <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+      <burstShotCount>3</burstShotCount>
+      <soundCast>WarpBolt</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityEffect">
+        <compClass>Corruption.Psykers.CompAbilityEffect_PsyProjectile</compClass>
+        <psychic>False</psychic>
+        <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
+        <applicableToMechs>True</applicableToMechs>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="PsykerAbilityBase">
+    <defName>GiftOfChaos</defName>
+    <label>gift of chaos</label>
+    <description>A whirling flash of Chaos energy is unleashed by the sorcerer, enveloping his target and rapidly mutating them. Those who survive the distortion of flesh and bone become a Chaos Spawn.</description>
+    <level>30</level>
+    <iconPath>UI/Abilities/GiftOfChaos</iconPath>
+    <hotKey>Misc6</hotKey>
+    <statBases>
+      <Ability_EntropyGain>20</Ability_EntropyGain>
+      <Ability_Duration>8</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <defaultProjectile>PSYGiftOfChaos</defaultProjectile>
+      <warmupTime>5.0</warmupTime>
+      <range>25.9</range>
+      <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+      <burstShotCount>3</burstShotCount>
+      <soundCast>WarpBolt</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityEffect">
+        <compClass>Corruption.Psykers.CompAbilityEffect_PsyProjectile</compClass>
+        <psychic>False</psychic>
+        <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="PsykerAbilityBase">
+    <defName>SingleMutation</defName>
+    <label>mutation</label>
+    <description>A conduit is opened to the warp and daemons temporarily possess the bodies of the target, mutating them and giving them increased strength and resilience.</description>
+    <level>20</level>
+    <iconPath>UI/Abilities/Painblock</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>10</Ability_EntropyGain>
+      <Ability_Duration>120</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <warmupTime>3.25</warmupTime>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+        <canTargetAnimals>True</canTargetAnimals>
+        <canTargetLocations>True</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>MutationBuff</hediffDef>
+        <durationMultiplier>PsychicSensitivity</durationMultiplier>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="PsykerAbilityBase">
+    <defName>MassMutation</defName>
+    <label>mass mutation</label>
+    <description>A conduit is opened to the warp and daemons temporarily possess the bodies of the targets, mutating them and giving them increased strength and resilience.</description>
+    <level>30</level>
+    <iconPath>UI/Abilities/Painblock</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>10</Ability_EntropyGain>
+      <Ability_Duration>120</Ability_Duration>
+      <Ability_EffectRadius>5</Ability_EffectRadius>
+    </statBases>
+    <verbProperties>
+      <warmupTime>5.25</warmupTime>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+        <canTargetAnimals>True</canTargetAnimals>
+        <canTargetLocations>True</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>MutationBuff</hediffDef>
+        <durationMultiplier>PsychicSensitivity</durationMultiplier>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+    </comps>
+  </AbilityDef>
+
+
+  <AbilityDef ParentName="PsykerAbilityBase">
+    <defName>Warptime</defName>
+    <label>warptime</label>
+    <description>The sorcerer alters the flow of time around himself, allowing for attacks with supernatural precision.</description>
+    <level>10</level>
+    <iconPath>UI/Abilities/Painblock</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>20</Ability_EntropyGain>
+      <Ability_Duration>120</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>Warptime</hediffDef>
+        <durationMultiplier>PsychicSensitivity</durationMultiplier>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+    </comps>
+  </AbilityDef>
+
+</Defs>

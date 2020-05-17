@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+
+
+  <!-- ========================= Bolt of Change ===================================== -->
+
+
+
+  <AbilityDef ParentName="PsykerAbilityBase" Name="BoltOfChange">
+    <defName>BoltOfChangeI</defName>
+    <label>bolt of change</label>
+    <description>The sorcerer hurls a bolt of roiling energy, formed of raw immaterium, which causes rapid mutation, melting flesh and vaporizing metal.</description>
+    <level>20</level>
+    <iconPath>UI/Abilities/BoltOfChange</iconPath>
+    <hotKey>Misc6</hotKey>
+    <statBases>
+      <Ability_EntropyGain>20</Ability_EntropyGain>
+    </statBases>
+    <verbProperties>
+      <defaultProjectile>PSYDoomBolt</defaultProjectile>
+      <warmupTime>5.0</warmupTime>
+      <range>15.0</range>
+      <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+      <burstShotCount>1</burstShotCount>
+      <soundCast>WarpBolt</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityEffect">
+        <compClass>Corruption.Psykers.CompAbilityEffect_PsyProjectile</compClass>
+        <psychic>False</psychic>
+        <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
+        <applicableToMechs>True</applicableToMechs>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="BoltOfChange">
+    <defName>BoltOfChangeII</defName>
+    <label>bolt of change</label>
+    <description>The sorcerer hurls a bolt of roiling energy, formed of raw immaterium, which causes rapid mutation, melting flesh and vaporizing metal.</description>
+    <level>30</level>
+    <iconPath>UI/Abilities/BoltOfChange</iconPath>
+    <hotKey>Misc6</hotKey>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+    </statBases>
+    <verbProperties>
+      <defaultProjectile>PSYDoomBolt</defaultProjectile>
+      <warmupTime>5.0</warmupTime>
+      <range>20.9</range>
+      <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+      <burstShotCount>1</burstShotCount>
+      <soundCast>WarpBolt</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </verbProperties>
+  </AbilityDef>
+
+  <AbilityDef ParentName="BoltOfChange">
+    <defName>BoltOfChangeIII</defName>
+    <label>bolt of change</label>
+    <description>The sorcerer hurls a bolt of roiling energy, formed of raw immaterium, which causes rapid mutation, melting flesh and vaporizing metal.</description>
+    <level>40</level>
+    <iconPath>UI/Abilities/BoltOfChange</iconPath>
+    <hotKey>Misc6</hotKey>
+    <statBases>
+      <Ability_EntropyGain>40</Ability_EntropyGain>
+    </statBases>
+    <verbProperties>
+      <defaultProjectile>PSYDoomBolt</defaultProjectile>
+      <warmupTime>5.0</warmupTime>
+      <range>25.9</range>
+      <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+      <burstShotCount>1</burstShotCount>
+      <soundCast>WarpBolt</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </verbProperties>
+  </AbilityDef>
+
+  <AbilityDef ParentName="BoltOfChange">
+    <defName>BoltOfChangeIV</defName>
+    <label>bolt of change</label>
+    <description>The sorcerer hurls a bolt of roiling energy, formed of raw immaterium, which causes rapid mutation, melting flesh and vaporizing metal.</description>
+    <level>50</level>
+    <iconPath>UI/Abilities/BoltOfChange</iconPath>
+    <hotKey>Misc6</hotKey>
+    <statBases>
+      <Ability_EntropyGain>50</Ability_EntropyGain>
+      <Ability_EffectRadius>8</Ability_EffectRadius>
+    </statBases>
+    <verbProperties>
+      <defaultProjectile>PSYDoomBolt</defaultProjectile>
+      <warmupTime>5.0</warmupTime>
+      <range>25.9</range>
+      <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+      <burstShotCount>1</burstShotCount>
+      <soundCast>WarpBolt</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </verbProperties>
+  </AbilityDef>
+  
+
+  <!-- ========================= Flickering Fire ===================================== -->
+  
+  
+  <AbilityDef ParentName="PsykerAbilityBase" Name="FlickeringFire">
+    <defName>FlickeringFireI</defName>
+    <label>flickering fire</label>
+    <description>The psyker causes his enemies to spontaneously combust.</description>
+    <level>30</level>
+    <iconPath>UI/Abilities/HealMinor</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+    </statBases>
+    <verbProperties>
+      <range>10.0</range>
+      <warmupTime>3.25</warmupTime>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+        <canTargetAnimals>True</canTargetAnimals>
+        <canTargetLocations>False</canTargetLocations>
+        <canTargetMechs>False</canTargetMechs>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="Corruption.Psykers.CompAbilityEffect_DirectDamage">
+        <compClass>Corruption.Psykers.CompProperties_DirectDamage</compClass>
+        <damageDef>Flame</damageDef>
+        <damage>10</damage>
+        <moteDef>Mote_FireGlow</moteDef>
+        <psychic>False</psychic>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="FlickeringFire">
+    <defName>FlickeringFireII</defName>
+    <level>40</level>
+    <iconPath>UI/Abilities/HealMinor</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>40</Ability_EntropyGain>
+      <Ability_EffectRadius>5</Ability_EffectRadius>
+    </statBases>
+    <verbProperties>
+      <range>15.0</range>
+      <warmupTime>3.25</warmupTime>
+    </verbProperties>
+  </AbilityDef>
+
+  <AbilityDef ParentName="FlickeringFire">
+    <defName>FlickeringFireIII</defName>
+    <level>40</level>
+    <iconPath>UI/Abilities/HealMinor</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>40</Ability_EntropyGain>
+      <Ability_EffectRadius>8</Ability_EffectRadius>
+    </statBases>
+    <verbProperties>
+      <range>20.0</range>
+      <warmupTime>3.25</warmupTime>
+    </verbProperties>
+  </AbilityDef>
+
+  <AbilityDef ParentName="PsykerAbilityBase" Name="TwistingPath">
+    <defName>TwistingPathI</defName>
+    <label>twisting path</label>
+    <description>The sorcerer reaches into his enemy's mind, causing an unsettling waking dream in which they ally themselves with the Dark Powers.</description>
+    <level>20</level>
+    <iconPath>UI/Abilities/Stun</iconPath>
+    <hotKey>Misc3</hotKey>
+    <statBases>
+      <Ability_EntropyGain>15</Ability_EntropyGain>
+      <Ability_Duration>3</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <range>15.0</range>
+      <targetParams>
+        <canTargetAnimals>True</canTargetAnimals>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class = "CompProperties_AbilityEffectWithDuration">
+        <compClass>CompAbilityEffect_Stun</compClass>
+        <durationMultiplier>PsychicSensitivity</durationMultiplier>
+        <psychic>True</psychic>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="TwistingPath">
+    <defName>TwistingPathII</defName>
+    <level>30</level>
+    <iconPath>UI/Abilities/Stun</iconPath>
+    <hotKey>Misc3</hotKey>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+      <Ability_Duration>20</Ability_Duration>
+    </statBases>
+  </AbilityDef>
+
+  <AbilityDef ParentName="TwistingPath">
+    <defName>TwistingPathIII</defName>
+    <level>40</level>
+    <iconPath>UI/Abilities/Stun</iconPath>
+    <hotKey>Misc3</hotKey>
+    <statBases>
+      <Ability_EntropyGain>40</Ability_EntropyGain>
+      <Ability_Duration>30</Ability_Duration>
+    </statBases>
+  </AbilityDef>
+
+  <AbilityDef ParentName="TwistingPath">
+    <defName>TwistingPathIV</defName>
+    <level>50</level>
+    <iconPath>UI/Abilities/Stun</iconPath>
+    <hotKey>Misc3</hotKey>
+    <statBases>
+      <Ability_EntropyGain>40</Ability_EntropyGain>
+      <Ability_Duration>30</Ability_Duration>
+      <Ability_EffectRadius>8</Ability_EffectRadius>
+    </statBases>
+  </AbilityDef>
+
+
+  <!-- ========================= Vortex ===================================== -->
+
+  <AbilityDef ParentName="PsykerAbilityBase" Name="TzeentchFirestorm">
+    <defName>TzeentchFirestormI</defName>
+    <label>tzeentch's firestorm</label>
+    <description>The Psyker conjures a storm of pink and blue fire that mutates his foes into foul Chaos Spawns.</description>
+    <level>30</level>
+    <iconPath>UI/Abilities/TelekVortexOfDoom</iconPath>
+    <hotKey>Misc10</hotKey>
+    <statBases>
+      <Ability_EntropyGain>35</Ability_EntropyGain>
+      <Ability_Duration>3</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <warmupTime>5</warmupTime>
+      <range>15.0</range>
+      <targetParams>
+        <canTargetPawns>False</canTargetPawns>
+        <canTargetLocations>True</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class = "Corruption.Psykers.CompProperties_SpawnVortex">
+        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnVortex</compClass>
+        <vortexToSpawn>TzeentchFirestorm</vortexToSpawn>
+        <radius>3</radius>
+        <screenShakeIntensity>2.0</screenShakeIntensity>
+        <clamorType>Ability</clamorType>
+        <clamorRadius>25</clamorRadius>
+        <sound>PsycastWallraise</sound>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="TzeentchFirestorm">
+    <defName>TzeentchFirestormII</defName>
+    <label>tzeentch's firestorm</label>
+    <description>The Psyker conjures a storm of pink and blue fire that mutates his foes into foul Chaos Spawns.</description>
+    <level>50</level>
+    <statBases>
+      <Ability_EntropyGain>45</Ability_EntropyGain>
+    </statBases>
+    <verbProperties>
+      <warmupTime>5</warmupTime>
+      <range>15.0</range>
+      <targetParams>
+        <canTargetPawns>False</canTargetPawns>
+        <canTargetLocations>True</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+  </AbilityDef>
+
+  <AbilityDef ParentName="TzeentchFirestorm">
+    <defName>TzeentchFirestormIII</defName>
+    <label>tzeentch's firestorm</label>
+    <description>The Psyker conjures a storm of pink and blue fire that mutates his foes into foul Chaos Spawns.</description>
+    <level>60</level>
+    <statBases>
+      <Ability_EntropyGain>60</Ability_EntropyGain>
+    </statBases>
+    <verbProperties>
+      <warmupTime>7</warmupTime>
+      <range>20.0</range>
+      <targetParams>
+        <canTargetPawns>False</canTargetPawns>
+        <canTargetLocations>True</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+  </AbilityDef>
+  
+  
+</Defs>

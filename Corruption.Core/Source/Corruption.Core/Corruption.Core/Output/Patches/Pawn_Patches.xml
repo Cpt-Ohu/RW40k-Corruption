@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>*/ThingDef[@Name="BasePawn"]/inspectorTabs</xpath>		
+		<value>
+			<li>Corruption.Core.Soul.ITab_Pawn_Soul</li>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>*/ThingDef[@Name="BasePawn"]/comps</xpath>
+		<value>
+			<li>
+			 <compClass>Corruption.Core.Soul.CompSoul</compClass>
+			</li>
+		</value>
+	</Operation>		
+	
+</Patch>
+

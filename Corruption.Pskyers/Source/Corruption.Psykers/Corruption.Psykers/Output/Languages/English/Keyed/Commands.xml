@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <CommandPsykerCastForNonPsyker>{0} is not a psyker. Ability cannot be channeled.</CommandPsykerCastForNonPsyker>
+  <CommandPsykerCastLevelTooHigh>This ability psyker to be at least {0} levels higher.</CommandPsykerCastLevelTooHigh>
+  
+</LanguageData>

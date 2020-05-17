@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <NoDiscipline>Initiate</NoDiscipline>
+  <MainDiscipline>Main Discipline</MainDiscipline>
+  <MinorDiscipline>Minor Discipline</MinorDiscipline>
+  <MinorDisciplines>Minor Disciplines</MinorDisciplines>
+  <MinorDisciplineWithoutMajorDiscipline>Must choose a main discipline first.</MinorDisciplineWithoutMajorDiscipline>
+  <MinorDisciplineInfo>Minor Discipline: {0}</MinorDisciplineInfo>
+  <PsykerPowerManagement>Psyker Management</PsykerPowerManagement>
+  <PsykerPowerManagementDescr>Manage this psykers disciplines and powers.</PsykerPowerManagementDescr>
+  <PsykerLevelInfo>Psionic Level: {0}</PsykerLevelInfo>
+  <PsykerEquipment>Equipment</PsykerEquipment>
+  <ChooseDiscipline>Choose Discipline</ChooseDiscipline>
+  <Cancel>Cancel</Cancel>
+  <PsykerXPInfo>Available XP: {XP}</PsykerXPInfo>
+  <LearnPowerCost>Costs: {COST} XP</LearnPowerCost>
+  <LearnPower>Learn Power</LearnPower>
+  <LearntPower>Power Learnt</LearntPower>
+  <PsykerLearnAboveLevel>Cannot learn a power that's above a psykers level.</PsykerLearnAboveLevel>
+  <PsykerLearnXPShortage>Insufficient Psy-XP</PsykerLearnXPShortage>
+  <UnlockMinorDisciplineSlot>Unlock a minor discipline slot. Cost: {COST} XP</UnlockMinorDisciplineSlot>
+</LanguageData>

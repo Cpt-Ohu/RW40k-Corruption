@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Corruption Psykers</name>
+  <author>Cpt. Ohu</author>
+  <supportedVersions>
+   <li>1.1</li>
+  </supportedVersions>
+   <packageId>CptVHOhu970.CorruptionPsyker</packageId>   
+   <modDependencies>
+   	  <li>
+	    <packageId>CptVHOhu970.CorruptionCore</packageId>
+	    <displayName>Corruption.Core</displayName>
+	    <steamWorkshopUrl>steam://url/CommunityFilePage/123456</steamWorkshopUrl>
+	  </li>
+   </modDependencies>
+  <description>A Warhammer 40k conversion mod. This module includes new psyker powers and traits.
+  
+  
+  This requires the Core mod to be installed. This requires the Royalty DLC.
+</description>
+</ModMetaData>

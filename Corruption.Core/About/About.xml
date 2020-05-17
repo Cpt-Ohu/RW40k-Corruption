@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Corruption Core</name>
+  <author>Cpt. Ohu</author>
+  <supportedVersions>
+   <li>1.1</li>
+  </supportedVersions>
+   <packageId>CptVHOhu970.CorruptionCore</packageId>
+  <description>A Warhammer 40k conversion mod. Unstable version. For now this is a proof of concept mod with a lot of placeholders and half-implemented features.
+
+Team:
+Cpt.Ohu - Assembly, XML, Textures
+
+</description>
+</ModMetaData>

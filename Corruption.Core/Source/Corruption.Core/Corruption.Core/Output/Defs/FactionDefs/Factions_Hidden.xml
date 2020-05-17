@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+  <FactionDef Abstract="True" Name="NPCFactionBase">
+    <categoryTag>Corruption</categoryTag>
+    <requiredCountAtGameStart>1</requiredCountAtGameStart>
+    <factionIconPath>World/WorldObjects/Expanding/Sites/DownedRefugee</factionIconPath>
+    <techLevel>Spacer</techLevel>
+    <backstoryFilters>
+      <li>
+        <categories>
+          <li>Offworld</li>
+        </categories>
+      </li>
+    </backstoryFilters>
+    <hidden>true</hidden>
+    <rescueesCanJoin>true</rescueesCanJoin>
+    <autoFlee>false</autoFlee>
+    <geneticVariance>1</geneticVariance>
+    <hairTags>
+      <li>Urban</li>
+    </hairTags>
+    <apparelStuffFilter>
+      <thingDefs>
+        <li>Synthread</li>
+        <li>Hyperweave</li>
+        <li>Plasteel</li>
+      </thingDefs>
+    </apparelStuffFilter>
+  </FactionDef>
+
+  <FactionDef ParentName="NPCFactionBase">
+    <defName>IoM_NPC</defName>
+    <label>imperium of man</label>
+    <pawnSingular>citizen</pawnSingular>
+    <pawnsPlural>citizens</pawnsPlural>
+    <fixedName>imperium</fixedName>
+  </FactionDef>
+
+
+  <FactionDef ParentName="NPCFactionBase">
+    <defName>Chaos_NPC</defName>
+    <label>agents of chaos</label>
+    <pawnSingular>heretic</pawnSingular>
+    <pawnsPlural>heretics</pawnsPlural>
+    <fixedName>chaos</fixedName>
+  </FactionDef>
+
+</Defs>

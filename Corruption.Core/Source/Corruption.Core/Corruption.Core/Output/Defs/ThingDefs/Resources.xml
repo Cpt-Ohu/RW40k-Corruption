@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  <ThingDef ParentName="ResourceBase">
+    <defName>HumanSkull</defName>
+    <label>human skull</label>
+    <description>The cleaned skull of a human being.</description>
+    <graphicData>
+      <texPath>Things/Skeletons/HumanSkull</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <soundInteract>Wood_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <stackLimit>10</stackLimit>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <MarketValue>0.5</MarketValue>
+      <Flammability>1.0</Flammability>
+      <Mass>0.35</Mass>
+    </statBases>
+    <intricate>false</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>HumanBones</defName>
+    <label>human bones</label>
+    <description>The cleaned bones of a human being.</description>
+    <graphicData>
+      <texPath>Things/Skeletons/HumanBones</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <soundInteract>Wood_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <stackLimit>50</stackLimit>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <MarketValue>0.5</MarketValue>
+      <Flammability>1.0</Flammability>
+      <Mass>0.35</Mass>
+    </statBases>
+    <intricate>false</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+  </ThingDef>
+</Defs>

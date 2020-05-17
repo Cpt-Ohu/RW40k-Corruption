@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffDef Name="HediffPsykerBuff" Abstract="True">
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.0, 0.6, 1.0)</defaultLabelColor>
+  </HediffDef>
+
+
+  <!-- ========================= ChaosBuffs ===================================== -->
+
+  <HediffDef ParentName="HediffPsykerBuff">
+    <defName>MutationBuff</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.7, 0.2, 0.0)</defaultLabelColor>
+    <label>vigor</label>
+    <description>This being is temporarily possessed by a demon, mutating the body into a more powerful form.</description>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>3600~3600</disappearsAfterTicks>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <capMods>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>1.0</offset>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>1.00</offset>
+          </li>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <MaxHitPoints>100</MaxHitPoints>
+          <ToxicSensitivity>-0.5</ToxicSensitivity>
+          <MentalBreakThreshold>5</MentalBreakThreshold>
+          <MoveSpeed>1.00</MoveSpeed>
+          <CarryingCapacity>1.00</CarryingCapacity>
+          <MeleeWeapon_DamageMultiplier>1.00</MeleeWeapon_DamageMultiplier>
+          <MeleeHitChance>0.2</MeleeHitChance>
+          <IncomingDamageFactor>0.9</IncomingDamageFactor>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+</Defs>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <Corruption.Core.Gods.PantheonAttributeDef>
+    <defName>ImperialUnity</defName>
+    <label>imperial unity</label>
+    <description>Anyone following the Imperial Cult has better relations to those factions that share their belief.</description>
+    <iconPath>UI/Pantheons/AttributeImperial</iconPath>
+  </Corruption.Core.Gods.PantheonAttributeDef>
+
+  <Corruption.Core.Gods.PantheonAttributeDef>
+    <defName>ImperialPilgrims</defName>
+    <label>pilgrims</label>
+    <description>If you construct impressive places of worship, pilgrims may come to visit your colony.</description>
+    <iconPath>UI/Pantheons/AttributePilgrims</iconPath>
+  </Corruption.Core.Gods.PantheonAttributeDef>
+
+  <Corruption.Core.Gods.PantheonAttributeDef>
+    <defName>ChaosCultistMind</defName>
+    <label>cultist mind</label>
+    <description>Falling for chaos your pawns slowly loose most of their empathy. They have a higher chance to gain traits that counter negative thoughts from the horrors they see.</description>
+    <iconPath>UI/Pantheons/AttributeCultists</iconPath>
+  </Corruption.Core.Gods.PantheonAttributeDef>
+
+  <Corruption.Core.Gods.PantheonAttributeDef>
+    <defName>ChaosSpawnings</defName>
+    <label>chaos spawnings</label>
+    <description>Your colony gains access to rituals to summon entities from the warp to help your cause.</description>
+    <iconPath>UI/Pantheons/AttributeChaosSpawning</iconPath>
+  </Corruption.Core.Gods.PantheonAttributeDef>
+  
+</Defs>

@@ -1,0 +1,568 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- ========================= Doombolt ===================================== -->
+
+  <AbilityDef ParentName="PsykerAbilityBase" Name="DoomBolt">
+    <defName>DoomboltI</defName>
+    <label>doombolt</label>
+    <description>The casters spite and loathing given form as bolts of dark energy launched against an enemy.</description>
+    <level>20</level>
+    <iconPath>UI/Abilities/Doombolt</iconPath>
+    <hotKey>Misc6</hotKey>
+    <statBases>
+      <Ability_EntropyGain>20</Ability_EntropyGain>
+    </statBases>
+    <verbProperties>
+      <defaultProjectile>PSYDoomBolt</defaultProjectile>
+      <warmupTime>5.0</warmupTime>
+      <range>25.9</range>
+      <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+      <burstShotCount>1</burstShotCount>
+      <soundCast>WarpBolt</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityEffect">
+        <compClass>Corruption.Psykers.CompAbilityEffect_PsyProjectile</compClass>
+        <psychic>False</psychic>
+        <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
+        <applicableToMechs>True</applicableToMechs>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="DoomBolt">
+    <defName>DoomboltII</defName>
+    <label>doombolt</label>
+    <level>20</level>
+    <iconPath>UI/Abilities/Doombolt</iconPath>
+    <hotKey>Misc6</hotKey>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+    </statBases>
+    <verbProperties>
+      <defaultProjectile>PSYDoomBolt</defaultProjectile>
+      <warmupTime>5.0</warmupTime>
+      <range>25.9</range>
+      <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+      <burstShotCount>5</burstShotCount>
+      <soundCast>WarpBolt</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </verbProperties>
+  </AbilityDef>
+
+  <AbilityDef ParentName="DoomBolt">
+    <defName>DoomboltIII</defName>
+    <label>doombolt</label>
+    <level>20</level>
+    <iconPath>UI/Abilities/Doombolt</iconPath>
+    <hotKey>Misc6</hotKey>
+    <statBases>
+      <Ability_EntropyGain>40</Ability_EntropyGain>
+    </statBases>
+    <verbProperties>
+      <defaultProjectile>PSYDoomBolt</defaultProjectile>
+      <warmupTime>5.0</warmupTime>
+      <range>25.9</range>
+      <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+      <burstShotCount>8</burstShotCount>
+      <soundCast>WarpBolt</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </verbProperties>
+  </AbilityDef>
+
+  <!-- ========================= Doombolt Projectile ===================================== -->
+
+  <ThingDef ParentName="BaseBullet" Class="Corruption.Core.Items.ThingDef_LaserProjectile" Name="PSYWarpBoltBase">
+    <thingClass>Corruption.Core.Items.Projectile_Laser</thingClass>
+    <defName>PSYWarpBolt</defName>
+    <label>Warp Bolt</label>
+    <graphicData>
+      <texPath>Things/Projectiles/WarpBolt</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <flyOverhead>false</flyOverhead>
+      <damageDef>Laser</damageDef>
+      <damageAmountBase>5</damageAmountBase>
+      <speed>125</speed>
+    </projectile>
+    <preFiringInitialIntensity>0</preFiringInitialIntensity>
+    <preFiringFinalIntensity>2</preFiringFinalIntensity>
+    <postFiringInitialIntensity>2</postFiringInitialIntensity>
+    <postFiringFinalIntensity>0</postFiringFinalIntensity>
+    <preFiringDuration>2</preFiringDuration>
+    <postFiringDuration>63</postFiringDuration>
+    <StartFireChance>0.000</StartFireChance>
+  </ThingDef>
+
+  <ThingDef ParentName="PSYWarpBoltBase"  Class="Corruption.Core.Items.ThingDef_LaserProjectile">
+    <defName>PSYWarpBolt_Medium</defName>
+    <projectile>
+      <damageAmountBase>16</damageAmountBase>
+    </projectile>
+  </ThingDef>
+
+
+  <ThingDef ParentName="PSYWarpBoltBase"  Class="Corruption.Core.Items.ThingDef_LaserProjectile">
+    <defName>PSYWarpBolt_High</defName>
+    <graphicData>
+      <texPath>Things/Projectiles/WarpBolt</texPath>
+    </graphicData>
+    <projectile>
+      <damageAmountBase>24</damageAmountBase>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet" Class="Corruption.Core.Items.ThingDef_LaserProjectile">
+    <thingClass>Corruption.Core.Items.Projectile_Smoking</thingClass>
+    <defName>PSYDoomBolt</defName>
+    <label>Doom Bolt</label>
+    <graphicData>
+      <texPath>Things/Projectiles/WarpBolt</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <flyOverhead>false</flyOverhead>
+      <damageDef>Burn</damageDef>
+      <damageAmountBase>8</damageAmountBase>
+      <speed>40</speed>
+      <explosionRadius>2.0</explosionRadius>
+    </projectile>
+    <preFiringInitialIntensity>0</preFiringInitialIntensity>
+    <preFiringFinalIntensity>2</preFiringFinalIntensity>
+    <postFiringInitialIntensity>2</postFiringInitialIntensity>
+    <postFiringFinalIntensity>0</postFiringFinalIntensity>
+    <preFiringDuration>2</preFiringDuration>
+    <postFiringDuration>60</postFiringDuration>
+    <StartFireChance>0.000</StartFireChance>
+    <causesExplosion>true</causesExplosion>
+    <smokeGraphicPath>Things/Projectiles/DoomBolt_Shadow</smokeGraphicPath>
+  </ThingDef>
+
+
+  <!-- ========================= Gift Of Chaos ===================================== -->
+  
+  <AbilityDef ParentName="PsykerAbilityBase" Name="GiftOfChaos">
+    <defName>GiftOfChaosI</defName>
+    <label>gift of chaos</label>
+    <description>A whirling flash of Chaos energy is unleashed by the sorcerer, enveloping his target and rapidly mutating them. Those who survive the distortion of flesh and bone become a Chaos Spawn.</description>
+    <level>20</level>
+    <iconPath>UI/Abilities/GiftOfChaos</iconPath>
+    <hotKey>Misc6</hotKey>
+    <statBases>
+      <Ability_EntropyGain>10</Ability_EntropyGain>
+    </statBases>
+    <verbProperties>
+      <warmupTime>5.0</warmupTime>
+      <range>10.0</range>
+      <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+      <burstShotCount>3</burstShotCount>
+      <soundCast>WarpBolt</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </verbProperties>
+    <comps>
+      <li Class="Corruption.Psykers.CompProperties_AbilityMutate">
+        <mutationHediffs>
+          <li>ChaosMutationClaw</li>
+          <li>ChaosMutationTentacledHand</li>
+          <li>ChaosMutationTentacledFeet</li>
+          <li>ChaosMutationClawedFeet</li>
+          <li>ChaosMutationHooves</li>
+          <li>ChaosMutationFeathers</li>
+          <li>ChaosMutationScalySkin</li>
+          <li>ChaosMutationBulbousSkin</li>
+          <li>ChaosMutationHornedHead</li>
+          <li>ChaosMutationMoreEyes</li>
+          <li>ChaosMutationMaw</li>
+          <li>ChaosMutationTentacledMouth</li>
+          <li>ChaosMutationMandibles</li>
+          <li>ChaosMutationBeak</li>
+        </mutationHediffs>
+        <severityFactorFromEntropy>0.8</severityFactorFromEntropy>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="GiftOfChaos">
+    <defName>GiftOfChaosII</defName>
+    <label>gift of chaos</label>
+    <description>A whirling flash of Chaos energy is unleashed by the sorcerer, enveloping his target and rapidly mutating them. Those who survive the distortion of flesh and bone become a Chaos Spawn.</description>
+    <level>30</level>
+    <statBases>
+      <Ability_EntropyGain>20</Ability_EntropyGain>
+    </statBases>
+    <verbProperties>
+      <warmupTime>5.0</warmupTime>
+      <range>25.9</range>
+      <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+      <burstShotCount>3</burstShotCount>
+      <soundCast>WarpBolt</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </verbProperties>
+  </AbilityDef>
+
+  <AbilityDef ParentName="GiftOfChaos">
+    <defName>GiftOfChaosIII</defName>
+    <label>gift of chaos</label>
+    <description>A whirling flash of Chaos energy is unleashed by the sorcerer, enveloping his target and rapidly mutating them. Those who survive the distortion of flesh and bone become a Chaos Spawn.</description>
+    <level>40</level>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+      <Ability_EffectRadius>5</Ability_EffectRadius>
+    </statBases>
+    <verbProperties>
+      <warmupTime>5.0</warmupTime>
+      <range>25.9</range>
+      <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+      <burstShotCount>3</burstShotCount>
+      <soundCast>WarpBolt</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </verbProperties>
+  </AbilityDef>
+
+  <AbilityDef ParentName="GiftOfChaos">
+    <defName>GiftOfChaosIV</defName>
+    <label>gift of chaos</label>
+    <description>A whirling flash of Chaos energy is unleashed by the sorcerer, enveloping his target and rapidly mutating them. Those who survive the distortion of flesh and bone become a Chaos Spawn.</description>
+    <level>40</level>
+    <statBases>
+      <Ability_EntropyGain>50</Ability_EntropyGain>
+      <Ability_EffectRadius>8</Ability_EffectRadius>
+    </statBases>
+    <verbProperties>
+      <warmupTime>5.0</warmupTime>
+      <range>25.9</range>
+      <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+      <burstShotCount>3</burstShotCount>
+      <soundCast>WarpBolt</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </verbProperties>
+  </AbilityDef>
+
+
+
+  <ThingDef ParentName="BaseBullet" Class="Corruption.Core.Items.ThingDef_LaserProjectile">
+    <thingClass>Corruption.Core.Items.Projectile_Smoking</thingClass>
+    <defName>PSYGiftOfChaos</defName>
+    <label>gift of chaos</label>
+    <graphicData>
+      <texPath>Things/Projectiles/GiftOfChaos</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <flyOverhead>false</flyOverhead>
+      <damageDef>Burn</damageDef>
+      <damageAmountBase>20</damageAmountBase>
+      <speed>40</speed>
+      <explosionRadius>2.0</explosionRadius>
+    </projectile>
+    <preFiringInitialIntensity>0</preFiringInitialIntensity>
+    <preFiringFinalIntensity>2</preFiringFinalIntensity>
+    <postFiringInitialIntensity>2</postFiringInitialIntensity>
+    <postFiringFinalIntensity>0</postFiringFinalIntensity>
+    <preFiringDuration>2</preFiringDuration>
+    <postFiringDuration>60</postFiringDuration>
+    <StartFireChance>0.000</StartFireChance>
+    <causesExplosion>true</causesExplosion>
+    <smokeGraphicPath>Things/Projectiles/GiftOfChaos_Shadow</smokeGraphicPath>
+  </ThingDef>
+
+  <!-- ========================= Single Mutation ===================================== -->
+
+  <AbilityDef ParentName="PsykerAbilityBase">
+    <defName>SingleMutation</defName>
+    <label>mutation</label>
+    <description>A conduit is opened to the warp and daemons temporarily possess the bodies of the target, mutating them and giving them increased strength and resilience.</description>
+    <level>20</level>
+    <iconPath>UI/Abilities/Painblock</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>20</Ability_EntropyGain>
+      <Ability_Duration>120</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <warmupTime>3.25</warmupTime>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+        <canTargetAnimals>True</canTargetAnimals>
+        <canTargetLocations>True</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>MutationBuff</hediffDef>
+        <durationMultiplier>PsychicSensitivity</durationMultiplier>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+      <li Class="Corruption.Psykers.CompProperties_AbilityMutate">
+        <mutationHediffs>
+          <li>ChaosMutationClaw</li>
+          <li>ChaosMutationTentacledHand</li>
+          <li>ChaosMutationTentacledFeet</li>
+          <li>ChaosMutationClawedFeet</li>
+          <li>ChaosMutationHooves</li>
+          <li>ChaosMutationFeathers</li>
+          <li>ChaosMutationScalySkin</li>
+          <li>ChaosMutationBulbousSkin</li>
+          <li>ChaosMutationHornedHead</li>
+          <li>ChaosMutationMoreEyes</li>
+          <li>ChaosMutationMaw</li>
+          <li>ChaosMutationTentacledMouth</li>
+          <li>ChaosMutationMandibles</li>
+          <li>ChaosMutationBeak</li>
+        </mutationHediffs>
+        <severityFactorFromEntropy>1.5</severityFactorFromEntropy>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  
+  
+  
+  
+  <AbilityDef ParentName="PsykerAbilityBase">
+    <defName>MassMutation</defName>
+    <label>mass mutation</label>
+    <description>A conduit is opened to the warp and daemons temporarily possess the bodies of the targets, mutating them and giving them increased strength and resilience.</description>
+    <level>40</level>
+    <iconPath>UI/Abilities/Painblock</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>40</Ability_EntropyGain>
+      <Ability_Duration>120</Ability_Duration>
+      <Ability_EffectRadius>5</Ability_EffectRadius>
+    </statBases>
+    <verbProperties>
+      <warmupTime>5.25</warmupTime>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+        <canTargetAnimals>True</canTargetAnimals>
+        <canTargetLocations>True</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>MutationBuff</hediffDef>
+        <durationMultiplier>PsychicSensitivity</durationMultiplier>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+      <li Class="Corruption.Psykers.CompProperties_AbilityMutate">
+        <mutationHediffs>
+          <li>ChaosMutationClaw</li>
+          <li>ChaosMutationTentacledHand</li>
+          <li>ChaosMutationTentacledFeet</li>
+          <li>ChaosMutationClawedFeet</li>
+          <li>ChaosMutationHooves</li>
+          <li>ChaosMutationFeathers</li>
+          <li>ChaosMutationScalySkin</li>
+          <li>ChaosMutationBulbousSkin</li>
+          <li>ChaosMutationHornedHead</li>
+          <li>ChaosMutationMoreEyes</li>
+          <li>ChaosMutationMaw</li>
+          <li>ChaosMutationTentacledMouth</li>
+          <li>ChaosMutationMandibles</li>
+          <li>ChaosMutationBeak</li>
+        </mutationHediffs>
+        <severityFactorFromEntropy>1.5</severityFactorFromEntropy>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+    </comps>
+  </AbilityDef>
+
+
+  <AbilityDef ParentName="PsykerAbilityBase" Name="Warptime">
+    <defName>WarptimeI</defName>
+    <label>warptime</label>
+    <description>The sorcerer alters the flow of time around himself, allowing for attacks with supernatural precision.</description>
+    <level>10</level>
+    <iconPath>UI/Abilities/Painblock</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>20</Ability_EntropyGain>
+      <Ability_Duration>60</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>Warptime</hediffDef>
+        <durationMultiplier>PsychicSensitivity</durationMultiplier>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="Warptime">
+    <defName>WarptimeII</defName>
+    <label>warptime</label>
+    <description>The sorcerer alters the flow of time around himself, allowing for attacks with supernatural precision.</description>
+    <level>20</level>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+      <Ability_Duration>100</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+  </AbilityDef>
+
+  <AbilityDef ParentName="Warptime">
+    <defName>WarptimeIII</defName>
+    <label>warptime</label>
+    <description>The sorcerer alters the flow of time around himself, allowing for attacks with supernatural precision.</description>
+    <level>30</level>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>40</Ability_EntropyGain>
+      <Ability_Duration>130</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+  </AbilityDef>
+
+  <AbilityDef ParentName="Warptime">
+    <defName>WarptimeIV</defName>
+    <label>warptime</label>
+    <description>The sorcerer alters the flow of time around himself and his allies, allowing for attacks with supernatural precision.</description>
+    <level>50</level>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>40</Ability_EntropyGain>
+      <Ability_Duration>130</Ability_Duration>
+      <Ability_EffectRadius>5</Ability_EffectRadius>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+  </AbilityDef>
+
+
+  <AbilityDef ParentName="PsykerAbilityBase">
+    <defName>SummonDemonI</defName>
+    <label>summon demon</label>
+    <description>The sorcerer opens a rift in the warp through which a singular demonic entity may manifest in the Materium.</description>
+    <level>20</level>
+    <iconPath>UI/Abilities/Painblock</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>20</Ability_EntropyGain>
+      <Ability_Duration>60</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="Corruption.Psykers.CompProperties_SpawnPawn">
+        <kindDef>DemonUndividedBeast</kindDef>
+        <spawnCount>1</spawnCount>
+        <spawningMentalState>Berserk</spawningMentalState>
+        <spawningHediffs>
+          <li>WarpspawnedEntity</li>
+        </spawningHediffs>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="PsykerAbilityBase">
+    <defName>SummonDemonIIa</defName>
+    <label>summon demon</label>
+    <description>The sorcerer opens a rift in the warp through which a singular demonic entity may manifest in the Materium.</description>
+    <level>30</level>
+    <iconPath>UI/Abilities/Painblock</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+      <Ability_Duration>120</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="Corruption.Psykers.CompProperties_SpawnPawn">
+        <kindDef>DemonUndividedFighter</kindDef>
+        <spawnCount>3</spawnCount>
+        <spawningMentalState>Berserk</spawningMentalState>
+        <spawningHediffs>
+          <li>WarpspawnedEntity</li>
+        </spawningHediffs>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="PsykerAbilityBase">
+    <defName>SummonDemonIIIa</defName>
+    <label>summon demon</label>
+    <description>The sorcerer opens a rift in the warp through which a horde of demonic entities may manifest in the Materium.</description>
+    <level>40</level>
+    <iconPath>UI/Abilities/Painblock</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>40</Ability_EntropyGain>
+      <Ability_Duration>120</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="Corruption.Psykers.CompProperties_SpawnPawn">
+        <kindDef>DemonUndividedFighter</kindDef>
+        <spawnCount>3</spawnCount>
+        <spawningMentalState>Berserk</spawningMentalState>
+        <spawningHediffs>
+          <li>WarpspawnedEntity</li>
+        </spawningHediffs>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+    </comps>
+  </AbilityDef>
+
+</Defs>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  <Corruption.Core.Gods.PantheonDef>
+    <defName>ImperialCult</defName>
+    <label>Imperial Cult</label>
+    <description>The Imperial Cult is the official and only state religion of the Imperium of Man. It is devoted to the worship of the Emperor of Mankind as the ascended divinity and saviour of humanity.</description>
+    <members>
+      <li>
+        <god>Emperor</god>
+      </li>
+    </members>
+    <approvingFactions>
+    </approvingFactions>
+    <approvingGoodwill>10</approvingGoodwill>
+    <rejectingGoodwill>-20</rejectingGoodwill>
+    <pantheonAttributes>
+      <li>ImperialUnity</li>
+      <li>ImperialPilgrims</li>
+    </pantheonAttributes>
+    <iconPath>UI/Pantheons/ImperialCultIcon</iconPath>
+    <mainColor>(0.93, 0.78, 0.19)</mainColor>
+  </Corruption.Core.Gods.PantheonDef>
+
+  <Corruption.Core.Gods.PantheonDef>
+    <defName>Chaos</defName>
+    <label>Chaos</label>
+    <description>The Ruinous Powers, seeking to keep the galaxy in an unending cycle of destruction.</description>
+    <members>
+      <li>
+        <god>Khorne</god>
+      </li>
+      <li>
+        <god>Nurgle</god>
+      </li>
+      <li>
+        <god>Slaanesh</god>
+      </li>
+      <li>
+        <god>Tzeentch</god>
+      </li>
+    </members>
+    <approvingFactions>
+    </approvingFactions>
+    <approvingGoodwill>10</approvingGoodwill>
+    <rejectingGoodwill>-20</rejectingGoodwill>
+    <pantheonAttributes>
+      <li>ChaosCultistMind</li>
+      <li>ChaosSpawnings</li>
+    </pantheonAttributes>
+    <iconPath>UI/Pantheons/ChaosIcon</iconPath>
+  </Corruption.Core.Gods.PantheonDef>
+
+
+
+</Defs>

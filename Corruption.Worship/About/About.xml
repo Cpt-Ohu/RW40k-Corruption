@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Corruption - Worship</name>
+  <author>Cpt. Ohu</author>
+  <supportedVersions>
+   <li>1.1</li>
+  </supportedVersions>
+   <packageId>CptVHOhu970.CorruptionWorship</packageId>
+  <description>A Warhammer 40k conversion mod. This module contains everything to start your own little religious community.
+
+Team:
+Cpt.Ohu - Assembly, XML, Textures
+TrashMan - Textures, XML
+BanditPanda/Baron - Textures
+KriegsStrudel - Textures
+StoneWolf - Assembly, XML
+Imperitor - Assembly, XML
+InfinityKage -  Concept/Balancing
+
+</description>
+</ModMetaData>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <PawnKindDef Class="Corruption.Core.CorruptionPawnKindDef" ParentName="BaseImperialPawnKind" Name="ImperialPsykerBase" Abstract="True">
+    <race>Human</race>
+    <invNutrition>2.55</invNutrition>
+    <gearHealthRange>0.7~2.3</gearHealthRange>
+    <apparelMoney>400~1000</apparelMoney>
+    <apparelTags>
+      <li>ImperialBasic</li>
+      <li>ImperialPsyker</li>
+    </apparelTags>
+    <apparelAllowHeadgearChance>0.8</apparelAllowHeadgearChance>
+    <weaponMoney>2500~3450</weaponMoney>
+    <weaponTags>
+      <li>ImperialPsykerWeapons</li>
+    </weaponTags>
+    <techHediffsChance>0.4</techHediffsChance>
+    <techHediffsMoney>500~1800</techHediffsMoney>
+    <techHediffsTags>
+      <li>ImplantEmpireCommon</li>
+    </techHediffsTags>
+
+    <inventoryOptions>
+      <skipChance>0.70</skipChance>
+      <subOptionsChooseOne>
+        <li>
+          <choiceChance>90</choiceChance>
+          <thingDef>Silver</thingDef>
+          <countRange>50~200</countRange>
+        </li>
+      </subOptionsChooseOne>
+    </inventoryOptions>
+
+    <Affliction>
+      <useForcedPantheon>True</useForcedPantheon>
+      <forcedPantheon>ImperialCult</forcedPantheon>
+      <favorProgressTemplates>
+        <god>Emperor</god>
+        <initialProgressRange>(2000,15000)</initialProgressRange>
+      </favorProgressTemplates>
+      <psykerPowerLevelRange>(2,3)</psykerPowerLevelRange>
+    </Affliction>
+  </PawnKindDef>
+
+  <PawnKindDef Class="Corruption.Core.CorruptionPawnKindDef" ParentName="ImperialPsykerBase" Abstract="True">
+    <defName>ImperialSanctionedPsyker</defName>
+    <label>Sanctioned Psyker</label>
+    <Affliction>
+      <psykerPowerLevelRange>(2,3)</psykerPowerLevelRange>
+      <forcedPsykerPowers>
+        <li>ImperialLightningArc</li>
+        <li>ImperialPsychicWard</li>
+        <li>ImperialWeakenResolve</li>
+      </forcedPsykerPowers>
+    </Affliction>
+
+  </PawnKindDef>
+
+  <PawnKindDef Class="Corruption.Core.CorruptionPawnKindDef" ParentName="ImperialPsykerBase" Abstract="True">
+    <defName>ImperialPrimarisPsyker</defName>
+    <label>Primaris Psyker</label>
+    <Affliction>
+      <psykerPowerLevelRange>(3,4)</psykerPowerLevelRange>
+      <forcedPsykerPowers>
+        <li>ImperialPsychicLash</li>
+        <li>ImperialPsychicWard</li>
+        <li>ImperialWeakenResolve</li>
+        <li>ImperialSoulStorm</li>
+      </forcedPsykerPowers>
+    </Affliction>
+
+  </PawnKindDef>
+
+</Defs>

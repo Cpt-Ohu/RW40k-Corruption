@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <IncidentDef>
+    <defName>GrowingFlock</defName>
+    <label>Growing Flock</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+      <li>Caravan</li>
+    </targetTags>
+    <workerClass>Corruption.Worship.Wonders.IncidentWorker_GrowingFlock</workerClass>
+    <category>Misc</category>
+    <baseChance>0.000000001</baseChance>
+    <pointsScaleable>true</pointsScaleable>
+  </IncidentDef>
+</Defs>

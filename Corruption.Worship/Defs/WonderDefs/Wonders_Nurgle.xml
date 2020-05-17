@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <Corruption.Worship.Wonders.WonderDef Abstract="True" Name="NurgleWonder">
+    <associatedGods>
+      <li>Nurgle</li>
+    </associatedGods>
+  </Corruption.Worship.Wonders.WonderDef>
+
+  <Corruption.Worship.Wonders.WonderDef ParentName="NurgleWonder">
+    <defName>NurgleBreath</defName>
+    <label>Breath of Decay</label>
+    <description>Cause a random disease in your colonists to please the grandfather.</description>
+    <workerClass>Corruption.Worship.Wonders.WonderWorker_FireIncident</workerClass>
+    <wonderIconPath>UI/Wonders/WondersNurgleBreath</wonderIconPath>
+    <favourCost>0</favourCost>
+    <incident>NurgleBreath</incident>
+    <incidentPoints>3000</incidentPoints>
+  </Corruption.Worship.Wonders.WonderDef>
+
+
+  <Corruption.Worship.Wonders.WonderDef ParentName="NurgleWonder">
+    <defName>NurgleRot</defName>
+    <label>Nurgle`s Rot</label>
+    <description>Make the selected pawn combust in an explosion of contageous matter that infects all around with Nurgle`s rot.</description>
+    <workerClass>Corruption.Worship.Wonders.WonderWorker_AddHediff</workerClass>
+    <wonderIconPath>UI/Wonders/WondersNurgleRot</wonderIconPath>
+    <favourCost>4500</favourCost>
+    <hediffsToAdd>
+      <li>NurgleRotInstantDeath</li>
+    </hediffsToAdd>
+  </Corruption.Worship.Wonders.WonderDef>
+
+
+  <Corruption.Worship.Wonders.WonderDef ParentName="NurgleWonder">
+    <defName>NurgleTurnChampion</defName>
+    <label>Champion of Nurgle</label>
+    <description>The selected pawn was chosen by Nurgle to be a herald of plague.</description>
+    <workerClass>Corruption.Worship.Wonders.WonderWorker_AddSpecialTrait</workerClass>
+    <wonderIconPath>UI/Wonders/WonderChampionNurgle</wonderIconPath>
+    <favourCost>10000</favourCost>
+    <traitToGive>NurgleChampion</traitToGive>
+  </Corruption.Worship.Wonders.WonderDef>
+
+
+</Defs>
