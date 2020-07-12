@@ -18,6 +18,18 @@
     <incidentPoints>3000</incidentPoints>
   </Corruption.Worship.Wonders.WonderDef>
 
+  <Corruption.Worship.Wonders.WonderDef ParentName="NurgleWonder">
+    <defName>NurgleResilience</defName>
+    <label>Nurglite Resilience</label>
+    <description>Nurgle's kind embrace makes a pawn resilient to the pain that reality incurs.</description>
+    <workerClass>Corruption.Worship.Wonders.WonderWorker_AddHediff</workerClass>
+    <wonderIconPath>UI/Wonders/WondersNurgleResilience</wonderIconPath>
+    <favourCost>1500</favourCost>
+    <hediffsToAdd>
+      <li>NurgleResilience</li>
+    </hediffsToAdd>
+  </Corruption.Worship.Wonders.WonderDef>
+
 
   <Corruption.Worship.Wonders.WonderDef ParentName="NurgleWonder">
     <defName>NurgleRot</defName>

@@ -1,0 +1,622 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+  <HediffDef Abstract="True" ParentName="InfectionBase" Name="DemonicAttentionBase">
+    <hediffClass>Corruption.Core.HediffDemonicAttention</hediffClass>
+    <makesSickThought>false</makesSickThought>
+    <makesAlert>false</makesAlert>
+    <minSeverity>0.001</minSeverity>
+    <maxSeverity>2</maxSeverity>
+    <initialSeverity>0.001</initialSeverity>
+    <tendable>false</tendable>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.1</severityPerDay>
+      </li>
+      <li Class="Corruption.Core.HediffCompProperties_DemonicAttention">
+        <possessionHediffs>
+          <li>DemonicPossessionUndivided</li>
+          <li>DemonicPossessionKhorne</li>
+          <li>DemonicPossessionNurgle</li>
+          <li>DemonicPossessionSlaanesh</li>
+        </possessionHediffs>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="DemonicAttentionBase">
+    <defName>DemonicAttentionVoices</defName>
+    <label>demonic attention</label>
+    <description>This pawn is drawing attention from demonic entities in the Immaterium. This is especially dangerous for Psykers, as the demons draw near, their presence affecting the psyker's mind.</description>
+    <stages>
+      <li>
+        <label>noticed</label>
+      </li>
+      <li>
+        <painOffset>0.01</painOffset>
+        <label>unease</label>
+        <restFallFactor>0.99</restFallFactor>
+        <minSeverity>0.3</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.01</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        
+        <label>whispers</label>
+        <restFallFactor>0.8</restFallFactor>
+        <minSeverity>0.5</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.08</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <painOffset>0.08</painOffset>
+        <label>moaning</label>
+        <restFallFactor>0.8</restFallFactor>
+        <minSeverity>0.7</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <painOffset>0.15</painOffset>
+        <label>voices</label>
+        <restFallFactor>0.4</restFallFactor>
+        <minSeverity>1.3</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.15</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <painOffset>0.3</painOffset>
+        <label>screaming</label>
+        <restFallFactor>0.1</restFallFactor>
+        <minSeverity>1.8</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.2</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName="DemonicAttentionBase">
+    <defName>DemonicAttentionVision</defName>
+    <label>demonic attention</label>
+    <description>This pawn is drawing attention from demonic entities in the Immaterium. This is especially dangerous for Psykers, as the demons draw near, their presence affecting the psyker's mind.</description>
+    <stages>
+      <li>
+        <label>noticed</label>
+      </li>
+      <li>
+        <painOffset>0.01</painOffset>
+        <label>unease</label>
+        <restFallFactor>0.9</restFallFactor>
+        <minSeverity>0.3</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.05</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        
+        <label>blurred vision</label>
+        <restFallFactor>0.8</restFallFactor>
+        <minSeverity>0.5</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.08</offset>
+          </li>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>-0.05</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <painOffset>0.08</painOffset>
+        <label>dancing shadows</label>
+        <restFallFactor>0.8</restFallFactor>
+        <minSeverity>0.6</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.15</offset>
+          </li>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <painOffset>0.15</painOffset>
+        <label>floating images</label>
+        <restFallFactor>0.9</restFallFactor>
+        <minSeverity>1.3</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.2</offset>
+          </li>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>-0.2</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <painOffset>0.3</painOffset>
+        <label>flickering ghost</label>
+        <restFallFactor>0.7</restFallFactor>
+        <minSeverity>1.8</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.2</offset>
+          </li>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>-0.2</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+
+  <!-- ========================= Possession ===================================== -->
+
+  <HediffDef Abstract="True" ParentName="InfectionBase" Name="PossessionBase">
+    <hediffClass>Corruption.Core.HediffDemonicPossession</hediffClass>
+    <makesSickThought>false</makesSickThought>
+    <makesAlert>false</makesAlert>
+    <minSeverity>0.001</minSeverity>
+    <maxSeverity>1</maxSeverity>
+    <initialSeverity>0.001</initialSeverity>
+    <lethalSeverity>1</lethalSeverity>
+    <tendable>false</tendable>
+  </HediffDef>
+
+
+
+  <HediffDef ParentName="PossessionBase">
+    <defName>DemonicPossessionUndivided</defName>
+    <label>possessed</label>
+    <description>This pawn has been possessed by an entity from the warp. Unless cleansed the pawn will slowly succumb to its literal inner demon until it gains full control.</description>
+    <stages>
+      <li>
+        <painOffset>0.1</painOffset>
+        <label>resisting</label>
+        <restFallFactor>0.8</restFallFactor>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.15</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <WorkSpeedGlobal>0.1</WorkSpeedGlobal>
+          <NegotiationAbility>0.1</NegotiationAbility>
+          <SocialImpact>0.1</SocialImpact>
+        </statOffsets>
+        <mentalBreakMtbDays>3</mentalBreakMtbDays>
+        <allowedMentalBreakIntensities>
+          <li>Minor</li>
+        </allowedMentalBreakIntensities>
+      </li>
+      <li>
+        
+        <label>weakened resolve</label>
+        <restFallFactor>0.8</restFallFactor>
+        <minSeverity>0.33</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.08</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <WorkSpeedGlobal>-0.1</WorkSpeedGlobal>
+          <NegotiationAbility>0.3</NegotiationAbility>
+          <SocialImpact>0.3</SocialImpact>
+        </statOffsets>
+        <mentalBreakMtbDays>3</mentalBreakMtbDays>
+        <allowedMentalBreakIntensities>
+          <li>Minor</li>
+          <li>Major</li>
+        </allowedMentalBreakIntensities>
+      </li>
+      <li>
+        <painOffset>0.08</painOffset>
+        <label>breaking</label>
+        <restFallFactor>0.8</restFallFactor>
+        <minSeverity>0.66</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.15</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <WorkSpeedGlobal>-0.1</WorkSpeedGlobal>
+          <NegotiationAbility>0.3</NegotiationAbility>
+          <SocialImpact>0.3</SocialImpact>
+        </statOffsets>
+        <mentalBreakMtbDays>3</mentalBreakMtbDays>
+        <allowedMentalBreakIntensities>
+          <li>Minor</li>
+          <li>Major</li>
+        </allowedMentalBreakIntensities>
+      </li>
+      <li>
+        <painOffset>0.15</painOffset>
+        <label>critical</label>
+        <restFallFactor>0.5</restFallFactor>
+        <minSeverity>0.8</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.4</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <WorkSpeedGlobal>-0.2</WorkSpeedGlobal>
+          <NegotiationAbility>-0.3</NegotiationAbility>
+          <SocialImpact>-0.5</SocialImpact>
+        </statOffsets>
+        <mentalBreakMtbDays>3</mentalBreakMtbDays>
+        <allowedMentalBreakIntensities>
+          <li>Extreme</li>
+        </allowedMentalBreakIntensities>
+      </li>
+    </stages>
+    <comps>
+      <li Class="Corruption.Core.HediffCompProperties_DemonicPossession">
+        <demonToSpawn>Demon_BeastUndivided</demonToSpawn>
+        <severityPerDay>0.02</severityPerDay>
+        <spawningMentalState>Berserk</spawningMentalState>
+      </li>
+    </comps>
+  </HediffDef>
+
+
+
+  <HediffDef ParentName="PossessionBase">
+    <defName>DemonicPossessionKhorne</defName>
+    <label>possessed</label>
+    <description>This pawn has been possessed by an entity from the warp. Unless cleansed the pawn will slowly succumb to its literal inner demon until it gains full control.</description>
+    <stages>
+      <li>
+        <painOffset>0.1</painOffset>
+        <label>resisting</label>
+        <restFallFactor>0.8</restFallFactor>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.15</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <MentalBreakThreshold>-0.1</MentalBreakThreshold>
+          <MeleeDPS>5</MeleeDPS>
+          <MeleeDodgeChance>0.1</MeleeDodgeChance>
+          <MeleeHitChance>0.25</MeleeHitChance>
+        </statOffsets>
+        <mentalBreakMtbDays>3</mentalBreakMtbDays>
+        <allowedMentalBreakIntensities>
+          <li>Minor</li>
+        </allowedMentalBreakIntensities>
+      </li>
+      <li>
+        
+        <label>weakened resolve</label>
+        <restFallFactor>0.8</restFallFactor>
+        <minSeverity>0.33</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.08</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <MentalBreakThreshold>-0.2</MentalBreakThreshold>
+          <MeleeDPS>8</MeleeDPS>
+          <MeleeDodgeChance>0.2</MeleeDodgeChance>
+          <MeleeHitChance>0.35</MeleeHitChance>
+        </statOffsets>
+        <mentalBreakMtbDays>3</mentalBreakMtbDays>
+        <allowedMentalBreakIntensities>
+          <li>Minor</li>
+          <li>Major</li>
+        </allowedMentalBreakIntensities>
+      </li>
+      <li>
+        <painOffset>0.08</painOffset>
+        <label>breaking</label>
+        <restFallFactor>0.8</restFallFactor>
+        <minSeverity>0.66</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.15</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <MentalBreakThreshold>-0.25</MentalBreakThreshold>
+          <MeleeDPS>10</MeleeDPS>
+          <MeleeDodgeChance>0.25</MeleeDodgeChance>
+          <MeleeHitChance>0.4</MeleeHitChance>
+        </statOffsets>
+        <mentalBreakMtbDays>3</mentalBreakMtbDays>
+        <allowedMentalBreakIntensities>
+          <li>Minor</li>
+          <li>Major</li>
+        </allowedMentalBreakIntensities>
+      </li>
+      <li>
+        <painOffset>0.15</painOffset>
+        <label>critical</label>
+        <restFallFactor>0.5</restFallFactor>
+        <minSeverity>0.8</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.4</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <MentalBreakThreshold>-0.1</MentalBreakThreshold>
+          <MeleeDPS>20.0</MeleeDPS>
+          <MeleeDodgeChance>0.5</MeleeDodgeChance>
+          <MeleeHitChance>0.7</MeleeHitChance>
+        </statOffsets>
+        <mentalBreakMtbDays>3</mentalBreakMtbDays>
+        <allowedMentalBreakIntensities>
+          <li>Extreme</li>
+        </allowedMentalBreakIntensities>
+      </li>
+    </stages>
+    <comps>
+      <li Class="Corruption.Core.HediffCompProperties_DemonicPossession">
+        <demonToSpawn>Demon_BeastUndivided</demonToSpawn>
+        <severityPerDay>0.02</severityPerDay>
+        <spawningMentalState>Berserk</spawningMentalState>
+      </li>
+    </comps>
+  </HediffDef>
+
+
+
+  <HediffDef ParentName="PossessionBase">
+    <defName>DemonicPossessionNurgle</defName>
+    <label>possessed</label>
+    <description>This pawn has been possessed by an entity from the warp. Unless cleansed the pawn will slowly succumb to its literal inner demon until it gains full control.</description>
+    <stages>
+      <li>
+        <painOffset>0.1</painOffset>
+        <label>resisting</label>
+        <restFallFactor>0.8</restFallFactor>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.15</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <MentalBreakThreshold>-0.1</MentalBreakThreshold>
+        </statOffsets>
+        <mentalBreakMtbDays>3</mentalBreakMtbDays>
+        <allowedMentalBreakIntensities>
+          <li>Minor</li>
+        </allowedMentalBreakIntensities>
+      </li>
+      <li>
+        
+        <label>weakened resolve</label>
+        <restFallFactor>0.8</restFallFactor>
+        <minSeverity>0.33</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.08</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <IncomingDamageFactor>0.9</IncomingDamageFactor>
+          <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+        </statOffsets>
+        <mentalBreakMtbDays>3</mentalBreakMtbDays>
+        <allowedMentalBreakIntensities>
+          <li>Minor</li>
+          <li>Major</li>
+        </allowedMentalBreakIntensities>
+      </li>
+      <li>
+        <painOffset>0.08</painOffset>
+        <label>breaking</label>
+        <restFallFactor>0.8</restFallFactor>
+        <minSeverity>0.66</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.15</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <IncomingDamageFactor>0.8</IncomingDamageFactor>
+          <ArmorRating_Blunt>0.4</ArmorRating_Blunt>
+        </statOffsets>
+        <mentalBreakMtbDays>3</mentalBreakMtbDays>
+        <allowedMentalBreakIntensities>
+          <li>Minor</li>
+          <li>Major</li>
+        </allowedMentalBreakIntensities>
+      </li>
+      <li>
+        <painOffset>0.15</painOffset>
+        <label>critical</label>
+        <restFallFactor>0.5</restFallFactor>
+        <minSeverity>0.8</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.4</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <IncomingDamageFactor>0.65</IncomingDamageFactor>
+          <ArmorRating_Blunt>0.5</ArmorRating_Blunt>
+        </statOffsets>
+        <mentalBreakMtbDays>3</mentalBreakMtbDays>
+        <allowedMentalBreakIntensities>
+          <li>Extreme</li>
+        </allowedMentalBreakIntensities>
+      </li>
+    </stages>
+    <comps>
+      <li Class="Corruption.Core.HediffCompProperties_DemonicPossession">
+        <demonToSpawn>Demon_BeastUndivided</demonToSpawn>
+        <severityPerDay>0.02</severityPerDay>
+        <spawningMentalState>Berserk</spawningMentalState>
+      </li>
+    </comps>
+  </HediffDef>
+
+
+  <HediffDef ParentName="PossessionBase">
+    <defName>DemonicPossessionSlaanesh</defName>
+    <label>possessed</label>
+    <description>This pawn has been possessed by an entity from the warp. Unless cleansed the pawn will slowly succumb to its literal inner demon until it gains full control.</description>
+    <stages>
+      <li>
+        <painOffset>0.1</painOffset>
+        <label>resisting</label>
+        <restFallFactor>0.8</restFallFactor>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.15</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <MentalBreakThreshold>-0.2</MentalBreakThreshold>
+          <MoveSpeed>0.05</MoveSpeed>
+        </statOffsets>
+        <mentalBreakMtbDays>3</mentalBreakMtbDays>
+        <allowedMentalBreakIntensities>
+          <li>Minor</li>
+        </allowedMentalBreakIntensities>
+      </li>
+      <li>
+        
+        <label>weakened resolve</label>
+        <restFallFactor>0.8</restFallFactor>
+        <minSeverity>0.33</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.08</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <MentalBreakThreshold>-0.3</MentalBreakThreshold>
+          <MoveSpeed>0.12</MoveSpeed>
+          <PawnBeauty>0.5</PawnBeauty>
+        </statOffsets>
+        <mentalBreakMtbDays>3</mentalBreakMtbDays>
+        <allowedMentalBreakIntensities>
+          <li>Minor</li>
+          <li>Major</li>
+        </allowedMentalBreakIntensities>
+      </li>
+      <li>
+        <painOffset>0.08</painOffset>
+        <label>breaking</label>
+        <restFallFactor>0.8</restFallFactor>
+        <minSeverity>0.66</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.15</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <MentalBreakThreshold>-0.3</MentalBreakThreshold>
+          <MoveSpeed>0.2</MoveSpeed>
+          <PawnBeauty>1</PawnBeauty>
+        </statOffsets>
+        <mentalBreakMtbDays>3</mentalBreakMtbDays>
+        <allowedMentalBreakIntensities>
+          <li>Minor</li>
+          <li>Major</li>
+        </allowedMentalBreakIntensities>
+      </li>
+      <li>
+        <painOffset>0.15</painOffset>
+        <label>critical</label>
+        <restFallFactor>0.5</restFallFactor>
+        <minSeverity>0.8</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.4</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <MentalBreakThreshold>-0.6</MentalBreakThreshold>
+          <MoveSpeed>0.25</MoveSpeed>
+          <PawnBeauty>2</PawnBeauty>
+        </statOffsets>
+        <mentalBreakMtbDays>3</mentalBreakMtbDays>
+        <allowedMentalBreakIntensities>
+          <li>Extreme</li>
+        </allowedMentalBreakIntensities>
+      </li>
+    </stages>
+    <comps>
+      <li Class="Corruption.Core.HediffCompProperties_DemonicPossession">
+        <demonToSpawn>Demon_BeastUndivided</demonToSpawn>
+        <severityPerDay>0.02</severityPerDay>
+        <spawningMentalState>Berserk</spawningMentalState>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Exorcised</defName>
+    <description>This pawn has survived a daemonic possession.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.25, 0.55, 1.0)</defaultLabelColor>
+    <label>exorcised</label>
+    <stages>
+      <li>
+        <painFactor>0.8</painFactor>
+        <statOffsets>
+          <MentalBreakThreshold>-0.6</MentalBreakThreshold>
+          <PawnBeauty>-1</PawnBeauty>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

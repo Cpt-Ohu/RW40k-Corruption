@@ -24,12 +24,25 @@ namespace Corruption.Core.Soul
         public void TryAddProgressFor(GodDef god, float change)
         {
             var worship = this.Favours.FirstOrDefault(x => x.God == god);
+            if (worship == null)
+            {
+                worship = new FavourProgress(god, change);
+                this.Favours.Add(worship);
+            }
+
             worship.TryAddProgress(change);
+            god.FavourWorker.PostGainFavour(this.Soul, change);
+
         }
 
         public IEnumerable<FavourProgress> FavorProgressForChosenPantheon()
         {
             return this.Favours.Where(x => this.Soul.ChosenPantheon.IsMember(x.God));
+        }
+
+        public IEnumerable<FavourProgress> AllFavoursSorted()
+        {
+            return this.Favours.OrderByDescending(x => x.Favour);
         }
 
         public GodsFavourLevel FavourLevelFor(GodDef god)
@@ -45,6 +58,11 @@ namespace Corruption.Core.Soul
             }
         }
 
+        public float FavourValueFor(GodDef god)
+        {
+            return this.Favours.FirstOrDefault(x => x.God == god)?.Favour ?? 0f;
+        }
+
         internal void TryAddGods(List<GodDef> gods)
         {
             this.TryAddGods(gods, FloatRange.Zero);
@@ -53,7 +71,7 @@ namespace Corruption.Core.Soul
         internal void TryAddGods(List<GodDef> gods, FloatRange startingRange)
         {
             var newGods = gods.Where(x => !this.Favours.Any(w => w.God == x));
-            foreach(var god in newGods)
+            foreach (var god in newGods)
             {
                 this.Favours.Add(new FavourProgress(god, startingRange.RandomInRange));
             }

@@ -13,13 +13,11 @@
     </statBases>
     <verbProperties>
       <defaultProjectile>PSYWarpBolt</defaultProjectile>
-      <warmupTime>5.0</warmupTime>
+      <warmupTime>1.0</warmupTime>
       <range>25.9</range>
       <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
       <burstShotCount>3</burstShotCount>
-      <soundCast>WarpBolt</soundCast>
-      <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <soundCast>PsychicInsanityLanceCast</soundCast>
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
@@ -44,13 +42,13 @@
     </statBases>
     <verbProperties>
       <defaultProjectile>PSYWarpBolt_Medium</defaultProjectile>
-      <warmupTime>5.0</warmupTime>
+      <warmupTime>1.0</warmupTime>
       <range>25.9</range>
       <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
       <burstShotCount>2</burstShotCount>
-      <soundCast>WarpBolt</soundCast>
-      <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <soundCast>PsychicInsanityLanceCast</soundCast>
+      
+      
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
@@ -137,13 +135,13 @@
     </statBases>
     <verbProperties>
       <defaultProjectile>PSYWarpBolt_Medium</defaultProjectile>
-      <warmupTime>5.0</warmupTime>
+      <warmupTime>1.0</warmupTime>
       <range>25.9</range>
       <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
       <burstShotCount>3</burstShotCount>
-      <soundCast>WarpBolt</soundCast>
-      <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <soundCast>PsychicInsanityLanceCast</soundCast>
+      
+      
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">

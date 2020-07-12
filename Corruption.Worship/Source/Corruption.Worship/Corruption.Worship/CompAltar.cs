@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 
 namespace Corruption.Worship
 {
@@ -45,6 +46,67 @@ namespace Corruption.Worship
         public CompAltar()
         {
             this.innerContainer = new ThingOwner<Thing>(this, false, LookMode.Deep);
+        }
+
+        public override void Initialize(CompProperties props)
+        {
+            base.Initialize(props);
+
+            this.God = this.CompProps.dedicatedTo ?? GodDefOf.Emperor;
+        }
+
+        public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        {
+            foreach (Gizmo gizmo in base.CompGetGizmosExtra())
+            {
+                yield return gizmo;
+            }
+            if (parent.Faction == Faction.OfPlayer && innerContainer.Count > 0)
+            {
+                Command_Action command_Action = new Command_Action();
+                command_Action.action = DropEffigy;
+                command_Action.defaultLabel = "CommandDropEffigy".Translate();
+                command_Action.defaultDesc = "CommandDropEffigyDesc".Translate();
+                if (HasEffigy == false)
+                {
+                    command_Action.Disable("CommandDropEffigyFailure".Translate());
+                }
+                command_Action.hotKey = KeyBindingDefOf.Misc8;
+                command_Action.icon = ContentFinder<Texture2D>.Get("UI/Commands/PodEject");
+                yield return command_Action;
+            }
+        }
+
+
+        public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn selPawn)
+        {
+            foreach (var option in base.CompFloatMenuOptions(selPawn))
+            {
+                yield return option;
+            }
+
+            if (this.CompProps.requiresEffigy && this.InstalledEffigy == null)
+            {
+                foreach (var effigy in selPawn.inventory.GetDirectlyHeldThings().Where(x => x is ItemEffigy))
+                {
+                    yield return new FloatMenuOption("InstallEffigy".Translate(), delegate
+                    {
+                        selPawn.inventory.innerContainer.TryDrop(effigy, selPawn.Position, selPawn.Map, ThingPlaceMode.Near, out Thing _);
+                        Job job = ItemEffigy.InstallEffigyJob(selPawn, effigy, this.parent);
+                        selPawn.jobs.StartJob(job, JobCondition.InterruptForced, null, true);
+                    });
+                }
+
+                foreach (var effigy in selPawn.Map.listerHaulables.ThingsPotentiallyNeedingHauling().Where(x => x is ItemEffigy))
+                {
+                    yield return new FloatMenuOption("InstallEffigy".Translate(), delegate
+                    {
+                        Job job = ItemEffigy.InstallEffigyJob(selPawn, effigy, this.parent);
+                        selPawn.jobs.StartJob(job, JobCondition.InterruptForced, null, true);
+                    });
+                }
+            }
+
         }
 
         public GodDef God = GodDefOf.Emperor;
@@ -120,6 +182,8 @@ namespace Corruption.Worship
         public float WorshipRatePerTick;
 
         public bool requiresEffigy = true;
+
+        public GodDef dedicatedTo;
 
         public CompProperties_Altar()
         {

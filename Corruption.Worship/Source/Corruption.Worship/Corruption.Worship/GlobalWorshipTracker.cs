@@ -74,7 +74,7 @@ namespace Corruption.Worship
             return null;
         }
 
-        public void TryAddFavor(GodDef god, float value)
+        public void TryAddFavor(GodDef god, float value, Pawn pawn = null)
         {
             var favor = this.Favours.FirstOrDefault(x => x.God == god);
             if (favor == null)
@@ -84,6 +84,19 @@ namespace Corruption.Worship
             else
             {
                 favor.TryAddProgress(value);
+                pawn?.records.AddTo(WorshipRecordDefOf.GlobalFavourContributed, value);
+            }
+        }
+
+        public override void WorldComponentTick()
+        {
+            base.WorldComponentTick();
+            foreach (var attribute in playerPantheon.pantheonAttributes.Where(x => x.effectWorker != null))
+            {
+                if (Find.TickManager.TicksGame % attribute.effectTick == 0)
+                {
+                    attribute.effectWorker.Tick();
+                }
             }
         }
 

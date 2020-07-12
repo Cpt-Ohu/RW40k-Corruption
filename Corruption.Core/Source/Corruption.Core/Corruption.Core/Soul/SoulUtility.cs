@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using Corruption.Core.Gods;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,15 @@ namespace Corruption.Core.Soul
         internal static float PsychicSensitivityFactor(Pawn pawn)
         {
             return pawn.GetStatValue(StatDefOf.PsychicSensitivity);
+        }
+
+
+        internal static void ThrowPrayerMote(Pawn pawn, GodDef god)
+        {
+            MoteBubble moteBubble2 = (MoteBubble)ThingMaker.MakeThing(ThingDefOf.Mote_Speech, null);
+            moteBubble2.SetupMoteBubble(god.prayerMote, pawn);
+            moteBubble2.Attach(pawn);
+            GenSpawn.Spawn(moteBubble2, pawn.Position, pawn.Map);
         }
     }
 }

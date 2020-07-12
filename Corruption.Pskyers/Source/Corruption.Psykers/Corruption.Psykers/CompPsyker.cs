@@ -1,29 +1,37 @@
-﻿using Corruption.Core.Soul;
+﻿using Corruption.Core;
+using Corruption.Core.Soul;
 using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using Verse;
 
 namespace Corruption.Psykers
 {
     public class CompPsyker : ThingComp
     {
-        private List<AbilityDef> LearnedAbilities = new List<AbilityDef>();
+        public List<AbilityDef> LearnedAbilities = new List<AbilityDef>();
 
         public PsykerDisciplineDef MainDiscipline = PsykerDisciplineDefOf.Initiate;
 
-        public PsykerDisciplineDef minorDiscipline;
+        public List<PsykerDisciplineDef> minorDisciplines = new List<PsykerDisciplineDef>();
 
         public Pawn Pawn => this.parent as Pawn;
+
+        public PsykerClassDef psykerClassDef;
+
+        private bool psykerInitialized;
+
+        public bool ShouldAutoCast = true;
 
         public Trait PsykerPowerTrait
         {
             get
             {
-                Trait psykerTrait = Pawn?.story.traits.GetTrait(SoulTraitDefOf.Psyker);
+                Trait psykerTrait = Pawn?.story?.traits.GetTrait(PsykerTraitDefOf.Psyker);
                 if (psykerTrait != null)
                 {
                     return psykerTrait;
@@ -32,9 +40,108 @@ namespace Corruption.Psykers
             }
         }
 
+        public override void PostSpawnSetup(bool respawningAfterLoad)
+        {
+            if (!this.psykerInitialized)
+            {
+                InitializePsyker();
+            }
+
+            if (this.PsykerPowerTrait != null)
+            {
+                if (this.Pawn.psychicEntropy.CurrentPsyfocus < 0)
+                {
+                    this.Pawn.psychicEntropy.OffsetPsyfocusDirectly(this.Pawn.psychicEntropy.TargetPsyfocus);
+                }
+            }
+            base.PostSpawnSetup(respawningAfterLoad);
+        }
+
+        public override void CompTick()
+        {
+            base.CompTick();
+        }
+
+        private void InitializePsyker()
+        {
+            CorruptionPawnKindDef psykerKind = this.Pawn.kindDef as CorruptionPawnKindDef;
+            if (psykerKind != null && psykerKind.affliction != null)
+            {
+
+                PsykerClassDef psykerClass = GetPsykerClass(psykerKind);
+                if (psykerClass != null)
+                {
+                    this.psykerClassDef = psykerClass;
+                    if (this.PsykerPowerTrait != null) this.Pawn.story.traits.allTraits.Remove(this.PsykerPowerTrait);
+                    int degree = psykerClass.MinPsykerLevel;
+                    this.Pawn.story.traits.GainTrait(new Trait(PsykerTraitDefOf.Psyker, degree));
+
+
+                    foreach (var power in psykerClass.forcedPowers)
+                    {
+                        this.TryLearnPower(power);
+                    }
+
+                    this.MainDiscipline = psykerClass.mainDiscipline;
+                    if (this.MainDiscipline.practicionerTrait != null)
+                        this.Pawn.story.traits.GainTrait(new Trait(psykerClass.mainDiscipline.practicionerTrait));
+
+                    if (psykerClass.minorDisciplines.Count > 0)
+                    {
+                        this.minorDisciplines.Add(psykerClass.minorDisciplines[0]);
+                    }
+
+                    float availableXP = psykerClass.startingXP;
+
+                    var availablePowers = MainDiscipline.abilities;
+                    foreach (var discipline in this.minorDisciplines)
+                    {
+                        availablePowers.AddRange(discipline.abilities);
+                    }
+                    bool canSpend = true;
+                    while (canSpend)
+                    {
+                        var learnables = availablePowers.Where(x => this.LearningRequirementsMet(x) && !this.HasLearnedAbility(x.ability) && x.cost <= availableXP);
+                        if (learnables.Count() == 0)
+                        {
+                            canSpend = false;
+                        }
+                        else
+                        {
+                            var learnable = learnables.RandomElement();
+                            if (this.TryLearnPower(learnable))
+                            {
+                                availableXP -= learnable.cost;
+                            }
+                            else
+                            {
+                                canSpend = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private static PsykerClassDef GetPsykerClass(CorruptionPawnKindDef psykerKind)
+        {
+            var availableClasses = DefDatabase<PsykerClassDef>.AllDefsListForReading.Where(x => x.tags.Intersect(psykerKind.additionalTags).Count() > 0);
+
+            if (availableClasses.Count() > 0)
+            {
+                return availableClasses.RandomElementByWeight(x => x.commonality);
+            }
+            return null;
+        }
+
         public bool HasLearnedAbility(AbilityDef def)
         {
             return this.LearnedAbilities.Contains(def);
+        }
+
+        public bool LearningRequirementsMet(PsykerLearnablePower selectedPower)
+        {
+            return selectedPower.perequesiteAbility == null || this.LearnedAbilities.Contains(selectedPower.perequesiteAbility);
         }
 
         public float PsykerXP;
@@ -69,8 +176,10 @@ namespace Corruption.Psykers
             if (this.PsykerXP < 0)
             {
                 this.PsykerXP = previousXP;
-                Messages.Message("PsykerLearnXPShortage".Translate(), null, MessageTypeDefOf.RejectInput);
-
+                if (this.Pawn.IsColonistPlayerControlled)
+                {
+                    Messages.Message("PsykerLearnXPShortage".Translate(), null, MessageTypeDefOf.RejectInput);
+                }
                 return false;
             }
 
@@ -89,26 +198,57 @@ namespace Corruption.Psykers
             {
                 yield return gizmo;
             }
-            Command_Action command = new Command_Action();
-            command.defaultLabel = "PsykerPowerManagement".Translate();
-            command.defaultDesc = "PsykerPowerManagementDescr".Translate();
-            command.icon = PsykerUtility.PsykerIcon;
-            command.action = delegate
+            if (this.PsykerPowerTrait != null)
             {
-                if (this.parent == null) Log.Message("No parent???");
-                Find.WindowStack.Add(new Window_Psyker(this));
-            };
-            yield return command;
+                Command_Action command = new Command_Action();
+                command.defaultLabel = "PsykerPowerManagement".Translate();
+                command.defaultDesc = "PsykerPowerManagementDescr".Translate();
+                command.icon = PsykerUtility.PsykerIcon;
+                command.action = delegate
+                {
+                    Find.WindowStack.Add(new Window_Psyker(this));
+                };
+                yield return command;
+                                
+                Command_Toggle autoCast = new Command_Toggle();
+                autoCast.defaultLabel = "PsykerAutoCast".Translate();
+                autoCast.defaultLabel = "PsykerAutoCastDesc".Translate();
+                autoCast.icon = ContentFinder<Texture2D>.Get("UI/Commands/HoldFire");
+                autoCast.toggleAction = delegate
+                {
+                    this.ShouldAutoCast = !this.ShouldAutoCast;
+                };
+                autoCast.isActive = (() => this.ShouldAutoCast);
+                yield return autoCast;
+            }
 
         }
 
-        public void ExposeData()
+        public override string CompInspectStringExtra()
+        {
+            var builder = new StringBuilder();
+            if (this.psykerClassDef != null)
+            {
+                builder.AppendLine("PsykerClass".Translate(new NamedArgument(this.psykerClassDef.label, "NAME")));
+            }
+            if (this.PsykerPowerTrait != null)
+            {
+                string powerLevelLetter = PsykerUtility.PowerLevelLetters[PsykerPowerTrait.Degree];
+                builder.AppendLine("PsykerLevelInfo".Translate(powerLevelLetter));
+            }
+            return builder.ToString().TrimEndNewlines();
+        }
+
+        public override void PostExposeData()
         {
             Scribe_Values.Look<float>(ref this.PsykerXP, "psykerPX");
-            Scribe_Collections.Look<AbilityDef>(ref this.LearnedAbilities, "learnedAbilities", LookMode.Deep);
+            Scribe_Collections.Look<AbilityDef>(ref this.LearnedAbilities, "learnedAbilities", LookMode.Def);
+            Scribe_Collections.Look<PsykerDisciplineDef>(ref this.minorDisciplines, "minorDisciplines", LookMode.Def);
             Scribe_Defs.Look<PsykerDisciplineDef>(ref this.MainDiscipline, "chosenDiscipline");
+            Scribe_Defs.Look<PsykerClassDef>(ref psykerClassDef, "psykerClassDef");
+            Scribe_Values.Look<bool>(ref this.psykerInitialized, "psykerInitialized");
+            Scribe_Values.Look<bool>(ref this.ShouldAutoCast, "ShouldAutoCast");
         }
-
 
     }
 }

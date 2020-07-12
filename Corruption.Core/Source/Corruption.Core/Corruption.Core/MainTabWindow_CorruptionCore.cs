@@ -24,11 +24,9 @@ namespace Corruption.Core
         {
             base.PreOpen();
             MainTabWindow_CorruptionCore.tabsList.Clear();
-            Log.Message(DefDatabase<CorruptionMainTabDef>.AllDefsListForReading.Count().ToString());
             foreach (var def in DefDatabase<CorruptionMainTabDef>.AllDefsListForReading)
             {
                 if (this.selectedDef == null) this.selectedDef = def;
-                Log.Message("Tabbing: " + def.defName);
                 MainTabWindow_CorruptionCore.tabsList.Add(new TabRecord(def.label, delegate
                 {
                     this.selectedDef = def;

@@ -6,14 +6,14 @@
   
   <AbilityDef ParentName="PsykerAbilityBase" Name="TelepDominate">
     <defName>TelepDominateI</defName>
-    <label>weak domination</label>
+    <label>domination</label>
     <description>The Psyker reaches into his foe's mind, crushing their will to resist.</description>
     <level>10</level>
     <iconPath>UI/Abilities/TelepDomination</iconPath>
     <hotKey>Misc1</hotKey>
     <statBases>
       <Ability_EntropyGain>10</Ability_EntropyGain>
-      <Ability_Duration>20</Ability_Duration>
+      <Ability_Duration>10</Ability_Duration>
     </statBases>
     <verbProperties>
       <range>10.0</range>
@@ -29,23 +29,26 @@
       <comps>
         <li Class = "CompProperties_AbilityGiveHediff">
           <compClass>CompAbilityEffect_GiveHediff</compClass>
-          <hediffDef>CatatonicBreakdown</hediffDef>
+          <hediffDef>TelepathDomination</hediffDef>
           <durationMultiplier>PsychicSensitivity</durationMultiplier>
           <psychic>True</psychic>
           <applicableToMechs>False</applicableToMechs>
+        </li>
+        <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+          <abilityCastType>Attack</abilityCastType>
         </li>
       </comps>
   </AbilityDef>
 
   <AbilityDef ParentName="TelepDominate">
     <defName>TelepDominateII</defName>
-    <label>domination</label>
+    <label>powerful domination</label>
     <description>The Psyker reaches into his foe's mind, crushing their will to resist.</description>
     <level>20</level>
     <hotKey>Misc1</hotKey>
     <statBases>
       <Ability_EntropyGain>20</Ability_EntropyGain>
-      <Ability_Duration>35</Ability_Duration>
+      <Ability_Duration>20</Ability_Duration>
     </statBases>
     <verbProperties>
       <range>20.0</range>
@@ -55,14 +58,15 @@
 
   <AbilityDef ParentName="TelepDominate">
     <defName>TelepDominateIII</defName>
-    <label>powerful domination</label>
-    <description>The Psyker reaches into his foe's mind, crushing their will to resist.</description>
+    <label>mass domination</label>
+    <description>The Psyker reaches into his foe's minds, crushing their will to resist.</description>
     <level>40</level>
     <hotKey>Misc1</hotKey>
+    <iconPath>UI/Abilities/TelepDominationMass</iconPath>
     <statBases>
       <Ability_EntropyGain>30</Ability_EntropyGain>
       <Ability_Duration>120</Ability_Duration>
-      <Ability_EffectRadius>2</Ability_EffectRadius>
+      <Ability_EffectRadius>3</Ability_EffectRadius>
     </statBases>
     <verbProperties>
       <range>25.0</range>
@@ -73,13 +77,14 @@
 
   <AbilityDef ParentName="TelepDominate">
     <defName>TelepDominateIV</defName>
-    <label>tyrannic domination</label>
+    <label>tyrannic mass domination</label>
     <description>The Psyker reaches into his foe's mind, crushing their will to resist.</description>
-    <level>40</level>
+    <level>50</level>
     <hotKey>Misc1</hotKey>
+    <iconPath>UI/Abilities/TelepDominationMass</iconPath>
     <statBases>
       <Ability_EntropyGain>50</Ability_EntropyGain>
-      <Ability_Duration>240</Ability_Duration>
+      <Ability_Duration>30</Ability_Duration>
       <Ability_EffectRadius>6</Ability_EffectRadius>
     </statBases>
     <verbProperties>
@@ -95,7 +100,7 @@
   <AbilityDef ParentName="PsykerAbilityBase" Name="TelepHallucination">
     <defName>TelepHallucinationI</defName>
     <label>weak hallucination</label>
-    <description>The Psyker induces paranoia, confusion, and panic into the minds of his enemies.</description>
+    <description>The Psyker induces paranoia, confusion, and panic in the minds of his enemies.</description>
     <level>20</level>
     <iconPath>UI/Abilities/TelepHallucination</iconPath>
     <hotKey>Misc1</hotKey>
@@ -121,6 +126,9 @@
         <psychic>True</psychic>
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
 
@@ -128,9 +136,10 @@
   <AbilityDef ParentName="TelepHallucination">
     <defName>TelepHallucinationII</defName>
     <label>hallucination</label>
-    <description>The Psyker induces paranoia, confusion, and panic into the minds of his enemies.</description>
+    <description>The Psyker induces paranoia, confusion, and panic in the minds of his enemies.</description>
     <level>30</level>
     <hotKey>Misc1</hotKey>
+    <iconPath>UI/Abilities/TelepHallucination</iconPath>
     <statBases>
       <Ability_EntropyGain>20</Ability_EntropyGain>
       <Ability_Duration>45</Ability_Duration>
@@ -145,7 +154,7 @@
   <AbilityDef ParentName="TelepHallucination">
     <defName>TelepHallucinationIII</defName>
     <label>harrowing hallucination</label>
-    <description>The Psyker induces paranoia, confusion, and panic into the minds of his enemies.</description>
+    <description>The Psyker induces paranoia, confusion, and panic in the minds of his enemies.</description>
     <level>40</level>
     <hotKey>Misc1</hotKey>
     <statBases>
@@ -160,10 +169,11 @@
 
   <AbilityDef ParentName="TelepHallucination">
     <defName>TelepHallucinationIV</defName>
-    <label>crushing hallucination</label>
-    <description>The Psyker induces paranoia, confusion, and panic into the minds of his enemies.</description>
+    <label>mass hallucination</label>
+    <description>The Psyker induces paranoia, confusion, and panic in the minds of his enemies.</description>
     <level>50</level>
     <hotKey>Misc1</hotKey>
+    <iconPath>UI/Abilities/TelepHallucinationMass</iconPath>
     <statBases>
       <Ability_EntropyGain>30</Ability_EntropyGain>
       <Ability_Duration>80</Ability_Duration>
@@ -208,6 +218,9 @@
         <stage>0</stage>
         <psychic>True</psychic>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Buff</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
 
@@ -240,6 +253,10 @@
         <thought>TelepathyFortitude</thought>
         <stage>1</stage>
         <psychic>True</psychic>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <compClass>Corruption.Psykers.AbilityComp_AICastBuff</compClass>
+        <abilityCastType>Buff</abilityCastType>
       </li>
     </comps>
   </AbilityDef>
@@ -274,6 +291,10 @@
         <stage>2</stage>
         <psychic>True</psychic>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <compClass>Corruption.Psykers.AbilityComp_AICastBuff</compClass>
+        <abilityCastType>Buff</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
 
@@ -306,6 +327,10 @@
         <thought>TelepathyFortitude</thought>
         <stage>3</stage>
         <psychic>True</psychic>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <compClass>Corruption.Psykers.AbilityComp_AICastBuff</compClass>
+        <abilityCastType>Buff</abilityCastType>
       </li>
     </comps>
   </AbilityDef>
@@ -342,6 +367,9 @@
         <psychic>True</psychic>
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
 
@@ -364,10 +392,11 @@
 
   <AbilityDef ParentName="TelepTerrify">
     <defName>TelepTerrifyIII</defName>
-    <label>major terror</label>
+    <label>mass terror</label>
     <description>The Telepath assails them with mental images of their own darkest and dreadful nightmares.</description>
     <level>30</level>
     <hotKey>Misc1</hotKey>
+    <iconPath>UI/Abilities/TelepTerrifyMass</iconPath>
     <statBases>
       <Ability_EntropyGain>30</Ability_EntropyGain>
       <Ability_Duration>60</Ability_Duration>
@@ -381,10 +410,11 @@
 
   <AbilityDef ParentName="TelepTerrify">
     <defName>TelepTerrifyIV</defName>
-    <label>primal terror</label>
+    <label>primal mass terror</label>
     <description>The Telepath assails them with mental images of their own darkest and dreadful nightmares.</description>
     <level>50</level>
     <hotKey>Misc1</hotKey>
+    <iconPath>UI/Abilities/TelepTerrifyMass</iconPath>
     <statBases>
       <Ability_EntropyGain>40</Ability_EntropyGain>
       <Ability_Duration>60</Ability_Duration>
@@ -426,6 +456,9 @@
           <compClass>CompAbilityEffect_GiveHediff</compClass>
           <hediffDef>PuppeteerMindcontrol</hediffDef>
           <psychic>True</psychic>
+        </li>
+        <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+          <abilityCastType>Attack</abilityCastType>
         </li>
       </comps>
   </AbilityDef>

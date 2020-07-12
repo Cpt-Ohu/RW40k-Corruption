@@ -127,44 +127,77 @@
 
 
 
-  <ThingDef ParentName="ApparelBase">
-    <defName>TelekineDome</defName>
-    <label>telekine dome</label>
-    <description>It will attempt to stop incoming projectiles or shrapnel, but does nothing against melee attacks or heat. It prevents the wearer from firing out, and shuts down instantly if hit by EMP.</description>
-    <thingClass>ShieldBelt</thingClass>
+  <ThingDef ParentName="ApparelMakeableBase">
+    <thingClass>FactionColors.ApparelUniform</thingClass>
+    <defName>Apparel_PsykerBackpack</defName>
+    <description>A backpack containing psychically sensitive materials that enhances a psykers capabilities.</description>
+    <label>psyker backpack</label>
+    <recipeMaker>
+      <researchPrerequisite>ComplexClothing</researchPrerequisite>
+    </recipeMaker>
     <graphicData>
-      <texPath>Things/Pawn/Humanlike/Apparel/ShieldBelt/ShieldBelt</texPath>
+      <texPath>Things/Apparel/PsykerBackpack/PsykerBackpackA</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <tickerType>Normal</tickerType>
-    <statBases>
-      <Mass>3</Mass>
-      <WorkToMake>14000</WorkToMake>
-      <Flammability>0.0</Flammability>
-      <EnergyShieldRechargeRate>0.13</EnergyShieldRechargeRate>
-      <EnergyShieldEnergyMax>2.1</EnergyShieldEnergyMax>
-      <EquipDelay>2</EquipDelay>
-    </statBases>
+    <generateCommonality>0.1</generateCommonality>
+    <costList>
+      <ComponentIndustrial>2</ComponentIndustrial>
+      <Steel>30</Steel>
+      <Plasteel>5</Plasteel>
+      <PsiConvector>1</PsiConvector>
+    </costList>
     <thingCategories>
-      <li>ApparelArmor</li>
+      <li>Apparel</li>
     </thingCategories>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToMake>5000</WorkToMake>
+      <Mass>5</Mass>
+      <EquipDelay>1.5</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+      <PsychicEntropyMax>20</PsychicEntropyMax>
+      <PsychicEntropyRecoveryRate>0.25</PsychicEntropyRecoveryRate>
+    </equippedStatOffsets>
     <apparel>
-      <careIfWornByCorpse>false</careIfWornByCorpse>
       <bodyPartGroups>
-        <li>Waist</li>
+        <li>Torso</li>
+        <li>Neck</li>
+        <li>Shoulders</li>
+        <li>Arms</li>
       </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/PsykerBackpack</wornGraphicPath>
       <layers>
-        <li>PsySphere</li>
+        <li>ExtraShell</li>
       </layers>
+      <tags>
+        <li>Psyker</li>
+      </tags>
+      <defaultOutfitTags>
+        <li>Psyker</li>
+      </defaultOutfitTags>
     </apparel>
     <colorGenerator Class="ColorGenerator_Options">
       <options>
         <li>
           <weight>10</weight>
-          <only>(0.33,0.33,0.33,1)</only>
+          <only>RGBA(1.00,1.00,1.00,1)</only>
         </li>
       </options>
     </colorGenerator>
+    <comps>
+      <li Class="FactionColors.CompProperties_FactionColor">
+        <compClass>FactionColors.CompFactionColor</compClass>
+        <IsRandomMultiGraphic>true</IsRandomMultiGraphic>
+        <RandomGraphicPaths>
+          <li>
+            <first>PsykerBackpackA</first>
+            <second>10</second>
+          </li>
+        </RandomGraphicPaths>
+      </li>
+    </comps>
   </ThingDef>
+
   
 </Defs>

@@ -13,5 +13,6 @@ namespace Corruption.Worship
     {
         public static JobDef HoldSermon;
         public static JobDef AttendSermon;
+        public static JobDef InstallEffigy;
     }
 }

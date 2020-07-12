@@ -11,8 +11,8 @@
     <label>Predators</label>
     <description>Khorne sends in a pack of savage beasts</description>
     <workerClass>Corruption.Worship.Wonders.WonderWorker_FireIncident</workerClass>
-    <wonderIconPath>UI/Wonders/WonderGiftMaterials</wonderIconPath>
-    <favourCost>300</favourCost>
+    <wonderIconPath>UI/Wonders/WondersKhorneBeasts</wonderIconPath>
+    <favourCost>0</favourCost>
     <incident>ManhunterPack</incident>
     <incidentPoints>3000</incidentPoints>
   </Corruption.Worship.Wonders.WonderDef>
@@ -45,7 +45,7 @@
     <label>Champion of Khorne</label>
     <description>The selected pawn was chosen by Khorne to be a great warrior.</description>
     <workerClass>Corruption.Worship.Wonders.WonderWorker_AddSpecialTrait</workerClass>
-    <wonderIconPath>UI/Wonders/WonderSaint</wonderIconPath>
+    <wonderIconPath>UI/Wonders/WonderChampionKhorne</wonderIconPath>
     <favourCost>10000</favourCost>
     <traitToGive>KhorneChampion</traitToGive>
   </Corruption.Worship.Wonders.WonderDef>

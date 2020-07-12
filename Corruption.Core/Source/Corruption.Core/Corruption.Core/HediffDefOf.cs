@@ -14,6 +14,6 @@ namespace Corruption.Core
         public static HediffDef NurglesRot;
         public static HediffDef MarkNurgle;
 
-
+        public static HediffDef Exorcised;
     }
 }

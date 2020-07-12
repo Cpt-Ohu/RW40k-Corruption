@@ -23,13 +23,13 @@ namespace Corruption.Worship.Wonders
         {
             for (int i = 0; i < this.Def.thingsToSpawn.Count; i++)
             {
-                ThingDefCount entry = this.Def.thingsToSpawn[i];
-                int countToCreate = entry.Count / entry.ThingDef.stackLimit;
+                ThingDefCountClass entry = this.Def.thingsToSpawn[i];
+                int countToCreate = entry.count / entry.thingDef.stackLimit;
                 for (int j = 0; j < countToCreate; j++)
                 {
-                   Thing thing = ThingMaker.MakeThing(entry.ThingDef);
-                   thing.stackCount = Math.Min(thing.def.stackLimit, countToCreate);
-                   GenPlace.TryPlaceThing(thing, this.target.Cell, this.target.Map, ThingPlaceMode.Near);
+                    Thing thing = ThingMaker.MakeThing(entry.thingDef);
+                    thing.stackCount = Math.Min(thing.def.stackLimit, countToCreate);
+                    GenPlace.TryPlaceThing(thing, this.target.Cell, this.target.Map, ThingPlaceMode.Near);
                 }
             }
         }

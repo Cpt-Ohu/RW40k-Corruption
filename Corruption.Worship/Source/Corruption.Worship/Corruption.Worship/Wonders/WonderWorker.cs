@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Corruption.Core.Gods;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace Corruption.Worship.Wonders
     {
         public WonderDef Def;
         
-        public virtual bool TryExecuteWonder(int worshipPoints) { return false; }
+        public virtual bool TryExecuteWonder(GodDef god, int worshipPoints) { return false; }
 
     }
 }

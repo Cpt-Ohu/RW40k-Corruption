@@ -20,6 +20,7 @@
     </comps>
     <stages>
       <li>
+        <painOffset>0.1</painOffset>
         <capMods>
           <li>
             <capacity>BloodPumping</capacity>
@@ -47,6 +48,7 @@
     </comps>
     <stages>
       <li>
+        <painOffset>0.2</painOffset>
         <capMods>
           <li>
             <capacity>BloodPumping</capacity>
@@ -152,8 +154,7 @@
       </li>
       <li Class="Corruption.Core.HediffCompProperties_Mutate">
         <compClass>Corruption.Core.HediffComp_Mutate</compClass>
-        <minMutationRate>1</minMutationRate>
-        <maxMutationRate>5</maxMutationRate>
+        <newMutationInterval>10</newMutationInterval>
       </li>
     </comps>
     <stages>
@@ -176,8 +177,6 @@
     <comps>
       <li Class="Corruption.Core.HediffCompProperties_Mutate">
         <compClass>Corruption.Core.HediffComp_Mutate</compClass>
-        <minMutationRate>1</minMutationRate>
-        <maxMutationRate>3</maxMutationRate>
       </li>
       <li Class="Corruption.Psykers.HediffCompProperties_Heal">
         <compClass>Corruption.Psykers.HediffComp_Heal</compClass>
@@ -189,6 +188,7 @@
     </comps>
     <stages>
       <li>
+        <painOffset>0.1</painOffset>
         <capMods>
           <li>
             <capacity>BloodPumping</capacity>
@@ -199,85 +199,6 @@
     </stages>
   </HediffDef>
 
-
-  <HediffDef ParentName="HediffPsykerBuff">
-    <defName>BloodBoil</defName>
-    <hediffClass>HediffWithComps</hediffClass>
-    <defaultLabelColor>(0.1, 0.7, 0.0)</defaultLabelColor>
-    <label>boiling blood</label>
-    <description>This being's heartrate is accelerating until its victim topples over.</description>
-    <lethalSeverity>1</lethalSeverity>
-    <comps>
-      <li Class="HediffCompProperties_Disappears">
-        <disappearsAfterTicks>800~1200</disappearsAfterTicks>
-      </li>
-      <li Class="HediffCompProperties_SeverityPerDay">
-        <severityPerDay>0.27</severityPerDay>        
-      </li>
-    </comps>
-    <stages>
-      <li>
-        <label>accelerating</label>
-        <capMods>
-          <li>
-            <capacity>Consciousness</capacity>
-            <offset>-0.1</offset>
-          </li>
-          <li>
-            <capacity>BloodPumping</capacity>
-            <offset>1.0</offset>
-          </li>
-        </capMods>
-      </li>
-      <li>
-        <label>racing</label>
-        <minSeverity>0.5</minSeverity>
-        <capMods>
-          <li>
-            <capacity>Consciousness</capacity>
-            <offset>-0.5</offset>
-          </li>
-          <li>
-            <capacity>BloodPumping</capacity>
-            <offset>2.0</offset>
-          </li>
-        </capMods>
-        <hediffGivers>
-          <li Class="HediffGiver_Random">
-            <hediff>HeartAttack</hediff>
-            <mtbDays>2</mtbDays>
-            <partsToAffect>
-              <li>Heart</li>
-            </partsToAffect>
-          </li>
-        </hediffGivers>
-      </li>
-      <li>
-        <label>breaking</label>
-        <minSeverity>0.8</minSeverity>
-        <lifeThreatening>true</lifeThreatening>
-        <capMods>
-          <li>
-            <capacity>Consciousness</capacity>
-            <offset>-1.0</offset>
-          </li>
-          <li>
-            <capacity>BloodPumping</capacity>
-            <offset>2.0</offset>
-          </li>
-        </capMods>
-        <hediffGivers>
-          <li Class="HediffGiver_Random">
-            <hediff>HeartAttack</hediff>
-            <mtbDays>1</mtbDays>
-            <partsToAffect>
-              <li>Heart</li>
-            </partsToAffect>
-          </li>
-        </hediffGivers>
-      </li>
-    </stages>
-  </HediffDef>
 
   <HediffDef ParentName="HediffPsykerBuff">
     <defName>BiomancyConstriction</defName>
@@ -288,6 +209,7 @@
     <comps>
       <li Class="HediffCompProperties_Disappears">
         <disappearsAfterTicks>1200~1800</disappearsAfterTicks>
+        <showRemainingTime>True</showRemainingTime>
       </li>
     </comps>
     <stages>
@@ -296,7 +218,7 @@
         <capMods>
           <li>
             <capacity>Breathing</capacity>
-            <offset>-0.8</offset>
+            <offset>-0.6</offset>
           </li>
         </capMods>
       </li>
@@ -312,6 +234,7 @@
     <comps>
       <li Class="HediffCompProperties_Disappears">
         <disappearsAfterTicks>1800~2400</disappearsAfterTicks>
+        <showRemainingTime>True</showRemainingTime>
       </li>
       <li Class="HediffCompProperties_SeverityPerDay">
         <severityPerDay>0.17</severityPerDay>
@@ -334,9 +257,14 @@
             <offset>-0.1</offset>
           </li>
         </capMods>
+        <statOffsets>
+          <ShootingAccuracyPawn>-5</ShootingAccuracyPawn>
+          <MeleeHitChance>-5</MeleeHitChance>
+          <MeleeDodgeChance>-5</MeleeDodgeChance>
+        </statOffsets>
       </li>
       <li>
-        <label>draining (major)</label>
+        <label>major</label>
         <minSeverity>0.4</minSeverity>
         <capMods>
           <li>
@@ -352,9 +280,14 @@
             <offset>-0.2</offset>
           </li>
         </capMods>
+        <statOffsets>
+          <ShootingAccuracyPawn>-10</ShootingAccuracyPawn>
+          <MeleeHitChance>-10</MeleeHitChance>
+          <MeleeDodgeChance>-10</MeleeDodgeChance>
+        </statOffsets>
       </li>
       <li>
-        <label>draining (lethal)</label>
+        <label>lethal</label>
         <lifeThreatening>true</lifeThreatening>
         <minSeverity>0.8</minSeverity>
         <capMods>
@@ -364,13 +297,18 @@
           </li>
           <li>
             <capacity>Moving</capacity>
-            <offset>-0.3</offset>
+            <offset>-0.4</offset>
           </li>
           <li>
             <capacity>Consciousness</capacity>
             <offset>-0.5</offset>
           </li>
         </capMods>
+        <statOffsets>
+          <ShootingAccuracyPawn>-20</ShootingAccuracyPawn>
+          <MeleeHitChance>-20</MeleeHitChance>
+          <MeleeDodgeChance>-20</MeleeDodgeChance>
+        </statOffsets>
       </li>
     </stages>
   </HediffDef>

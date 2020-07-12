@@ -11,6 +11,7 @@ namespace Corruption.Core.Soul
     {
         public static CompSoul Soul(this Pawn pawn)
         {
+            if (!pawn.RaceProps.Humanlike) return null;
             return pawn.GetComp<CompSoul>();
         }
     }

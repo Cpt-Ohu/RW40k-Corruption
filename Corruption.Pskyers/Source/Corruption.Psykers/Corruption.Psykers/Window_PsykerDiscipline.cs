@@ -10,6 +10,7 @@ using Verse;
 using RimWorld;
 using RimWorld.IO;
 using System.Linq.Expressions;
+using RimWorld.QuestGen;
 
 namespace Corruption.Psykers
 {
@@ -21,9 +22,13 @@ namespace Corruption.Psykers
 
         protected CompPsyker comp;
 
-        private Window_Psyker parentWindow;
+        protected Window_Psyker parentWindow;
 
         protected virtual string Title => "MainDiscipline".Translate();
+
+        protected virtual PsykerDisciplineCategory Category => PsykerDisciplineCategory.Main;
+
+        private static Vector2 descrScrollPos = Vector2.zero;
 
         public override Vector2 InitialSize => new Vector2(800f, 700f);
 
@@ -32,14 +37,18 @@ namespace Corruption.Psykers
             this.closeOnClickedOutside = true;
 
             this.comp = comp;
-            if (comp.parent == null) Log.Message("No PArent");
             this.parentWindow = windowPsyker;
-            var disciplines = DefDatabase<Corruption.Psykers.PsykerDisciplineDef>.AllDefsListForReading.FindAll(x => x.associatedPantheons.NullOrEmpty() == false && x != PsykerDisciplineDefOf.Initiate);
 
-            var pawnPantheon = comp.Pawn.Soul().ChosenPantheon;
 
-            this.psykerDisciplines = disciplines.FindAll(x => x.associatedPantheons.Any(p => pawnPantheon == p));
+            this.psykerDisciplines = this.LoadDisciplines();
             this.selectedDef = psykerDisciplines.Contains(comp.MainDiscipline) ? comp.MainDiscipline : psykerDisciplines.FirstOrDefault();
+        }
+
+        protected List<PsykerDisciplineDef> LoadDisciplines()
+        {
+            var pawnPantheon = comp.Pawn.Soul().ChosenPantheon;
+            var disciplines = DefDatabase<Corruption.Psykers.PsykerDisciplineDef>.AllDefsListForReading.FindAll(x => x.associatedPantheons.NullOrEmpty() == false && x != PsykerDisciplineDefOf.Initiate);
+            return disciplines.FindAll(x => x.associatedPantheons.Any(p => pawnPantheon == p) && x.category == this.Category);
         }
 
         public override void DoWindowContents(Rect inRect)
@@ -65,15 +74,21 @@ namespace Corruption.Psykers
                 }
             }
 
-
-            Rect selectedRect = new Rect(disciplinesRect.width / 2f - 64f, disciplinesRect.height / 2f - 64f, 128f, 128f);
-            DrawSelectedDiscipline(selectedRect);
-
+            if (selectedDef != null)
+            {
+                Rect selectedRect = new Rect(disciplinesRect.width / 2f - 64f, disciplinesRect.height / 2f - 64f, 128f, 128f);
+                DrawSelectedDiscipline(selectedRect);
+            }
             GUI.EndGroup();
 
 
             Rect confirmRect = new Rect(inRect.width / 2f - 132f, disciplinesRect.yMax + 32f, 128f, 56f);
-            if (Widgets.ButtonText(confirmRect, "ChooseDiscipline".Translate(), true, true, this.comp.MainDiscipline != this.selectedDef))
+            if (this.selectedDef.abilities.Min(x => x.ability.level > this.comp.PsykerPowerTrait?.Degree))
+            {
+                Widgets.CustomButtonText(ref confirmRect, "DisciplineLevelTooHigh".Translate(), TexUI.LockedResearchColor, TexUI.HighlightBorderResearchColor, TexUI.HighlightBorderResearchColor);
+                
+            }
+            else if (Widgets.ButtonText(confirmRect, "ChooseDiscipline".Translate(), true, true, this.comp.MainDiscipline != this.selectedDef))
             {
                 this.ChoosePower();
             }
@@ -101,7 +116,7 @@ namespace Corruption.Psykers
             Rect descriptionRect = new Rect(iconRect.x - 38f, iconRect.yMax + 8f, iconRect.width + 76f, Text.LineHeight * 4f);
             Widgets.DrawBox(descriptionRect);
             descriptionRect = descriptionRect.ContractedBy(2f);
-            Widgets.TextArea(descriptionRect, selectedDef.description, true);
+            Widgets.TextAreaScrollable(descriptionRect, selectedDef.description, ref descrScrollPos, true);
         }
 
         private void DrawDiscipline(PsykerDisciplineDef def, Vector2 vector)
@@ -117,8 +132,8 @@ namespace Corruption.Psykers
             Widgets.DrawHighlightIfMouseover(rect);
             TooltipHandler.TipRegion(rect, new TipSignal(def.label));
 
-            Rect titleRect = new Rect(rect.x - 16f, rect.yMax + 4f, rect.width + 32f, Text.LineHeight);
-            Text.Anchor = TextAnchor.MiddleCenter;
+            Rect titleRect = new Rect(rect.x - 32f, rect.yMax + 4f, rect.width + 64f, Text.LineHeight * 2f);
+            Text.Anchor = TextAnchor.UpperCenter;
             Widgets.Label(titleRect, def.LabelCap);
             Text.Anchor = TextAnchor.UpperLeft;
         }
@@ -126,8 +141,17 @@ namespace Corruption.Psykers
         protected virtual void ChoosePower()
         {
             comp.MainDiscipline = this.selectedDef;
+            if (this.selectedDef.practitionerHediff != null)
+            {
+                comp.Pawn.health.AddHediff(this.selectedDef.practitionerHediff);
+            }
+            if (this.selectedDef.practicionerTrait != null)
+            {
+                var trait = new Trait(this.selectedDef.practicionerTrait);
+                comp.Pawn.story.traits.GainTrait(trait);
+            }
+            this.comp.AddXP(this.selectedDef.initialXP);
             this.parentWindow.UpdatePowers();
-            Log.Message(this.comp.parent.Label);
             this.Close();
         }
     }
@@ -137,13 +161,16 @@ namespace Corruption.Psykers
 
         protected override string Title => "MinorDiscipline".Translate();
 
+        protected override PsykerDisciplineCategory Category => PsykerDisciplineCategory.Minor;
+
         public Window_PsykerDisciplineMinor(CompPsyker comp, Window_Psyker windowPsyker) : base(comp, windowPsyker)
         {
         }
 
         protected override void ChoosePower()
         {
-            this.comp.minorDiscipline = this.selectedDef;
+            this.comp.minorDisciplines[0] = this.selectedDef;
+            this.parentWindow.UpdatePowers();
             this.Close();
         }
     }

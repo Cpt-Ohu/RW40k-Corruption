@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThoughtDef>
+    <defName>Nurgle_Happy</defName>
+    <workerClass>ThoughtWorker_AlwaysActive</workerClass>
+    <requiredTraits>
+      <li>Nurgle_Fervor</li>
+    </requiredTraits>
+    <stages>
+      <li>
+        <label>There's only death</label>
+        <description>All creation is doomed to die and crumble. And that's good, isn't it, Papa Nurgle?</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Nurgle_Blessings</defName>
+    <workerClass>Corruption.Core.ThoughtWorker_NurgleGifts</workerClass>
+    <requiredTraits>
+      <li>Nurgle_Fervor</li>
+    </requiredTraits>
+    <stages>
+      <li>
+        <label>Nurgles Gift</label>
+        <description>Papa Nurgle has given me a gift.</description>
+        <baseMoodEffect>5</baseMoodEffect>
+      </li>
+      <li>
+        <label>Nurgles Favour</label>
+        <description>So many gifts have been bestowed upon me...</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+      <li>
+        <label>Nurgles Blessing</label>
+        <description>Papa Nurgle has blessed me!</description>
+        <baseMoodEffect>15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Tzeentch_Happy</defName>
+    <workerClass>Corruption.Core.ThoughtWorker_Tzeentchian</workerClass>
+    <requiredTraits>
+      <li>Tzeentch_Fervor</li>
+    </requiredTraits>
+    <stages>
+      <li>
+        <label>JUST AS PLANNED!</label>
+        <description>Excellent, his plans are unfolding seemlessly!</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+      <li>
+        <label>NOT AS PLANNED!</label>
+        <description>NOO, IT failed, how can this be?</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+      <li>
+        <label>JUST AS PLANNED!</label>
+        <description>Haha, all schemes are in order!</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+      <li>
+        <label>NOT AS PLANNED!</label>
+        <description>This isn't going as intended. Has Tzeentch left me!?</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+      <li>
+        <label>JUST AS PLANNED!</label>
+        <description>YEES, soon everything will be revealed...</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+      <li>
+        <label>NOT AS PLANNED!</label>
+        <description>Curses, foiled again! What is the meaning of this!?</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+
+</Defs>

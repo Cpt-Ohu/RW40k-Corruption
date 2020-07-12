@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using Corruption.Core;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,8 @@ namespace Corruption.Psykers
             Vortex vortex = (Vortex)ThingMaker.MakeThing(this.Props.vortexToSpawn);
             vortex.Instigator = this.parent.pawn;
             vortex.Radius = this.Props.radius; //this.parent.def.statBases.GetStatValueFromList(StatDefOf.Ability_EffectRadius, 1);
-            GenSpawn.Spawn(vortex, target.Cell, this.parent.pawn.Map, WipeMode.Vanish);
+            vortex.LifeTimeSecs = (int)this.parent.def.statBases.GetStatValueFromList(StatDefOf.Ability_Duration, 1);
+            GenSpawn.Spawn(vortex, target.Cell, this.parent.pawn.Map, WipeMode.Vanish);            
         }
 
         public override void DrawEffectPreview(LocalTargetInfo target)

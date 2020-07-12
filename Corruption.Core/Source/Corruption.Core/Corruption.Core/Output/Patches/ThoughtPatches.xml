@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="KnowGuestExecuted"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="KnowColonistExecuted"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="KnowPrisonerDiedInnocent"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="KnowColonistDied"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="ColonistLost"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="PawnWithGoodOpinionLost"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="KnowPrisonerSold"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="ReleasedHealthyPrisoner"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="KnowPrisonerSold"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="KnowGuestOrganHarvested"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="KnowColonistOrganHarvested"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="Nuzzled"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="ButcheredHumanlikeCorpse"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="KnowButcheredHumanlikeCorpse"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="KnowColonistOrganHarvested"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="ObservedLayingCorpse"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="WitnessedDeathAlly"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="WitnessedDeathNonAlly"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="ColonistBanished"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="ColonistBanishedToDie"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="PrisonerBanishedToDie"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="ButcheredHumanlikeCorpseOpinion"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="SoldPrisoner"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="KnowColonistOrganHarvested"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="ColonistLeftUnburied"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="Naked"]/nullifyingTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </value>
+  </Operation>
+
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="Sick"]</xpath>
+    <value>
+      <nullifyingTraits>
+        <li>Nurgle_Fervor</li>
+      </nullifyingTraits>
+    </value>
+  </Operation>
+
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="KilledHumanlikeBloodlust"]</xpath>
+    <value>
+      <thoughtClass>Corruption.Core.Thought_MemoryBloodlust</thoughtClass>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="KilledHumanlikeBloodlust"]/requiredTraits</xpath>
+    <value>
+      <li>Khorne_Fervor</li>
+    </value>
+  </Operation>  
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="KilledHumanlikeBloodlust"]/stages</xpath>
+    <value>
+      <li>
+        <label>Khornate Deprivation</label>
+        <description>I DEMAND THE GLORY OF A KILL!</description>
+        <baseMoodEffect>-25</baseMoodEffect>
+      </li>
+      <li>
+        <label>Khornate Desire</label>
+        <description>It's been TOO long since I have spilled blood ...</description>
+        <baseMoodEffect>-15</baseMoodEffect>
+      </li>
+      <li>
+        <label>Khornate Urge</label>
+        <description>I haven't tasted battle in a while...</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+      <li>
+        <label>Khornate Sacrifice</label>
+        <description>I got to kill someone in the name of Khorne!</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+      <li>
+        <label>Khornate Slaughter</label>
+        <description>This is a bloodbath! For KHORNE!!</description>
+        <baseMoodEffect>20</baseMoodEffect>
+      </li>
+      <li>
+        <label>Khornate Glory</label>
+        <description>BLOOD FOR THE BLOOD GOD! SKULLS FOR THE SKULL THRONE!</description>
+        <baseMoodEffect>30</baseMoodEffect>
+      </li>
+    </value>
+  </Operation>
+
+  <!--<Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="AteHumanlikeMeatAsIngredient"]</xpath>
+    <value>
+      <thoughtClass>Corruption.Core.Thought_PleasesSlaanesh</thoughtClass>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="AteHumanlikeMeatAsIngredientCannibal"]</xpath>
+    <value>
+      <thoughtClass>Corruption.Core.Thought_PleasesSlaanesh</thoughtClass>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="AteHumanlikeMeatDirectCannibal"]</xpath>
+    <value>
+      <thoughtClass>Corruption.Core.Thought_PleasesSlaanesh</thoughtClass>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="AteLavishMeal"]</xpath>
+    <value>
+      <thoughtClass>Corruption.Core.Thought_PleasesSlaanesh</thoughtClass>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="AteInImpressiveDiningRoom"]</xpath>
+    <value>
+      <thoughtClass>Corruption.Core.Thought_PleasesSlaanesh</thoughtClass>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="JoyActivityInImpressiveRecRoom"]</xpath>
+    <value>
+      <thoughtClass>Corruption.Core.Thought_PleasesSlaanesh</thoughtClass>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="ForcedMeToTakeLuciferium"]</xpath>
+    <value>
+      <thoughtClass>Corruption.Core.Thought_PleasesSlaanesh</thoughtClass>
+    </value>
+  </Operation>
+
+
+  
+
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="Slighted"]</xpath>
+    <value>
+      <thoughtClass>Corruption.Core.Thought_PleasesTzeentch</thoughtClass>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="Insulted"]</xpath>
+    <value>
+      <thoughtClass>Corruption.Core.Thought_PleasesTzeentch</thoughtClass>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="HadAngeringFight"]</xpath>
+    <value>
+      <thoughtClass>Corruption.Core.Thought_PleasesTzeentch</thoughtClass>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="SoldMyLovedOne"]</xpath>
+    <value>
+      <thoughtClass>Corruption.Core.Thought_PleasesTzeentch</thoughtClass>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="SoldMyBondedAnimal"]</xpath>
+    <value>
+      <thoughtClass>Corruption.Core.Thought_PleasesTzeentch</thoughtClass>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[defName="SoldMyBondedAnimalMood"]</xpath>
+    <value>
+      <thoughtClass>Corruption.Core.Thought_PleasesTzeentch</thoughtClass>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThoughtDef[@Name="LostMemory"]</xpath>
+    <value>
+      <thoughtClass>Corruption.Core.Thought_PleasesNurgle</thoughtClass>
+    </value>
+  </Operation>-->
+
+  
+
+</Patch>

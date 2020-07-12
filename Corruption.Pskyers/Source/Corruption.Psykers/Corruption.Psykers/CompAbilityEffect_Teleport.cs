@@ -25,20 +25,34 @@ namespace Corruption.Psykers
             GenSpawn.Spawn(pawn, target.Cell, map);
             this.parent.pawn.Position = target.Cell;
             CreatePortalFor(pawn);
-            pawn.drafter.Drafted = true;
+            if (pawn.IsColonist)
+            {
+                pawn.drafter.Drafted = true;
+            }
         }
 
         private void CreatePortalFor(Pawn pawn)
         {
-            Map map = pawn.Map;
-            var loc = pawn.DrawPos;
-            MoteMaker.ThrowSmoke(loc, map, 1.5f);
-            MoteMaker.ThrowMicroSparks(loc, map);
-            MoteMaker.ThrowLightningGlow(loc, map, 1.0f);
-            var mote = MoteMaker.MakeStaticMote(loc, map, this.Props.mote) as MoteThrown;
-            mote.rotationRate = 180f;
-            SoundInfo info = SoundInfo.InMap(new TargetInfo(loc.ToIntVec3(), map));
-            SoundDefOf.Thunder_OnMap.PlayOneShot(info);
+            if (pawn != null && pawn.Spawned)
+            {
+                Map map = pawn.Map;
+                var loc = pawn.DrawPos;
+                if (map != null)
+                {
+                    MoteMaker.ThrowSmoke(loc, map, 1.5f);
+                    MoteMaker.ThrowMicroSparks(loc, map);
+                    MoteMaker.ThrowLightningGlow(loc, map, 1.0f);
+                    var mote = MoteMaker.MakeStaticMote(loc, map, this.Props.mote) as MoteThrown;
+                    mote.rotationRate = 180f;
+                    SoundInfo info = SoundInfo.InMap(new TargetInfo(loc.ToIntVec3(), map));
+
+                    if (this.Props.sound != null)
+                    {
+                        this.Props.sound.PlayOneShot(info);
+                    }
+                }
+            }
+
         }
     }
 
@@ -50,5 +64,7 @@ namespace Corruption.Psykers
         }
 
         public ThingDef mote;
+
+        public SoundDef sound;
     }
 }

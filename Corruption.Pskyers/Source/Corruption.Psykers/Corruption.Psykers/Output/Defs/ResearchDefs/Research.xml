@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-  <ResearchProjectDef>
+  <!--<ResearchProjectDef>
     <defName>EmpyrealBasics</defName>
     <label>empyreal basic understanding</label>
     <tab>Empyreal</tab>
@@ -115,7 +115,7 @@
     <requiredResearchBuilding>EmpyrealShamanResearchBench</requiredResearchBuilding>
     <researchViewX>4.00</researchViewX>
     <researchViewY>3.00</researchViewY>
-  </ResearchProjectDef>
+  </ResearchProjectDef>-->
 
   
 </Defs>

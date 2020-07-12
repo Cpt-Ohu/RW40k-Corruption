@@ -10,8 +10,6 @@ namespace Corruption.Core.Soul
     [DefOf]
     public static class SoulTraitDefOf
     {
-        public static SoulTraitDef Psyker;
-
         public static TraitDef Devotion;
     }
 }

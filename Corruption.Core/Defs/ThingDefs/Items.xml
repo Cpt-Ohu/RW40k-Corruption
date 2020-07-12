@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <ThingDef ParentName="MedicineBase">
+    <defName>DaemonBlood</defName>
+    <label>daemon blood</label>
+    <description>The corrupted remains of a daemon that entered realspace. It may have healing abilities.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/Medicine/MedicineIndustrial</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>0.85</drawSize>
+    </graphicData>
+    <techLevel>Industrial</techLevel>
+    <statBases>
+      <MarketValue>18</MarketValue>
+      <Mass>0.50</Mass>
+      <Flammability>0.7</Flammability>
+      <MedicalPotency>1.00</MedicalPotency>
+      <MedicalQualityMax>1.00</MedicalQualityMax>
+      <DeteriorationRate>2</DeteriorationRate>
+      <WorkToMake>700</WorkToMake>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>ReligiousTrinket</defName>
+    <label>religious trinket</label>
+    <description>A trinket used in acts of worship.</description>
+    <graphicData>
+      <texPath>Things/Items/Worship/Trinket</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+      <drawSize>0.85</drawSize>
+    </graphicData>
+    <techLevel>Neolithic</techLevel>
+    <stackLimit>1</stackLimit>
+    <statBases>
+      <MaxHitPoints>70</MaxHitPoints>
+      <MarketValue>32</MarketValue>
+      <Mass>0.6</Mass>
+      <Flammability>0.6</Flammability>
+      <DeteriorationRate>2.0</DeteriorationRate>
+    </statBases>
+    <thingCategories>
+      <li>WorshipItems</li>
+    </thingCategories>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>25</costStuffCount>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>EcclesiarchyIcon</defName>
+    <label>Imperial Cult Icon</label>
+    <description>An icon of the Adeptus Munitorum, the Imperial Cult. May fit nicely into a place of worship.</description>
+    <graphicData>
+      <texPath>Things/Items/Worship/EcclesiarchIcon/EcclesiarchIcon</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <stackLimit>1</stackLimit>
+    <statBases>
+      <MaxHitPoints>70</MaxHitPoints>
+      <MarketValue>21</MarketValue>
+      <Flammability>1.0</Flammability>
+      <Mass>0.35</Mass>
+    </statBases>
+    <intricate>true</intricate>
+    <thingCategories>
+      <li>WorshipItems</li>
+    </thingCategories>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <comps>
+      <li Class="Corruption.Core.Items.CompProperties_Empyreal">
+        <compClass>Corruption.Core.Items.CompEmpyreal</compClass>
+        <GainRate>-5.0</GainRate>
+      </li>
+    </comps>
+  </ThingDef>
+  
+</Defs>

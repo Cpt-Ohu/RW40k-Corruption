@@ -2,5 +2,6 @@
 <LanguageData>
   <CommandPsykerCastForNonPsyker>{0} is not a psyker. Ability cannot be channeled.</CommandPsykerCastForNonPsyker>
   <CommandPsykerCastLevelTooHigh>This ability psyker to be at least {0} levels higher.</CommandPsykerCastLevelTooHigh>
-  
+  <PsykerAutoCast>Toggle Autocast</PsykerAutoCast>
+  <PsykerAutoCastDesc>Toggle the autocasting of Psyker abilities.</PsykerAutoCastDesc>
 </LanguageData>

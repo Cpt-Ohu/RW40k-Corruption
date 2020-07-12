@@ -41,4 +41,62 @@
       </li>
     </stages>
   </HediffDef>
+
+  <HediffDef>
+    <defName>SlaaneshHigh</defName>
+    <label>Slaaneshi high</label>
+    <labelNoun>slaaneshi high</labelNoun>
+    <description>This pawn is experiencing a high of otherworldly magnitude, granted by the Prince of Pleasure.</description>
+    <hediffClass>Hediff_High</hediffClass>
+    <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+    <scenarioCanAdd>true</scenarioCanAdd>
+    <maxSeverity>1.0</maxSeverity>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-1.5</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <painFactor>0.5</painFactor>
+        <restFallFactor>0.33</restFallFactor>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>0.25</offset>
+          </li>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.80</offset>
+          </li>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>0.35</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <ShootingAccuracyPawn>8</ShootingAccuracyPawn>
+          <MeleeHitChance>8</MeleeHitChance>
+          <MeleeDodgeChance>8</MeleeDodgeChance>
+          <IncomingDamageFactor>0.8</IncomingDamageFactor>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <ThoughtDef>
+    <defName>SlaaneshHigh</defName>
+    <workerClass>ThoughtWorker_Hediff</workerClass>
+    <hediff>SlaaneshHigh</hediff>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>slaaneshi high</label>
+        <description>Feeling pumped! Let's do this!</description>
+        <baseMoodEffect>35</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
 </Defs>

@@ -92,9 +92,6 @@ namespace Corruption.Core.Items
         /// </summary>
         public override void Tick()
         {
-            //  Log.Message("Tickng Ma Lazor");
-            // Directly call the Projectile base Tick function (we want to completely override the Projectile Tick() function).
-            //((ThingWithComponents)this).Tick(); // Does not work...
             try
             {
 

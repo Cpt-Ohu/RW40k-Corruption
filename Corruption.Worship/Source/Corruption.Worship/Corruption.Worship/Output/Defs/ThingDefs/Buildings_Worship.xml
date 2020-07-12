@@ -326,6 +326,11 @@
       <li>
         <compClass>CompQuality</compClass>
       </li>
+      <li Class="Corruption.Worship.CompProperties_Altar">
+        <compClass>Corruption.Worship.CompAltar</compClass>
+        <requiresEffigy>false</requiresEffigy>
+        <WorshipRatePerTick>1</WorshipRatePerTick>
+      </li>
     </comps>
     <costStuffCount>50</costStuffCount>
     <costList>
@@ -485,5 +490,94 @@
     <designationCategory>Worship</designationCategory>
 
   </ThingDef>
+
+
+  <!--================================ Sculptures ======================================-->
+
+  <ThingDef ParentName="SculptureBase">
+    <thingClass>Corruption.Worship.Building_WorshipStatue</thingClass>
+    <defName>SculptureAngel</defName>
+    <label>angelic sculpture</label>
+    <description>A person-sized piece of material sculpted into the shape of an angel or some forgotten saint.</description>
+    <graphicData>
+      <graphicClass>Graphic_Random</graphicClass>
+      <texPath>Things/Worship/StatueAngelic</texPath>
+      <drawSize>(2,2)</drawSize>
+      <drawOffset>(0,0,0.5)</drawOffset>
+    </graphicData>
+    <drawerType>RealtimeOnly</drawerType>
+    <size>(1,1)</size>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <fillPercent>0.5</fillPercent>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>90</Mass>
+      <Beauty>80</Beauty>
+      <WorkToMake>30000</WorkToMake>
+    </statBases>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>135</costStuffCount>
+    <comps>
+      <li Class="Corruption.Worship.CompProperties_Altar">
+        <compClass>Corruption.Worship.CompAltar</compClass>
+        <requiresEffigy>false</requiresEffigy>
+        <dedicatedTo>Emperor</dedicatedTo>
+        <WorshipRatePerTick>0.7</WorshipRatePerTick>
+      </li>
+      <li Class="Corruption.Core.Items.CompProperties_Empyreal">
+        <compClass>Corruption.Core.Items.CompEmpyreal</compClass>
+        <GainRate>0.1</GainRate>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="SculptureBase">
+    <defName>SculptureHero</defName>
+    <label>heroic sculpture</label>
+    <description>A person-sized piece of material sculpted into the shape of an Imperial hero worthy of devotion.</description>
+    <graphicData>
+      <graphicClass>Graphic_Random</graphicClass>
+      <texPath>Things/Worship/StatueHeroic</texPath>
+      <drawSize>(2,2)</drawSize>
+      <drawOffset>(0.5,0,0)</drawOffset>
+    </graphicData>
+    <drawerType>RealtimeOnly</drawerType>
+    <size>(1,1)</size>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <fillPercent>0.5</fillPercent>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>90</Mass>
+      <Beauty>80</Beauty>
+      <WorkToMake>30000</WorkToMake>
+    </statBases>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>135</costStuffCount>
+    <comps>
+      <li Class="Corruption.Worship.CompProperties_Altar">
+        <compClass>Corruption.Worship.CompAltar</compClass>
+        <requiresEffigy>false</requiresEffigy>
+        <dedicatedTo>Emperor</dedicatedTo>
+        <WorshipRatePerTick>0.7</WorshipRatePerTick>
+      </li>
+      <li Class="Corruption.Core.Items.CompProperties_Empyreal">
+        <compClass>Corruption.Core.Items.CompEmpyreal</compClass>
+        <GainRate>0.1</GainRate>
+      </li>
+    </comps>
+  </ThingDef>
+
 
 </Defs>

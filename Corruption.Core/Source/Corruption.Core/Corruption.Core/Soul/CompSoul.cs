@@ -3,6 +3,7 @@ using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,12 @@ namespace Corruption.Core.Soul
         /// </summary>
         public bool KnownToPlayer;
 
+        public bool IsOnPilgrimage;
+        private bool soulInitialized;
+
         public Soul_FavourTracker FavourTracker;
+
+        public Pawn_PrayerTracker PrayerTracker;
 
         private PantheonDef _chosenPantheon;
 
@@ -34,6 +40,8 @@ namespace Corruption.Core.Soul
                 this.FavourTracker.TryAddGods(_chosenPantheon.GodsListForReading);
             }
         }
+
+        public FloatRange LoyalistRange => new FloatRange(1f, CorruptionRange.max * SoulAfflictionDefOf.Tainted.Threshold - 2000f);
 
         public Pawn Pawn => this.parent as Pawn;
 
@@ -53,19 +61,42 @@ namespace Corruption.Core.Soul
             float pawnKindFactor = 1f;
             if (this.Pawn.kindDef is CorruptionPawnKindDef cDef)
             {
-                pawnKindFactor = cDef.affliction.resolveFactor;
+                pawnKindFactor = cDef.affliction?.resolveFactor ?? 1f;
             }
 
-            var vanillaPsychicTrait = this.Pawn.story.traits.allTraits.FirstOrDefault(x => x.def == TraitDefOf.PsychicSensitivity);
             var sensitivityFactor = SoulUtility.PsychicSensitivityFactor(Pawn);
             _cachedResistanceFactor = pawnKindFactor * sensitivityFactor;
 
         }
 
-        public void GainCorruption(float change)
+        public void GainCorruption(float change, GodDef favouredGod = null)
         {
             var adjustedChange = change * _cachedResistanceFactor;
             this._corruption = CorruptionRange.ClampToRange(this._corruption += adjustedChange);
+            if (favouredGod != null)
+            {
+                this.TryAddFavorProgress(favouredGod, Math.Abs(change * 0.076f));
+            }
+            if (this.Corrupted)
+            {
+                this.FallToChaos();
+            }
+            else if (adjustedChange < 0f)
+            {
+                var chaosFavour = this.FavourTracker.AllFavoursSorted().FirstOrDefault(x => PantheonDefOf.Chaos.GodsListForReading.Contains(x.God));
+                if (chaosFavour != null)
+                {
+                    this.FavourTracker.TryAddProgressFor(chaosFavour.God, change * 0.1f);
+                }
+            }
+        }
+
+        private void FallToChaos()
+        {
+            if (this.ChosenPantheon != PantheonDefOf.Chaos)
+            {
+                this.ChosenPantheon = PantheonDefOf.Chaos;
+            }
         }
 
         public float CorruptionLevel => this._corruption / CorruptionRange.max;
@@ -73,6 +104,8 @@ namespace Corruption.Core.Soul
         public CompSoul()
         {
             this.FavourTracker = new Soul_FavourTracker(this);
+            this.PrayerTracker = new Pawn_PrayerTracker(this);
+            this.ChosenPantheon = PantheonDefOf.ImperialCult;
         }
 
         public override void Initialize(CompProperties props)
@@ -80,35 +113,24 @@ namespace Corruption.Core.Soul
             base.Initialize(props);
         }
 
-        public SoulAffliction Affliction
+        public override void PostSpawnSetup(bool respawningAfterLoad)
         {
-            get
+            base.PostSpawnSetup(respawningAfterLoad);
+            if (!this.soulInitialized && Pawn.RaceProps.Humanlike)
             {
-                if (this.CorruptionLevel == 1.0f)
+                CorruptionPawnKindDef corruptionKind = this.Pawn.kindDef as CorruptionPawnKindDef;
+                if (corruptionKind != null && corruptionKind.affliction != null)
                 {
-                    return SoulAffliction.Lost;
+                    foreach (var favour in corruptionKind.affliction.favorProgressTemplates)
+                    {
+                        this.TryAddFavorProgress(favour.god, favour.initialProgressRange.RandomInRange);
+                    }
+
+                    this.GainCorruption(corruptionKind.affliction.afflictionRange.RandomInRange);
                 }
-                if (this.CorruptionLevel > 0.9f)
-                {
-                    return SoulAffliction.Corrupted;
-                }
-                if (this.CorruptionLevel > 0.7f)
-                {
-                    return SoulAffliction.Tainted;
-                }
-                if (this.CorruptionLevel > 0.3f)
-                {
-                    return SoulAffliction.Warptouched;
-                }
-                if (this.CorruptionLevel > 0.1f)
-                {
-                    return SoulAffliction.Intrigued;
-                }
-                return SoulAffliction.Pure;
             }
         }
 
-        public bool Corrupted => this.Affliction >= SoulAffliction.Corrupted;
 
         public int DevotionDegree
         {
@@ -131,7 +153,53 @@ namespace Corruption.Core.Soul
             }
         }
 
-        public bool IsOnPilgrimage;
+        public override void CompTick()
+        {
+            base.CompTick();
+            if (this.Pawn.RaceProps.Humanlike && this.Pawn.IsHashIntervalTick(60))
+            {
+                this.CheckEmotions();
+            }
+            this.PrayerTracker?.PrayerTick();
+        }
+
+        private void CheckEmotions()
+        {
+            float moodLevel = this.Pawn.needs.mood.CurLevel;
+            float moodOffset = this.Pawn.needs.mood.thoughts.TotalMoodOffset();
+            if (moodOffset > 20f && moodLevel > 0.9f)
+            {
+                this.GainCorruption(0.2f, GodDefOf.Slaanesh);
+            }
+            else if (moodOffset < -20f && moodLevel < 0.5f)
+            {
+                this.GainCorruption(0.2f, GodDefOf.Nurgle);
+            }
+            if (this.Pawn.health.hediffSet.AnyHediffMakesSickThought)
+            {
+                this.GainCorruption(0.5f, GodDefOf.Nurgle);
+            }
+
+            if (this.Pawn.CurJobDef == JobDefOf.Meditate)
+            {
+                GodDef god = this.ChosenPantheon.GodsListForReading.RandomElementByWeight(x => 1f + this.FavourTracker.FavourValueFor(x) * 10f);
+                this.GainCorruption(god.favourCorruptionFactor, god);
+            }
+            if (this.Pawn.CurJobDef == JobDefOf.Research)
+            {
+                this.GainCorruption(0.2f, GodDefOf.Tzeentch);
+            }
+            if (this.Pawn.CurJobDef == JobDefOf.Lovin)
+            {
+                this.GainCorruption(0.5f, GodDefOf.Slaanesh);
+            }
+            if (this.Pawn.IsFighting())
+            {
+                this.GainCorruption(1f, GodDefOf.Khorne);
+            }
+        }
+
+        public bool Corrupted => this.CorruptionLevel >= SoulAfflictionDefOf.Corrupted.Threshold;
 
         public void InitializeForPawn()
         {
@@ -144,9 +212,7 @@ namespace Corruption.Core.Soul
                     this.TryAddFavorProgress(progressTemplate.god, progressTemplate.initialProgressRange.RandomInRange);
                 }
 
-                float afup = cdef.affliction.upperAfflictionLimit;
-                float afdown = cdef.affliction.lowerAfflictionLimit;
-                this._corruption = (Rand.Range(afup, afdown));
+                this.GainCorruption(cdef.affliction.afflictionRange.RandomInRange);
 
             }
             else
@@ -158,34 +224,39 @@ namespace Corruption.Core.Soul
 
         internal void InitializeDefaultPawn()
         {
-            float pNum = Rand.GaussianAsymmetric(2.5f, 0.45f, 2);
-            if (pNum < 0)
-            {
-                pNum = 0;
-            }
-            else if (pNum > 7)
-            {
-                pNum = 7;
-            }
-
-            if (Rand.Value > 0.1f)
+            if (Rand.Value > 0.01f)
             {
                 this.ChosenPantheon = PantheonDefOf.ImperialCult;
-                this.FavourTracker.TryAddProgressFor(GodDefOf.Emperor, Rand.Range(0.02f, 0.6f));
+                this.FavourTracker.TryAddProgressFor(GodDefOf.Emperor, Rand.Range(100f, 2500f));
+                this.GainCorruption(this.LoyalistRange.RandomInRange);
+            }
+            else
+            {
+                this.ChosenPantheon = PantheonDefOf.Chaos;
+                var god = PantheonDefOf.Chaos.GodsListForReading.RandomElement();
+                this.GainCorruption(FavourProgress.ProgressRange.RandomInRange, god);
             }
         }
 
         public void TryAddFavorProgress(GodDef god, float change)
         {
-            this.FavourTracker.TryAddProgressFor(god, change);
+            if (this.Pawn.RaceProps.Humanlike)
+            {
+                if (this.FavourTracker == null) this.FavourTracker = new Soul_FavourTracker(this);
+                this.FavourTracker.TryAddProgressFor(god, change);
+            }
         }
 
         public override void PostExposeData()
         {
             base.PostExposeData();
-            Scribe_Deep.Look<Soul_FavourTracker>(ref this.FavourTracker, "WorshipTracker", new object[] { this });
+            Scribe_Deep.Look<Soul_FavourTracker>(ref this.FavourTracker, "WorshipTracker", this);
+            Scribe_Deep.Look<Pawn_PrayerTracker>(ref this.PrayerTracker, "PrayerTracker", this);
             Scribe_Values.Look<float>(ref this._cachedResistanceFactor, "resistanceFactor", 1f);
             Scribe_Defs.Look<PantheonDef>(ref this._chosenPantheon, "chosenPantheon");
+            Scribe_Values.Look<bool>(ref soulInitialized, "soulInitialized");
+            Scribe_Values.Look<float>(ref _corruption, "corruption");
+
         }
 
         public static void TryDiscoverAlignment(Pawn investigator, Pawn target, float modifier)
@@ -208,12 +279,12 @@ namespace Corruption.Core.Soul
 
         private void AlignmentDiscoveryFailure(Pawn investigator, Pawn target, int socialSkillDifference)
         {
-            throw new NotImplementedException();
+            this.KnownToPlayer = false;
         }
 
         private void DiscoverAlignment()
         {
-            throw new NotImplementedException();
+            this.KnownToPlayer = true;
         }
     }
 }

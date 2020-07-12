@@ -17,5 +17,12 @@
   
   
   <TabSoul>Soul</TabSoul>
-  <NextLevel>Next Level</NextLevel>  
+  <NextLevel>Next Level</NextLevel>
+  <AllowPrayers>Allow Prayers</AllowPrayers>
+  <ShowPrayers>Show Prayers</ShowPrayers>
+  <LastPrayer>Last Prayer:</LastPrayer>
+  <PossessionSurvived>Survived Possession</PossessionSurvived>
+  <PossessionSurvivedDesc>{0} has survived daemonic possession and has become an Exorcised.</PossessionSurvivedDesc>
+  <PossessionDied>Killed in Exorcism</PossessionDied>
+  <PossessionDied>{0} has been killed while being exorcised.</PossessionDied>
 </LanguageData>

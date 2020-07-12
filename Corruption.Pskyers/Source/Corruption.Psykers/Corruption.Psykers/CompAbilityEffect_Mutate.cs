@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using Corruption.Core;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,21 +25,8 @@ namespace Corruption.Psykers
             {
                 return;
             }
+            MutationUtility.ApplyMutation(pawn, this.Props.mutationHediffs, this.parent.def.EntropyGain / 100f);
 
-            var existingHediffs = pawn.health.hediffSet.hediffs.FindAll(x => this.Props.mutationHediffs.Contains(x.def));
-
-            var selectedHediff = existingHediffs.FindAll(x => x.Severity < x.def.maxSeverity).RandomElement();
-
-            if (selectedHediff != null && Rand.Value > 0.1f)
-            {
-                selectedHediff.Severity += (float)(this.Props.severityFactorFromEntropy * this.parent.def.EntropyGain / (100 * (Math.Sqrt(Math.Max(1,this.parent.def.EffectRadius * 0.5f)))));
-            }
-            else
-            {
-                var randomDef = this.Props.mutationHediffs.RandomElement();
-                Hediff hediff = HediffMaker.MakeHediff(randomDef, pawn);
-                pawn.health.AddHediff(hediff);
-            }
         }
     }
 
@@ -59,7 +47,7 @@ namespace Corruption.Psykers
         public CompProperties_AbilityMutate()
         {
             this.compClass = typeof(CompAbilityEffect_Mutate);
-        }        
+        }
     }
 
 }

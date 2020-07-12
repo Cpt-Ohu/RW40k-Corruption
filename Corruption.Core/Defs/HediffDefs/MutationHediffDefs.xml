@@ -3,18 +3,18 @@
 
   <HediffDef Name="ChaosMutationSource" Abstract="True">
     <hediffClass>HediffWithComps</hediffClass>
-    <defaultLabelColor>(0.32, 0.05, 0.53)</defaultLabelColor>
+    <defaultLabelColor>(1.0, 0.05, 0.43)</defaultLabelColor>
     <isBad>true</isBad>
   </HediffDef>
   
   <HediffDef ParentName="ChaosMutationSource">
     <defName>BoltOfChangeMutationSource</defName>
     <label>mutation source</label>
+    <description>This pawn was hit by a Bolt of Change, mutating its body and melting its equipment.</description>
     <stages>
       <li>
-        <label>mutating (Tzeentch)</label>
-        <description>This pawn was hit by a Bolt of Change, mutating its body and melting its equipment.</description>
-        <painOffset>0.5</painOffset>
+        <label>Tzeentch</label>
+        <painOffset>0.1</painOffset>
       </li>
     </stages>
     <comps>
@@ -41,15 +41,78 @@
     </comps>
   </HediffDef>
 
-  <HediffDef Name="ChaosMutationPart" Abstract="True">
-    <hediffClass>Hediff_AddedPart</hediffClass>
-    <defaultLabelColor>(0.32, 0.05, 0.53)</defaultLabelColor>
-    <isBad>false</isBad>
+  <HediffDef ParentName="ChaosMutationSource">
+    <defName>TzeentchFirestormMutationSource</defName>
+    <label>mutation source</label>
+    <description>This pawn was hit by a firstorm of change, mutating its body and melting its equipment.</description>
+    <stages>
+      <li>
+        <label>Tzeentch</label>
+        
+      </li>
+    </stages>
     <comps>
-      <li Class="HediffComp_GetsPermanent">
-        <isPermanentInt>True</isPermanentInt>
+      <li Class="Corruption.Core.HediffCompProperties_Mutate">
+        <severityGainPerSecond>0.08</severityGainPerSecond>
+        <mutationHediffs>
+          <li>ChaosMutationClaw</li>
+          <li>ChaosMutationClawedFeet</li>
+          <li>ChaosMutationFeathers</li>
+          <li>ChaosMutationMoreEyes</li>
+          <li>ChaosMutationBeak</li>
+        </mutationHediffs>
+      </li>
+      <li Class="Corruption.Core.HediffCompProperties_DamageEquipment">
+        <damagePerSecond>10</damagePerSecond>
+        <damageDef>Burn</damageDef>
+        <categoriesToDamage>
+          <li>ApparelArmor</li>
+        </categoriesToDamage>
+      </li>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>120~240</disappearsAfterTicks>
       </li>
     </comps>
+  </HediffDef>
+
+  <HediffDef Name="ChaosMutationPart" Abstract="True">
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.5, 0.00, 1.0)</defaultLabelColor>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="HediffCompProperties_GetsPermanent">
+        <becomePermanentChanceFactor>1000</becomePermanentChanceFactor>
+      </li>
+    </comps>
+    <injuryProps>
+      <bleedRate>0.0</bleedRate>
+      <painPerSeverity>0.0</painPerSeverity>
+      <canMerge>false</canMerge>
+      <destroyedLabel>Mutated</destroyedLabel>
+      <destroyedOutLabel>Mutated</destroyedOutLabel>
+      <averagePainPerSeverityPermanent>0</averagePainPerSeverityPermanent>
+      <useRemovedLabel>false</useRemovedLabel>
+    </injuryProps>
+  </HediffDef>
+
+  <HediffDef Name="ChaosMutationBody" Abstract="True">
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.5, 0.00, 1.0)</defaultLabelColor>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="HediffCompProperties_GetsPermanent">
+        <becomePermanentChanceFactor>1000</becomePermanentChanceFactor>
+      </li>
+    </comps>
+    <injuryProps>
+      <bleedRate>0.0</bleedRate>
+      <painPerSeverity>0.0</painPerSeverity>
+      <canMerge>false</canMerge>
+      <destroyedLabel>Mutated</destroyedLabel>
+      <destroyedOutLabel>Mutated</destroyedOutLabel>
+      <averagePainPerSeverityPermanent>0</averagePainPerSeverityPermanent>
+      <useRemovedLabel>false</useRemovedLabel>
+    </injuryProps>
   </HediffDef>
 
   <HediffDef ParentName="ChaosMutationPart">
@@ -59,8 +122,8 @@
     <maxSeverity>3</maxSeverity>
     <stages>
       <li>
-        <label>mutation (additional digits)</label>
-        <painOffset>0.01</painOffset>
+        <label>additional digits</label>
+        
         <capMods>
           <li>
             <capacity>Manipulation</capacity>
@@ -69,8 +132,8 @@
         </capMods>
       </li>
       <li>
-        <label>mutation (additional joints)</label>
-        <painOffset>0.05</painOffset>
+        <label>additional joints</label>
+        
         <minSeverity>1</minSeverity>
         <capMods>
           <li>
@@ -79,19 +142,13 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-0.25</value>
-          </li>
-          <li>
-            <stat>WorkSpeedGlobal</stat>
-            <value>0.03</value>
-          </li>
+          <PawnBeauty>-0.25</PawnBeauty>
+          <WorkSpeedGlobal>0.03</WorkSpeedGlobal>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (claw)</label>
-        <painOffset>0.1</painOffset>
+        <label>claw</label>
+        
         <minSeverity>2</minSeverity>
         <capMods>
           <li>
@@ -100,23 +157,14 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>WorkSpeedGlobal</stat>
-            <value>-0.01</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-0.5</value>
-          </li>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>0.05</value>
-          </li>
+          <WorkSpeedGlobal>-0.01</WorkSpeedGlobal>
+          <PawnBeauty>-0.5</PawnBeauty>
+          <MeleeDPS>0.05</MeleeDPS>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (monstrous claw)</label>
-        <painOffset>0.15</painOffset>
+        <label>monstrous claw</label>
+        
         <minSeverity>3</minSeverity>
         <capMods>
           <li>
@@ -125,18 +173,9 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>WorkSpeedGlobal</stat>
-            <value>-0.05</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-1</value>
-          </li>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>0.25</value>
-          </li>
+          <WorkSpeedGlobal>-0.05</WorkSpeedGlobal>
+          <PawnBeauty>-1</PawnBeauty>
+          <MeleeDPS>0.25</MeleeDPS>
         </statOffsets>
       </li>
     </stages>
@@ -145,8 +184,8 @@
       <partEfficiency>1.00</partEfficiency>
     </addedPartProps>
     <comps>
-      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
-        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+      <li Class="Corruption.Core.HediffCompProperties_ReplacePart">
+        <compClass>Corruption.Core.HediffComp_ReplacePart</compClass>
         <partToReplace>Hand</partToReplace>
         <severityOnExisting>0.5</severityOnExisting>
       </li>
@@ -160,8 +199,8 @@
     <maxSeverity>10</maxSeverity>
     <stages>
       <li>
-        <label>mutation (additional digits)</label>
-        <painOffset>0.01</painOffset>
+        <label>additional digits</label>
+        
         <capMods>
           <li>
             <capacity>Manipulation</capacity>
@@ -170,8 +209,8 @@
         </capMods>
       </li>
       <li>
-        <label>mutation (additional joints)</label>
-        <painOffset>0.05</painOffset>
+        <label>additional joints</label>
+        
         <minSeverity>1</minSeverity>
         <capMods>
           <li>
@@ -180,19 +219,13 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>WorkSpeedGlobal</stat>
-            <value>0.03</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-0.25</value>
-          </li>
+          <WorkSpeedGlobal>0.03</WorkSpeedGlobal>
+          <PawnBeauty>-0.25</PawnBeauty>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (tentacled fingers)</label>
-        <painOffset>0.1</painOffset>
+        <label>tentacled fingers</label>
+        
         <minSeverity>2</minSeverity>
         <capMods>
           <li>
@@ -201,23 +234,14 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>WorkSpeedGlobal</stat>
-            <value>0.11</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-0.5</value>
-          </li>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>-0.01</value>
-          </li>
+          <WorkSpeedGlobal>0.11</WorkSpeedGlobal>
+          <PawnBeauty>-0.5</PawnBeauty>
+          <MeleeDPS>-0.01</MeleeDPS>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (tentacled hand)</label>
-        <painOffset>0.15</painOffset>
+        <label>tentacled hand</label>
+        
         <minSeverity>3</minSeverity>
         <capMods>
           <li>
@@ -226,18 +250,9 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>WorkSpeedGlobal</stat>
-            <value>0.15</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-1</value>
-          </li>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>0.25</value>
-          </li>
+          <WorkSpeedGlobal>0.15</WorkSpeedGlobal>
+          <PawnBeauty>-1</PawnBeauty>
+          <MeleeDPS>0.25</MeleeDPS>
         </statOffsets>
       </li>
     </stages>
@@ -246,8 +261,8 @@
       <partEfficiency>1.00</partEfficiency>
     </addedPartProps>
     <comps>
-      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
-        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+      <li Class="Corruption.Core.HediffCompProperties_ReplacePart">
+        <compClass>Corruption.Core.HediffComp_ReplacePart</compClass>
         <partToReplace>Hand</partToReplace>
         <severityOnExisting>0.5</severityOnExisting>
       </li>
@@ -263,8 +278,8 @@
     <maxSeverity>3</maxSeverity>
     <stages>
       <li>
-        <label>mutation (additional digits)</label>
-        <painOffset>0.01</painOffset>
+        <label>additional digits</label>
+        
         <capMods>
           <li>
             <capacity>Moving</capacity>
@@ -273,8 +288,8 @@
         </capMods>
       </li>
       <li>
-        <label>mutation (additional joints)</label>
-        <painOffset>0.05</painOffset>
+        <label>additional joints</label>
+        
         <minSeverity>1</minSeverity>
         <capMods>
           <li>
@@ -283,15 +298,12 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>MoveSpeed</stat>
-            <value>-0.2</value>
-          </li>
+          <MoveSpeed>-0.2</MoveSpeed>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (tentacled toes)</label>
-        <painOffset>0.1</painOffset>
+        <label>tentacled toes</label>
+        
         <minSeverity>2</minSeverity>
         <capMods>
           <li>
@@ -300,23 +312,14 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>MoveSpeed</stat>
-            <value>-0.11</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-0.5</value>
-          </li>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>0.05</value>
-          </li>
+          <MoveSpeed>-0.11</MoveSpeed>
+          <PawnBeauty>-0.5</PawnBeauty>
+          <MeleeDPS>0.05</MeleeDPS>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (tentacled foot)</label>
-        <painOffset>0.15</painOffset>
+        <label>tentacled foot</label>
+        
         <minSeverity>3</minSeverity>
         <capMods>
           <li>
@@ -325,18 +328,9 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>MoveSpeed</stat>
-            <value>-0.11</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-1</value>
-          </li>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>0.1</value>
-          </li>
+          <MoveSpeed>-0.11</MoveSpeed>
+          <PawnBeauty>-1</PawnBeauty>
+          <MeleeDPS>0.1</MeleeDPS>
         </statOffsets>
       </li>
     </stages>
@@ -345,8 +339,8 @@
       <partEfficiency>1.00</partEfficiency>
     </addedPartProps>
     <comps>
-      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
-        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+      <li Class="Corruption.Core.HediffCompProperties_ReplacePart">
+        <compClass>Corruption.Core.HediffComp_ReplacePart</compClass>
         <partToReplace>Foot</partToReplace>
         <severityOnExisting>0.5</severityOnExisting>
       </li>
@@ -360,8 +354,8 @@
     <maxSeverity>3</maxSeverity>
     <stages>
       <li>
-        <label>mutation (additional digits)</label>
-        <painOffset>0.01</painOffset>
+        <label>additional digits</label>
+        
         <capMods>
           <li>
             <capacity>Moving</capacity>
@@ -370,8 +364,8 @@
         </capMods>
       </li>
       <li>
-        <label>mutation (additional joints)</label>
-        <painOffset>0.05</painOffset>
+        <label>additional joints</label>
+        
         <minSeverity>1</minSeverity>
         <capMods>
           <li>
@@ -380,15 +374,12 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>MoveSpeed</stat>
-            <value>-0.2</value>
-          </li>
+          <MoveSpeed>-0.2</MoveSpeed>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (clawed toes)</label>
-        <painOffset>0.1</painOffset>
+        <label>clawed toes</label>
+        
         <minSeverity>2</minSeverity>
         <capMods>
           <li>
@@ -397,23 +388,14 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>MoveSpeed</stat>
-            <value>-0.11</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-0.3</value>
-          </li>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>0.05</value>
-          </li>
+          <MoveSpeed>-0.11</MoveSpeed>
+          <PawnBeauty>-0.3</PawnBeauty>
+          <MeleeDPS>0.05</MeleeDPS>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (clawed foot)</label>
-        <painOffset>0.15</painOffset>
+        <label>clawed foot</label>
+        
         <minSeverity>3</minSeverity>
         <capMods>
           <li>
@@ -422,18 +404,9 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>MoveSpeed</stat>
-            <value>-0.05</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-1</value>
-          </li>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>0.25</value>
-          </li>
+          <MoveSpeed>-0.05</MoveSpeed>
+          <PawnBeauty>-1</PawnBeauty>
+          <MeleeDPS>0.25</MeleeDPS>
         </statOffsets>
       </li>
     </stages>
@@ -442,8 +415,8 @@
       <partEfficiency>1.00</partEfficiency>
     </addedPartProps>
     <comps>
-      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
-        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+      <li Class="Corruption.Core.HediffCompProperties_ReplacePart">
+        <compClass>Corruption.Core.HediffComp_ReplacePart</compClass>
         <partToReplace>Foot</partToReplace>
         <severityOnExisting>0.5</severityOnExisting>
       </li>
@@ -457,8 +430,8 @@
     <maxSeverity>2</maxSeverity>
     <stages>
       <li>
-        <label>mutation (webbed foot)</label>
-        <painOffset>0.01</painOffset>
+        <label>webbed foot</label>
+        
         <capMods>
           <li>
             <capacity>Moving</capacity>
@@ -467,8 +440,8 @@
         </capMods>
       </li>
       <li>
-        <label>mutation (proto-hoof)</label>
-        <painOffset>0.05</painOffset>
+        <label>proto-hoof</label>
+        
         <minSeverity>1</minSeverity>
         <capMods>
           <li>
@@ -477,15 +450,11 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>MoveSpeed</stat>
-            <value>0.05</value>
-          </li>
+          <MoveSpeed>0.05</MoveSpeed>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (hoof)</label>
-        <painOffset>0.1</painOffset>
+        <label>hoof</label>
         <minSeverity>2</minSeverity>
         <capMods>
           <li>
@@ -494,14 +463,8 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>MoveSpeed</stat>
-            <value>0.1</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-0.5</value>
-          </li>
+          <MoveSpeed>0.05</MoveSpeed>
+          <PawnBeauty>-0.5</PawnBeauty>
         </statOffsets>
       </li>
     </stages>
@@ -510,8 +473,8 @@
       <partEfficiency>1.00</partEfficiency>
     </addedPartProps>
     <comps>
-      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
-        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+      <li Class="Corruption.Core.HediffCompProperties_ReplacePart">
+        <compClass>Corruption.Core.HediffComp_ReplacePart</compClass>
         <partToReplace>Foot</partToReplace>
         <severityOnExisting>0.5</severityOnExisting>
       </li>
@@ -521,19 +484,19 @@
   <!-- ========================= Skin ===================================== -->
 
 
-  <HediffDef ParentName="ChaosMutationPart">
+  <HediffDef ParentName="ChaosMutationBody">
     <defName>ChaosMutationFeathers</defName>
     <label>chaos mutation</label>
     <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
     <maxSeverity>4</maxSeverity>
     <stages>
       <li>
-        <label>mutation (stain)</label>
-        <painOffset>0.05</painOffset>
+        <label>stain</label>
+        
       </li>
       <li>
-        <label>mutation (rashes)</label>
-        <painOffset>0.2</painOffset>
+        <label>rashes</label>
+        
         <minSeverity>1</minSeverity>
         <capMods>
           <li>
@@ -543,46 +506,27 @@
         </capMods>
       </li>
       <li>
-        <label>mutation (hardened skinflakes)</label>
-        <painOffset>0.1</painOffset>
+        <label>hardened skinflakes</label>
+        
         <minSeverity>2</minSeverity>
         <statOffsets>
-          <li>
-            <stat>ArmorRating_Sharp</stat>
-            <value>0.05</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-0.3</value>
-          </li>
-          <li>
-            <stat>Insulation_Cold</stat>
-            <value>0.1</value>
-          </li>          
+          <ArmorRating_Sharp>0.05</ArmorRating_Sharp>
+          <PawnBeauty>-0.5</PawnBeauty>
+          <Insulation_Cold>0.1</Insulation_Cold>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (proto-feathers)</label>
-        <painOffset>0.05</painOffset>
+        <label>proto-feathers</label>
+        
         <minSeverity>3</minSeverity>
         <statOffsets>
-          <li>
-            <stat>ArmorRating_Sharp</stat>
-            <value>0.25</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>0.5</value>
-          </li>
-          <li>
-            <stat>Insulation_Cold</stat>
-            <value>0.2</value>
-          </li>
+          <ArmorRating_Sharp>0.25</ArmorRating_Sharp>
+          <PawnBeauty>-0.5</PawnBeauty>
+          <Insulation_Cold>0.2</Insulation_Cold>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (feathering)</label>
-        <painOffset>0.15</painOffset>
+        <label>feathering</label>
         <minSeverity>4</minSeverity>
         <capMods>
           <li>
@@ -591,36 +535,36 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>MoveSpeed</stat>
-            <value>0.05</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>1</value>
-          </li>
-          <li>
-            <stat>Insulation_Cold</stat>
-            <value>0.3</value>
-          </li>
+          <MoveSpeed>0.05</MoveSpeed>
+          <ArmorRating_Sharp>0.25</ArmorRating_Sharp>
+          <PawnBeauty>1</PawnBeauty>
+          <Insulation_Cold>0.3</Insulation_Cold>
         </statOffsets>
       </li>
     </stages>
+    <comps>
+      <li Class="Corruption.Core.HediffCompProperties_DrawPawnExtra">
+        <texPath>Things/Pawn/BodyOverlays/MutationOverlayFeathers/MutationOverlayFeathers</texPath>
+        <templateApparelDef>Apparel_SkinOverlay</templateApparelDef>
+        <useBodyTypes>true</useBodyTypes>
+        <minSeverity>3</minSeverity>
+      </li>
+    </comps>
   </HediffDef>
 
-  <HediffDef ParentName="ChaosMutationPart">
+  <HediffDef ParentName="ChaosMutationBody">
     <defName>ChaosMutationScalySkin</defName>
     <label>chaos mutation</label>
     <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
     <maxSeverity>4</maxSeverity>
     <stages>
       <li>
-        <label>mutation (stain)</label>
-        <painOffset>0.05</painOffset>
+        <label>stain</label>
+        
       </li>
       <li>
-        <label>mutation (rashes)</label>
-        <painOffset>0.2</painOffset>
+        <label>rashes</label>
+        
         <minSeverity>1</minSeverity>
         <capMods>
           <li>
@@ -630,46 +574,27 @@
         </capMods>
       </li>
       <li>
-        <label>mutation (hardened skinflakes)</label>
-        <painOffset>0.1</painOffset>
+        <label>hardened skinflakes</label>
+        
         <minSeverity>2</minSeverity>
         <statOffsets>
-          <li>
-            <stat>ArmorRating_Sharp</stat>
-            <value>0.05</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-0.3</value>
-          </li>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>0.02</value>
-          </li>
+          <ArmorRating_Sharp>0.05</ArmorRating_Sharp>
+          <PawnBeauty>-0.3</PawnBeauty>
+          <MeleeDPS>0.05</MeleeDPS>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (scaly skin)</label>
-        <painOffset>0.15</painOffset>
+        <label>scaly skin</label>
+        
         <minSeverity>3</minSeverity>
         <statOffsets>
-          <li>
-            <stat>ArmorRating_Sharp</stat>
-            <value>0.25</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-1</value>
-          </li>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>0.05</value>
-          </li>
+          <ArmorRating_Sharp>0.25</ArmorRating_Sharp>
+          <PawnBeauty>-1</PawnBeauty>
+          <MeleeDPS>0.08</MeleeDPS>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (dragonscales)</label>
-        <painOffset>0.15</painOffset>
+        <label>dragonscales</label>
         <minSeverity>4</minSeverity>
         <capMods>
           <li>
@@ -678,37 +603,35 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>MoveSpeed</stat>
-            <value>-0.05</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-1</value>
-          </li>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>0.25</value>
-          </li>
+          <MoveSpeed>-0.05</MoveSpeed>
+          <ArmorRating_Sharp>0.4</ArmorRating_Sharp>
+          <PawnBeauty>-1</PawnBeauty>
+          <MeleeDPS>0.25</MeleeDPS>
         </statOffsets>
       </li>
     </stages>
+    <comps>
+      <li Class="Corruption.Core.HediffCompProperties_AffectSkin">
+        <bodyPath>Things/Pawn/BodyOverlays/ScalySkin/ScalySkin</bodyPath>
+        <minSeverity>2</minSeverity>
+      </li>
+    </comps>
   </HediffDef>
 
   
-  <HediffDef ParentName="ChaosMutationPart">
+  <HediffDef ParentName="ChaosMutationBody">
     <defName>ChaosMutationBulbousSkin</defName>
     <label>chaos mutation</label>
     <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
     <maxSeverity>4</maxSeverity>
     <stages>
       <li>
-        <label>mutation (stain)</label>
-        <painOffset>0.05</painOffset>
+        <label>stain</label>
+        
       </li>
       <li>
-        <label>mutation (rashes)</label>
-        <painOffset>0.2</painOffset>
+        <label>rashes</label>
+        
         <minSeverity>1</minSeverity>
         <capMods>
           <li>
@@ -718,46 +641,27 @@
         </capMods>
       </li>
       <li>
-        <label>mutation (skingrowths)</label>
-        <painOffset>0.1</painOffset>
+        <label>skingrowths</label>
+        
         <minSeverity>2</minSeverity>
         <statOffsets>
-          <li>
-            <stat>MaxHitPoints</stat>
-            <value>20</value>
-          </li>
-          <li>
-            <stat>ArmorRating_Blunt</stat>
-            <value>0.05</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-1</value>
-          </li>
+          <IncomingDamageFactor>0.9</IncomingDamageFactor>
+          <ArmorRating_Blunt>0.05</ArmorRating_Blunt>
+          <PawnBeauty>-1</PawnBeauty>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (second skin)</label>
-        <painOffset>0.15</painOffset>
+        <label>second skin</label>
+        
         <minSeverity>3</minSeverity>
         <statOffsets>
-          <li>
-            <stat>MaxHitPoints</stat>
-            <value>40</value>
-          </li>
-          <li>
-            <stat>ArmorRating_Blunt</stat>
-            <value>0.1</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-2</value>
-          </li>
+          <IncomingDamageFactor>0.8</IncomingDamageFactor>
+          <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+          <PawnBeauty>-2</PawnBeauty>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (bulbous hide)</label>
-        <painOffset>0.15</painOffset>
+        <label>bulbous hide</label>
         <minSeverity>4</minSeverity>
         <capMods>
           <li>
@@ -766,38 +670,36 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>MaxHitPoints</stat>
-            <value>70</value>
-          </li>
-          <li>
-            <stat>ArmorRating_Blunt</stat>
-            <value>0.15</value>
-          </li>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-3</value>
-          </li>
+          <IncomingDamageFactor>0.5</IncomingDamageFactor>
+          <ArmorRating_Blunt>0.15</ArmorRating_Blunt>
+          <PawnBeauty>-3</PawnBeauty>
         </statOffsets>
       </li>
     </stages>
+    <comps>
+      <li Class="Corruption.Core.HediffCompProperties_AffectSkin">
+        <bodyPath>Things/Pawn/BodyOverlays/ScalySkin/ScalySkin</bodyPath>
+        <minSeverity>2</minSeverity>
+        <skinColor>(0.74, 0.81, 0.17)</skinColor>
+      </li>
+    </comps>
   </HediffDef>
 
   <!-- ========================= Head ===================================== -->
   
-  <HediffDef ParentName="ChaosMutationPart">
+  <HediffDef ParentName="ChaosMutationBody">
     <defName>ChaosMutationHornedHead</defName>
     <label>chaos mutation</label>
     <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
     <maxSeverity>2</maxSeverity>
     <stages>
       <li>
-        <label>mutation (itching)</label>
-        <painOffset>0.1</painOffset>
+        <label>itching</label>
+        
       </li>
       <li>
-        <label>mutation (thorny forehead)</label>
-        <painOffset>0.03</painOffset>
+        <label>thorny forehead</label>
+        
         <minSeverity>1</minSeverity>
         <capMods>
           <li>
@@ -810,15 +712,11 @@
           </li>             
         </capMods>     
         <statOffsets>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>0.1</value>
-          </li>
+          <MeleeDPS>0.1</MeleeDPS>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (horned head)</label>
-        <painOffset>0.05</painOffset>
+        <label>horned head</label>
         <minSeverity>2</minSeverity>
         <capMods>
           <li>
@@ -831,28 +729,37 @@
           </li>             
         </capMods>      
         <statOffsets>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>0.3</value>
-          </li>
+          <MeleeDPS>0.3</MeleeDPS>
         </statOffsets>    
       </li>
     </stages>
+    <comps>
+      <li Class="Corruption.Core.HediffCompProperties_DrawPawnExtra">
+        <texPath>Things/Pawn/BodyOverlays/Horns</texPath>
+        <graphicData>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.0</drawSize>
+          <shaderType>Cutout</shaderType>          
+        </graphicData>
+        <templateApparelDef>Apparel_FaceOverlay</templateApparelDef>
+        <minSeverity>2</minSeverity>
+      </li>
+    </comps>
   </HediffDef>
   
-  <HediffDef ParentName="ChaosMutationPart">
+  <HediffDef ParentName="ChaosMutationBody">
     <defName>ChaosMutationMoreEyes</defName>
     <label>chaos mutation</label>
     <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
     <maxSeverity>3</maxSeverity>
     <stages>
       <li>
-        <label>mutation (itching)</label>
-        <painOffset>0.1</painOffset>
+        <label>itching</label>
+        
       </li>
       <li>
-        <label>mutation (spotted forehead)</label>
-        <painOffset>0.03</painOffset>
+        <label>spotted forehead</label>
+        
         <minSeverity>1</minSeverity>
         <capMods>
           <li>
@@ -865,15 +772,12 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>0.1</value>
-          </li>
+          <MeleeDPS>0.05</MeleeDPS>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (third eye)</label>
-        <painOffset>0.05</painOffset>
+        <label>third eye</label>
+        
         <minSeverity>2</minSeverity>
         <capMods>
           <li>
@@ -886,15 +790,12 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>MeleeDodgeChance</stat>
-            <value>0.1</value>
-          </li>
+          <MeleeDodgeChance>0.05</MeleeDodgeChance>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (warpspawned eyes)</label>
-        <painOffset>0.05</painOffset>
+        <label>warpspawned eyes</label>
+        
         <minSeverity>3</minSeverity>
         <capMods>
           <li>
@@ -907,14 +808,7 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>MeleeDodgeChance</stat>
-            <value>0.2</value>
-          </li>
-          <li>
-            <stat>PsychicEntropyMax</stat>
-            <value>20</value>
-          </li>
+          <MeleeDodgeChance>0.05</MeleeDodgeChance>
         </statOffsets>
       </li>
     </stages>
@@ -929,8 +823,8 @@
     <maxSeverity>3</maxSeverity>
     <stages>
       <li>
-        <label>mutation (enlarged mouth)</label>
-        <painOffset>0.05</painOffset>
+        <label>enlarged mouth</label>
+        
         <capMods>
           <li>
             <capacity>Talking</capacity>
@@ -943,8 +837,8 @@
         </capMods>
       </li>
       <li>
-        <label>mutation (additional teeth)</label>
-        <painOffset>0.05</painOffset>
+        <label>additional teeth</label>
+        
         <minSeverity>1</minSeverity>
         <capMods>
           <li>
@@ -956,16 +850,10 @@
             <offset>0.05</offset>
           </li>
         </capMods>
-        <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-0.25</value>
-          </li>
-        </statOffsets>
       </li>
       <li>
-        <label>mutation (fanged mouth)</label>
-        <painOffset>0.05</painOffset>
+        <label>fanged mouth</label>
+        
         <minSeverity>2</minSeverity>
         <capMods>
           <li>
@@ -978,19 +866,12 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-0.55</value>
-          </li>
-          <li>
-            <stat>EatingSpeed</stat>
-            <value>1</value>
-          </li>
+          <EatingSpeed>1</EatingSpeed>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (maw)</label>
-        <painOffset>0.1</painOffset>
+        <label>maw</label>
+        
         <minSeverity>3</minSeverity>
         <capMods>
           <li>
@@ -1003,24 +884,15 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-2</value>
-          </li>
-          <li>
-            <stat>EatingSpeed</stat>
-            <value>3</value>
-          </li>
-          <li>
-            <stat>HungerRateMultiplier</stat>
-            <value>1</value>
-          </li>          
+          <PawnBeauty>-2</PawnBeauty>
+          <HungerRateMultiplier>1.5</HungerRateMultiplier>
+          <EatingSpeed>1</EatingSpeed>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (monstrous maw)</label>
-        <painOffset>0.1</painOffset>
-        <minSeverity>3</minSeverity>
+        <label>monstrous maw</label>
+        
+        <minSeverity>4</minSeverity>
         <capMods>
           <li>
             <capacity>Talking</capacity>
@@ -1032,22 +904,10 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-3</value>
-          </li>
-          <li>
-            <stat>EatingSpeed</stat>
-            <value>5</value>
-          </li>
-          <li>
-            <stat>HungerRateMultiplier</stat>
-            <value>2</value>
-          </li>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>0.5</value>
-          </li>
+          <PawnBeauty>-2</PawnBeauty>
+          <HungerRateMultiplier>1.8</HungerRateMultiplier>
+          <EatingSpeed>1.5</EatingSpeed>
+          <MeleeDPS>0.5</MeleeDPS>
         </statOffsets>
       </li>
     </stages>
@@ -1056,8 +916,8 @@
       <partEfficiency>1.00</partEfficiency>
     </addedPartProps>
     <comps>
-      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
-        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+      <li Class="Corruption.Core.HediffCompProperties_ReplacePart">
+        <compClass>Corruption.Core.HediffComp_ReplacePart</compClass>
         <partToReplace>Jaw</partToReplace>
         <severityOnExisting>0.5</severityOnExisting>
       </li>
@@ -1071,8 +931,8 @@
     <maxSeverity>3</maxSeverity>
     <stages>
       <li>
-        <label>mutation (enlarged lips)</label>
-        <painOffset>0.05</painOffset>
+        <label>enlarged lips</label>
+        
         <capMods>
           <li>
             <capacity>Talking</capacity>
@@ -1084,15 +944,12 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>0.5</value>
-          </li>
+          <PawnBeauty>0.5</PawnBeauty>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (mouth flaps)</label>
-        <painOffset>0.1</painOffset>
+        <label>mouth flaps</label>
+        
         <minSeverity>1</minSeverity>
         <capMods>
           <li>
@@ -1105,15 +962,12 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-1</value>
-          </li>
+          <PawnBeauty>-1</PawnBeauty>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (tentacled mouth)</label>
-        <painOffset>0.15</painOffset>
+        <label>tentacled mouth</label>
+        
         <minSeverity>2</minSeverity>
         <capMods>
           <li>
@@ -1126,15 +980,12 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-2</value>
-          </li>
+          <PawnBeauty>-2</PawnBeauty>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (tentacled mouth)</label>
-        <painOffset>0.1</painOffset>
+        <label>tentacled mouth</label>
+        
         <minSeverity>3</minSeverity>
         <capMods>
           <li>
@@ -1147,14 +998,8 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-3</value>
-          </li>
-          <li>
-            <stat>SocialImpact</stat>
-            <value>-0.3</value>
-          </li>
+          <PawnBeauty>-2</PawnBeauty>
+          <SocialImpact>-0.5</SocialImpact>
         </statOffsets>
       </li>
     </stages>
@@ -1163,8 +1008,8 @@
       <partEfficiency>1.00</partEfficiency>
     </addedPartProps>
     <comps>
-      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
-        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+      <li Class="Corruption.Core.HediffCompProperties_ReplacePart">
+        <compClass>Corruption.Core.HediffComp_ReplacePart</compClass>
         <partToReplace>Jaw</partToReplace>
         <severityOnExisting>0.5</severityOnExisting>
       </li>
@@ -1178,8 +1023,8 @@
     <maxSeverity>3</maxSeverity>
     <stages>
       <li>
-        <label>mutation (enlarged lips)</label>
-        <painOffset>0.05</painOffset>
+        <label>enlarged lips</label>
+        
         <capMods>
           <li>
             <capacity>Talking</capacity>
@@ -1191,15 +1036,12 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>0.5</value>
-          </li>
+          <PawnBeauty>0.5</PawnBeauty>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (mouth flaps)</label>
-        <painOffset>0.1</painOffset>
+        <label>mouth flaps</label>
+        
         <minSeverity>1</minSeverity>
         <capMods>
           <li>
@@ -1212,15 +1054,12 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-1</value>
-          </li>
+          <PawnBeauty>-1</PawnBeauty>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (vertical mouth)</label>
-        <painOffset>0.15</painOffset>
+        <label>vertical mouth</label>
+        
         <minSeverity>2</minSeverity>
         <capMods>
           <li>
@@ -1233,15 +1072,12 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-2</value>
-          </li>
+          <PawnBeauty>-2</PawnBeauty>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (mandibles)</label>
-        <painOffset>0.1</painOffset>
+        <label>mandibles</label>
+        
         <minSeverity>3</minSeverity>
         <capMods>
           <li>
@@ -1254,18 +1090,9 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-2</value>
-          </li>
-          <li>
-            <stat>SocialImpact</stat>
-            <value>-0.3</value>
-          </li>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>0.3</value>
-          </li>
+          <PawnBeauty>-2</PawnBeauty>
+          <SocialImpact>-0.3</SocialImpact>
+          <MeleeDPS>0.3</MeleeDPS>
         </statOffsets>
       </li>
     </stages>
@@ -1274,8 +1101,8 @@
       <partEfficiency>1.00</partEfficiency>
     </addedPartProps>
     <comps>
-      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
-        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+      <li Class="Corruption.Core.HediffCompProperties_ReplacePart">
+        <compClass>Corruption.Core.HediffComp_ReplacePart</compClass>
         <partToReplace>Jaw</partToReplace>
         <severityOnExisting>0.5</severityOnExisting>
       </li>
@@ -1289,8 +1116,8 @@
     <maxSeverity>3</maxSeverity>
     <stages>
       <li>
-        <label>mutation (enlarged lips)</label>
-        <painOffset>0.05</painOffset>
+        <label>enlarged lips</label>
+        
         <capMods>
           <li>
             <capacity>Talking</capacity>
@@ -1302,15 +1129,12 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>0.5</value>
-          </li>
+          <PawnBeauty>0.5</PawnBeauty>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (mouth flaps)</label>
-        <painOffset>0.1</painOffset>
+        <label>mouth flaps</label>
+        
         <minSeverity>1</minSeverity>
         <capMods>
           <li>
@@ -1323,15 +1147,12 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-1</value>
-          </li>
+          <PawnBeauty>-1</PawnBeauty>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (protruded mouthflaps)</label>
-        <painOffset>0.15</painOffset>
+        <label>protruded mouthflaps</label>
+        
         <minSeverity>2</minSeverity>
         <capMods>
           <li>
@@ -1344,15 +1165,12 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-2</value>
-          </li>
+          <PawnBeauty>-2</PawnBeauty>
         </statOffsets>
       </li>
       <li>
-        <label>mutation (beak)</label>
-        <painOffset>0.1</painOffset>
+        <label>beak</label>
+        
         <minSeverity>3</minSeverity>
         <capMods>
           <li>
@@ -1365,18 +1183,9 @@
           </li>
         </capMods>
         <statOffsets>
-          <li>
-            <stat>PawnBeauty</stat>
-            <value>-1</value>
-          </li>
-          <li>
-            <stat>SocialImpact</stat>
-            <value>-0.3</value>
-          </li>
-          <li>
-            <stat>MeleeDPS</stat>
-            <value>0.1</value>
-          </li>
+          <PawnBeauty>-2</PawnBeauty>
+          <SocialImpact>-0.3</SocialImpact>
+          <MeleeDPS>0.1</MeleeDPS>
         </statOffsets>
       </li>
     </stages>
@@ -1385,8 +1194,8 @@
       <partEfficiency>1.00</partEfficiency>
     </addedPartProps>
     <comps>
-      <li Class="Corruption.CoreHediffCompProperties_ReplacePart">
-        <hediffClass>Corruption.CoreHediffComp_ReplacePart</hediffClass>
+      <li Class="Corruption.Core.HediffCompProperties_ReplacePart">
+        <compClass>Corruption.Core.HediffComp_ReplacePart</compClass>
         <partToReplace>Jaw</partToReplace>
         <severityOnExisting>0.5</severityOnExisting>
       </li>

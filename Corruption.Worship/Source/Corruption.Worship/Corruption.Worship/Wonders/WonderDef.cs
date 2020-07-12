@@ -15,9 +15,13 @@ namespace Corruption.Worship.Wonders
 
         public List<GodDef> associatedGods = new List<GodDef>();
 
-        public List<ThingDefCount> thingsToSpawn = new List<ThingDefCount>();
+        public List<ThingDefCountClass> thingsToSpawn = new List<ThingDefCountClass>();
 
         public List<HediffDef> hediffsToAdd = new List<HediffDef>();
+
+        private int cooldownTicks;
+
+        public int CooldownTicks => cooldownTicks;
 
         public float minHediffSeverity = 0.1f;
 
@@ -47,6 +51,8 @@ namespace Corruption.Worship.Wonders
             LongEventHandler.ExecuteWhenFinished(delegate
             {
                 this.wonderIcon = ContentFinder<Texture2D>.Get(this.wonderIconPath, true);
+                this.workerInt = (WonderWorker)Activator.CreateInstance(this.workerClass);
+                this.workerInt.Def = this;
             });
         }
 
@@ -55,11 +61,6 @@ namespace Corruption.Worship.Wonders
         {
             get
             {
-                if (this.workerInt == null)
-                {
-                    this.workerInt = (WonderWorker)Activator.CreateInstance(this.workerClass);
-                    this.workerInt.Def = this;
-                }
                 return this.workerInt;
             }
         }
@@ -85,7 +86,7 @@ namespace Corruption.Worship.Wonders
                 var builder = new StringBuilder();
                 builder.AppendLine(this.description);
                 builder.AppendLine();
-                builder.AppendLine("FavourCost".Translate(new NamedArgument(this.favourCost, "FAVOUR_COST")));
+                builder.AppendLine("FavourCost".Translate(new NamedArgument(this.favourCost, "COST")));
                 return builder.ToString();
             }
         }

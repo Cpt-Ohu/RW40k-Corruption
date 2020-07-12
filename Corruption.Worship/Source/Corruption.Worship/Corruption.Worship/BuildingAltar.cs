@@ -9,7 +9,6 @@ using Verse;
 
 namespace Corruption.Worship
 {
-
     public class BuildingAltar : Building
     {
         public bool OptionMorning = false;
@@ -27,6 +26,8 @@ namespace Corruption.Worship
         public Pawn preacher = null;
 
         public GodDef DedicatedTo = GodDefOf.Emperor;
+
+        public Altar_RecordsTracker records = new Altar_RecordsTracker();
 
         public bool DoMorningSermon
         {
@@ -67,7 +68,6 @@ namespace Corruption.Worship
                 {
                     if (!HeldSermon)
                     {
-                        //        Log.Message("starting morning sermon");
                         SermonUtility.ForceSermon(this, Worship.WorshipActType.MorningPrayer);
                         this.HeldSermon = true;
                     }
@@ -97,6 +97,7 @@ namespace Corruption.Worship
             base.ExposeData();
 
             Scribe_References.Look<Pawn>(ref this.preacher, "preacher", false);
+            Scribe_Deep.Look<Altar_RecordsTracker>(ref this.records, "records");
             Scribe_Values.Look<string>(ref this.RoomName, "RoomName", "Temple", false);
             Scribe_Values.Look<bool>(ref this.OptionEvening, "OptionEvening", false, false);
             Scribe_Values.Look<bool>(ref this.OptionMorning, "OptionMorning", false, false);

@@ -4,6 +4,7 @@ using Corruption.Worship.Wonders;
 using RimWorld;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -18,7 +19,8 @@ namespace Corruption.Worship
         private List<Pawn> Worshippers = new List<Pawn>();
         private List<BuildingAltar> Altars = new List<BuildingAltar>();
         private static List<TabRecord> tabsList = new List<TabRecord>();
-
+        private float contributionRecordMaximum;
+        private float averagedMaxContribution;
         private MainTabWindow_Worship.Tab selectedTab;
 
         private enum Tab
@@ -90,6 +92,12 @@ namespace Corruption.Worship
             {
                 this.Worshippers.AddRange(caravan.pawns.InnerListForReading.FindAll(x => x.IsColonist));
             }
+
+            
+               
+            this.contributionRecordMaximum = Math.Max(1, this.Worshippers.Sum(x => x.records.GetAsInt(WorshipRecordDefOf.GlobalFavourContributed)));
+            this.averagedMaxContribution = this.contributionRecordMaximum / this.Worshippers.Count;
+            this.Worshippers = this.Worshippers.OrderByDescending(x => x.records.GetValue(WorshipRecordDefOf.GlobalFavourContributed)).ToList();
         }
 
         public override void DoWindowContents(Rect inRect)
@@ -107,12 +115,12 @@ namespace Corruption.Worship
             {
                 case Tab.Favour:
                     {
-                        WorshipUIUtility.DrawColonyPantheon(inRect);
+                        WorshipUIUtility.DrawColonyPantheon(inRect, Worshippers);
                         break;
                     }
                 case Tab.Pawns:
                     {
-                        WorshipUIUtility.DrawWorshippers(inRect, Worshippers, this.Altars);
+                        WorshipUIUtility.DrawWorshippers(inRect, Worshippers, this.Altars, averagedMaxContribution);
                         break;
                     }
             }
@@ -129,11 +137,11 @@ namespace Corruption.Worship
 
         private static List<WonderDef> cachedWonders = DefDatabase<WonderDef>.AllDefsListForReading;
 
-        public static void DrawColonyPantheon(Rect inRect)
+        public static void DrawColonyPantheon(Rect inRect, List<Pawn> worshippers)
         {
             Rect pantheonHeaderRect = new Rect(inRect);
             pantheonHeaderRect.height = 236f;
-            pantheonHeaderRect.width -= 16f; 
+            pantheonHeaderRect.width -= 16f;
             Widgets.DrawMenuSection(pantheonHeaderRect);
             Rect innerRect = inRect.ContractedBy(17f);
             GUI.BeginGroup(innerRect);
@@ -151,6 +159,11 @@ namespace Corruption.Worship
                     {
                         GlobalWorshipTracker.Current.TryAddFavor(god, 1000f);
                     }
+
+                    foreach (var worshipper in worshippers)
+                    {
+                        worshipper.records.AddTo(WorshipRecordDefOf.GlobalFavourContributed, Rand.Range(100, 200));
+                    }
                 }
             }
 
@@ -164,7 +177,7 @@ namespace Corruption.Worship
             GUI.DrawTexture(progressRect, BackgroundTile);
             float overallProgress = GlobalWorshipTracker.Current.PantheonFavourPercentage;
             TooltipHandler.TipRegion(progressRect, new TipSignal(string.Concat(overallProgress * 100f, "%")));
-            Rect innerProgressRect = progressRect.ContractedBy(2f);
+            Rect innerProgressRect = progressRect.ContractedBy(8f);
             Widgets.FillableBar(innerProgressRect, overallProgress, pantheon.FillTex, null, false);
             Rect leftNodeRect = new Rect(0f, progressRect.y - 8f, 48f, 48f);
             GUI.DrawTexture(leftNodeRect, pantheon.Icon);
@@ -193,7 +206,7 @@ namespace Corruption.Worship
 
             float curY = titleRect.yMax + 4f;
 
-            foreach(var attribute in pantheon.pantheonAttributes)
+            foreach (var attribute in pantheon.pantheonAttributes)
             {
                 Rect attributeRect = new Rect(0f, curY, inRect.width, 64f);
                 Rect attributeIconRect = new Rect(0f, curY, 64f, 64f);
@@ -247,7 +260,7 @@ namespace Corruption.Worship
 
                 float godsFavour = GlobalWorshipTracker.Current.GetFavourProgressFor(member.god).Favour;
                 Rect favourLabelRect = new Rect(0f, descriptionRect.yMax + 4f, descriptionRect.width, Text.LineHeight);
-                Widgets.Label(favourLabelRect, String.Concat("GodsFavour".Translate(),": ", ((int)godsFavour).ToString()));
+                Widgets.Label(favourLabelRect, String.Concat("GodsFavour".Translate(), ": ", ((int)godsFavour).ToString()));
 
                 Rect borderRect = new Rect(48f, favourLabelRect.yMax + 6f, godsRect.width - 96f, 32f);
                 GUI.DrawTexture(borderRect, BackgroundTile);
@@ -287,14 +300,14 @@ namespace Corruption.Worship
                         textGetter = ((int x) => "SetWorshipPoints".Translate());
                         Dialog_Slider window = new Dialog_Slider(textGetter, wonder.favourCost, (int)godsFavour, delegate (int value)
                         {
-                            wonder.Worker.TryExecuteWonder(value);
+                            wonder.Worker.TryExecuteWonder(god, value);
                             GlobalWorshipTracker.Current.ConsumeFavourFor(value, god);
                         }, wonder.favourCost);
                         Find.WindowStack.Add(window);
                     }
                     else
                     {
-                        wonder.Worker.TryExecuteWonder(wonder.favourCost);
+                        wonder.Worker.TryExecuteWonder(god, wonder.favourCost);
                         GlobalWorshipTracker.Current.ConsumeFavourFor(wonder.favourCost, god);
                     }
                 }
@@ -304,31 +317,47 @@ namespace Corruption.Worship
         private static Vector2 followersScrollPos = Vector2.zero;
         private static Vector2 altarsScrollPos = Vector2.zero;
 
-        internal static void DrawWorshippers(Rect inRect, List<Pawn> worshippers, List<BuildingAltar> altars)
+        internal static void DrawWorshippers(Rect inRect, List<Pawn> worshippers, List<BuildingAltar> altars, float contributionRecordMaximum)
         {
             inRect = inRect.ContractedBy(17f);
             GUI.BeginGroup(inRect);
-            Rect pawnsRect = new Rect(0f, 0f, inRect.width * 256f, inRect.height);
-            GUI.BeginGroup(pawnsRect);
+            Rect pawnsRect = new Rect(0f, 0f, 256f, inRect.height);
+            Widgets.DrawMenuSection(pawnsRect);
             pawnsRect = pawnsRect.ContractedBy(5f);
+            GUI.BeginGroup(pawnsRect);
             Text.Font = GameFont.Medium;
             Rect labelRect = new Rect(0f, 0f, pawnsRect.width, Text.LineHeight);
             Widgets.Label(labelRect, "Followers".Translate());
             Text.Font = GameFont.Small;
-            Rect outerRect = new Rect(0f, labelRect.yMax + 4f, pawnsRect.width, pawnsRect.height - labelRect.yMax - 8f);
-            Rect viewRect = new Rect(0f, 0f, outerRect.width - 8f, worshippers.Count * 128f);
+            Rect outerRect = new Rect(0f, labelRect.yMax + 4f, pawnsRect.width, pawnsRect.height - labelRect.yMax - 32f);
+            Rect viewRect = new Rect(0f, 0f, outerRect.width - 16f, worshippers.Count * 64f + 4f);
             Widgets.BeginScrollView(outerRect, ref followersScrollPos, viewRect);
             float curY = 0f;
             foreach (var pawn in worshippers)
             {
-                Rect rect = new Rect(0f, curY, 64f, 64f);
-                GUI.BeginGroup(rect);
-                pawn.Drawer.renderer.RenderPortrait();
-                GUI.EndGroup();
+                Rect iconRect = new Rect(0f, curY, 64f, 64f);
+                GUI.DrawTexture(iconRect, PortraitsCache.Get(pawn, iconRect.size));
 
-                Rect nameRect = new Rect(68f, curY, 196f, Text.LineHeight);
+                Rect nameRect = new Rect(68f, curY, viewRect.width - 68f, Text.LineHeight);
                 Widgets.Label(nameRect, pawn.NameShortColored);
-                curY = rect.yMax + 4f;
+
+                Rect contributionRect = new Rect(nameRect);
+
+                contributionRect.y += Text.LineHeight + 4f;
+                Widgets.Label(contributionRect, "WorshipEfforts".Translate());
+                contributionRect.y += Text.LineHeight;
+                contributionRect.height = 12f;
+                contributionRect.width -= 8f;
+                float pawnContribution = pawn.records.GetValue(WorshipRecordDefOf.GlobalFavourContributed);
+                Widgets.FillableBar(contributionRect, Math.Min(1f, pawnContribution / contributionRecordMaximum), GlobalWorshipTracker.Current.PlayerPantheon.FillTex);
+                TooltipHandler.TipRegion(contributionRect, new TipSignal("WorshipEffortsDesc".Translate(), pawn.GetHashCode() * 144758));
+
+                Rect totalRect = new Rect(0f, curY, viewRect.width, 68f);
+                if (Mouse.IsOver(totalRect))
+                {
+                    Widgets.DrawHighlight(totalRect);
+                }
+                curY = totalRect.yMax + 4f;
             }
             Widgets.EndScrollView();
             GUI.EndGroup();
@@ -349,24 +378,92 @@ namespace Corruption.Worship
             foreach (var altar in altars)
             {
                 Widgets.DrawLineHorizontal(4f, curY, altarViewRect.width - 8f);
-                Rect iconRect = new Rect(0f, curY + 32f, 64f, 64f);
-                GUI.DrawTexture(iconRect, altar.def.uiIcon);
+                Rect iconRect = new Rect(0f, curY + 2f, 64f, 64f);
+                Widgets.ThingIcon(iconRect, altar);
                 Rect titleRect = new Rect(68f, curY + 2f, altarViewRect.width, Text.LineHeight);
-                Widgets.Label(titleRect, altar.RoomName);
+                Widgets.Label(titleRect, altar.RoomName.Colorize(altar.DedicatedTo.cultColorOne));
 
-                Rect rect3 = new Rect(68f, curY + 2f, 200f, 25f);
+
+                Rect rect3 = new Rect(68f, titleRect.yMax + 2f, 200f, 25f);
+                Widgets.Label(rect3, "CurrentPreacher".Translate());
+                rect3.y += Text.LineHeight + 4f;
                 string label2 = TempleCardUtility.PreacherLabel(altar);
                 if (Widgets.ButtonText(rect3, label2, true, false, true))
                 {
                     TempleCardUtility.OpenPreacherSelectMenu(altar);
                 }
 
+                Rect statRect = new Rect(rect3.xMax + 4f, titleRect.yMax + 2f, altarViewRect.width - 32f, Text.LineHeight * 5);
+                Widgets.DrawWindowBackground(statRect);
+                GUI.BeginGroup(statRect);
+                float recordY = 0f;
+
+                var room = altar.GetRoom();
+                Widgets.ListSeparator(ref curY, viewRect.width, "AltarStats".Translate());
+                curY += 24f;
+                if (room != null)
+                {
+                    WorshipUIUtility.DrawRoomRecord(ref recordY, room, RoomStatDefOf.Impressiveness, statRect.width, altar);
+                    WorshipUIUtility.DrawRoomRecord(ref recordY, room, RoomStatDefOf.Wealth, statRect.width, altar);
+                }
+
+                WorshipUIUtility.DrawAltarRecord(ref recordY, statRect.width, altar, WorshipRecordDefOf.SermonsHeldAltar);
+                WorshipUIUtility.DrawAltarRecord(ref recordY, statRect.width, altar, WorshipRecordDefOf.SermonAttendees);
+
+                GUI.EndGroup();
+                curY += recordY;
             }
             Widgets.EndScrollView();
             GUI.EndGroup();
 
 
             GUI.EndGroup();
+        }
+
+        private static void DrawRoomRecord(ref float curY, Room room, RoomStatDef stat, float width, BuildingAltar altar)
+        {
+            float num = width * 0.45f;
+            string text = room.GetStat(stat).ToString();
+            Rect rect = new Rect(8f, curY, width, Text.CalcHeight(text, num));
+            if (Mouse.IsOver(rect))
+            {
+                Widgets.DrawHighlight(rect);
+            }
+            Rect rect2 = rect;
+            rect2.width -= num;
+            Widgets.Label(rect2, stat.LabelCap);
+            Rect rect3 = rect;
+            rect3.x = rect2.xMax;
+            rect3.width = num;
+            Widgets.Label(rect3, text);
+            if (stat.description != null && Mouse.IsOver(rect))
+            {
+                TooltipHandler.TipRegion(rect, new TipSignal(() => stat.description ?? "", stat.GetHashCode()));
+            }
+            curY += rect.height;
+        }
+
+        private static void DrawAltarRecord(ref float curY, float width, BuildingAltar altar, RecordDef record)
+        {
+            float num = width * 0.45f;
+            string text = (record.type != 0) ? altar.records.GetValue(record).ToString("0.##") : altar.records.GetAsInt(record).ToStringTicksToPeriod();
+            Rect rect = new Rect(8f, curY, width, Text.CalcHeight(text, num));
+            if (Mouse.IsOver(rect))
+            {
+                Widgets.DrawHighlight(rect);
+            }
+            Rect rect2 = rect;
+            rect2.width -= num;
+            Widgets.Label(rect2, record.LabelCap);
+            Rect rect3 = rect;
+            rect3.x = rect2.xMax;
+            rect3.width = num;
+            Widgets.Label(rect3, text);
+            if (Mouse.IsOver(rect))
+            {
+                TooltipHandler.TipRegion(rect, new TipSignal(() => record.description, record.GetHashCode()));
+            }
+            curY += rect.height;
         }
     }
 }

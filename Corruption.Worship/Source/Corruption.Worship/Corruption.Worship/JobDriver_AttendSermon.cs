@@ -12,9 +12,12 @@ namespace Corruption.Worship
     public class JobDriver_AttendSermon : JobDriver
     {
 
-        //        private TargetIndex Preacher = TargetIndex.A;
-        //        private TargetIndex Altar = TargetIndex.B;
+        private TargetIndex Preacher = TargetIndex.A;
+        private TargetIndex Altar = TargetIndex.B;
         private TargetIndex Spot = TargetIndex.C;
+        
+
+        private CompAltar CompAltar => ((ThingWithComps)this.TargetA).GetComp<CompAltar>();
 
         public override void ExposeData()
         {
@@ -49,6 +52,10 @@ namespace Corruption.Worship
             {
                 this.pawn.rotationTracker.FaceCell(this.TargetB.Cell);
                 this.pawn.GainComfortFromCellIfPossible();
+                if (this.CompAltar != null)
+                {
+                    GlobalWorshipTracker.Current.TryAddFavor(this.CompAltar.God, this.CompAltar.CompProps.WorshipRatePerTick);
+                }
             });
             yield return altarToil;
 

@@ -13,6 +13,9 @@
       <li>ChaosBasic</li>
       <li>ChaosAdvanced</li>
     </apparelTags>
+    <apparelRequired>
+      <li>Apparel_PsykerBackpack</li>
+    </apparelRequired>
     <apparelAllowHeadgearChance>0.8</apparelAllowHeadgearChance>
     <weaponMoney>2500~3450</weaponMoney>
     <weaponTags>
@@ -39,6 +42,17 @@
       </subOptionsChooseOne>
     </inventoryOptions>
     <biocodeWeaponChance>0.2</biocodeWeaponChance>
+    <affliction>
+      <startingPowers>
+        <li>GenericSmite</li>
+      </startingPowers>
+      <forcedPantheon>Chaos</forcedPantheon>
+    </affliction>
+    <additionalTags>
+      <li>SorcererNurgle</li>
+      <li>SorcererTzeentch</li>
+      <li>SorcererSlaanesh</li>
+    </additionalTags>
   </PawnKindDef>
   
 </Defs>

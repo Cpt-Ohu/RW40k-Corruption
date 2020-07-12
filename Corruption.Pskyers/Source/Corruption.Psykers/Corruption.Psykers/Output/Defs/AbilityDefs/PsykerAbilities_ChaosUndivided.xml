@@ -15,13 +15,14 @@
     </statBases>
     <verbProperties>
       <defaultProjectile>PSYDoomBolt</defaultProjectile>
-      <warmupTime>5.0</warmupTime>
+      <warmupTime>1.0</warmupTime>
       <range>25.9</range>
       <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
-      <burstShotCount>1</burstShotCount>
-      <soundCast>WarpBolt</soundCast>
-      <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <burstShotCount>2</burstShotCount>
+      <soundCast>DoomBolt</soundCast>
+      <targetParams>
+        <canTargetLocations>True</canTargetLocations>
+      </targetParams>
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
@@ -30,48 +31,55 @@
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
 
   <AbilityDef ParentName="DoomBolt">
     <defName>DoomboltII</defName>
     <label>doombolt</label>
-    <level>20</level>
+    <level>30</level>
     <iconPath>UI/Abilities/Doombolt</iconPath>
     <hotKey>Misc6</hotKey>
     <statBases>
       <Ability_EntropyGain>30</Ability_EntropyGain>
+      <Ability_EffectRadius>2</Ability_EffectRadius>
     </statBases>
     <verbProperties>
       <defaultProjectile>PSYDoomBolt</defaultProjectile>
-      <warmupTime>5.0</warmupTime>
+      <warmupTime>1.0</warmupTime>
       <range>25.9</range>
       <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
-      <burstShotCount>5</burstShotCount>
-      <soundCast>WarpBolt</soundCast>
-      <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <burstShotCount>4</burstShotCount>
+      <soundCast>DoomBolt</soundCast>
+      <targetParams>
+        <canTargetLocations>True</canTargetLocations>
+      </targetParams>
     </verbProperties>
   </AbilityDef>
 
   <AbilityDef ParentName="DoomBolt">
     <defName>DoomboltIII</defName>
     <label>doombolt</label>
-    <level>20</level>
+    <level>40</level>
     <iconPath>UI/Abilities/Doombolt</iconPath>
     <hotKey>Misc6</hotKey>
     <statBases>
       <Ability_EntropyGain>40</Ability_EntropyGain>
+      <Ability_EffectRadius>4</Ability_EffectRadius>
     </statBases>
     <verbProperties>
       <defaultProjectile>PSYDoomBolt</defaultProjectile>
-      <warmupTime>5.0</warmupTime>
+      <warmupTime>1.0</warmupTime>
       <range>25.9</range>
       <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
-      <burstShotCount>8</burstShotCount>
-      <soundCast>WarpBolt</soundCast>
-      <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <burstShotCount>6</burstShotCount>
+      <soundCast>DoomBolt</soundCast>
+      <targetParams>
+        <canTargetLocations>True</canTargetLocations>
+      </targetParams>
     </verbProperties>
   </AbilityDef>
 
@@ -88,8 +96,9 @@
     <projectile>
       <flyOverhead>false</flyOverhead>
       <damageDef>Laser</damageDef>
-      <damageAmountBase>5</damageAmountBase>
+      <damageAmountBase>10</damageAmountBase>
       <speed>125</speed>
+      <armorPenetrationBase>1.0</armorPenetrationBase>
     </projectile>
     <preFiringInitialIntensity>0</preFiringInitialIntensity>
     <preFiringFinalIntensity>2</preFiringFinalIntensity>
@@ -103,7 +112,7 @@
   <ThingDef ParentName="PSYWarpBoltBase"  Class="Corruption.Core.Items.ThingDef_LaserProjectile">
     <defName>PSYWarpBolt_Medium</defName>
     <projectile>
-      <damageAmountBase>16</damageAmountBase>
+      <damageAmountBase>20</damageAmountBase>
     </projectile>
   </ThingDef>
 
@@ -114,7 +123,7 @@
       <texPath>Things/Projectiles/WarpBolt</texPath>
     </graphicData>
     <projectile>
-      <damageAmountBase>24</damageAmountBase>
+      <damageAmountBase>30</damageAmountBase>
     </projectile>
   </ThingDef>
 
@@ -129,7 +138,8 @@
     <projectile>
       <flyOverhead>false</flyOverhead>
       <damageDef>Burn</damageDef>
-      <damageAmountBase>8</damageAmountBase>
+      <armorPenetrationBase>2.0</armorPenetrationBase>
+      <damageAmountBase>20</damageAmountBase>
       <speed>40</speed>
       <explosionRadius>2.0</explosionRadius>
     </projectile>
@@ -147,136 +157,132 @@
 
   <!-- ========================= Gift Of Chaos ===================================== -->
   
-  <AbilityDef ParentName="PsykerAbilityBase" Name="GiftOfChaos">
+  <AbilityDef ParentName="PsykerAbilityBase">
     <defName>GiftOfChaosI</defName>
     <label>gift of chaos</label>
     <description>A whirling flash of Chaos energy is unleashed by the sorcerer, enveloping his target and rapidly mutating them. Those who survive the distortion of flesh and bone become a Chaos Spawn.</description>
     <level>20</level>
-    <iconPath>UI/Abilities/GiftOfChaos</iconPath>
+    <iconPath>UI/Abilities/ChaosGift</iconPath>
     <hotKey>Misc6</hotKey>
     <statBases>
       <Ability_EntropyGain>10</Ability_EntropyGain>
     </statBases>
     <verbProperties>
-      <warmupTime>5.0</warmupTime>
+      <warmupTime>2.0</warmupTime>
       <range>10.0</range>
       <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
       <burstShotCount>3</burstShotCount>
-      <soundCast>WarpBolt</soundCast>
-      <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <soundCast>PsychicInsanityLanceCast</soundCast>
     </verbProperties>
     <comps>
-      <li Class="Corruption.Psykers.CompProperties_AbilityMutate">
-        <mutationHediffs>
-          <li>ChaosMutationClaw</li>
-          <li>ChaosMutationTentacledHand</li>
-          <li>ChaosMutationTentacledFeet</li>
-          <li>ChaosMutationClawedFeet</li>
-          <li>ChaosMutationHooves</li>
-          <li>ChaosMutationFeathers</li>
-          <li>ChaosMutationScalySkin</li>
-          <li>ChaosMutationBulbousSkin</li>
-          <li>ChaosMutationHornedHead</li>
-          <li>ChaosMutationMoreEyes</li>
-          <li>ChaosMutationMaw</li>
-          <li>ChaosMutationTentacledMouth</li>
-          <li>ChaosMutationMandibles</li>
-          <li>ChaosMutationBeak</li>
-        </mutationHediffs>
-        <severityFactorFromEntropy>0.8</severityFactorFromEntropy>
+      <li Class="Corruption.Psykers.CompProperties_DirectDamage">
+        <compClass>Corruption.Psykers.CompAbilityEffect_DirectDamage</compClass>
+        <damageDef>MutatingBurn</damageDef>
+        <damage>10</damage>
+        <moteDef>Mote_BloodSplash</moteDef>
         <psychic>False</psychic>
-        <applicableToMechs>False</applicableToMechs>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
       </li>
     </comps>
   </AbilityDef>
 
-  <AbilityDef ParentName="GiftOfChaos">
+  <AbilityDef ParentName="PsykerAbilityBase">
     <defName>GiftOfChaosII</defName>
-    <label>gift of chaos</label>
+    <label>blessing of chaos</label>
     <description>A whirling flash of Chaos energy is unleashed by the sorcerer, enveloping his target and rapidly mutating them. Those who survive the distortion of flesh and bone become a Chaos Spawn.</description>
     <level>30</level>
+    <iconPath>UI/Abilities/ChaosGift</iconPath>
+    <hotKey>Misc6</hotKey>
     <statBases>
       <Ability_EntropyGain>20</Ability_EntropyGain>
     </statBases>
     <verbProperties>
-      <warmupTime>5.0</warmupTime>
+      <warmupTime>2.0</warmupTime>
       <range>25.9</range>
       <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
       <burstShotCount>3</burstShotCount>
-      <soundCast>WarpBolt</soundCast>
-      <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <soundCast>PsychicInsanityLanceCast</soundCast>
     </verbProperties>
+    <cooldownTicksRange>800~1200</cooldownTicksRange>
+    <comps>
+      <li Class="Corruption.Psykers.CompProperties_DirectDamage">
+        <compClass>Corruption.Psykers.CompAbilityEffect_DirectDamage</compClass>
+        <damageDef>MutatingBurn</damageDef>
+        <damage>30</damage>
+        <moteDef>Mote_BloodSplash</moteDef>
+        <psychic>False</psychic>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
+    </comps>
   </AbilityDef>
 
-  <AbilityDef ParentName="GiftOfChaos">
+  <AbilityDef ParentName="PsykerAbilityBase">
     <defName>GiftOfChaosIII</defName>
-    <label>gift of chaos</label>
+    <label>mass gift of chaos</label>
     <description>A whirling flash of Chaos energy is unleashed by the sorcerer, enveloping his target and rapidly mutating them. Those who survive the distortion of flesh and bone become a Chaos Spawn.</description>
     <level>40</level>
+    <hotKey>Misc6</hotKey>
+    <iconPath>UI/Abilities/ChaosGiftMass</iconPath>
     <statBases>
       <Ability_EntropyGain>30</Ability_EntropyGain>
       <Ability_EffectRadius>5</Ability_EffectRadius>
     </statBases>
     <verbProperties>
-      <warmupTime>5.0</warmupTime>
+      <warmupTime>3.0</warmupTime>
       <range>25.9</range>
       <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
       <burstShotCount>3</burstShotCount>
-      <soundCast>WarpBolt</soundCast>
-      <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <soundCast>PsychicInsanityLanceCast</soundCast>
     </verbProperties>
+    <cooldownTicksRange>800~1200</cooldownTicksRange>
+    <comps>
+      <li Class="Corruption.Psykers.CompProperties_DirectDamage">
+        <compClass>Corruption.Psykers.CompAbilityEffect_DirectDamage</compClass>
+        <damageDef>MutatingBurn</damageDef>
+        <damage>10</damage>
+        <moteDef>Mote_BloodSplash</moteDef>
+        <psychic>False</psychic>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
+    </comps>
   </AbilityDef>
 
-  <AbilityDef ParentName="GiftOfChaos">
+  <AbilityDef ParentName="PsykerAbilityBase">
     <defName>GiftOfChaosIV</defName>
-    <label>gift of chaos</label>
+    <label>mass blessing of chaos</label>
     <description>A whirling flash of Chaos energy is unleashed by the sorcerer, enveloping his target and rapidly mutating them. Those who survive the distortion of flesh and bone become a Chaos Spawn.</description>
-    <level>40</level>
+    <level>50</level>
+    <hotKey>Misc6</hotKey>
+    <iconPath>UI/Abilities/ChaosGiftMass</iconPath>
     <statBases>
       <Ability_EntropyGain>50</Ability_EntropyGain>
       <Ability_EffectRadius>8</Ability_EffectRadius>
     </statBases>
     <verbProperties>
-      <warmupTime>5.0</warmupTime>
+      <warmupTime>3.0</warmupTime>
       <range>25.9</range>
       <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
       <burstShotCount>3</burstShotCount>
-      <soundCast>WarpBolt</soundCast>
-      <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <soundCast>PsychicInsanityLanceCast</soundCast>
     </verbProperties>
+    <cooldownTicksRange>1000~1600</cooldownTicksRange>
+    <comps>
+      <li Class="Corruption.Psykers.CompProperties_DirectDamage">
+        <compClass>Corruption.Psykers.CompAbilityEffect_DirectDamage</compClass>
+        <damageDef>MutatingBurn</damageDef>
+        <damage>30</damage>
+        <moteDef>Mote_BloodSplash</moteDef>
+        <psychic>False</psychic>
+      </li>
+    </comps>
   </AbilityDef>
 
-
-
-  <ThingDef ParentName="BaseBullet" Class="Corruption.Core.Items.ThingDef_LaserProjectile">
-    <thingClass>Corruption.Core.Items.Projectile_Smoking</thingClass>
-    <defName>PSYGiftOfChaos</defName>
-    <label>gift of chaos</label>
-    <graphicData>
-      <texPath>Things/Projectiles/GiftOfChaos</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-    </graphicData>
-    <projectile>
-      <flyOverhead>false</flyOverhead>
-      <damageDef>Burn</damageDef>
-      <damageAmountBase>20</damageAmountBase>
-      <speed>40</speed>
-      <explosionRadius>2.0</explosionRadius>
-    </projectile>
-    <preFiringInitialIntensity>0</preFiringInitialIntensity>
-    <preFiringFinalIntensity>2</preFiringFinalIntensity>
-    <postFiringInitialIntensity>2</postFiringInitialIntensity>
-    <postFiringFinalIntensity>0</postFiringFinalIntensity>
-    <preFiringDuration>2</preFiringDuration>
-    <postFiringDuration>60</postFiringDuration>
-    <StartFireChance>0.000</StartFireChance>
-    <causesExplosion>true</causesExplosion>
-    <smokeGraphicPath>Things/Projectiles/GiftOfChaos_Shadow</smokeGraphicPath>
-  </ThingDef>
 
   <!-- ========================= Single Mutation ===================================== -->
 
@@ -285,7 +291,7 @@
     <label>mutation</label>
     <description>A conduit is opened to the warp and daemons temporarily possess the bodies of the target, mutating them and giving them increased strength and resilience.</description>
     <level>20</level>
-    <iconPath>UI/Abilities/Painblock</iconPath>
+    <iconPath>UI/Abilities/ChaosMutation</iconPath>
     <hotKey>Misc1</hotKey>
     <statBases>
       <Ability_EntropyGain>20</Ability_EntropyGain>
@@ -299,6 +305,7 @@
         <canTargetLocations>True</canTargetLocations>
       </targetParams>
     </verbProperties>
+    <cooldownTicksRange>800~1200</cooldownTicksRange>
     <comps>
       <li Class="CompProperties_AbilityGiveHediff">
         <compClass>CompAbilityEffect_GiveHediff</compClass>
@@ -328,19 +335,19 @@
         <psychic>False</psychic>
         <applicableToMechs>False</applicableToMechs>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <compClass>Corruption.Psykers.AbilityComp_AICastBuff</compClass>
+        <abilityCastType>Buff</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
-
-  
-  
-  
   
   <AbilityDef ParentName="PsykerAbilityBase">
     <defName>MassMutation</defName>
     <label>mass mutation</label>
     <description>A conduit is opened to the warp and daemons temporarily possess the bodies of the targets, mutating them and giving them increased strength and resilience.</description>
     <level>40</level>
-    <iconPath>UI/Abilities/Painblock</iconPath>
+    <iconPath>UI/Abilities/ChaosMutationAoE</iconPath>
     <hotKey>Misc1</hotKey>
     <statBases>
       <Ability_EntropyGain>40</Ability_EntropyGain>
@@ -355,6 +362,7 @@
         <canTargetLocations>True</canTargetLocations>
       </targetParams>
     </verbProperties>
+    <cooldownTicksRange>1600~2500</cooldownTicksRange>
     <comps>
       <li Class="CompProperties_AbilityGiveHediff">
         <compClass>CompAbilityEffect_GiveHediff</compClass>
@@ -384,17 +392,21 @@
         <psychic>False</psychic>
         <applicableToMechs>False</applicableToMechs>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <compClass>Corruption.Psykers.AbilityComp_AICastBuff</compClass>
+        <abilityCastType>Buff</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
-
 
   <AbilityDef ParentName="PsykerAbilityBase" Name="Warptime">
     <defName>WarptimeI</defName>
     <label>warptime</label>
     <description>The sorcerer alters the flow of time around himself, allowing for attacks with supernatural precision.</description>
     <level>10</level>
-    <iconPath>UI/Abilities/Painblock</iconPath>
+    <iconPath>UI/Abilities/ChaosWarptime</iconPath>
     <hotKey>Misc1</hotKey>
+    <targetRequired>false</targetRequired>
     <statBases>
       <Ability_EntropyGain>20</Ability_EntropyGain>
       <Ability_Duration>60</Ability_Duration>
@@ -412,6 +424,10 @@
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
         <psychic>False</psychic>
         <applicableToMechs>False</applicableToMechs>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <compClass>Corruption.Psykers.AbilityComp_AICastBuff</compClass>
+        <abilityCastType>Buff</abilityCastType>
       </li>
     </comps>
   </AbilityDef>
@@ -471,13 +487,12 @@
     </verbProperties>
   </AbilityDef>
 
-
   <AbilityDef ParentName="PsykerAbilityBase">
     <defName>SummonDemonI</defName>
-    <label>summon demon</label>
+    <label>summon fury</label>
     <description>The sorcerer opens a rift in the warp through which a singular demonic entity may manifest in the Materium.</description>
     <level>20</level>
-    <iconPath>UI/Abilities/Painblock</iconPath>
+    <iconPath>UI/Abilities/ChaosSummonFury</iconPath>
     <hotKey>Misc1</hotKey>
     <statBases>
       <Ability_EntropyGain>20</Ability_EntropyGain>
@@ -486,12 +501,12 @@
     <verbProperties>
       <warmupTime>0.25</warmupTime>
       <targetParams>
-        <canTargetSelf>True</canTargetSelf>
+        <canTargetLocations>True</canTargetLocations>
       </targetParams>
     </verbProperties>
     <comps>
       <li Class="Corruption.Psykers.CompProperties_SpawnPawn">
-        <kindDef>DemonUndividedBeast</kindDef>
+        <kindDef>Demon_Fury</kindDef>
         <spawnCount>1</spawnCount>
         <spawningMentalState>Berserk</spawningMentalState>
         <spawningHediffs>
@@ -500,30 +515,33 @@
         <psychic>False</psychic>
         <applicableToMechs>False</applicableToMechs>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
 
   <AbilityDef ParentName="PsykerAbilityBase">
     <defName>SummonDemonIIa</defName>
-    <label>summon demon</label>
+    <label>summon marauder</label>
     <description>The sorcerer opens a rift in the warp through which a singular demonic entity may manifest in the Materium.</description>
     <level>30</level>
-    <iconPath>UI/Abilities/Painblock</iconPath>
+    <iconPath>UI/Abilities/ChaosSummonMarauder</iconPath>
     <hotKey>Misc1</hotKey>
     <statBases>
       <Ability_EntropyGain>30</Ability_EntropyGain>
-      <Ability_Duration>120</Ability_Duration>
+      <Ability_Duration>30</Ability_Duration>
     </statBases>
     <verbProperties>
       <warmupTime>0.25</warmupTime>
       <targetParams>
-        <canTargetSelf>True</canTargetSelf>
+        <canTargetLocations>True</canTargetLocations>
       </targetParams>
     </verbProperties>
     <comps>
       <li Class="Corruption.Psykers.CompProperties_SpawnPawn">
-        <kindDef>DemonUndividedFighter</kindDef>
-        <spawnCount>3</spawnCount>
+        <kindDef>Demon_Brute</kindDef>
+        <spawnCount>1</spawnCount>
         <spawningMentalState>Berserk</spawningMentalState>
         <spawningHediffs>
           <li>WarpspawnedEntity</li>
@@ -531,15 +549,87 @@
         <psychic>False</psychic>
         <applicableToMechs>False</applicableToMechs>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
 
   <AbilityDef ParentName="PsykerAbilityBase">
     <defName>SummonDemonIIIa</defName>
-    <label>summon demon</label>
+    <label>summon marauders</label>
     <description>The sorcerer opens a rift in the warp through which a horde of demonic entities may manifest in the Materium.</description>
     <level>40</level>
-    <iconPath>UI/Abilities/Painblock</iconPath>
+    <iconPath>UI/Abilities/ChaosSummonMarauder</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>40</Ability_EntropyGain>
+      <Ability_Duration>60</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <targetParams>
+        <canTargetLocations>True</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="Corruption.Psykers.CompProperties_SpawnPawn">
+        <kindDef>Demon_Brute</kindDef>
+        <spawnCount>3</spawnCount>
+        <spawningHediffs>
+          <li>WarpspawnedEntity</li>
+        </spawningHediffs>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
+    </comps>
+  </AbilityDef>
+
+
+
+  <AbilityDef ParentName="PsykerAbilityBase">
+    <defName>SummonDemonIIb</defName>
+    <label>summon beast</label>
+    <description>The sorcerer opens a rift in the warp through which a singular demonic entity may manifest in the Materium.</description>
+    <level>30</level>
+    <iconPath>UI/Abilities/ChaosSummonBeast</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+      <Ability_Duration>30</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <targetParams>
+        <canTargetLocations>True</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="Corruption.Psykers.CompProperties_SpawnPawn">
+        <kindDef>Demon_BeastUndivided</kindDef>
+        <spawnCount>1</spawnCount>
+        <spawningMentalState>Berserk</spawningMentalState>
+        <spawningHediffs>
+          <li>WarpspawnedEntity</li>
+        </spawningHediffs>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="PsykerAbilityBase">
+    <defName>SummonDemonIIIb</defName>
+    <label>summon beast</label>
+    <description>The sorcerer opens a rift in the warp through which a horde of demonic entities may manifest in the Materium.</description>
+    <level>40</level>
+    <iconPath>UI/Abilities/ChaosSummonBeast</iconPath>
     <hotKey>Misc1</hotKey>
     <statBases>
       <Ability_EntropyGain>40</Ability_EntropyGain>
@@ -548,19 +638,21 @@
     <verbProperties>
       <warmupTime>0.25</warmupTime>
       <targetParams>
-        <canTargetSelf>True</canTargetSelf>
+        <canTargetLocations>True</canTargetLocations>
       </targetParams>
     </verbProperties>
     <comps>
       <li Class="Corruption.Psykers.CompProperties_SpawnPawn">
-        <kindDef>DemonUndividedFighter</kindDef>
-        <spawnCount>3</spawnCount>
-        <spawningMentalState>Berserk</spawningMentalState>
+        <kindDef>Demon_BeastUndivided</kindDef>
+        <spawnCount>1</spawnCount>
         <spawningHediffs>
           <li>WarpspawnedEntity</li>
         </spawningHediffs>
         <psychic>False</psychic>
         <applicableToMechs>False</applicableToMechs>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
       </li>
     </comps>
   </AbilityDef>

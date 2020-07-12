@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
+using Verse.AI.Group;
 
 namespace Corruption.Psykers
 {
@@ -16,35 +17,49 @@ namespace Corruption.Psykers
         {
             for (int i = 0; i < this.Props.spawnCount; i++)
             {
-                Pawn pawn = PawnGenerator.GeneratePawn(Props.kindDef, this.Props.isPsykerControlled ? this.parent.pawn.Faction : Find.FactionManager.FirstFactionOfDef(Corruption.Core.FactionsDefOf.IoM_NPC));
-                GenSpawn.Spawn(pawn, target.Cell, this.parent.pawn.Map);
+                Pawn newPawn = PawnGenerator.GeneratePawn(Props.kindDef, this.Props.isPsykerControlled ? this.parent.pawn.Faction : Find.FactionManager.FirstFactionOfDef(Props.kindDef.defaultFactionType)); // Find.FactionManager.FirstFactionOfDef(Corruption.Core.FactionsDefOf.IoM_NPC));
+                GenSpawn.Spawn(newPawn, target.Cell, this.parent.pawn.Map);
+                if (newPawn.Faction != null && newPawn.Faction != Faction.OfPlayer)
+                {
+                    Lord lord = null;
+                    if (newPawn.Map.mapPawns.SpawnedPawnsInFaction(newPawn.Faction).Any((Pawn p) => p != newPawn))
+                    {
+                        lord = ((Pawn)GenClosest.ClosestThing_Global(newPawn.Position, newPawn.Map.mapPawns.SpawnedPawnsInFaction(newPawn.Faction), 99999f, (Thing p) => p != newPawn && ((Pawn)p).GetLord() != null)).GetLord();
+                    }
+                    if (lord == null)
+                    {
+                        LordJob_DefendPoint lordJob = new LordJob_DefendPoint(newPawn.Position);
+                        lord = LordMaker.MakeNewLord(newPawn.Faction, lordJob, Find.CurrentMap);
+                    }
+                    lord.AddPawn(newPawn);
+                }
+
                 if (this.Props.spawningMentalState != null)
                 {
-                    pawn.mindState.mentalStateHandler.TryStartMentalState(this.Props.spawningMentalState);
+                    newPawn.mindState.mentalStateHandler.TryStartMentalState(this.Props.spawningMentalState);
                 }
                 foreach (var hediffDef in this.Props.spawningHediffs)
                 {
-                    Hediff hediff = HediffMaker.MakeHediff(hediffDef, pawn);
+                    Hediff hediff = HediffMaker.MakeHediff(hediffDef, newPawn);
                     HediffComp_Disappears hediffComp_Disappears = hediff.TryGetComp<HediffComp_Disappears>();
                     if (hediffComp_Disappears != null)
                     {
-                        hediffComp_Disappears.ticksToDisappear = GetDurationSeconds(pawn).SecondsToTicks();
+                        hediffComp_Disappears.ticksToDisappear = GetDurationSeconds(newPawn).SecondsToTicks();
                     }
-                    pawn.health.AddHediff(hediff);
-
+                    newPawn.health.AddHediff(hediff);
                 }
 
             }
         }
     }
 
-    public class CompProperties_SpawnPawn : CompProperties_AbilityEffect
+    public class CompProperties_SpawnPawn : CompProperties_AbilityEffectWithDuration
     {
         public PawnKindDef kindDef;
 
         public int spawnCount = 1;
 
-        public bool isPsykerControlled = true;
+        public bool isPsykerControlled = false;
 
         public List<HediffDef> spawningHediffs = new List<HediffDef>();
 

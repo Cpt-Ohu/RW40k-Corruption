@@ -246,14 +246,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbilityOpportunity.cs" />
     <Compile Include="Command_PsyCastCorruption.cs" />
+    <Compile Include="CompAbilityEffect_AroundPsyker.cs" />
     <Compile Include="CompAbilityEffect_GiveThought.cs" />
     <Compile Include="CompAbilityEffect_Mutate.cs" />
     <Compile Include="CompAbilityEffect_ReplacePart.cs" />
     <Compile Include="CompAbilityEffect_SatisfyNeed.cs" />
     <Compile Include="CompAbilityEffect_SpawnPawn.cs" />
     <Compile Include="CompAbilityEffect_SpawnVortex.cs" />
+    <Compile Include="CompAbilityEffect_StunAdvanced.cs" />
     <Compile Include="CompAbilityEffect_Teleport.cs" />
+    <Compile Include="AbilityCompProperties_AICast.cs" />
+    <Compile Include="CompDamageOnSpawn.cs" />
+    <Compile Include="CompProperties_AbilityEffectWithDurationAdvanced.cs" />
+    <Compile Include="CompPsykerExtension.cs" />
+    <Compile Include="Graphic_Vortex.cs" />
     <Compile Include="HediffComp_AffectSkill.cs" />
     <Compile Include="CompAbilityEffect_DirectDamage.cs" />
     <Compile Include="CompAbilityEffect_GiveHediffSeverity.cs" />
@@ -271,18 +279,25 @@
     <Compile Include="HediffDefOf.cs" />
     <Compile Include="Hediff_SummonedEntity.cs" />
     <Compile Include="InfernoBeam.cs" />
+    <Compile Include="JobDriver_MeditateXP.cs" />
+    <Compile Include="JobDriver_WaitCastPower.cs" />
+    <Compile Include="JobGiver_CastAbility.cs" />
     <Compile Include="LevitatingBoulder.cs" />
     <Compile Include="MoteDefOf.cs" />
+    <Compile Include="PsykerAIExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PsykerCast.cs" />
     <Compile Include="CompPsyker.cs" />
+    <Compile Include="PsykerCastAoE.cs" />
+    <Compile Include="PsykerClassDef.cs" />
     <Compile Include="PsykerDisciplineDef.cs" />
     <Compile Include="PsykerDisciplineDefOf.cs" />
+    <Compile Include="PsykerDisciplineCategory.cs" />
     <Compile Include="PsykerProjectiles.cs" />
     <Compile Include="PsykerUtility.cs" />
+    <Compile Include="ScenPart_PsykerStart.cs" />
     <Compile Include="Thought_MemoryPsionic.cs" />
     <Compile Include="Verb_CastPsykerAbility.cs" />
-    <Compile Include="Vortex.cs" />
     <Compile Include="Window_Psyker.cs" />
     <Compile Include="Window_PsykerDiscipline.cs" />
   </ItemGroup>
@@ -297,7 +312,9 @@
     <Content Include="Output\Defs\AbilityDefs\PsykerAbilitiesImperium.xml" />
     <Content Include="Output\Defs\AbilityDefs\PsykerAbilities_Biomancy.xml" />
     <Content Include="Output\Defs\AbilityDefs\PsykerAbilities_Divination.xml" />
+    <Content Include="Output\Defs\AbilityDefs\PsykerAbilities_Nurgle.xml" />
     <Content Include="Output\Defs\AbilityDefs\PsykerAbilities_Pyromancy.xml" />
+    <Content Include="Output\Defs\AbilityDefs\PsykerAbilities_Slaanesh.xml" />
     <Content Include="Output\Defs\AbilityDefs\PsykerAbilities_Telekinesis.xml" />
     <Content Include="Output\Defs\AbilityDefs\PsykerAbilities_Telepathy.xml" />
     <Content Include="Output\Defs\AbilityDefs\PsykerAbilities_Tzeentch.xml" />
@@ -310,9 +327,14 @@
     <Content Include="Output\Defs\Misc\ApparelLayerDefs\ApparelLayerDefs.xml" />
     <Content Include="Output\Defs\PawnKindDefs\PawnKinds_Chaos.xml" />
     <Content Include="Output\Defs\PawnKindDefs\PawnKinds_Imperium.xml" />
-    <Content Include="Output\Defs\PsykerDisciplineDefs\PsykerDisciplines.xml" />
+    <Content Include="Output\Defs\PawnKindDefs\PawnKinds_NativePsykers.xml" />
+    <Content Include="Output\Defs\PsykerClassDefs\GenericPsykers.xml" />
+    <Content Include="Output\Defs\PsykerDisciplineDefs\PsykerDisciplinesChaos.xml" />
+    <Content Include="Output\Defs\PsykerDisciplineDefs\PsykerDisciplinesImperial.xml" />
     <Content Include="Output\Defs\ResearchDefs\Research.xml" />
     <Content Include="Output\Defs\ResearchDefs\ResearchTabs.xml" />
+    <Content Include="Output\Defs\ScenPartDefs\ScenParts.xml" />
+    <Content Include="Output\Defs\SoundDefs\Ability_Oneshots.xml" />
     <Content Include="Output\Defs\SoundDefs\PsykerSounds.xml" />
     <Content Include="Output\Defs\ThingCategorieDefs\ThingCategories.xml" />
     <Content Include="Output\Defs\ThingDefs\Motes.xml" />
@@ -322,10 +344,13 @@
     <Content Include="Output\Defs\ThingDefs\Things_Apparel.xml" />
     <Content Include="Output\Defs\ThingDefs\Things_Buildings.xml" />
     <Content Include="Output\Defs\ThingDefs\Vortex.xml" />
+    <Content Include="Output\Defs\ThoughtDefs\Thoughts_Psykers.xml" />
     <Content Include="Output\Defs\ThoughtDefs\Thoughts_Telepathy.xml" />
     <Content Include="Output\Defs\TraitDefs\Traits_Spectrum.xml" />
     <Content Include="Output\Languages\English\Keyed\Commands.xml" />
     <Content Include="Output\Languages\English\Keyed\Psykers.xml" />
+    <Content Include="Output\Patches\CorePatches.xml" />
+    <Content Include="Output\Patches\Patches_AI.xml" />
     <Content Include="Output\Patches\Patches_Psyker.xml" />
   </ItemGroup>
   <ItemGroup>

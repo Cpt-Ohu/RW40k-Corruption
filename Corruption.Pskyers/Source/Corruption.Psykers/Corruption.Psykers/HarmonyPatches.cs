@@ -8,6 +8,7 @@ using Corruption.Core.Soul;
 using HarmonyLib;
 using RimWorld;
 using Verse;
+using Verse.AI;
 
 namespace Corruption.Psykers
 {
@@ -23,7 +24,8 @@ namespace Corruption.Psykers
             harmony.Patch(AccessTools.Method(typeof(RimWorld.Pawn_ApparelTracker), "Wear", null), null, new HarmonyMethod(typeof(HarmonyPatches), "WearPostfix", null));
             harmony.Patch(AccessTools.Method(typeof(Verse.Pawn), "PreApplyDamage", null), new HarmonyMethod(typeof(HarmonyPatches), "PreApplyDamagePrefix", null));
 
-            harmony.Patch(AccessTools.Method(typeof(Verse.ArmorUtility), "GetPostArmorDamage", null), new HarmonyMethod(typeof(HarmonyPatches), "GetPostArmorDamagePrefix"), null, null);
+            harmony.Patch(AccessTools.Method(typeof(RimWorld.Pawn_PsychicEntropyTracker), "NeedToShowGizmo", null), new HarmonyMethod(typeof(HarmonyPatches), "NeedToShowGizmoPrefix"), null, null);
+            harmony.Patch(AccessTools.Method(typeof(Verse.AI.Toils_Combat), "FollowAndMeleeAttack", null),null, new HarmonyMethod(typeof(HarmonyPatches), "FollowAndMeleeAttackPostfix"), null, null);
 
         }
 
@@ -56,22 +58,6 @@ namespace Corruption.Psykers
             }
         }
 
-        private static bool GetPostArmorDamagePrefix(Pawn pawn, float amount, float armorPenetration, BodyPartRecord part, ref DamageDef damageDef, out bool deflectedByMetalArmor, out bool diminishedByMetalArmor, float __result)
-        {
-            Hediff misfortuneHediff = pawn.health.hediffSet.GetFirstHediffOfDef(Corruption.Psykers.HediffDefOf.DiviMisfortune);
-
-            deflectedByMetalArmor = false;
-            diminishedByMetalArmor = false;
-
-            if (misfortuneHediff != null)
-            {
-                armorPenetration = armorPenetration -= misfortuneHediff.CurStage.statOffsets.GetStatOffsetFromList(StatDefOf.ArmorRating_Sharp);
-                __result = ArmorUtility.GetPostArmorDamage(pawn, amount, armorPenetration, part, ref damageDef, out deflectedByMetalArmor, out diminishedByMetalArmor);
-                return false;
-            }
-            return true;
-        }
-
         private static bool PreApplyDamagePrefix(ref bool absorbed, ref DamageInfo dinfo, Pawn __instance)
         {
             var shieldHediffs = __instance.health.hediffSet.GetAllComps().Where(x => x is HediffComp_Shield);
@@ -85,6 +71,34 @@ namespace Corruption.Psykers
             }
 
             return true;
+        }
+
+        private static bool NeedToShowGizmoPrefix(Pawn_PsychicEntropyTracker __instance, ref bool __result)
+        {
+            CompPsyker psyker = __instance.Pawn.CompPsyker();
+            if (__result && psyker != null && psyker.PsykerPowerTrait != null)
+            {
+                __result = false;
+                return false;
+            }
+            return true;
+        }
+
+        private static void FollowAndMeleeAttackPostfix(TargetIndex targetInd, Action hitAction, Toil __result)
+        {
+            __result.AddPreTickAction(delegate
+            {
+                Pawn pawn = __result.actor;
+                if ((pawn.story?.traits?.HasTrait(PsykerTraitDefOf.Psyker) ?? false))
+                {
+                    AbilityOpportunity opportunity;
+                    if (PsykerUtility.TryGetAbilityOpportunity(pawn, out opportunity))
+                    {
+                        LocalTargetInfo target = pawn.CurJob.GetTarget(targetInd);
+                        opportunity.ability.verb.TryStartCastOn(target);
+                    }
+                }
+            });
         }
 
     }

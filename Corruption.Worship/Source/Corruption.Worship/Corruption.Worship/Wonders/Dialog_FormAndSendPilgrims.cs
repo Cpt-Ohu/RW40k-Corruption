@@ -21,12 +21,10 @@ namespace Corruption.Worship.Wonders
             base.PostClose();
             foreach (Pawn p in TransferableUtility.GetPawnsFromTransferables(this.transferables))
             {
-                Log.Message("Setting Pilgrimage" + p.NameShortColored);
                 CompSoul soul = p.Soul();
 
                 if (soul != null)
                 {
-                    Log.Message("Setting");
                     soul.IsOnPilgrimage = true;
                 }
             }

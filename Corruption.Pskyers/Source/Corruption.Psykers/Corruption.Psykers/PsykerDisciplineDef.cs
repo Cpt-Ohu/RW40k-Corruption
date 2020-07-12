@@ -16,6 +16,14 @@ namespace Corruption.Psykers
 
         public List<PsykerLearnablePower> abilities;
 
+        public TraitDef practicionerTrait;
+
+        public HediffDef practitionerHediff;
+
+        public PsykerDisciplineCategory category;
+
+        public float initialXP = 200f;
+
         public string practitionerTitle;
 
         public Color color = Color.white;
@@ -31,6 +39,19 @@ namespace Corruption.Psykers
             {
                 this.Icon = ContentFinder<Texture2D>.Get(this.iconPath);
             });
+        }
+
+        public override IEnumerable<string> ConfigErrors()
+        {
+            foreach (string error in base.ConfigErrors())
+            {
+                yield return error;
+            }
+            if (this.initialXP < this.abilities.Min(x => x.cost))
+            {
+                this.initialXP = this.abilities.Min(x => x.cost);
+                yield return $"PsykerDiscipline {this.defName} has an initialXP below its cheapest ability.";
+            }
         }
     }
 

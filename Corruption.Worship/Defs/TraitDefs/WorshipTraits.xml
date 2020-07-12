@@ -50,9 +50,71 @@
         <description>This individual was selected by Nurgle to spread pestilence.</description>
         <statFactors>
           <MarketValue>10.0</MarketValue>
-          <MentalBreakThreshold>3.12</MentalBreakThreshold>
-          <MoveSpeed>0.5</MoveSpeed>
+          <MoveSpeed>0.8</MoveSpeed>
         </statFactors>
+        <statOffsets>
+          <MentalBreakThreshold>2.0</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+
+
+  <TraitDef>
+    <defName>TzeentchChampion</defName>
+    <commonality>0</commonality>
+    <ignoreConfigErrors>true</ignoreConfigErrors>
+    <degreeDatas>
+      <li>
+        <label>Champion of Tzeentch</label>
+        <description>This individual was selected by Tzeentch to be a fulcrum of knowledge and sorcery.</description>
+        <statFactors>
+          <MarketValue>10.0</MarketValue>
+          <MoveSpeed>0.8</MoveSpeed>
+        </statFactors>
+        <statOffsets>
+          <MentalBreakThreshold>2.0</MentalBreakThreshold>
+          <PainShockThreshold>3.0</PainShockThreshold>
+        </statOffsets>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+
+  
+
+  <TraitDef>
+    <defName>SlaaneshChampion</defName>
+    <commonality>0</commonality>
+    <ignoreConfigErrors>true</ignoreConfigErrors>
+    <degreeDatas>
+      <li>
+        <label>Champion of Slaanesh</label>
+        <description>This individual was chosen by Slaanesh to be an idol of lust and perfection.</description>
+        <statFactors>
+          <MarketValue>10.0</MarketValue>
+        </statFactors>
+        <statOffsets>
+          <PawnBeauty>4</PawnBeauty>
+          <WorkSpeedGlobal>0.50</WorkSpeedGlobal>
+          <MentalBreakThreshold>0.15</MentalBreakThreshold>
+          <ShootingAccuracyPawn>5</ShootingAccuracyPawn>
+          <MeleeHitChance>5</MeleeHitChance>
+          <MeleeDodgeChance>5</MeleeDodgeChance>
+        </statOffsets>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+
+  
+
+  <TraitDef>
+    <defName>ChaosCultist</defName>
+    <commonality>0</commonality>
+    <ignoreConfigErrors>true</ignoreConfigErrors>
+    <degreeDatas>
+      <li>
+        <label>cultist</label>
+        <description>{PAWN_nameDef} is following a chaos cult.</description>
       </li>
     </degreeDatas>
   </TraitDef>

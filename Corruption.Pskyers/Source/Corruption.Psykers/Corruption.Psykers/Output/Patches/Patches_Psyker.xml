@@ -2,13 +2,100 @@
 <Patch>
 
   <Operation Class="PatchOperationAdd">
-    <xpath>*/ThingDef[@Name="BasePawn"]/comps</xpath>
+    <xpath>*/ThingDef[defName="Human"]</xpath>
     <value>
-      <li>
-        <compClass>Corruption.Psykers.CompPsyker</compClass>
+      <comps>
+        <li>
+          <compClass>Corruption.Psykers.CompPsyker</compClass>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ScenarioDef[defName="40K_ChaosCult"]/scenario/parts</xpath>
+    <value>
+      <li Class="Corruption.Psykers.ScenPart_PsykerStart">
+        <def>PsykerStart</def>
+        <minPsykerCount>1</minPsykerCount>
       </li>
     </value>
   </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ScenarioDef[defName="Crashlanded"]/scenario/parts</xpath>
+    <value>
+      <li Class="Corruption.Psykers.ScenPart_PsykerStart">
+        <def>PsykerStart</def>
+        <minPsykerCount>1</minPsykerCount>
+      </li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ScenarioDef[defName="LostTribe"]/scenario/parts</xpath>
+    <value>
+      <li Class="Corruption.Psykers.ScenPart_PsykerStart">
+        <def>PsykerStart</def>
+        <minPsykerCount>1</minPsykerCount>
+      </li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ScenarioDef[defName="TheRichExplorer"]/scenario/parts</xpath>
+    <value>
+      <li Class="Corruption.Psykers.ScenPart_PsykerStart">
+        <def>PsykerStart</def>
+        <minPsykerCount>1</minPsykerCount>
+      </li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ScenarioDef[defName="NakedBrutality"]/scenario/parts</xpath>
+    <value>
+      <li Class="Corruption.Psykers.ScenPart_PsykerStart">
+        <def>PsykerStart</def>
+        <minPsykerCount>1</minPsykerCount>
+      </li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ScenarioDef[defName="NakedBrutality"]/scenario/parts</xpath>
+    <value>
+      <li Class="Corruption.Psykers.ScenPart_PsykerStart">
+        <def>PsykerStart</def>
+        <minPsykerCount>1</minPsykerCount>
+      </li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ScenarioDef[defName="40k_ImperialDomination"]/scenario/parts</xpath>
+    <value>
+      <li Class="Corruption.Psykers.ScenPart_PsykerStart">
+        <def>PsykerStart</def>
+        <minPsykerCount>1</minPsykerCount>
+      </li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/FactionDef[@Name="TribeBase"]/pawnGroupMakers/li/options</xpath>
+    <value>
+      <Tribal_Shaman>1</Tribal_Shaman>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>*/JobDef[defName="Meditate"]/driverClass</xpath>
+    <value>
+      <driverClass>Corruption.Psykers.JobDriver_MeditateXP</driverClass>
+    </value>
+  </Operation>
+
 
 </Patch>
 

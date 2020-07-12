@@ -49,6 +49,7 @@
       <li>ChaosSpawnings</li>
     </pantheonAttributes>
     <iconPath>UI/Pantheons/ChaosIcon</iconPath>
+    <mainColor>(0.1, 0.1, 0.1)</mainColor>
   </Corruption.Core.Gods.PantheonDef>
 
 

@@ -30,6 +30,8 @@ namespace Corruption.Core
 
         public List<TraitDef> forcedStartingTraits = new List<TraitDef>();
 
+        public List<string> additionalTags = new List<string>();
+
         public bool isServitor;
     }
 }

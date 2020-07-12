@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <JoyGiverDef>
+    <defName>GoForWalkAndPray</defName>
+    <giverClass>JoyGiver_GoForWalk</giverClass>
+    <baseChance>1</baseChance>
+    <jobDef>Pray</jobDef>
+    <joyKind>Meditative</joyKind>
+  </JoyGiverDef>
+  
+  <JoyGiverDef>
+    <defName>SocialRelaxAndPray</defName>
+    <giverClass>JoyGiver_SocialRelax</giverClass>
+    <baseChance>1</baseChance>
+    <jobDef>Pray</jobDef>
+    <joyKind>Meditative</joyKind>
+  </JoyGiverDef>
+  
+  <JoyGiverDef>
+    <defName>MeditateAndPray</defName>
+    <giverClass>JoyGiver_Meditate</giverClass>
+    <baseChance>1</baseChance>
+    <pctPawnsEverDo>0.4</pctPawnsEverDo>
+    <joyKind>Meditative</joyKind>
+    <canDoWhileInBed>true</canDoWhileInBed>
+    <jobDef>Pray</jobDef>
+  </JoyGiverDef>
+
+</Defs>

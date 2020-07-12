@@ -48,8 +48,8 @@ namespace Corruption.Core
                     {
                         this.Pawn.health.AddHediff(HediffDefOf.MarkNurgle);
                         soul.ChosenPantheon = PantheonDefOf.Chaos;
-                        soul.TryAddFavorProgress(GodDefOf.Nurgle, 5000f); 
-                        soul.GainCorruption(20000f);
+                        soul.TryAddFavorProgress(GodDefOf.Nurgle, 2000f); 
+                        soul.GainCorruption(10000f);
                         this.parent.Heal(1f);
                     }
                 }
@@ -63,7 +63,6 @@ namespace Corruption.Core
                 GenExplosion.DoExplosion(this.Pawn.Position, this.Pawn.Corpse.Map, 1, Corruption.Core.DamageDefOf.RottenBurst, null, 1,-1, null, null, null, null, ThingDefOf.Filth_Vomit, 1);
             }
         }
-
     }
 
     public class HediffComp_NurglesMark : HediffComp

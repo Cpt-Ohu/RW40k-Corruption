@@ -18,7 +18,8 @@ namespace Corruption.Psykers
             Pawn pawn = target.Pawn;
             if (pawn != null)
             {
-                Thought_MemoryPsionic thought = new Thought_MemoryPsionic(this.parent.def.statBases.GetStatValueFromList(StatDefOf.Ability_Duration, 0f));
+                Thought_MemoryPsionic thought = (Thought_MemoryPsionic)ThoughtMaker.MakeThought(this.Props.thought);
+                thought.expirationTicks = (int)this.parent.def.statBases.GetStatValueFromList(StatDefOf.Ability_Duration, 0f);
                 thought.SetForcedStage(this.Props.stage);
                 pawn.needs.mood.thoughts.memories.TryGainMemory(thought);
             }

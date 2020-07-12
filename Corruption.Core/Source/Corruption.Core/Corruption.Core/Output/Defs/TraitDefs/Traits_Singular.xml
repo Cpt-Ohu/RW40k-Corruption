@@ -6,7 +6,7 @@
     <degreeDatas>
       <li>
         <label>Imperial endurance</label>
-        <description>NAME is a follower of the Imperial cult. Though life may seem arduous, complicated and finally with much suffering, NAME will carry on in the knowledge, that the Emperor has a plan. And however long it may take to unfold, the Imperium of Man will prevail until such time.</description>
+        <description>{PAWN_nameDef} is a follower of the Imperial cult. Though life may seem arduous, complicated and finally with much suffering, NAME will carry on in the knowledge, that the Emperor has a plan. And however long it may take to unfold, the Imperium of Man will prevail until such time.</description>
       </li>
     </degreeDatas>
     <commonality>0</commonality>
@@ -19,8 +19,12 @@
     <degreeDatas>
       <li>
         <label>Khornate</label>
-        <description>NAME will regularly start slaughtering bystanders if not allowed to kill anything.</description>
+        <description>{PAWN_nameDef} will regularly start slaughtering bystanders if not allowed to kill anything.</description>
         <socialFightChanceFactor>2</socialFightChanceFactor>
+        <theOnlyAllowedMentalBreaks>
+          <li>Slaughterer</li>
+          <li>Berserk</li>
+        </theOnlyAllowedMentalBreaks>
         <randomMentalState>Berserk</randomMentalState>
         <randomMentalStateMtbDaysMoodCurve>
           <points>
@@ -29,10 +33,19 @@
             <li>(100, 100)</li>
           </points>
         </randomMentalStateMtbDaysMoodCurve>
+        <statOffsets>
+          <PainShockThreshold>0.8</PainShockThreshold>
+        </statOffsets>
       </li>
     </degreeDatas>
     <commonality>0</commonality>
     <ignoreConfigErrors>true</ignoreConfigErrors>
+    <conflictingTraits>
+      <li>Bloodlust</li>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </conflictingTraits>
   </Corruption.Core.Soul.SoulTraitDef>
 
   <Corruption.Core.Soul.SoulTraitDef>
@@ -40,11 +53,21 @@
     <degreeDatas>
       <li>
         <label>Nurglite</label>
-        <description>NAME is always in a good mood, for Papa Nurgle is looking after HIM.</description>
+        <description>{PAWN_nameDef} is always in a good mood, for Papa Nurgle is looking after {PAWN_pronoun}.</description>
+        <randomDiseaseMtbDays>40</randomDiseaseMtbDays>
+        <statOffsets>
+          <RestRateMultiplier>0.50</RestRateMultiplier>
+          <PainShockThreshold>1.0</PainShockThreshold>
+        </statOffsets>
       </li>
     </degreeDatas>
     <commonality>0</commonality>
     <ignoreConfigErrors>true</ignoreConfigErrors>
+    <conflictingTraits>
+      <li>Khorne_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </conflictingTraits>
   </Corruption.Core.Soul.SoulTraitDef>
 
   <Corruption.Core.Soul.SoulTraitDef>
@@ -52,11 +75,33 @@
     <degreeDatas>
       <li>
         <label>Slaaneshi</label>
-        <description>NAME is always seeking new thrills.</description>
+        <description>{PAWN_nameDef} is always seeking new thrills.</description>
+        <theOnlyAllowedMentalBreaks>
+          <li>Binging_DrugExtreme</li>
+          <li>Binging_Food</li>
+          <li>Slaughterer</li>
+          <li>Tantrum</li>
+          <li>SadisticRage</li>
+        </theOnlyAllowedMentalBreaks>
+        <randomMentalState>Binging_Food</randomMentalState>
+        <randomMentalStateMtbDaysMoodCurve>
+          <points>
+            <li>(0, 90)</li>
+          </points>
+        </randomMentalStateMtbDaysMoodCurve>
+        <mentalStateGiverClass>Corruption.Core.TraitMentalStateGiver_Slaaneshi</mentalStateGiverClass>
+        <statOffsets>
+          <PainShockThreshold>1.0</PainShockThreshold>
+        </statOffsets>
       </li>
     </degreeDatas>
     <commonality>0</commonality>
     <ignoreConfigErrors>true</ignoreConfigErrors>
+    <conflictingTraits>
+      <li>Nurgle_Fervor</li>
+      <li>Khorne_Fervor</li>
+      <li>Tzeentch_Fervor</li>
+    </conflictingTraits>
    </Corruption.Core.Soul.SoulTraitDef>
 
   <Corruption.Core.Soul.SoulTraitDef>
@@ -64,11 +109,19 @@
     <degreeDatas>
       <li>
         <label>Tzeentchian</label>
-        <description>NAME will experience mood swings, depending on how the schemes of Tzeentch unfold.</description>
+        <description>{PAWN_nameDef} will experience mood swings, depending on how the schemes of Tzeentch unfold.</description>
+        <statOffsets>
+          <ResearchSpeed>1.0</ResearchSpeed>
+        </statOffsets>
       </li>
     </degreeDatas>
     <commonality>0</commonality>
     <ignoreConfigErrors>true</ignoreConfigErrors>
+    <conflictingTraits>
+      <li>Nurgle_Fervor</li>
+      <li>Slaanesh_Fervor</li>
+      <li>Khorne_Fervor</li>
+    </conflictingTraits>
   </Corruption.Core.Soul.SoulTraitDef>    
 
   <Corruption.Core.Soul.SoulTraitDef>
@@ -76,7 +129,7 @@
     <degreeDatas>
       <li>
         <label>Chaos follower</label>
-        <description>NAME will teach and convert in the name of chaos itself.</description>
+        <description>{PAWN_nameDef} will teach and convert in the name of chaos itself.</description>
       </li>
     </degreeDatas>
     <commonality>0</commonality>
@@ -88,7 +141,7 @@
     <degreeDatas>
       <li>
         <label>Dark Eldar Depravity</label>
-        <description>NAME feeds on the pain on sentient beings. HE will go through unspeakable acts of depravity to still this hunger.</description>
+        <description>{PAWN_nameDef} feeds on the pain on sentient beings. HE will go through unspeakable acts of depravity to still this hunger.</description>
       </li>
     </degreeDatas>
     <commonality>0</commonality>
@@ -100,7 +153,7 @@
     <degreeDatas>
       <li>
         <label>Eldar mastery</label>
-        <description>NAME is an Eldar. They strive for perfection in everything they do.</description>
+        <description>{PAWN_nameDef} is an Eldar. They strive for perfection in everything they do.</description>
       </li>
     </degreeDatas>
     <commonality>0</commonality>
@@ -112,7 +165,7 @@
     <degreeDatas>
       <li>
         <label>Utalitarian Philosophy</label>
-        <description>NAME follows the idea that all beings should strive to ensure the greatest good for the greatest number of beings in the galaxy.</description>
+        <description>{PAWN_nameDef} follows the idea that all beings should strive to ensure the greatest good for the greatest number of beings in the galaxy.</description>
       </li>
     </degreeDatas>
     <commonality>0</commonality>
@@ -126,7 +179,7 @@
     <degreeDatas>
       <li>
         <label>Ork mindedness</label>
-        <description>NAME is an Orkoid, meaning HIS life evolves around seemingly mindless bloodshed.</description>
+        <description>{PAWN_nameDef} is an Orkoid, meaning HIS life evolves around seemingly mindless bloodshed.</description>
       </li>
     </degreeDatas>
     <commonality>0</commonality>

@@ -11,18 +11,14 @@
     <iconPath>UI/Abilities/BioLightning</iconPath>
     <hotKey>Misc1</hotKey>
     <statBases>
-      <Ability_EntropyGain>15</Ability_EntropyGain>
-      <Ability_Duration>1</Ability_Duration>
+      <Ability_EntropyGain>15</Ability_EntropyGain>      
     </statBases>
     <verbProperties>
       <defaultProjectile>PSYBioLightning</defaultProjectile>
-      <warmupTime>5.0</warmupTime>
+      <warmupTime>1.0</warmupTime>
       <range>25</range>
-      <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
       <burstShotCount>1</burstShotCount>
-      <soundCast>WarpBolt</soundCast>
-      <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <soundCast>PsychicInsanityLanceCast</soundCast>
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
@@ -30,6 +26,9 @@
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
       </li>
     </comps>
   </AbilityDef>
@@ -42,9 +41,9 @@
     </statBases>
     <verbProperties>
       <defaultProjectile>PSYBioLightning</defaultProjectile>
-      <warmupTime>5.0</warmupTime>
+      <warmupTime>1.0</warmupTime>
       <range>30</range>
-      <burstShotCount>4</burstShotCount>
+      <burstShotCount>2</burstShotCount>
     </verbProperties>
   </AbilityDef>
 
@@ -56,18 +55,38 @@
     </statBases>
     <verbProperties>
       <defaultProjectile>PSYBioLightning</defaultProjectile>
-      <warmupTime>5.0</warmupTime>
+      <warmupTime>1.0</warmupTime>
       <range>30</range>
-      <burstShotCount>8</burstShotCount>
+      <burstShotCount>3</burstShotCount>
     </verbProperties>
   </AbilityDef>
 
 
+  <AbilityDef ParentName="BioLightningBase">
+    <defName>BioLightningIV</defName>
+    <level>40</level>
+    <statBases>
+      <Ability_EntropyGain>40</Ability_EntropyGain>
+    </statBases>
+    <verbProperties>
+      <defaultProjectile>PSYBioLightning</defaultProjectile>
+      <warmupTime>1.0</warmupTime>
+      <range>30</range>
+      <burstShotCount>5</burstShotCount>
+    </verbProperties>
+  </AbilityDef>
 
   <ThingDef ParentName="PSYWarpBoltBase"  Class="Corruption.Core.Items.ThingDef_LaserProjectile">
     <defName>PSYBioLightning</defName>
+    <graphicData>
+      <texPath>Things/Projectiles/BioLightning</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
     <projectile>
       <damageAmountBase>20</damageAmountBase>
+      <damageDef>Burn</damageDef>
+      <armorPenetrationBase>1.0</armorPenetrationBase>
     </projectile>
   </ThingDef>
 
@@ -85,7 +104,7 @@
       <Ability_Duration>120</Ability_Duration>
     </statBases>
     <verbProperties>
-      <range>1.0</range>
+      <range>10.0</range>
       <warmupTime>3.25</warmupTime>
       <targetParams>
         <canTargetSelf>True</canTargetSelf>
@@ -93,6 +112,7 @@
         <canTargetLocations>False</canTargetLocations>
         <canTargetMechs>False</canTargetMechs>
       </targetParams>
+      <soundCast>BiomancyPulse</soundCast>
     </verbProperties>
     <comps>
       <li Class = "CompProperties_AbilityGiveHediff">
@@ -102,8 +122,93 @@
         <psychic>False</psychic>
         <applicableToMechs>False</applicableToMechs>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
+
+
+
+  <HediffDef ParentName="HediffPsykerBuff">
+    <defName>BloodBoil</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.8, 0.0, 0.0)</defaultLabelColor>
+    <label>boiling blood</label>
+    <description>This being's heartrate is accelerating until its victim topples over.</description>
+    <lethalSeverity>1</lethalSeverity>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <showRemainingTime>True</showRemainingTime>
+        <disappearsAfterTicks>800~1200</disappearsAfterTicks>
+      </li>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>0.27</severityPerDay>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <label>accelerating</label>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.1</offset>
+          </li>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>1.0</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>racing</label>
+        <minSeverity>0.5</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.7</offset>
+          </li>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>2.0</offset>
+          </li>
+        </capMods>
+        <hediffGivers>
+          <li Class="HediffGiver_Random">
+            <hediff>HeartAttack</hediff>
+            <mtbDays>2</mtbDays>
+            <partsToAffect>
+              <li>Heart</li>
+            </partsToAffect>
+          </li>
+        </hediffGivers>
+      </li>
+      <li>
+        <label>breaking</label>
+        <minSeverity>0.8</minSeverity>
+        <lifeThreatening>true</lifeThreatening>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-1.0</offset>
+          </li>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>2.0</offset>
+          </li>
+        </capMods>
+        <hediffGivers>
+          <li Class="HediffGiver_Random">
+            <hediff>HeartAttack</hediff>
+            <mtbDays>1</mtbDays>
+            <partsToAffect>
+              <li>Heart</li>
+            </partsToAffect>
+          </li>
+        </hediffGivers>
+      </li>
+    </stages>
+  </HediffDef>
 
   <!-- ========================= Constrict ===================================== -->
 
@@ -127,6 +232,7 @@
         <canTargetLocations>False</canTargetLocations>
         <canTargetMechs>False</canTargetMechs>
       </targetParams>
+      <soundCast>BiomancyPulse</soundCast>
     </verbProperties>
     <comps>
       <li Class = "CompProperties_AbilityGiveHediff">
@@ -135,6 +241,9 @@
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
         <psychic>True</psychic>
         <applicableToMechs>False</applicableToMechs>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
       </li>
     </comps>
   </AbilityDef>
@@ -145,7 +254,7 @@
   <AbilityDef ParentName="PsykerAbilityBase" Name="BiomancyLifeLeechBase">
     <defName>BiomancyLifeLeechI</defName>
     <label>life leech</label>
-    <description>Force a target's trachea to close, suffocating them.</description>
+    <description>Slowly drain a targets life-force, reducing movement speed and offensive capabilities.</description>
     <level>20</level>
     <iconPath>UI/Abilities/BiomancyLifeLeechI</iconPath>
     <hotKey>Misc1</hotKey>
@@ -162,6 +271,7 @@
         <canTargetLocations>False</canTargetLocations>
         <canTargetMechs>False</canTargetMechs>
       </targetParams>
+      <soundCast>Leach</soundCast>
     </verbProperties>
     <comps>
       <li Class = "CompProperties_AbilityGiveHediff">
@@ -171,6 +281,9 @@
         <psychic>True</psychic>
         <applicableToMechs>False</applicableToMechs>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
 
@@ -178,8 +291,9 @@
   <AbilityDef ParentName="BiomancyLifeLeechBase">
     <defName>BiomancyLifeLeechII</defName>
     <label>life leeching aura</label>
-    <description>Force a target's trachea to close, suffocating them.</description>
+    <description>Slowly drain a targets life-force, reducing movement speed and offensive capabilities.</description>
     <level>40</level>
+    <iconPath>UI/Abilities/BiomancyLifeLeechAura</iconPath>
     <statBases>
       <Ability_EntropyGain>25</Ability_EntropyGain>
       <Ability_Duration>120</Ability_Duration>
@@ -210,14 +324,15 @@
         <canTargetLocations>False</canTargetLocations>
         <canTargetMechs>False</canTargetMechs>
       </targetParams>
+      <soundCast>BiomancyPulse</soundCast>
     </verbProperties>
     <comps>
-      <li Class = "CompProperties_AbilityGiveHediff">
-        <compClass>CompAbilityEffect_GiveHediff</compClass>
-        <hediffDef>Shredded</hediffDef>
-        <durationMultiplier>PsychicSensitivity</durationMultiplier>
-        <psychic>True</psychic>
-        <applicableToMechs>False</applicableToMechs>
+      <li Class="Corruption.Psykers.CompProperties_DirectDamage">
+        <compClass>Corruption.Psykers.CompAbilityEffect_DirectDamage</compClass>
+        <damageDef>Bomb</damageDef>
+        <damage>30</damage>
+        <moteDef>Mote_BloodSplash</moteDef>
+        <psychic>False</psychic>
       </li>
     </comps>
   </AbilityDef>
@@ -227,6 +342,7 @@
     <label>mass haemorrhage</label>
     <description>Cause random wounds to appear on multiple enemies.</description>
     <level>30</level>
+    <iconPath>UI/Abilities/BiomancyHaemorrhageMass</iconPath>
     <statBases>
       <Ability_EntropyGain>25</Ability_EntropyGain>
       <Ability_Duration>120</Ability_Duration>
@@ -253,12 +369,15 @@
       <warmupTime>3.25</warmupTime>
       <targetParams>
         <canTargetSelf>True</canTargetSelf>
-        <canTargetPawns>False</canTargetPawns>
+        <canTargetPawns>True</canTargetPawns>
         <canTargetAnimals>False</canTargetAnimals>
         <canTargetLocations>False</canTargetLocations>
         <canTargetMechs>False</canTargetMechs>
       </targetParams>
+      <soundCast>HealPulse</soundCast>
     </verbProperties>
+    <cooldownTicksRange>1600~2000</cooldownTicksRange>
+    <targetRequired>False</targetRequired>
     <comps>
       <li Class = "CompProperties_AbilityGiveHediff">
         <compClass>CompAbilityEffect_GiveHediff</compClass>
@@ -266,6 +385,10 @@
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
         <psychic>True</psychic>
         <applicableToMechs>False</applicableToMechs>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <compClass>Corruption.Psykers.AbilityComp_AICastHealSelf</compClass>
+        <abilityCastType>SelfHeal</abilityCastType>
       </li>
     </comps>
   </AbilityDef>
@@ -291,7 +414,10 @@
         <canTargetLocations>False</canTargetLocations>
         <canTargetMechs>False</canTargetMechs>
       </targetParams>
+      <soundCast>HealPulse</soundCast>
     </verbProperties>
+    <targetRequired>False</targetRequired>
+    <cooldownTicksRange>1600~2000</cooldownTicksRange>
     <comps>
       <li Class = "CompProperties_AbilityGiveHediff">
         <compClass>CompAbilityEffect_GiveHediff</compClass>
@@ -300,9 +426,12 @@
         <psychic>True</psychic>
         <applicableToMechs>False</applicableToMechs>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <compClass>Corruption.Psykers.AbilityComp_AICastHealSelf</compClass>
+        <abilityCastType>SelfHeal</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
-
 
   <AbilityDef ParentName="PsykerAbilityBase">
     <defName>BioMancyRegenerateIII</defName>
@@ -314,7 +443,6 @@
     <statBases>
       <Ability_EntropyGain>30</Ability_EntropyGain>
       <Ability_Duration>120</Ability_Duration>
-      <Ability_EffectRadius>5</Ability_EffectRadius>
     </statBases>
     <verbProperties>
       <range>1.0</range>
@@ -326,7 +454,10 @@
         <canTargetLocations>False</canTargetLocations>
         <canTargetMechs>False</canTargetMechs>
       </targetParams>
+      <soundCast>HealPulse</soundCast>
     </verbProperties>
+    <targetRequired>False</targetRequired>
+    <cooldownTicksRange>1600~2000</cooldownTicksRange>
     <comps>
       <li Class = "CompProperties_AbilityGiveHediff">
         <compClass>CompAbilityEffect_GiveHediff</compClass>
@@ -338,4 +469,84 @@
     </comps>
   </AbilityDef>
 
+
+  <!-- ========================= Seal Wounds ===================================== -->
+
+  <AbilityDef ParentName="PsykerAbilityBase" Name="BioMancySealWounds">
+    <defName>BioMancySealWoundsI</defName>
+    <label>seal wounds</label>
+    <description>Heal injuries and diseases of a target.</description>
+    <level>30</level>
+    <iconPath>UI/Abilities/BiomancySealWound</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+      <Ability_Duration>120</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <range>3.0</range>
+      <warmupTime>3.25</warmupTime>
+      <targetParams>
+        <canTargetSelf>False</canTargetSelf>
+        <canTargetPawns>True</canTargetPawns>
+        <canTargetAnimals>True</canTargetAnimals>
+        <canTargetLocations>False</canTargetLocations>
+        <canTargetMechs>False</canTargetMechs>
+      </targetParams>
+      <soundCast>HealPulse</soundCast>
+    </verbProperties>
+    <cooldownTicksRange>1600~2000</cooldownTicksRange>
+    <comps>
+      <li Class = "CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>HealingBuffMinor</hediffDef>
+        <durationMultiplier>PsychicSensitivity</durationMultiplier>
+        <psychic>True</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <compClass>Corruption.Psykers.AbilityComp_AICastHeal</compClass>
+        <abilityCastType>Heal</abilityCastType>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="PsykerAbilityBase">
+    <defName>BioMancySealWoundsII</defName>
+    <label>seal wounds</label>
+    <description>Heal injuries and diseases of a target.</description>
+    <level>40</level>
+    <iconPath>UI/Abilities/BiomancySealWound</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_EntropyGain>40</Ability_EntropyGain>
+      <Ability_Duration>120</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <range>3.0</range>
+      <warmupTime>3.25</warmupTime>
+      <targetParams>
+        <canTargetSelf>False</canTargetSelf>
+        <canTargetPawns>True</canTargetPawns>
+        <canTargetAnimals>True</canTargetAnimals>
+        <canTargetLocations>False</canTargetLocations>
+        <canTargetMechs>False</canTargetMechs>
+      </targetParams>
+      <soundCast>HealPulse</soundCast>
+    </verbProperties>
+    <cooldownTicksRange>1600~2000</cooldownTicksRange>
+    <comps>
+      <li Class = "CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>HealingBuffMajor</hediffDef>
+        <durationMultiplier>PsychicSensitivity</durationMultiplier>
+        <psychic>True</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <compClass>Corruption.Psykers.AbilityComp_AICastHeal</compClass>
+        <abilityCastType>Heal</abilityCastType>
+      </li>
+    </comps>
+  </AbilityDef>
 </Defs>

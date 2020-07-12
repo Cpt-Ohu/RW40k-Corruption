@@ -12,5 +12,9 @@ namespace Corruption.Psykers
     public class HediffDefOf
     {
         public static HediffDef DiviMisfortune;
+        public static HediffDef DemonicAttentionVoices;
+        public static HediffDef DemonicAttentionVision;
+
+        
     }
 }

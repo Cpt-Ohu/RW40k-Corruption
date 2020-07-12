@@ -11,18 +11,18 @@
     <level>20</level>
     <iconPath>UI/Abilities/TelekAssail</iconPath>
     <hotKey>Misc1</hotKey>
+    <warmupMote>Mote_ShotHit_Dirt</warmupMote>
     <statBases>
       <Ability_EntropyGain>15</Ability_EntropyGain>
-      <Ability_Duration>1</Ability_Duration>
+      
     </statBases>
     <verbProperties>
       <defaultProjectile>PsyAssailBoulderI</defaultProjectile>
-      <warmupTime>5.0</warmupTime>
+      <warmupTime>3.0</warmupTime>
       <range>15</range>
       <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
       <burstShotCount>1</burstShotCount>
-      <soundCast>WarpBolt</soundCast>
-      <soundCastTail>GunTail_Medium</soundCastTail>
+      <soundCast>PsychicInsanityLanceCast</soundCast>      
       <targetParams>
         <canTargetSelf>False</canTargetSelf>
         <canTargetAnimals>True</canTargetAnimals>
@@ -37,6 +37,9 @@
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
 
@@ -48,7 +51,7 @@
     </statBases>
     <verbProperties>
       <defaultProjectile>PsyAssailBoulderII</defaultProjectile>
-      <warmupTime>5.0</warmupTime>
+      <warmupTime>3.0</warmupTime>
       <range>20</range>
       <burstShotCount>1</burstShotCount>
     </verbProperties>
@@ -63,7 +66,7 @@
     </statBases>
     <verbProperties>
       <defaultProjectile>PsyAssailBoulderIII</defaultProjectile>
-      <warmupTime>10.0</warmupTime>
+      <warmupTime>1.0</warmupTime>
       <range>20</range>
       <burstShotCount>1</burstShotCount>
     </verbProperties>
@@ -83,9 +86,10 @@
     </graphicData>
     <projectile>
       <damageDef>Crush</damageDef>
-      <damageAmountBase>12</damageAmountBase>
+      <damageAmountBase>25</damageAmountBase>
       <stoppingPower>7</stoppingPower>
-      <speed>25</speed>
+      <speed>35</speed>
+      <armorPenetrationBase>0.1</armorPenetrationBase>
       <soundExplode>Artillery_HitThickRoof</soundExplode>
     </projectile>
   </ThingDef>
@@ -100,9 +104,10 @@
       <postExplosionSpawnChance>0.3</postExplosionSpawnChance>
       <postExplosionSpawnThingCount>1</postExplosionSpawnThingCount>
       <damageDef>Crush</damageDef>
-      <damageAmountBase>20</damageAmountBase>
-      <stoppingPower>5</stoppingPower>
-      <speed>35</speed>
+      <damageAmountBase>55</damageAmountBase>
+      <stoppingPower>15</stoppingPower>
+      <armorPenetrationBase>0.3</armorPenetrationBase>
+      <speed>25</speed>
       <soundExplode>Artillery_HitThickRoof</soundExplode>
     </projectile>
   </ThingDef>
@@ -117,9 +122,10 @@
       <postExplosionSpawnChance>0.3</postExplosionSpawnChance>
       <postExplosionSpawnThingCount>1</postExplosionSpawnThingCount>
       <damageDef>Crush</damageDef>
-      <damageAmountBase>20</damageAmountBase>
-      <stoppingPower>5</stoppingPower>
-      <speed>35</speed>
+      <damageAmountBase>100</damageAmountBase>
+      <stoppingPower>35</stoppingPower>
+      <armorPenetrationBase>0.65</armorPenetrationBase>
+      <speed>20</speed>
       <soundExplode>Artillery_HitThickRoof</soundExplode>
     </projectile>
   </ThingDef>
@@ -140,7 +146,7 @@
       <Ability_Duration>30</Ability_Duration>
     </statBases>
     <verbProperties>
-      <warmupTime>5</warmupTime>
+      <warmupTime>1</warmupTime>
       <range>19.9</range>
       <targetParams>
         <canTargetAnimals>True</canTargetAnimals>
@@ -153,6 +159,9 @@
         <damage>8</damage>
         <armorPenetration>0.2</armorPenetration>
         <psychic>True</psychic>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
       </li>
     </comps>
   </AbilityDef>
@@ -184,6 +193,9 @@
         <armorPenetration>0.2</armorPenetration>
         <psychic>True</psychic>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
 
@@ -214,6 +226,9 @@
         <armorPenetration>0.2</armorPenetration>
         <psychic>True</psychic>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
 
@@ -239,12 +254,18 @@
         <canTargetLocations>True</canTargetLocations>
         <canTargetPawns>False</canTargetPawns>
       </targetParams>
+      <requireLineOfSight>false</requireLineOfSight>
     </verbProperties>
     <comps>
       <li Class = "Corruption.Psykers.CompProperties_Teleport">
         <compClass>Corruption.Psykers.CompAbilityEffect_Teleport</compClass>
         <psychic>False</psychic>
         <mote>Mote_GateOfInfinity</mote>
+        <sound>OpenPortal</sound>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <compClass>Corruption.Psykers.AbilityComp_AICastTeleport</compClass>
+        <abilityCastType>Flee</abilityCastType>
       </li>
     </comps>
   </AbilityDef>
@@ -318,6 +339,7 @@
         <onlyTargetControlledPawns>true</onlyTargetControlledPawns>
       </targetParams>
     </verbProperties>
+    <targetRequired>False</targetRequired>
     <comps>
       <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
         <compClass>CompAbilityEffect_GiveHediff</compClass>
@@ -325,6 +347,9 @@
         <onlyToSelf>True</onlyToSelf>
         <psychic>True</psychic>
         <goodwillImpact>-15</goodwillImpact>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>SelfHeal</abilityCastType>
       </li>
     </comps>
   </AbilityDef>
@@ -352,6 +377,7 @@
         <onlyTargetControlledPawns>true</onlyTargetControlledPawns>
       </targetParams>
     </verbProperties>
+    <targetRequired>False</targetRequired>
     <comps>
       <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
         <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
@@ -361,6 +387,9 @@
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
         <psychic>False</psychic>
         <applicableToMechs>False</applicableToMechs>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>SelfHeal</abilityCastType>
       </li>
     </comps>
   </AbilityDef>
@@ -386,6 +415,7 @@
         <onlyTargetControlledPawns>true</onlyTargetControlledPawns>
       </targetParams>
     </verbProperties>
+    <targetRequired>False</targetRequired>
     <comps>
       <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
         <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
@@ -396,12 +426,56 @@
         <psychic>False</psychic>
         <applicableToMechs>False</applicableToMechs>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>SelfHeal</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
-  
+
+
+  <HediffDef ParentName="HediffPsykerBuff">
+    <defName>TelekineDome</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <label>telekine dome</label>
+    <description>A barrier of shimmering energy deflects bullets and blows.</description>
+    <comps>
+      <li Class="Corruption.Psykers.HediffCompProperties_Shield">
+        <compClass>Corruption.Psykers.HediffComp_Shield</compClass>
+        <removeOnSpent>true</removeOnSpent>
+        <materialPath>Things/Motes/TelekDome</materialPath>
+      </li>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>600~1200</disappearsAfterTicks>
+        <showRemainingTime>True</showRemainingTime>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <statOffsets>
+          <EnergyShieldRechargeRate>0.00</EnergyShieldRechargeRate>
+          <EnergyShieldEnergyMax>200.00</EnergyShieldEnergyMax>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>1</minSeverity>
+        <statOffsets>
+          <EnergyShieldRechargeRate>0.01</EnergyShieldRechargeRate>
+          <EnergyShieldEnergyMax>250.00</EnergyShieldEnergyMax>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <statOffsets>
+          <EnergyShieldRechargeRate>0.05</EnergyShieldRechargeRate>
+          <EnergyShieldEnergyMax>300.00</EnergyShieldEnergyMax>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
   <!-- ========================= Vortex ===================================== -->
   
-  <AbilityDef ParentName="PsykerAbilityBase" Name="VortexOfDoom">
+  <AbilityDef ParentName="PsykerAbilityBase">
     <defName>TelekVortexOfDoomI</defName>
     <label>vortex of doom</label>
     <description>The Telekine opens a tear between the material realm and the Warp, unleashing energies that consume any nearby foe.</description>
@@ -409,11 +483,11 @@
     <iconPath>UI/Abilities/TelekVortexOfDoom</iconPath>
     <hotKey>Misc10</hotKey>
     <statBases>
-      <Ability_EntropyGain>35</Ability_EntropyGain>
-        <Ability_Duration>3</Ability_Duration>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+        <Ability_Duration>5</Ability_Duration>
     </statBases>
     <verbProperties>
-      <warmupTime>5</warmupTime>
+      <warmupTime>1</warmupTime>
       <range>15.0</range>
       <targetParams>
         <canTargetPawns>False</canTargetPawns>
@@ -430,43 +504,79 @@
         <clamorRadius>25</clamorRadius>
         <sound>PsycastWallraise</sound>
       </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
     </comps>
   </AbilityDef>
-  
-  <AbilityDef ParentName="VortexOfDoom">
+
+  <AbilityDef ParentName="PsykerAbilityBase">
     <defName>TelekVortexOfDoomII</defName>
     <label>vortex of doom</label>
     <description>The Telekine opens a tear between the material realm and the Warp, unleashing energies that consume any nearby foe.</description>
-    <level>50</level>
+    <level>40</level>
+    <iconPath>UI/Abilities/TelekVortexOfDoom</iconPath>
+    <hotKey>Misc10</hotKey>
     <statBases>
-      <Ability_EntropyGain>45</Ability_EntropyGain>
+      <Ability_EntropyGain>38</Ability_EntropyGain>
+      <Ability_Duration>10</Ability_Duration>
     </statBases>
     <verbProperties>
-      <warmupTime>5</warmupTime>
+      <warmupTime>1</warmupTime>
       <range>15.0</range>
       <targetParams>
         <canTargetPawns>False</canTargetPawns>
         <canTargetLocations>True</canTargetLocations>
       </targetParams>
     </verbProperties>
+    <comps>
+      <li Class = "Corruption.Psykers.CompProperties_SpawnVortex">
+        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnVortex</compClass>
+        <vortexToSpawn>VortexOfDoom</vortexToSpawn>
+        <radius>6</radius>
+        <screenShakeIntensity>2.0</screenShakeIntensity>
+        <clamorType>Ability</clamorType>
+        <clamorRadius>25</clamorRadius>
+        <sound>PsycastWallraise</sound>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
+    </comps>
   </AbilityDef>
 
-  <AbilityDef ParentName="VortexOfDoom">
+  <AbilityDef ParentName="PsykerAbilityBase">
     <defName>TelekVortexOfDoomIII</defName>
     <label>vortex of doom</label>
     <description>The Telekine opens a tear between the material realm and the Warp, unleashing energies that consume any nearby foe.</description>
-    <level>60</level>
+    <level>50</level>
+    <iconPath>UI/Abilities/TelekVortexOfDoom</iconPath>
+    <hotKey>Misc10</hotKey>
     <statBases>
-      <Ability_EntropyGain>60</Ability_EntropyGain>
+      <Ability_EntropyGain>50</Ability_EntropyGain>
+      <Ability_Duration>15</Ability_Duration>
     </statBases>
     <verbProperties>
-      <warmupTime>7</warmupTime>
-      <range>20.0</range>
+      <warmupTime>1</warmupTime>
+      <range>15.0</range>
       <targetParams>
         <canTargetPawns>False</canTargetPawns>
         <canTargetLocations>True</canTargetLocations>
       </targetParams>
     </verbProperties>
+    <comps>
+      <li Class = "Corruption.Psykers.CompProperties_SpawnVortex">
+        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnVortex</compClass>
+        <vortexToSpawn>VortexOfDoom</vortexToSpawn>
+        <radius>10</radius>
+        <screenShakeIntensity>2.0</screenShakeIntensity>
+        <clamorType>Ability</clamorType>
+        <clamorRadius>25</clamorRadius>
+        <sound>PsycastWallraise</sound>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
+        <abilityCastType>Attack</abilityCastType>
+      </li>
+    </comps>
   </AbilityDef>
-
 </Defs>

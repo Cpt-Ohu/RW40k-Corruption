@@ -20,6 +20,16 @@ namespace Corruption.Psykers
         public static Color AbilitySelectedBG = new ColorInt(72, 72, 72).ToColor;
         public static Color AbilityPerequisiteBorder = new Color(1f, 0f, 0f);
 
+        public static Dictionary<AbilityCastType, float> CastTypeWeights = new Dictionary<AbilityCastType, float>()
+        {
+            { AbilityCastType.SelfHeal, 90f },
+            { AbilityCastType.Attack, 60f },
+            { AbilityCastType.Heal, 40f },
+            { AbilityCastType.Defend, 35f },
+            { AbilityCastType.Flee, 30f },
+            { AbilityCastType.Buff, 20f }
+        };
+
         public static readonly Texture2D PsykerIcon = ContentFinder<Texture2D>.Get("UI/Abilities/PsykerLearning", true);
         public static readonly Texture2D PowerLevelKappa = ContentFinder<Texture2D>.Get("UI/PsykerLevels/PsykerPowerLevelKappa", true);
         public static readonly Texture2D PowerLevelIota = ContentFinder<Texture2D>.Get("UI/PsykerLevels/PsykerPowerLevelIota", true);
@@ -32,7 +42,10 @@ namespace Corruption.Psykers
 
         public static readonly Texture2D BGTex = ContentFinder<Texture2D>.Get("UI/Widgets/DesButBG");
         public static readonly Texture2D BGTexHighlight = ContentFinder<Texture2D>.Get("UI/Widgets/DesButBGHighlight");
-        
+
+        public static List<HediffDef> DemonicAttentionHediffs => DefDatabase<HediffDef>.AllDefsListForReading.FindAll(x => x.defName.StartsWith("DemonicAttention"));
+        public static List<HediffDef> DemonicPossessionHediffs => DefDatabase<HediffDef>.AllDefsListForReading.FindAll(x => x.defName.StartsWith("DemonicPossession"));
+
         public static readonly Dictionary<int, int> PsykerDegreeXPCost = new Dictionary<int, int>{
             {1, 50 },
             {2, 150 },
@@ -67,5 +80,51 @@ namespace Corruption.Psykers
             {50, "Delta" },
             {60, "Beta" }
         };
+
+        public static bool TryGetAbilityOpportunity(Pawn pawn, out AbilityOpportunity opportunity)
+        {
+            if (!pawn.CompPsyker()?.ShouldAutoCast ?? false)
+            {
+                opportunity = default(AbilityOpportunity);
+                return false;
+            }
+
+            List<AbilityOpportunity> opportunities = GetAbilityOpportunities(pawn);
+
+            if (opportunities.Count == 0)
+            {
+                opportunity = default(AbilityOpportunity);
+                return false;
+            }
+            else
+            {
+                opportunity = opportunities.RandomElementByWeight(x => PsykerUtility.CastTypeWeights[x.castType]);
+                return true;
+            }            
+        }
+
+        public static List<AbilityOpportunity> GetAbilityOpportunities(Pawn pawn)
+        {
+            List<AbilityOpportunity> opportunities = new List<AbilityOpportunity>();
+            foreach (var ability in pawn.abilities.abilities)
+            {
+                AbilityComp_AICast aiCast = ability.CompOfType<AbilityComp_AICast>();
+                if (aiCast != null)
+                {
+                    LocalTargetInfo target = LocalTargetInfo.Invalid;
+                    if (aiCast.TryGetTarget(out target))
+                    {
+                        opportunities.Add(new AbilityOpportunity(ability, aiCast.Props.abilityCastType, target));
+                    }
+                }
+            }
+            return opportunities;
+        }
+    }
+
+    [DefOf]
+    public static class PsykerTraitDefOf
+    {
+        public static TraitDef Psyker;
     }
 }

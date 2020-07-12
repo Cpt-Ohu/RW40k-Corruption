@@ -19,6 +19,14 @@
     <joyGainRate>1</joyGainRate>
     <joyMaxParticipants>20</joyMaxParticipants>
     <joyKind>Worship</joyKind>
-  </JobDef>  
+  </JobDef>
 
+  <JobDef>
+    <defName>InstallEffigy</defName>
+    <driverClass>JobDriver_HaulToContainer</driverClass>
+    <reportString>installing TargetA on TargetB.</reportString>
+    <suspendable>false</suspendable>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+  
 </Defs>

@@ -54,6 +54,8 @@ namespace Corruption.Worship
             {
                 altar.CalledInFlock = false;
                 SermonUtility.HoldSermonTickCheckEnd(this.pawn, god, altar);
+                this.pawn.records.Increment(WorshipRecordDefOf.SermonsHeldPawn);
+                altar.records.Increment(WorshipRecordDefOf.SermonsHeldAltar);
             });
         }
 

@@ -7,6 +7,13 @@
 			<li>Corruption.Core.Soul.ITab_Pawn_Soul</li>
 		</value>
 	</Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>*/ThingDef[defName="Human"]/recipes</xpath>
+    <value>
+      <li>Exorcism</li>
+    </value>
+  </Operation>
 	
 	<Operation Class="PatchOperationAdd">
 		<xpath>*/ThingDef[@Name="BasePawn"]/comps</xpath>

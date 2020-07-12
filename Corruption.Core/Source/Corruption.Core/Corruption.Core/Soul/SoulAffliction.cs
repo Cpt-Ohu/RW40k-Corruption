@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Corruption.Core.Soul
 {
-    public enum SoulAffliction
-    {
-        Pure,
-        Intrigued,
-        Warptouched,
-        Tainted,
-        Corrupted,
-        Lost
-    }
+    //public enum SoulAffliction
+    //{
+    //    Pure,
+    //    Intrigued,
+    //    Warptouched,
+    //    Tainted,
+    //    Corrupted,
+    //    Lost
+    //}
 }

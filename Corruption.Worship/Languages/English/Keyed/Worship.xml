@@ -2,7 +2,7 @@
 
 <LanguageData>
   <ColonyPantheon>Colony Religion: {RELIGION}</ColonyPantheon>
-  <FavourCost>Favour Required: {FAVOUR_COST}</FavourCost>
+  <FavourCost>Favour Required: {COST}</FavourCost>
   <PantheonMembers>Members of the Pantheon</PantheonMembers>
   <PantheonAttributes>Attributes</PantheonAttributes>
   <FavourTab>Favour</FavourTab>
@@ -11,4 +11,15 @@
   <PlacesOfWorship>Places of Worship</PlacesOfWorship>
   <GrowingFlockMessage>Your colony has been joined by {COUNT} believers.</GrowingFlockMessage>
   <LetterLabelGrowingFlock>Growing Flock</LetterLabelGrowingFlock>
+  <CommandDropEffigy>Drop Effigy</CommandDropEffigy>
+  <CommandDropEffigyDesc>Remove this effigy from its place</CommandDropEffigyDesc>
+  <CommandDropEffigyFailure>No effigy installed</CommandDropEffigyFailure>
+  <WorshipEfforts>Worship efforts</WorshipEfforts>
+  <WorshipEffortsDesc>The effort this pawn has contributed to overall Favour relative to peers.</WorshipEffortsDesc>
+  <CurrentPreacher>Current Preacher</CurrentPreacher>
+  <AltarStats>Altar Stats</AltarStats>
+  <MessageInvalidWonderTargetDesc>The selected target is not valid for this wonder.</MessageInvalidWonderTargetDesc>
+  <SetWorshipPoints>Set points to spend</SetWorshipPoints>
+  <RotateThingRight>Rotate Right</RotateThingRight>
+  <RotateThingRightDesc>Rotate this object to the righ.</RotateThingRightDesc>
 </LanguageData>

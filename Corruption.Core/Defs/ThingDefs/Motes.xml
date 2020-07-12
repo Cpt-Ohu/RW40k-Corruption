@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  <ThingDef ParentName="MoteBase">
+    <defName>Mote_Skull</defName>
+    <graphicData>
+      <texPath>Things/Motes/Skull</texPath>
+      <color>(168, 180, 56, 200)</color>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MetaOverlays</altitudeLayer>
+    <mote>
+      <fadeInTime>0.08</fadeInTime>
+      <solidTime>1.4</solidTime>
+      <fadeOutTime>1.5</fadeOutTime>
+      <growthRate>0.05</growthRate>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Mote_AttachedText</defName>
+    <graphicData>
+      <texPath>Things/Mote/Transparent</texPath>
+    </graphicData>
+    <thingClass>Corruption.Core.MoteAttachedText</thingClass>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <altitudeLayer>MetaOverlays</altitudeLayer>
+    <mote>
+      <fadeInTime>0.2</fadeInTime>
+      <solidTime>2.2</solidTime>
+      <fadeOutTime>0.3</fadeOutTime>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrown</thingClass>
+    <defName>Mote_Cacaphony</defName>
+    <graphicData>
+      <texPath>Things/Motes/Soundwaves</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.01</fadeInTime>
+      <solidTime>0.1</solidTime>
+      <fadeOutTime>0.05</fadeOutTime>
+      <growthRate>10</growthRate>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrown</thingClass>
+    <defName>Mote_DemonicPossessionBlast</defName>
+    <graphicData>
+      <texPath>Things/Motes/PossessionBlast</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.01</fadeInTime>
+      <solidTime>0.0</solidTime>
+      <fadeOutTime>0.2</fadeOutTime>
+      <growthRate>50</growthRate>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrown</thingClass>
+    <defName>Mote_HolyExorcise</defName>
+    <graphicData>
+      <texPath>UI/Glow_Holy</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>2.0</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>1</growthRate>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <thingClass>Corruption.Core.MotePulse</thingClass>
+    <defName>Mote_SoundBlast</defName>
+    <graphicData>
+      <texPath>Things/Motes/SoundBlast</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>0.5</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>35</growthRate>
+      <landSound>CacaphonyPulse</landSound>
+    </mote>
+  </ThingDef>
+
+
+  
+
+</Defs>

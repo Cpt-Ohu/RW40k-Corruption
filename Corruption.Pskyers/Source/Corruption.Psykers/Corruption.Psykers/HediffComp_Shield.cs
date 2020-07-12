@@ -13,10 +13,10 @@ namespace Corruption.Psykers
     public class HediffComp_Shield : HediffComp
     {
         public float MaxShieldCapacity;
-        public float ShieldCapacity = 0f;
+        public float ShieldCapacity = 100f;
         private float RechargeRate = 0f;
         private bool shouldRemove;
-        private ShieldState ShieldState;
+        private ShieldState ShieldState = ShieldState.Active;
 
         public override void CompPostMake()
         {
@@ -81,11 +81,12 @@ namespace Corruption.Psykers
                 float num = Mathf.Lerp(1.5f, 2.55f, ShieldCapacity);
                 Vector3 drawPos = this.Pawn.Drawer.DrawPos;
                 drawPos.y = AltitudeLayer.MoteOverhead.AltitudeFor();
-                float angle = Rand.Range(0, 360);
+                float angle = 0f;
                 Vector3 s = new Vector3(num, 1f, num);
                 Matrix4x4 matrix = default(Matrix4x4);
                 matrix.SetTRS(drawPos, Quaternion.AngleAxis(angle, Vector3.up), s);
                 Graphics.DrawMesh(MeshPool.plane10, matrix, this.Props.drawMat, 0);
+
             }
         }
     }
@@ -94,6 +95,7 @@ namespace Corruption.Psykers
     {
         public bool removeOnSpent;
         public string materialPath = "Other/ShieldBubble";
+        public GraphicData graphicData;
         public Material drawMat;
 
         public override void PostLoad()
@@ -101,7 +103,14 @@ namespace Corruption.Psykers
             base.PostLoad();
             LongEventHandler.ExecuteWhenFinished(delegate
             {
-                this.drawMat = MaterialPool.MatFrom(materialPath, ShaderDatabase.Transparent);
+                if (graphicData != null)
+                {
+                    this.drawMat = this.graphicData.Graphic.MatSingle;
+                }
+                else
+                {
+                    this.drawMat = MaterialPool.MatFrom(materialPath, ShaderDatabase.Transparent);
+                }
             });
 
         }

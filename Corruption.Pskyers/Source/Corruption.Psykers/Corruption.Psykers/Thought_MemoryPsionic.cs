@@ -11,16 +11,6 @@ namespace Corruption.Psykers
     {
         public int expirationTicks;
 
-        public Thought_MemoryPsionic()
-        {
-            this.expirationTicks = this.def.DurationTicks;
-        }
-
-        public Thought_MemoryPsionic(float durationTicks)
-        {
-            this.expirationTicks = (int)durationTicks;
-        }
-
         public override bool ShouldDiscard => age > expirationTicks;
     }
 }

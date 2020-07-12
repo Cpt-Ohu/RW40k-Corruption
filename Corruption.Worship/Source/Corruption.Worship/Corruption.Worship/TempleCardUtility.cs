@@ -129,8 +129,7 @@ namespace Corruption.Worship
                 if (!SermonUtility.IsPreacher(current))
                 {
                     CompSoul nsoul = current.Soul();
-                    var data= nsoul.DevotionDegreeData;
-                    string text1 = current.NameShortColored + " (" + data.label + ")";
+                    string text1 = current.NameShortColored;
 
                     Action action;
                     Pawn localCol = current;

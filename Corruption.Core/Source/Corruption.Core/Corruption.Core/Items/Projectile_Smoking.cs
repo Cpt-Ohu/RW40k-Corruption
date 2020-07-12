@@ -187,6 +187,7 @@ namespace Corruption.Core.Items
                         MoteMaker.MakeWaterSplash(this.ActualPosition, map, Mathf.Sqrt((float)this.def.projectile.explosionRadius) * 1f, 4f);
                     }
                 }
+                this.landed = true;
             }
             this.istraveling = false;
         }

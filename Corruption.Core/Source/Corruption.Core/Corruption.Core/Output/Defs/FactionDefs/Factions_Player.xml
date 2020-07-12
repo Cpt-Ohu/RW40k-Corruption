@@ -78,9 +78,15 @@
       <li>Urban</li>
     </hairTags>
     <apparelStuffFilter>
-      <thingDefs>
+      <stuffCategoriesToAllow>
+        <li>Leathery</li>
+        <li>Fabric</li>
+      </stuffCategoriesToAllow>
+      <disallowedThingDefs>
         <li>Synthread</li>
-      </thingDefs>
+        <li>Hyperweave</li>
+        <li>Plasteel</li>
+      </disallowedThingDefs>
     </apparelStuffFilter>
   </FactionDef>
 </Defs>

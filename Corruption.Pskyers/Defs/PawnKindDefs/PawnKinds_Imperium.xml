@@ -19,7 +19,6 @@
     <techHediffsTags>
       <li>ImplantEmpireCommon</li>
     </techHediffsTags>
-
     <inventoryOptions>
       <skipChance>0.70</skipChance>
       <subOptionsChooseOne>
@@ -38,36 +37,37 @@
         <god>Emperor</god>
         <initialProgressRange>(2000,15000)</initialProgressRange>
       </favorProgressTemplates>
-      <psykerPowerLevelRange>(2,3)</psykerPowerLevelRange>
     </Affliction>
   </PawnKindDef>
 
   <PawnKindDef Class="Corruption.Core.CorruptionPawnKindDef" ParentName="ImperialPsykerBase" Abstract="True">
     <defName>ImperialSanctionedPsyker</defName>
     <label>Sanctioned Psyker</label>
-    <Affliction>
-      <psykerPowerLevelRange>(2,3)</psykerPowerLevelRange>
-      <forcedPsykerPowers>
+    <affliction>
+      <startingPowers>
         <li>ImperialLightningArc</li>
-        <li>ImperialPsychicWard</li>
-        <li>ImperialWeakenResolve</li>
-      </forcedPsykerPowers>
-    </Affliction>
+      </startingPowers>
+      <forcedPantheon>ImperialCult</forcedPantheon>
+    </affliction>
+    <additionalTags>
+      <li>Biomancer</li>
+      <li>Pyromancer</li>
+      <li>Telepath</li>
+      <li>Telekine</li>
+      <li>Diviner</li>
+      <li>ImperialBattlePsyker</li>
+    </additionalTags>
 
   </PawnKindDef>
 
   <PawnKindDef Class="Corruption.Core.CorruptionPawnKindDef" ParentName="ImperialPsykerBase" Abstract="True">
     <defName>ImperialPrimarisPsyker</defName>
     <label>Primaris Psyker</label>
-    <Affliction>
-      <psykerPowerLevelRange>(3,4)</psykerPowerLevelRange>
-      <forcedPsykerPowers>
+    <affliction>
+      <startingPowers>
         <li>ImperialPsychicLash</li>
-        <li>ImperialPsychicWard</li>
-        <li>ImperialWeakenResolve</li>
-        <li>ImperialSoulStorm</li>
-      </forcedPsykerPowers>
-    </Affliction>
+      </startingPowers>
+    </affliction>
 
   </PawnKindDef>
 

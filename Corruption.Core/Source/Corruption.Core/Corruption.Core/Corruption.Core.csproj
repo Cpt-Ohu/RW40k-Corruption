@@ -38,6 +38,9 @@
       <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="FactionColors">
+      <HintPath>..\..\..\Assemblies\FactionColors.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
@@ -298,30 +301,57 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AfflictionProperty.cs" />
+    <Compile Include="CompNotSpawnable.cs" />
     <Compile Include="CorruptionPawnKindDef.cs" />
     <Compile Include="CorruptionStoryTracker.cs" />
     <Compile Include="CorruptionStoryTrackerUtilities.cs" />
+    <Compile Include="CorruptionTraitDefOf.cs" />
     <Compile Include="DamageDefOf.cs" />
     <Compile Include="DamageWorker_Mutate.cs" />
     <Compile Include="FactionsDefOf.cs" />
     <Compile Include="Gods\GodDef.cs" />
     <Compile Include="Gods\GodDefOf.cs" />
+    <Compile Include="Gods\GodFavourWorker.cs" />
     <Compile Include="Gods\PantheonAttributeDef.cs" />
     <Compile Include="Gods\PantheonDef.cs" />
     <Compile Include="Gods\PantheonDefOf.cs" />
     <Compile Include="HarmonyPatches.cs" />
+    <Compile Include="HediffComp_AffectSkin.cs" />
     <Compile Include="HediffComp_DamageEquipment.cs" />
+    <Compile Include="HediffComp_DemonicAttention.cs" />
+    <Compile Include="HediffComp_DemonicPossession.cs" />
+    <Compile Include="HediffComp_DrawExtra.cs" />
+    <Compile Include="HediffComp_GainCorruption.cs" />
     <Compile Include="HediffComp_GiveTrait.cs" />
     <Compile Include="HediffComps_Nurgle.cs" />
+    <Compile Include="HediffComp_MoteThrower.cs" />
     <Compile Include="HediffComp_Mutate.cs" />
     <Compile Include="HediffComp_ReplacePart.cs" />
     <Compile Include="HediffDefOf.cs" />
+    <Compile Include="HediffDemonicAttention.cs" />
     <Compile Include="Items\CompEmpyreal.cs" />
     <Compile Include="Items\Projectile_Expanding.cs" />
     <Compile Include="Items\Projectile_Laser.cs" />
     <Compile Include="Items\Projectile_Smoking.cs" />
+    <Compile Include="ModSettingsCorruptionCore.cs" />
+    <Compile Include="MoteAttachedText.cs" />
+    <Compile Include="MotePulse.cs" />
+    <Compile Include="Patches\ToilPatches.cs" />
+    <Compile Include="PossessionUtiltiy.cs" />
+    <Compile Include="RecipeWorker_Exorcise.cs" />
+    <Compile Include="Soul\JobDriver_Pray.cs" />
     <Compile Include="MainTabWindow_CorruptionCore.cs" />
     <Compile Include="MutationUtility.cs" />
+    <Compile Include="Gods\Pawn_PrayerTracker.cs" />
+    <Compile Include="Gods\PrayerDef.cs" />
+    <Compile Include="Soul\SoulAfflictionDef.cs" />
+    <Compile Include="Soul\SoulTraitDefOf.cs" />
+    <Compile Include="ThingDefOf.cs" />
+    <Compile Include="ThoughtWorker_PsychicBlank.cs" />
+    <Compile Include="ThoughtWorker_Tzeentchian.cs" />
+    <Compile Include="PawnRecentMemoryCorruption.cs" />
+    <Compile Include="ScenPart_ChaosColony.cs" />
+    <Compile Include="ScenPart_NextToHostile.cs" />
     <Compile Include="Soul\ITab_Pawn_Soul.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Soul\CompSoul.cs" />
@@ -330,14 +360,21 @@
     <Compile Include="Soul\SoulExtensions.cs" />
     <Compile Include="Soul\SoulPredisposition.cs" />
     <Compile Include="Soul\SoulTraitDef.cs" />
-    <Compile Include="Soul\SoulTraitDefOf.cs" />
     <Compile Include="Soul\SoulUtility.cs" />
     <Compile Include="Soul\Soul_WorshipTracker.cs" />
     <Compile Include="FavorProgress.cs" />
     <Compile Include="Soul\GodsFavourLevel.cs" />
+    <Compile Include="ThoughtWorker_NurgleGifts.cs" />
+    <Compile Include="Thought_MemoryBloodlust.cs" />
+    <Compile Include="Thought_PleasesSlaanesh.cs" />
+    <Compile Include="TraitMentalStateGiver_Slaaneshi.cs" />
+    <Compile Include="Vortex.cs" />
+    <Compile Include="WeakSettlementComp.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Books\" />
     <Folder Include="Output\Assemblies\" />
+    <Folder Include="Output\Defs\Bodies\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Output\Defs\GodDefs\GodDefs.xml" />
@@ -364,17 +401,37 @@
     <None Include="Output\Defs\TraitDefs\Traits_Spectrum.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Output\Defs\ApparelLayerDef\ApparelLayers.xml" />
     <Content Include="Output\Defs\DamageDefs\DamageDefs.xml" />
+    <Content Include="Output\Defs\EffecterDefs\Effecters.xml" />
     <Content Include="Output\Defs\FactionDefs\Factions_Hidden.xml" />
     <Content Include="Output\Defs\FactionDefs\Factions_Player.xml" />
     <Content Include="Output\Defs\GodDefs\PantheonAttributes.xml" />
     <Content Include="Output\Defs\HediffDefs\GodHediffs.xml" />
     <Content Include="Output\Defs\HediffDefs\MutationHediffDefs.xml" />
+    <Content Include="Output\Defs\HediffDefs\PossesssionHediffs.xml" />
+    <Content Include="Output\Defs\JoyGiverDefs\JoyGiversPray.xml" />
+    <Content Include="Output\Defs\Misc\SoulAfflictions.xml" />
     <Content Include="Output\Defs\PawnKindDefs\PawnKindDefs.xml" />
+    <Content Include="Output\Defs\PrayerDefs\CorruptionPrayers.xml" />
+    <Content Include="Output\Defs\PrayerDefs\EmperorPrayers.xml" />
+    <Content Include="Output\Defs\RecipeDefs\Recipes_Possession.xml" />
+    <Content Include="Output\Defs\Scenarios\Secnarios_Special.xml" />
+    <Content Include="Output\Defs\SoundDefs\CoreSounds.xml" />
+    <Content Include="Output\Defs\StuffCategoryDefs\StuffCategories.xml" />
+    <Content Include="Output\Defs\ThingCategoryDefs\ThingCategories.xml" />
     <Content Include="Output\Defs\ThingDefs\Apparel.xml" />
+    <Content Include="Output\Defs\ThingDefs\Buildings_Structure.xml" />
+    <Content Include="Output\Defs\ThingDefs\Items.xml" />
+    <Content Include="Output\Defs\ThingDefs\MeleeWeapons_Demonic.xml" />
+    <Content Include="Output\Defs\ThingDefs\Motes.xml" />
+    <Content Include="Output\Defs\ThingDefs\Races_Demonkind.xml" />
     <Content Include="Output\Defs\ThingDefs\Resources.xml" />
+    <Content Include="Output\Defs\ThoughtDefs\Thoughts_Chaos.xml" />
     <Content Include="Output\Languages\English\Keyed\Gods.xml" />
     <Content Include="Output\Languages\English\Keyed\Soul.xml" />
+    <Content Include="Output\Patches\JobPatches.xml" />
+    <Content Include="Output\Patches\ThoughtPatches.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

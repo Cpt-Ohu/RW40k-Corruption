@@ -28,6 +28,16 @@
     <incidentPoints>3000</incidentPoints>
   </Corruption.Worship.Wonders.WonderDef>
 
+
+  <Corruption.Worship.Wonders.WonderDef ParentName="EmperorWonder">
+    <defName>EmperorCleansePossession</defName>
+    <label>Cleansing Posession</label>
+    <description>Force a demon to leave the body of a believer.</description>
+    <workerClass>Corruption.Worship.Wonders.WonderWorker_CleansePossession</workerClass>
+    <wonderIconPath>UI/Wonders/WonderPilgrimage</wonderIconPath>
+    <favourCost>2000</favourCost>
+  </Corruption.Worship.Wonders.WonderDef>
+
   <Corruption.Worship.Wonders.WonderDef ParentName="EmperorWonder">
     <defName>EmperorWandererJoin</defName>
     <workerClass>Corruption.Worship.Wonders.WonderWorker_FireIncident</workerClass>
@@ -66,12 +76,6 @@
     <workerClass>Corruption.Worship.Wonders.WonderWorker_HealAllPawns</workerClass>
     <wonderIconPath>UI/Wonders/WonderHealEmperor</wonderIconPath>
     <favourCost>6500</favourCost>
-    <thingsToSpawn>
-      <li>
-        <thingDef>MealSimple</thingDef>
-        <count>10</count>
-      </li>
-    </thingsToSpawn>
   </Corruption.Worship.Wonders.WonderDef>
 
   <Corruption.Worship.Wonders.WonderDef ParentName="EmperorWonder">

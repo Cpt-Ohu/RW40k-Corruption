@@ -1,4 +1,5 @@
-﻿using Corruption.Core.Soul;
+﻿using Corruption.Core.Gods;
+using Corruption.Core.Soul;
 using RimWorld;
 using System;
 using System.Collections.Generic;

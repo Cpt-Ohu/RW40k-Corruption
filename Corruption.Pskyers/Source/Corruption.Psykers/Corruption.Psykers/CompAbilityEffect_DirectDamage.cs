@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.Assertions.Must;
 using Verse;
 
@@ -28,7 +29,10 @@ namespace Corruption.Psykers
                 {
                     pawn.stances.StaggerFor(this.Props.staggerTicks);
                 }
-                MoteMaker.MakeStaticMote(dest.Cell, map, this.Props.moteDef);
+                if (this.Props.moteDef != null)
+                {
+                    MoteMaker.MakeAttachedOverlay(this.parent.pawn, this.Props.moteDef, Vector3.zero);
+                }
             }
         }
     }

@@ -36,41 +36,9 @@
         <compClass>Corruption.Core.Items.CompEmpyreal</compClass>        
         <GainRate>-10.0</GainRate>
       </li>
-    </comps>
-  </ThingDef>
-
-  <ThingDef ParentName="ResourceBase">
-    <thingClass>Corruption.Worship.ItemEffigy</thingClass>
-    <defName>EcclesiarchyIcon</defName>
-    <label>Imperial Cult Icon</label>
-    <description>An icon of the Adeptus Munitorum, the Imperial Cult. May fit nicely into a place of worship.</description>
-    <graphicData>
-      <texPath>Things/Effigies/EcclesiarchIcon</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
-    </graphicData>
-    <soundInteract>Metal_Drop</soundInteract>
-    <soundDrop>Standard_Drop</soundDrop>
-    <stackLimit>1</stackLimit>
-    <statBases>
-      <MaxHitPoints>70</MaxHitPoints>
-      <MarketValue>21</MarketValue>
-      <Flammability>1.0</Flammability>
-      <Mass>0.35</Mass>
-    </statBases>
-    <intricate>true</intricate>
-    <thingCategories>
-      <li>Manufactured</li>
-    </thingCategories>
-    <stuffCategories>
-      <li>Metallic</li>
-      <li>Woody</li>
-      <li>Stony</li>
-    </stuffCategories>
-    <comps>
-      <li Class="Corruption.Core.Items.CompProperties_Empyreal">
-        <compClass>Corruption.Core.Items.CompEmpyreal</compClass>        
-        <GainRate>-5.0</GainRate>
+      <li Class="Corruption.Worship.CompProperties_Effigy">
+        <compClass>Corruption.Worship.CompEffigy</compClass>
+        <dedicatedTo>Emperor</dedicatedTo>
       </li>
     </comps>
   </ThingDef>
@@ -106,6 +74,10 @@
       <li Class="Corruption.Core.Items.CompProperties_Empyreal">
         <compClass>Corruption.Core.Items.CompEmpyreal</compClass>        
         <GainRate>10.0</GainRate>
+      </li>
+      <li Class="Corruption.Worship.CompProperties_Effigy">
+        <compClass>Corruption.Worship.CompEffigy</compClass>
+        <dedicatedPantheon>Chaos</dedicatedPantheon>
       </li>
     </comps>
   </ThingDef>
@@ -146,6 +118,10 @@
         <compClass>Corruption.Core.Items.CompEmpyreal</compClass>        
         <GainRate>10.0</GainRate>
       </li>
+      <li Class="Corruption.Worship.CompProperties_Effigy">
+        <compClass>Corruption.Worship.CompEffigy</compClass>
+        <dedicatedTo>Khorne</dedicatedTo>
+      </li>
     </comps>
   </ThingDef>
 
@@ -184,6 +160,10 @@
       <li Class="Corruption.Core.Items.CompProperties_Empyreal">
         <compClass>Corruption.Core.Items.CompEmpyreal</compClass>        
         <GainRate>10.0</GainRate>
+      </li>
+      <li Class="Corruption.Worship.CompProperties_Effigy">
+        <compClass>Corruption.Worship.CompEffigy</compClass>
+        <dedicatedTo>Nurgle</dedicatedTo>
       </li>
     </comps>
   </ThingDef>
@@ -224,6 +204,10 @@
         <compClass>Corruption.Core.Items.CompEmpyreal</compClass>        
         <GainRate>10.0</GainRate>
       </li>
+      <li Class="Corruption.Worship.CompProperties_Effigy">
+        <compClass>Corruption.Worship.CompEffigy</compClass>
+        <dedicatedTo>Tzeentch</dedicatedTo>
+      </li>
     </comps>
   </ThingDef>
 
@@ -262,6 +246,10 @@
       <li Class="Corruption.Core.Items.CompProperties_Empyreal">
         <compClass>Corruption.Core.Items.CompEmpyreal</compClass>        
         <GainRate>100.0</GainRate>
+      </li>
+      <li Class="Corruption.Worship.CompProperties_Effigy">
+        <compClass>Corruption.Worship.CompEffigy</compClass>
+        <dedicatedTo>Slaanesh</dedicatedTo>
       </li>
     </comps>
   </ThingDef>

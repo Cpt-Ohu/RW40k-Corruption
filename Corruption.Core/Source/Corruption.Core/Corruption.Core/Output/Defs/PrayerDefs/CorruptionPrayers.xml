@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <Corruption.Core.Gods.PrayerDef Name="KhornePrayerBase" Abstract="True">
+    <dedicatedTo>Khorne</dedicatedTo>
+    <preferredWorktags>8</preferredWorktags>
+  </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef ParentName="KhornePrayerBase" Abstract="True">
+    <defName>Prayer_KhornateRambling</defName>
+    <label>Khorante rambling</label>
+    <prayerLines>
+      <li>Kill!</li>
+      <li>Maim!</li>
+      <li>Fight!</li>
+      <li>Skulls!</li>
+    </prayerLines>
+  </Corruption.Core.Gods.PrayerDef>
+</Defs>

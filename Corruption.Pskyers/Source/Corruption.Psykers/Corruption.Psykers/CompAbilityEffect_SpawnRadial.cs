@@ -11,28 +11,6 @@ using Verse.Noise;
 
 namespace Corruption.Psykers
 {
-    public class CompAbilityEffect_SpawnRadial : CompAbilityEffect
-    {
-        public new ComProperties_SpawnThing Props => this.props as ComProperties_SpawnThing;
-
-        public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
-        {
-            base.Apply(target, dest);
-            IntVec3 center = dest.Cell;
-
-            var rangeStat = this.parent.def.statBases.FirstOrDefault(x => x.stat == StatDefOf.Ability_EffectRadius);
-            var range = rangeStat?.value;
-            Map map = this.parent.pawn.Map;
-            var cells = GenRadial.RadialCellsAround(dest.Cell, rangeStat.value, true).Where(x => x.DistanceTo(dest.Cell) == range && GenGrid.Standable(x, map));
-
-            foreach (var cell in cells)
-            {
-                GenSpawn.Spawn(this.Props.thingToSpawn, cell, map);
-                MoteMaker.ThrowDustPuffThick(cell.ToVector3Shifted(), map, Rand.Range(1.5f, 3f), this.Props.moteColor);
-            }
-        }
-    }
-
     public class CompAbilityEffect_SpawnPattern : CompAbilityEffect
     {
         public new ComProperties_SpawnThing Props => this.props as ComProperties_SpawnThing;
@@ -61,7 +39,7 @@ namespace Corruption.Psykers
             {
                 if (!cell.Filled(this.parent.pawn.Map) && cell.Standable(parent.pawn.Map))
                 {
-                    ThingWithComps thing = GenSpawn.Spawn(this.Props.thingToSpawn, cell, this.parent.pawn.Map) as ThingWithComps;
+                    ThingWithComps thing = ThingMaker.MakeThing(this.Props.thingToSpawn) as ThingWithComps; // = GenSpawn.Spawn(this.Props.thingToSpawn, cell, this.parent.pawn.Map) as ThingWithComps;           
                     if (thing != null)
                     {
                         CompLifespan compLifespan = thing.TryGetComp<CompLifespan>();
@@ -69,6 +47,12 @@ namespace Corruption.Psykers
                         {
                             compLifespan.age = (int)(compLifespan.Props.lifespanTicks - (this.parent.def.statBases.GetStatValueFromList(StatDefOf.Ability_Duration, compLifespan.Props.lifespanTicks) * GenTicks.TicksPerRealSecond));
                         }
+                        CompDamageOnSpawn compDamage = thing.TryGetComp<CompDamageOnSpawn>();
+                        if (compDamage != null)
+                        {
+                            compDamage.Caster = this.parent.pawn;
+                        }
+                        GenSpawn.Spawn(thing, cell, this.parent.pawn.Map);
                     }
                 }
             }
@@ -77,16 +61,19 @@ namespace Corruption.Psykers
         protected IEnumerable<IntVec3> AffectedCells(LocalTargetInfo target, Map map)
         {
             var sourceVector = this.parent.pawn.Position.ToVector3();
+            var targetVector = target.Cell.ToVector3();
             var angleRef = (target.Cell.ToVector3() - sourceVector).AngleFlat();
-
             foreach (IntVec2 item in Props.pattern)
             {
-                var targetVector = (target.Cell + new IntVec3(item.x, 0, item.z)).ToVector3();
+                var patternTarget = (target.Cell + new IntVec3(item.x, 0, item.z)).ToVector3();
+                var fromCenter = patternTarget - targetVector;
+                var rotated = fromCenter.RotatedBy(angleRef);
+                //var targetVector = (target.Cell + new IntVec3(item.x, 0, item.z)).ToVector3();
 
-                Vector3 rotatedTarget = targetVector.RotatedBy(angleRef);
+                //Vector3 rotatedTarget = targetVector.RotatedBy(angleRef);
 
-                yield return (sourceVector + rotatedTarget).ToIntVec3();
-            }
+                yield return (targetVector + rotated).ToIntVec3();
+            } 
         }
     }
 

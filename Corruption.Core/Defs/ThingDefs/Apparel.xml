@@ -1,12 +1,79 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
+  <ThingDef Name="VirtualOverlay" Abstract="True">
+    <thingClass>Apparel</thingClass>
+    <category>Item</category>
+    <selectable>False</selectable>
+    <pathCost>10</pathCost>
+    <useHitPoints>False</useHitPoints>
+    <techLevel>Neolithic</techLevel>
+    <graphicData>
+      <onGroundRandomRotateAngle>35</onGroundRandomRotateAngle>
+      <texPath>Things/Pawn/Humanlike/Apparel/TribalA/TribalA</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+    </graphicData>
+    <drawGUIOverlay>false</drawGUIOverlay>
+    <altitudeLayer>Item</altitudeLayer>
+    <alwaysHaulable>false</alwaysHaulable>
+    <tickerType>Never</tickerType>
+    <comps>
+      <li>
+        <compClass>Corruption.Core.CompNotSpawnable</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="VirtualOverlay">
+    <defName>Apparel_SkinOverlay</defName>
+    <label>skin overlay</label>
+    <description>THIS SHOULD NEVER BE SPAWNED ON ITS OWN!</description>
+    <apparel>
+      <layers>
+        <li>OnSkin</li>
+      </layers>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="VirtualOverlay">
+    <defName>Apparel_FaceOverlay</defName>
+    <label>face overlay</label>
+    <description>THIS SHOULD NEVER BE SPAWNED ON ITS OWN!</description>
+    <apparel>
+      <hatRenderedFrontOfFace>true</hatRenderedFrontOfFace>
+      <layers>
+        <li>Overhead</li>
+      </layers>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="VirtualOverlay">
+    <defName>Apparel_ShellOverlay</defName>
+    <label>shell overlay</label>
+    <description>THIS SHOULD NEVER BE SPAWNED ON ITS OWN!</description>
+    <apparel>
+      <layers>
+        <li>Shell</li>
+      </layers>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="VirtualOverlay">
+    <defName>Apparel_BeltOverlay</defName>
+    <label>belt overlay</label>
+    <description>THIS SHOULD NEVER BE SPAWNED ON ITS OWN!</description>
+    <apparel>
+      <layers>
+        <li>Belt</li>
+      </layers>
+    </apparel>
+  </ThingDef>
 
   <ThingDef ParentName="ApparelMakeableBase">
     <defName>ChaosLeathers</defName>
     <label>cultist leathers</label>
     <description>Filthy rags and leathers whose origin is best left unknown.</description>
     <graphicData>
-      <texPath>Things/Apparel/CultistLeathers/CultistLeathering</texPath>
+      <texPath>Things/Apparel/CultistLeathers/CultistLeatheringIcon</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <techLevel>Neolithic</techLevel>
@@ -32,7 +99,7 @@
         <li>Torso</li>
         <li>Legs</li>
       </bodyPartGroups>
-      <wornGraphicPath>Things/Apparel/CultistLeathers/CultistLeatheringIcon</wornGraphicPath>
+      <wornGraphicPath>Things/Apparel/CultistLeathers/CultistLeathering</wornGraphicPath>
       <layers>
         <li>OnSkin</li>
       </layers>
@@ -272,5 +339,173 @@
       </options>
     </colorGenerator>
   </ThingDef>
-  
+
+
+
+
+  <ThingDef ParentName="ApparelMakeableBase">
+    <thingClass>FactionColors.ApparelComposite</thingClass>
+    <defName>Apparel_LeatherArmor</defName>
+    <description>A heavy leather robe, reinforced with steel.</description>
+    <label>armored robe</label>
+    <recipeMaker>
+      <researchPrerequisite>ComplexClothing</researchPrerequisite>
+    </recipeMaker>
+    <graphicData>
+      <texPath>Things/Apparel/LeatherRobe/LeatherRobe</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <costStuffCount>125</costStuffCount>
+    <stuffCategories>
+      <li>Leathery</li>
+    </stuffCategories>
+    <thingCategories>
+      <li>Apparel</li>
+    </thingCategories>
+    <costList>
+      <Steel>50</Steel>
+    </costList>
+    <statBases>
+      <WorkToMake>35000</WorkToMake>
+      <MaxHitPoints>260</MaxHitPoints>
+      <Mass>10</Mass>
+      <StuffEffectMultiplierArmor>0.68</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>1.0</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.3</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>2</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.05</MoveSpeed>
+    </equippedStatOffsets>
+    <generateCommonality>1</generateCommonality>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Shoulders</li>
+        <li>Arms</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/LeatherRobe/LeatherRobe</wornGraphicPath>
+      <layers>
+        <li>Shell</li>
+      </layers>
+      <tags>
+        <li>Military</li>
+        <li>Outlander</li>
+      </tags>
+      <defaultOutfitTags>
+        <li>Soldier</li>
+      </defaultOutfitTags>
+    </apparel>
+    <comps>
+      <li Class="FactionColors.CompProperties_FactionColor">
+        <compClass>FactionColors.CompFactionColor</compClass>
+        <UseSecondaryColors>true</UseSecondaryColors>
+        <Coloring Class="ColorGenerator_Options">
+          <options>
+            <li>
+              <weight>10</weight>
+              <only>RGBA(0.33,0.33,0.33,1)</only>
+            </li>
+            <li>
+              <weight>10</weight>
+              <only>RGBA(0.22,0.65,0.22,1)</only>
+            </li>
+            <li>
+              <weight>10</weight>
+              <only>RGBA(0.7,0.0,0.0,1)</only>
+            </li>
+            <li>
+              <weight>10</weight>
+              <only>RGBA(0.63,0.70,0.71,1)</only>
+            </li>
+            <li>
+              <weight>10</weight>
+              <only>RGBA(0.69,0.0,0.26,1)</only>
+            </li>
+            <li>
+              <weight>30</weight>
+              <only>RGBA(0.7,0.7,0.7,1)</only>
+            </li>
+            <li>
+              <weight>20</weight>
+              <only>RGBA(1.0,0.92,0.48,1)</only>
+            </li>
+          </options>
+        </Coloring>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+
+  <ThingDef ParentName="HatBase">
+    <thingClass>FactionColors.ApparelUniform</thingClass>
+    <defName>Heretic_Helmet</defName>
+    <label>guard helmet</label>
+    <description>A lightweight combat helmet.</description>
+    <graphicData>
+      <texPath>Things/Apparel/DamnedHelmet/DamnedHelmetA</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <tradeability>Sellable</tradeability>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <MarketValue>50</MarketValue>
+      <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.15</ArmorRating_Sharp>
+      <Mass>5</Mass>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>0.0</MoveSpeed>
+    </equippedStatOffsets>
+    <generateCommonality>2</generateCommonality>
+    <apparel>
+      <bodyPartGroups>
+        <li>UpperHead</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/DamnedHelmet</wornGraphicPath>
+      <layers>
+        <li>Overhead</li>
+      </layers>
+      <tags>
+        <li>ChaosMilitant</li>
+      </tags>
+      <defaultOutfitTags>
+        <li>ChaosMilitant</li>
+      </defaultOutfitTags>
+    </apparel>
+    <colorGenerator Class="ColorGenerator_Options">
+      <options>
+        <li>
+          <weight>10</weight>
+          <only>RGBA(1.00,1.00,1.00,1)</only>
+        </li>
+      </options>
+    </colorGenerator>
+
+    <comps>
+      <li Class="FactionColors.CompProperties_FactionColor">
+        <compClass>FactionColors.CompFactionColor</compClass>
+        <IsRandomMultiGraphic>true</IsRandomMultiGraphic>
+        <RandomGraphicPaths>
+          <li>
+            <first>DamnedHelmetA</first>
+            <second>10</second>
+          </li>
+          <li>
+            <first>DamnedHelmetB</first>
+            <second>10</second>
+          </li>
+          <li>
+            <first>DamnedHelmetC</first>
+            <second>10</second>
+          </li>
+        </RandomGraphicPaths>
+      </li>
+    </comps>
+  </ThingDef>
+
 </Defs>

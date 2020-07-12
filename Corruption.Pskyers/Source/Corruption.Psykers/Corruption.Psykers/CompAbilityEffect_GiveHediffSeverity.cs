@@ -14,9 +14,10 @@ namespace Corruption.Psykers
 
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
-            base.Apply(target, dest);
-            if (target.Pawn != null)
+            Pawn pawn = target.Pawn;
+            if (pawn != null)
             {
+                base.Apply(target, dest);
                 Hediff givenHediff = target.Pawn.health.hediffSet.GetFirstHediffOfDef(this.Props.hediffDef);
                 if (givenHediff != null)
                 {

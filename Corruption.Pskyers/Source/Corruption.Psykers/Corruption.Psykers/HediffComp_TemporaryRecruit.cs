@@ -12,22 +12,23 @@ namespace Corruption.Psykers
     {
         public Faction PawnFactionOri;
 
-        public override void CompPostMake()
+        public override void CompPostPostAdd(DamageInfo? dinfo)
         {
-            base.CompPostMake();
+            base.CompPostPostAdd(dinfo);
             this.PawnFactionOri = this.Pawn.Faction;
-            Faction setFaction = this.PawnFactionOri == Faction.OfPlayer ? Find.FactionManager.FirstFactionOfDef(Corruption.Core.FactionsDefOf.IoM_NPC) : Faction.OfPlayer; 
-            this.Pawn.jobs.EndCurrentJob(Verse.AI.JobCondition.InterruptForced);
+            Faction setFaction = this.PawnFactionOri == Faction.OfPlayer ? Find.FactionManager.FirstFactionOfDef(Corruption.Core.FactionsDefOf.IoM_NPC) : Faction.OfPlayer;
 
-            this.Pawn.SetFactionDirect(setFaction);
+            this.Pawn.SetFaction(setFaction);
+
+            this.Pawn.drafter.Drafted = true;
 
             Find.ColonistBar.MarkColonistsDirty();
         }
 
-        public override void CompPostTick(ref float severityAdjustment)
+        public override void CompExposeData()
         {
-            base.CompPostTick(ref severityAdjustment);
-            MoteMaker.MakeStaticMote(this.Pawn.Position, this.Pawn.Map, ThingDefOf.Mote_MicroSparks);
+            base.CompExposeData();
+            Scribe_References.Look<Faction>(ref this.PawnFactionOri, "PawnFactionOri");
         }
 
         public override bool CompShouldRemove
@@ -36,8 +37,12 @@ namespace Corruption.Psykers
             {
                 if (base.CompShouldRemove)
                 {
+                    if (this.PawnFactionOri == Faction.OfPlayer)
+                    {
+                        //this.Pawn.recr
+                    }
                     this.Pawn.SetFactionDirect(PawnFactionOri);
-
+                    this.Pawn.jobs.EndCurrentJob(Verse.AI.JobCondition.InterruptForced);
                     Find.ColonistBar.MarkColonistsDirty();
                     return true;
                 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
+using Verse.Noise;
 
 namespace Corruption.Core.Soul
 {
@@ -44,19 +45,19 @@ namespace Corruption.Core.Soul
         {
             get
             {
-                if (this.favourValue >= 0.95f)
+                if (this.favourValue >= ProgressRange.max * 0.95f)
                 {
                     return GodsFavourLevel.Blessed;
                 }
-                else if (this.favourValue >= 0.8f)
+                else if (this.favourValue >= ProgressRange.max * 0.8f)
                 {
                     return GodsFavourLevel.Favoured;
                 }
-                else if (this.favourValue >= 0.4f)
+                else if (this.favourValue >= ProgressRange.max * 0.4f)
                 {
                     return GodsFavourLevel.Acknowledged;
                 }
-                else if (this.favourValue >= 0.05f)
+                else if (this.favourValue >= ProgressRange.max * 0.05f)
                 {
                     return GodsFavourLevel.Noticed;
                 }
@@ -81,9 +82,10 @@ namespace Corruption.Core.Soul
             Scribe_Values.Look<float>(ref this.favourValue, "value", 0f);
         }
 
-        public void TryAddProgress(float change)
+        public bool TryAddProgress(float change)
         {
             this.favourValue = ProgressRange.ClampToRange(favourValue + change);
+            return true;
         }
 
         public static Dictionary<GodsFavourLevel, float> FavorLevelThresholds = new Dictionary<GodsFavourLevel, float>()

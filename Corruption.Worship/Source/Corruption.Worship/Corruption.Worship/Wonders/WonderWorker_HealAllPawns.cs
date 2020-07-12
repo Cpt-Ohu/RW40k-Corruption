@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using Corruption.Core.Gods;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Corruption.Worship.Wonders
 {
     public class WonderWorker_HealAllPawns : WonderWorker
     {
-        public override bool TryExecuteWonder(int worshipPoints)
+        public override bool TryExecuteWonder(GodDef god, int worshipPoints)
         {
             List<Pawn> AllColonists = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists.ToList();
 

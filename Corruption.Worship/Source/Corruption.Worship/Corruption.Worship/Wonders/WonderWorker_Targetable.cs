@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using Corruption.Core.Gods;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,14 +22,18 @@ namespace Corruption.Worship.Wonders
             };
         }
 
-        protected void StartTargeting(int worshipPoints)
+        protected void StartTargeting(GodDef god, int worshipPoints)
         {
             if (this.target == null)
             {
+                Log.Message("Returning Favour");
+                GlobalWorshipTracker.Current.TryAddFavor(god, worshipPoints);
                 return;
             }
             if (this.target != null && !this.GetTargetingParameters().CanTarget(this.target))
             {
+                Log.Message("Returning Favour");
+                GlobalWorshipTracker.Current.TryAddFavor(god, worshipPoints);
                 return;
             }
             TryDoEffectOnTarget(worshipPoints);
@@ -44,12 +49,12 @@ namespace Corruption.Worship.Wonders
             return true;
         }
 
-        public override bool TryExecuteWonder(int worshipPoints)
+        public override bool TryExecuteWonder(GodDef god, int worshipPoints)
         {
             Find.Targeter.BeginTargeting(this.GetTargetingParameters(), delegate (LocalTargetInfo t)
             {
                 this.target = t.ToTargetInfo(Find.CurrentMap);
-                this.StartTargeting(worshipPoints);
+                this.StartTargeting(god, worshipPoints);
             }, null, null, null);
             return true;
         }

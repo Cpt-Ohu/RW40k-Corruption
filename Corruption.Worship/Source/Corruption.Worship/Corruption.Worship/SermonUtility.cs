@@ -149,6 +149,8 @@ namespace Corruption.Worship
 
             soul.GainCorruption(num);
             SermonUtility.GlobalWorship.TryAddFavor(altar.DedicatedTo, num * 10000);
+            altar.records.Increment(WorshipRecordDefOf.SermonAttendees);
+            preacher.records.Increment(WorshipRecordDefOf.SermonAttendees);
             if (worshipActType == WorshipActType.Confession)
             {
                 CompSoul.TryDiscoverAlignment(preacher, pawn, -0.2f);

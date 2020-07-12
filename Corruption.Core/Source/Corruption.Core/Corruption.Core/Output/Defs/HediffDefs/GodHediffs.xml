@@ -19,7 +19,7 @@
     <stages>
       <li>
         <label>initial</label>
-        <painOffset>0.05</painOffset>
+        
       </li>
       <li>
         <minSeverity>0.1</minSeverity>
@@ -58,14 +58,60 @@
   </HediffDef>
 
   <HediffDef>
+    <defName>NurgleResilience</defName>
+    <description>The pawn is imbued with Nurgle's Touch, granting resistance to pain.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.43, 0.78, 0.43)</defaultLabelColor>
+    <label>resilience of Nurgle</label>
+    <stages>
+      <li>
+        <painFactor>0.5</painFactor>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
     <defName>MarkNurgle</defName>
     <description>The pawn is blessed by the Grandfather, immune to pain while bursting with sickness.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(0.43, 0.78, 0.43)</defaultLabelColor>
     <label>mark of Nurgle</label>
+    <stages>
+      <li>
+        <painFactor>0</painFactor>
+      </li>
+    </stages>
     <comps>
       <li>
         <compClass>Corruption.Core.HediffComp_NurglesMark</compClass>
+      </li>
+    </comps>
+  </HediffDef>
+
+
+
+  <HediffDef ParentName="DiseaseBase">
+    <defName>CacaphonyAftermath</defName>
+    <label>trauma cacaphony</label>
+    <labelNoun>trauma</labelNoun>
+    <description>This pawn has been hit by a cacaphony from the Immaterium, overloading its hearing nerves</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <stages>
+      <li>
+        <partIgnoreMissingHP>true</partIgnoreMissingHP>
+        <!-- to avoid penalties from brain injuries, so manipulation is 100%+ -->
+        <capMods>
+          <li>
+            <capacity>Hearing</capacity>
+            <setMax>0</setMax>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <showRemainingTime>True</showRemainingTime>
+        <disappearsAfterTicks>1000~3000</disappearsAfterTicks>
       </li>
     </comps>
   </HediffDef>

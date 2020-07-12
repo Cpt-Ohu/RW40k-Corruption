@@ -93,7 +93,7 @@
 
   <DamageDef Name="Mutation" Abstract="True" Class="Corruption.Core.DamageDefMutation">
     <workerClass>Corruption.Core.DamageWorker_Mutate</workerClass>
-    <additionalHediffs>
+    <mutationHediffs>
       <li>
         <hediff>ChaosMutationClaw</hediff>
         <severityPerDamageDealt>0.15</severityPerDamageDealt>
@@ -178,10 +178,10 @@
         <victimSeverityScaling>PsychicSensitivity</victimSeverityScaling>
         <victimSeverityScalingByInvBodySize>false</victimSeverityScalingByInvBodySize>
       </li>
-    </additionalHediffs>
+    </mutationHediffs>
   </DamageDef>
 
-  <DamageDef ParentName="Mutation">
+  <DamageDef ParentName="Mutation"  Class="Corruption.Core.DamageDefMutation">
     <defName>MutatingBurn</defName>
     <label>mutating burn</label>
     <externalViolence>true</externalViolence>
@@ -192,6 +192,32 @@
     <armorCategory />
     <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
     <scratchSplitPercentage>0.67</scratchSplitPercentage>
+    <explosionHeatEnergyPerCell>15</explosionHeatEnergyPerCell>
+    <explosionCellMote>Mote_BlastFlame</explosionCellMote>
+    <explosionColorCenter>(1, 0.7, 0.7)</explosionColorCenter>
+    <explosionColorEdge>(1, 1, 0.7)</explosionColorEdge>
+    <soundExplosion>Explosion_Flame</soundExplosion>
   </DamageDef>
+
+
+  <DamageDef>
+    <defName>StreamOfNurgle</defName>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <label>stream of nurgle</label>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been suffocated by noxious gas.</deathMessage>
+    <hediff>Burn</hediff>
+    <harmAllLayersUntilOutside>false</harmAllLayersUntilOutside>
+    <impactSoundType>Tornado</impactSoundType>
+    <additionalHediffs>
+      <li>
+        <hediff>Plague</hediff>
+        <severityPerDamageDealt>0.15</severityPerDamageDealt>
+        <victimSeverityScaling>ToxicSensitivity</victimSeverityScaling>
+        <victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+      </li>
+    </additionalHediffs>
+  </DamageDef>
+
   
 </Defs>

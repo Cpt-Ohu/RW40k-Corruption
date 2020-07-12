@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-  <ThingDef ParentName="BenchBase">
+  <!--<ThingDef ParentName="BenchBase">
     <defName>EmpyrealShamanResearchBench</defName>
     <label>shamanic shrine</label>
     <description>A simple shrine, made from natural resources. Meditation in the center may lead to discovering the ways of the Empyrean.</description>
@@ -43,7 +43,7 @@
       <li>PlaceWorker_PreventInteractionSpotOverlap</li>
     </placeWorkers>
     <fillPercent>0.5</fillPercent>
-    <interactionCellOffset>(0,0,0)</interactionCellOffset>
+    <interactionCellOffset>(1,0,0)</interactionCellOffset>
     <hasInteractionCell>true</hasInteractionCell>
     <designationCategory>Production</designationCategory>
     <surfaceType>Item</surfaceType>
@@ -78,7 +78,7 @@
     <researchPrerequisites>
       <li>EmpyrealBasics</li>
     </researchPrerequisites>
-  </ThingDef>
+  </ThingDef>-->
 
   <ThingDef ParentName="BuildingBase">
     <defName>FireWall</defName>
@@ -130,7 +130,7 @@
         <heatPushMaxTemperature>40</heatPushMaxTemperature>
       </li>
       <li Class="CompProperties_FireOverlay">
-        <fireSize>5.0</fireSize>
+        <fireSize>1.0</fireSize>
         <offset>(0,0,0)</offset>
       </li>
       <li Class="CompProperties_Lifespan">
@@ -139,6 +139,10 @@
       <li Class="CompProperties_MoteEmitter">
         <mote>Mote_Smoke</mote>
         <emissionInterval>120</emissionInterval>
+      </li>
+      <li Class="Corruption.Psykers.CompProperties_DamageOnSpawn">
+        <damageDef>Flame</damageDef>
+        <amount>10</amount>
       </li>
     </comps>
   </ThingDef>

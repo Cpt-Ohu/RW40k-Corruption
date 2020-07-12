@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <Corruption.Core.Gods.PrayerDef Name="EmperorPrayerBase" Abstract="True">
+    <dedicatedTo>Emperor</dedicatedTo>
+  </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef ParentName="EmperorPrayerBase">
+    <defName>Prayer_LitanyToDuty</defName>
+    <label>litany to duty</label>
+    <prayerLines>
+      <li>Give me the strength</li>
+      <li>to carry my duty through</li>
+      <li>and smite those</li>
+      <li>who seek to thwart me.</li>      
+    </prayerLines>
+  </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef ParentName="EmperorPrayerBase">
+    <defName>Prayer_LitanyToWork</defName>
+    <label>litany to work</label>
+    <prayerLines>
+      <li>Blessed are those</li>
+      <li>who by their hands</li>
+      <li>do the Emperors work</li>
+      <li>in light and dark.</li>
+    </prayerLines>
+  </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef ParentName="EmperorPrayerBase">
+    <defName>Prayer_LitanyToHope</defName>
+    <label>litany to hope</label>
+    <prayerLines>
+      <li>By your will I endure</li>
+      <li>By your will I toil.</li>
+      <li>By your will I labour.</li>
+      <li>To bask in your light.</li>
+    </prayerLines>
+  </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef ParentName="EmperorPrayerBase">
+    <defName>Prayer_LitanyToPiety</defName>
+    <label>litany to piety</label>
+    <prayerLines>
+      <li>By my heart.</li>
+      <li>By my life.</li>
+      <li>By my soul.</li>
+      <li>I pledge myself to thee.</li>
+    </prayerLines>
+  </Corruption.Core.Gods.PrayerDef>
+  
+  
+</Defs>

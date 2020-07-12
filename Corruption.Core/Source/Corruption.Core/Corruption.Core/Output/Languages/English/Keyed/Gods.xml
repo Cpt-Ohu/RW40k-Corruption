@@ -6,5 +6,8 @@
   <ChosenPantheon>Chosen Pantheon: {0}</ChosenPantheon>
   <OverallFavour>Overall Favour</OverallFavour>
   <GodsFavour>God's Favour</GodsFavour>
+  <GodsFavourOverview>Favours</GodsFavourOverview>
+  <PleasesGod>(Pleases {GOD})</PleasesGod>
+  <FavourSources>Favour Sources</FavourSources>
 </LanguageData>
   

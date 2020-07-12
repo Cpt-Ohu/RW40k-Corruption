@@ -6,71 +6,176 @@
     <defName>Emperor</defName>
     <label>Emperor</label>
     <description>The Emperor of Mankind is the sovereign of the Imperium of Man, and Father, Guardian, and God of the human race. He has sat immobile within the Golden Throne of Terra for ten thousand years.</description>
-    <texturePath>UI/Emperor_bg</texturePath>
-    <smallTexturePath>UI/Emperor_bg</smallTexturePath>
+    <texturePath>UI/Glow_Holy</texturePath>
+    <smallTexturePath>UI/Glow_Holy</smallTexturePath>
     <mainColor>(0.93, 0.78, 0.19)</mainColor>
+    <cultColorOne>RGBA(0.93,0.78,0.19,1)</cultColorOne>
+    <cultColorTwo>RGBA(0.3,0.3,0.3,1)</cultColorTwo>
+    <favourCorruptionFactor>-1</favourCorruptionFactor>
     <patronTraits>
       <li>Emperor_Hope</li>
     </patronTraits>
+    <pleasedByThought>
+      <li>NewColonyOptimism</li>
+      <li>NewColonyHope</li>
+      <li>FreedFromSlavery</li>
+      <li>ReleasedHealthyPrisoner</li>
+      <li>RescuedRelative</li>
+      <li>Rescued</li>
+    </pleasedByThought>
     <psykerPowers>
     </psykerPowers>
+    <favourSourceDescriptions>
+      <li>Prayers during work</li>
+      <li>Optimism</li>
+      <li>Altruism</li>
+    </favourSourceDescriptions>
   </Corruption.Core.Gods.GodDef>
 
   <Corruption.Core.Gods.GodDef>
+    <favourWorkerClass>Corruption.Core.Gods.GodFavourWorker_Khorne</favourWorkerClass>
     <defName>Khorne</defName>
     <label>Khorne</label>
     <description>Khorne, also called the Blood God and the Lord of Skulls, is the Chaos God of blood, war and murder.</description>
-    <texturePath>UI/Khorne_bg</texturePath>
-    <smallTexturePath>UI/Khorne_bg</smallTexturePath>
+    <texturePath>UI/Glow_Corrupt</texturePath>
+    <smallTexturePath>UI/Glow_Corrupt</smallTexturePath>
     <worshipBarPath>UI/Background/WorshipBarKhorne</worshipBarPath>
     <mainColor>(0.7, 0.0, 0.0)</mainColor>
+    <cultColorOne>RGBA(0.75,0.00,0.00,1)</cultColorOne>
+    <cultColorTwo>RGBA(0.83,0.51,0.10,1)</cultColorTwo>
     <patronTraits>
       <li>Khorne_Fervor</li>
     </patronTraits>
+    <pleasedByThought>
+      <li>WitnessedDeathBloodlust</li>
+      <li>KilledHumanlikeBloodlust</li>
+      <li>DefeatedHostileFactionLeader</li>
+      <li>DefeatedHostileFactionLeaderOpinion</li>
+      <li>DefeatedMechCluster</li>
+    </pleasedByThought>
+    <favourSourceDescriptions>
+      <li>Fighting and Killing</li>
+    </favourSourceDescriptions>
   </Corruption.Core.Gods.GodDef>
 
   <Corruption.Core.Gods.GodDef>
     <defName>Nurgle</defName>
     <label>Nurgle</label>
     <description>Nurgle, also known as the Plague Lord, is the Chaos God of disease, decay, death and destruction.</description>
-    <texturePath>UI/Nurgle_bg</texturePath>
-    <smallTexturePath>UI/Nurgle_bg</smallTexturePath>
+    <texturePath>UI/Glow_Corrupt</texturePath>
+    <smallTexturePath>UI/Glow_Corrupt</smallTexturePath>
     <worshipBarPath>UI/Background/WorshipBarNurgle</worshipBarPath>
     <mainColor>(0.43, 0.78, 0.43)</mainColor>
+    <cultColorOne>RGBA(0.59,0.49,0.34,1)</cultColorOne>
+    <cultColorTwo>RGBA(0.25,0.19,0.11,1)</cultColorTwo>
     <patronTraits>
       <li>Nurgle_Fervor</li>
     </patronTraits>
+    <pleasedByThoughtTags>
+      <li>Lost</li>
+      <li>Died</li>
+      <li>Killed</li>
+    </pleasedByThoughtTags>
+    <pleasedByThought>
+      <li>DivorcedMe</li>
+      <li>Insulted</li>
+      <li>SoldMyLovedOne</li>
+      <li>SoldMyBondedAnimal</li>
+      <li>SoldMyBondedAnimalMood</li>
+      <li>ObservedLayingCorpse</li>
+      <li>WitnessedDeathAlly</li>
+      <li>WitnessedDeathNonAlly</li>
+      <li>WitnessedDeathFamily</li>
+      <li>ColonistBanished</li>
+      <li>PrisonerBanishedToDie</li>
+      <li>BondedAnimalBanished</li>
+      <li>FailedToRescueRelative</li>
+      <li>KnowGuestExecuted</li>
+      <li>KnowColonistExecuted</li>
+    </pleasedByThought>
+    <favourSourceDescriptions>
+      <li>All Thoughts about death</li>
+      <li>Being sick</li>
+      <li>Despair (mood lower 50% and negative offset greater 20)</li>
+    </favourSourceDescriptions>
   </Corruption.Core.Gods.GodDef>
 
   <Corruption.Core.Gods.GodDef>
     <defName>Tzeentch</defName>
     <label>Tzeentch</label>
     <description>Tzeentch, also known as the Changer of Ways, and the Architect of Fate, is the Chaos God of change, evolution, intrigue and sorcery, he who weaves the threads that connect every action, plot and subtle intrigue in a galaxy-wide game of manipulation and subterfuge.</description>
-    <texturePath>UI/Tzeentch_bg</texturePath>
-    <smallTexturePath>UI/Tzeentch_bg</smallTexturePath>
+    <texturePath>UI/Glow_Corrupt</texturePath>
+    <smallTexturePath>UI/Glow_Corrupt</smallTexturePath>
     <worshipBarPath>UI/Background/WorshipBarTzeentch</worshipBarPath>
     <mainColor>(0.42, 0.7, 1.0)</mainColor>
+    <cultColorOne>RGBA(0.42,0.70,1.00,1)</cultColorOne>
+    <cultColorTwo>RGBA(0.83,0.51,0.10,1)</cultColorTwo>
     <patronTraits>
       <li>Tzeentch_Fervor</li>
     </patronTraits>
     <psykerPowers>
     </psykerPowers>
+    <pleasedByThought>
+      <li>Slighted</li>
+      <li>Insulted</li>
+      <li>SoldMyLovedOne</li>
+      <li>SoldMyBondedAnimal</li>
+      <li>SoldMyBondedAnimalMood</li>
+      <li>PawnWithBadOpinionLost</li>
+      <li>ButcheredHumanlikeCorpse</li>
+      <li>KnowButcheredHumanlikeCorpse</li>
+      <li>ColonistBanished</li>
+      <li>PrisonerBanishedToDie</li>
+      <li>KnowGuestExecuted</li>
+      <li>KnowColonistExecuted</li>
+      <li>PawnWithBadOpinionDied</li>
+      <li>WasImprisoned</li>
+    </pleasedByThought>
+    <favourSourceDescriptions>
+      <li>Research</li>
+      <li>Betraying non-hostile pawns (banishing, executing, enslaving, selling)</li>
+    </favourSourceDescriptions>
   </Corruption.Core.Gods.GodDef>
 
   <Corruption.Core.Gods.GodDef>
     <defName>Slaanesh</defName>
     <label>Slaanesh</label>
     <description>Slaanesh, also known as the Dark Prince, is the Chaos God of pleasure, excess and decadence. Lust, pride and self-indulgence are the hallmarks of all who follow him.</description>
-    <texturePath>UI/Slaanesh_bg</texturePath>
-    <smallTexturePath>UI/Slaanesh_bg</smallTexturePath>
+    <texturePath>UI/Glow_Corrupt</texturePath>
+    <smallTexturePath>UI/Glow_Corrupt</smallTexturePath>
     <worshipBarPath>UI/Background/WorshipBarSlaanesh</worshipBarPath>
     <mainColor>(1.0, 0.5, 1.0)</mainColor>
+    <cultColorOne>RGBA(0.67,0.47,0.60,1)</cultColorOne>
+    <cultColorTwo>RGBA(0.2,0.2,0.2,1)</cultColorTwo>
     <patronTraits>
       <li>Slaanesh_Fervor</li>
     </patronTraits>
+    <pleasedByThought>
+      <li>AteHumanlikeMeatAsIngredient</li>
+      <li>AteHumanlikeMeatAsIngredientCannibal</li>
+      <li>AteHumanlikeMeatDirectCannibal</li>
+      <li>AteLavishMeal</li>
+      <li>AteInImpressiveDiningRoom</li>
+      <li>JoyActivityInImpressiveRecRoom</li>
+      <li>ForcedMeToTakeLuciferium</li>
+      <li>ForcedMeToTakeDrugs</li>
+      <li>RebuffedMyRomanceAttempt</li>
+      <li>CheatedOnMe</li>
+      <li>HoneymoonPhase</li>
+      <li>GotSomeLovin</li>
+      <li>KnowGuestOrganHarvested</li>
+      <li>KnowColonistOrganHarvested</li>
+      <li>MyOrganHarvested</li>
+    </pleasedByThought>
+    <favourSourceDescriptions>
+      <li>Euphoria (mood greater 50% and positive offset greater 20</li>
+      <li>Indulgence (lavish meals, impressive rooms, taking drugs)</li>
+      <li>Lovin</li>
+      <li>Cannibalism</li>
+    </favourSourceDescriptions>
   </Corruption.Core.Gods.GodDef>
 
 
-  
+
 
 </Defs>
