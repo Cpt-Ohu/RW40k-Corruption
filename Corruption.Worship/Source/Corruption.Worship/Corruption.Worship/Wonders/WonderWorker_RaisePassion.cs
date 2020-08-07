@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Corruption.Core.Gods;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace Corruption.Worship.Wonders
 {
     public class WonderWorker_RaisePassion : WonderWorker_Targetable
     {
-        protected override void TryDoEffectOnTarget(int worshipPoints)
+        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
             Pawn pawn = this.target.Thing as Pawn;
             if (pawn != null)

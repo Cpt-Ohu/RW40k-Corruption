@@ -21,6 +21,7 @@ namespace Corruption.Core.Soul
         protected override IEnumerable<Toil> MakeNewToils()
         {
             this.SetGod();
+            CompSoul soul = this.GetActor().Soul();
             Toil lastToil = new Toil();
             IEnumerator<Toil> enumerator = base.MakeNewToils().GetEnumerator();
             while (enumerator.MoveNext())
@@ -31,29 +32,7 @@ namespace Corruption.Core.Soul
 
             lastToil.AddPreInitAction(new Action(delegate
             {
-                SoulUtility.ThrowPrayerMote(this.GetActor(), this.targetedGod);
-            }));
-
-            lastToil.tickAction = new Action(delegate
-            {
-                if (Find.TickManager.TicksGame % 120 == 0)
-                    SoulUtility.ThrowPrayerMote(this.GetActor(), this.targetedGod);
-
-            });
-
-            lastToil.AddFinishAction(new Action(delegate
-            {
-                CompSoul soul = this.GetActor().Soul();
-                if (soul != null)
-                {
-
-                    float num = 100f;
-                    if (!soul.Corrupted)
-                    {
-                        num *= -1f * Rand.Range(0.5f, 1);
-                    }
-                    soul.GainCorruption(num, targetedGod);
-                }
+                soul?.PrayerTracker.StartRandomPrayer(this.job, true);
             }));
 
             yield break;

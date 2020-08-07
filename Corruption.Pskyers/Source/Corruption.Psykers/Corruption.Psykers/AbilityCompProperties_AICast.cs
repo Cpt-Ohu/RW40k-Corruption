@@ -62,7 +62,7 @@ namespace Corruption.Psykers
             Predicate<Thing> validator = delegate (Thing t)
             {
                 Pawn pawn3 = (Pawn)t;
-                return (pawn3.health.summaryHealth.SummaryHealthPercent < 1f && parent.CanApplyOn(pawn3) && parent.verb.targetParams.CanTarget(pawn3)) ? true : false;
+                return (pawn3.health.summaryHealth.SummaryHealthPercent < 1f && parent.CanApplyOn((LocalTargetInfo)pawn3) && parent.verb.targetParams.CanTarget(pawn3)) ? true : false;
             };
             Pawn pawn2 = (Pawn)GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForGroup(ThingRequestGroup.Pawn), PathEndMode.None, TraverseParms.For(pawn), parent.verb.verbProps.range, validator);
             return pawn2;
@@ -119,7 +119,7 @@ namespace Corruption.Psykers
             Predicate<Thing> validator = delegate (Thing t)
             {
                 Pawn pawn3 = (Pawn)t;
-                return (parent.CanApplyOn(pawn3) && parent.verb.targetParams.CanTarget(pawn3)) ? true : false;
+                return (parent.CanApplyOn((LocalTargetInfo)pawn3) && parent.verb.targetParams.CanTarget(pawn3)) ? true : false;
             };
             Pawn pawn2 = (Pawn)GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForGroup(ThingRequestGroup.Pawn), PathEndMode.None, TraverseParms.For(pawn), parent.verb.verbProps.range, validator);
             return pawn2;
@@ -128,6 +128,14 @@ namespace Corruption.Psykers
         protected override bool IsOpportune(Ability a, AbilityCastType castType, LocalTargetInfo target)
         {
             return base.IsOpportune(a, castType, target);
+        }
+    }
+
+    public class AbilityComp_AICastBuffSelf : AbilityComp_AICast
+    {
+        protected override LocalTargetInfo GetTarget()
+        {
+            return parent.pawn;
         }
     }
 

@@ -676,6 +676,7 @@
       </li>
       <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
         <abilityCastType>Defend</abilityCastType>
+        <compClass>Corruption.Psykers.AbilityComp_AICastBuffSelf</compClass>
       </li>
     </comps>
   </AbilityDef>
@@ -716,6 +717,7 @@
       </li>
       <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
         <abilityCastType>Defend</abilityCastType>
+        <compClass>Corruption.Psykers.AbilityComp_AICastBuffSelf</compClass>
       </li>
     </comps>
   </AbilityDef>
@@ -754,6 +756,7 @@
       </li>
       <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
         <abilityCastType>Defend</abilityCastType>
+        <compClass>Corruption.Psykers.AbilityComp_AICastBuffSelf</compClass>
       </li>
     </comps>
   </AbilityDef>

@@ -30,10 +30,10 @@
       <li>Optimism</li>
       <li>Altruism</li>
     </favourSourceDescriptions>
+    <effectMote>Mote_Emperor</effectMote>
   </Corruption.Core.Gods.GodDef>
 
   <Corruption.Core.Gods.GodDef>
-    <favourWorkerClass>Corruption.Core.Gods.GodFavourWorker_Khorne</favourWorkerClass>
     <defName>Khorne</defName>
     <label>Khorne</label>
     <description>Khorne, also called the Blood God and the Lord of Skulls, is the Chaos God of blood, war and murder.</description>
@@ -56,6 +56,10 @@
     <favourSourceDescriptions>
       <li>Fighting and Killing</li>
     </favourSourceDescriptions>
+    <effectMote>Mote_Khorne</effectMote>
+    <favourWorkerClasses>
+      <li>Corruption.Core.Gods.GodFavourWorker_Khorne</li>
+    </favourWorkerClasses>
   </Corruption.Core.Gods.GodDef>
 
   <Corruption.Core.Gods.GodDef>
@@ -98,6 +102,7 @@
       <li>Being sick</li>
       <li>Despair (mood lower 50% and negative offset greater 20)</li>
     </favourSourceDescriptions>
+    <effectMote>Mote_Nurgle</effectMote>
   </Corruption.Core.Gods.GodDef>
 
   <Corruption.Core.Gods.GodDef>
@@ -135,6 +140,7 @@
       <li>Research</li>
       <li>Betraying non-hostile pawns (banishing, executing, enslaving, selling)</li>
     </favourSourceDescriptions>
+    <effectMote>Mote_Tzeentch</effectMote>
   </Corruption.Core.Gods.GodDef>
 
   <Corruption.Core.Gods.GodDef>
@@ -173,6 +179,7 @@
       <li>Lovin</li>
       <li>Cannibalism</li>
     </favourSourceDescriptions>
+    <effectMote>Mote_Slaanesh</effectMote>
   </Corruption.Core.Gods.GodDef>
 
 

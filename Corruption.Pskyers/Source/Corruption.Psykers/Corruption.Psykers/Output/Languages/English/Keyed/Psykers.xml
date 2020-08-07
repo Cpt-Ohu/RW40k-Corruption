@@ -29,5 +29,6 @@
   <ProjectileAoERadius>Explosion Radius: {RADIUS}</ProjectileAoERadius>
   <CannotLearnViolentPower>Refuses offensive powers</CannotLearnViolentPower>
   <DisciplineLevelTooHigh>Level too high</DisciplineLevelTooHigh>
+  <UpgradePsykerLevel>Upgrade your Psykers level. Cost: {0}</UpgradePsykerLevel>
   
 </LanguageData>

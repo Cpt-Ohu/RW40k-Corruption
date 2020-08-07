@@ -44,15 +44,17 @@ namespace Corruption.Core.Gods
 
     public class PantheonAttributeTickWorker
     {
-        public virtual void Tick() { }
+        public virtual void TickLong() { }
+
+        public virtual void TickDay() { }
     }
     
     public class PantheonAttributeTickWorker_Trait : PantheonAttributeTickWorker
     {
         private PantheonAttributeDef Def;
 
-        public override void Tick()
-        {
+        public override void TickDay()
+        { 
             foreach (var map in Find.Maps)
             {
                 Pawn pawn;
@@ -69,7 +71,7 @@ namespace Corruption.Core.Gods
     {
         private PantheonAttributeDef Def;
 
-        public override void Tick()
+        public override void TickDay()
         {
             foreach (var map in Find.Maps)
             {
@@ -93,4 +95,6 @@ namespace Corruption.Core.Gods
             }
         }
     }
+
+
 }

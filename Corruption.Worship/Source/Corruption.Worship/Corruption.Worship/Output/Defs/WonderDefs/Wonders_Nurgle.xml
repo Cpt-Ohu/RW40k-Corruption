@@ -30,6 +30,23 @@
     </hediffsToAdd>
   </Corruption.Worship.Wonders.WonderDef>
 
+  <Corruption.Worship.Wonders.WonderDef ParentName="NurgleWonder">
+    <defName>NurgleGarden</defName>
+    <label>Garden of Nurgle</label>
+    <description>Nurgle plants seedlings of his own beautiful trees in your colony.</description>
+    <workerClass>Corruption.Worship.Wonders.WonderWorker_SpawnThing</workerClass>
+    <wonderIconPath>UI/Wonders/WondersNurgleGarden</wonderIconPath>
+    <favourCost>2500</favourCost>
+    <spawnForPlayerFaction>True</spawnForPlayerFaction>
+    <thingsToSpawn>
+      <Plant_FeculentGnarlmaw>1</Plant_FeculentGnarlmaw>
+    </thingsToSpawn>
+    <spawnPattern>
+      <li>(0,2)</li>
+      <li>(2,0)</li>
+      <li>(-2,0)</li>
+    </spawnPattern>
+  </Corruption.Worship.Wonders.WonderDef>
 
   <Corruption.Worship.Wonders.WonderDef ParentName="NurgleWonder">
     <defName>NurgleRot</defName>
@@ -37,12 +54,11 @@
     <description>Make the selected pawn combust in an explosion of contageous matter that infects all around with Nurgle`s rot.</description>
     <workerClass>Corruption.Worship.Wonders.WonderWorker_AddHediff</workerClass>
     <wonderIconPath>UI/Wonders/WondersNurgleRot</wonderIconPath>
-    <favourCost>4500</favourCost>
+    <favourCost>7500</favourCost>
     <hediffsToAdd>
       <li>NurgleRotInstantDeath</li>
     </hediffsToAdd>
   </Corruption.Worship.Wonders.WonderDef>
-
 
   <Corruption.Worship.Wonders.WonderDef ParentName="NurgleWonder">
     <defName>NurgleTurnChampion</defName>
@@ -53,6 +69,5 @@
     <favourCost>10000</favourCost>
     <traitToGive>NurgleChampion</traitToGive>
   </Corruption.Worship.Wonders.WonderDef>
-
 
 </Defs>

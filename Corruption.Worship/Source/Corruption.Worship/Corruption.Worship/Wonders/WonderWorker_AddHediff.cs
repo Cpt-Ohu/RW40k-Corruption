@@ -21,7 +21,7 @@ namespace Corruption.Worship.Wonders
             };
         }
 
-        protected override void TryDoEffectOnTarget(int worshipPoints)
+        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
             for (int i = 0; i < this.Def.hediffsToAdd.Count; i++)
             {
@@ -44,7 +44,7 @@ namespace Corruption.Worship.Wonders
             };
         }
 
-        protected override void TryDoEffectOnTarget(int worshipPoints)
+        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
             Map map = this.target.Map;
             foreach (var colonist in map.mapPawns.FreeColonistsSpawned)

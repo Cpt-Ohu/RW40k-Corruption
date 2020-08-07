@@ -301,7 +301,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AfflictionProperty.cs" />
+    <Compile Include="CompAffectSoil.cs" />
+    <Compile Include="CompDamageLInker.cs" />
     <Compile Include="CompNotSpawnable.cs" />
+    <Compile Include="CompNurgleRevivable.cs" />
+    <Compile Include="CompSpawnTurret.cs" />
+    <Compile Include="CoreConceptDefOf.cs" />
+    <Compile Include="CoreSoundDefOf.cs" />
     <Compile Include="CorruptionPawnKindDef.cs" />
     <Compile Include="CorruptionStoryTracker.cs" />
     <Compile Include="CorruptionStoryTrackerUtilities.cs" />
@@ -309,6 +315,7 @@
     <Compile Include="DamageDefOf.cs" />
     <Compile Include="DamageWorker_Mutate.cs" />
     <Compile Include="FactionsDefOf.cs" />
+    <Compile Include="Gods\God.cs" />
     <Compile Include="Gods\GodDef.cs" />
     <Compile Include="Gods\GodDefOf.cs" />
     <Compile Include="Gods\GodFavourWorker.cs" />
@@ -333,10 +340,13 @@
     <Compile Include="Items\Projectile_Expanding.cs" />
     <Compile Include="Items\Projectile_Laser.cs" />
     <Compile Include="Items\Projectile_Smoking.cs" />
-    <Compile Include="ModSettingsCorruptionCore.cs" />
+    <Compile Include="ModSettings_Corruption.cs" />
     <Compile Include="MoteAttachedText.cs" />
     <Compile Include="MotePulse.cs" />
     <Compile Include="Patches\ToilPatches.cs" />
+    <Compile Include="PlaceWorker_Hidden.cs" />
+    <Compile Include="Plant_Nurgle.cs" />
+    <Compile Include="Plant_RareTicker.cs" />
     <Compile Include="PossessionUtiltiy.cs" />
     <Compile Include="RecipeWorker_Exorcise.cs" />
     <Compile Include="Soul\JobDriver_Pray.cs" />
@@ -370,6 +380,7 @@
     <Compile Include="TraitMentalStateGiver_Slaaneshi.cs" />
     <Compile Include="Vortex.cs" />
     <Compile Include="WeakSettlementComp.cs" />
+    <Compile Include="WidgetExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Books\" />
@@ -416,6 +427,7 @@
     <Content Include="Output\Defs\PrayerDefs\CorruptionPrayers.xml" />
     <Content Include="Output\Defs\PrayerDefs\EmperorPrayers.xml" />
     <Content Include="Output\Defs\RecipeDefs\Recipes_Possession.xml" />
+    <Content Include="Output\Defs\RecipeDefs\Recipes_SynthBinder.xml" />
     <Content Include="Output\Defs\Scenarios\Secnarios_Special.xml" />
     <Content Include="Output\Defs\SoundDefs\CoreSounds.xml" />
     <Content Include="Output\Defs\StuffCategoryDefs\StuffCategories.xml" />
@@ -428,6 +440,7 @@
     <Content Include="Output\Defs\ThingDefs\Races_Demonkind.xml" />
     <Content Include="Output\Defs\ThingDefs\Resources.xml" />
     <Content Include="Output\Defs\ThoughtDefs\Thoughts_Chaos.xml" />
+    <Content Include="Output\Defs\Tutor\Concepts.xml" />
     <Content Include="Output\Languages\English\Keyed\Gods.xml" />
     <Content Include="Output\Languages\English\Keyed\Soul.xml" />
     <Content Include="Output\Patches\JobPatches.xml" />
@@ -437,6 +450,8 @@
   <PropertyGroup>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)\Output\*.*" "$(ProjectDir)\..\..\..\" /E /Y /C</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(ProjectDir)\Output\*.*" "$(ProjectDir)\..\..\..\" /E /Y /C
+xcopy "$(ProjectDir)\..\..\..\Assemblies\*.*" "$(ProjectDir)\..\..\..\1.1\Assemblies\" /E /Y /C
+xcopy "$(ProjectDir)\..\..\..\Assemblies\*.*" "$(ProjectDir)\..\..\..\1.2\Assemblies\" /E /Y /C</PostBuildEvent>
   </PropertyGroup>
 </Project>

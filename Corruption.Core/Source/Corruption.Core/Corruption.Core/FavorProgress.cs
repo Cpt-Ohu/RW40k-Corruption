@@ -13,6 +13,14 @@ namespace Corruption.Core.Soul
     {
         public static FloatRange ProgressRange = new FloatRange(0f, 10000f);
 
+        private static SimpleCurve ProgressProgression = new SimpleCurve()
+        {
+            {0f, 1f },
+            {1000f, 0.8f },
+            {5000f, 0.6f },
+            {10000f, 0.3f }
+        };
+
         public GodDef God;
 
         public FavourProgress()
@@ -84,7 +92,8 @@ namespace Corruption.Core.Soul
 
         public bool TryAddProgress(float change)
         {
-            this.favourValue = ProgressRange.ClampToRange(favourValue + change);
+            var actualChange = change * ProgressProgression.Evaluate(this.favourValue);
+            this.favourValue = ProgressRange.ClampToRange(favourValue + actualChange);
             return true;
         }
 

@@ -9,7 +9,7 @@ using Verse;
 
 namespace Corruption.Worship
 {
-    public class Altar_RecordsTracker
+    public class Altar_RecordsTracker : IExposable
     {
         private DefMap<RecordDef, float> records = new DefMap<RecordDef, float>();
 

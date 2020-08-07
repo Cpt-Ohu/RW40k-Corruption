@@ -7,7 +7,7 @@
     <label>chaos undivided</label>
     <description>Sorcerers of Chaos Undivided are diviners and summoners of the Dark Gods.</description>
     <practitionerTitle>sorcerer of chaos undivided</practitionerTitle>
-    <color>(0.9,0.9,0.9)</color>
+    <color>(0.6,0.0,0.0)</color>
     <abilities>
       <li>
         <ability>DoomboltI</ability>
@@ -147,7 +147,7 @@
     <label>chaos undivided</label>
     <description>Sorcerers of Chaos Undivided are diviners and summoners of the Dark Gods.</description>
     <practitionerTitle>sorcerer of chaos undivided</practitionerTitle>
-    <color>(0.9,0.9,0.9)</color>
+    <color>(0.6,0.0,0.0)</color>
     <category>Minor</category>
     <abilities>
       <li>
@@ -410,7 +410,7 @@
     <description>Sorcerers of Nurgle are heralds of pestilence and decay, able to unleash the gifts of Nurgle onto the world.</description>
     <practitionerTitle>sorcerer of nurgle</practitionerTitle>
     <practitionerHediff>SorcererNurgle</practitionerHediff>
-    <color>(0.29,0.66,0.84)</color>
+    <color>(0.28,0.43,0.20)</color>
     <abilities>
       <li>
         <ability>PlagueWindI</ability>
@@ -528,7 +528,7 @@
     <description>Sorcerers of Nurgle are heralds of pestilence and decay, able to unleash the gifts of Nurgle onto the world.</description>
     <practitionerTitle>sorcerer of nurgle</practitionerTitle>
     <practitionerHediff>SorcererNurgle</practitionerHediff>
-    <color>(0.29,0.66,0.84)</color>
+    <color>(0.28,0.43,0.20)</color>
     <category>Minor</category>
     <abilities>
       <li>

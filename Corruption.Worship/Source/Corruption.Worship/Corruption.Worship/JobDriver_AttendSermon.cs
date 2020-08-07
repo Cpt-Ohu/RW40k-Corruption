@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using Corruption.Core.Soul;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,61 +10,42 @@ using Verse.AI;
 
 namespace Corruption.Worship
 {
-    public class JobDriver_AttendSermon : JobDriver
-    {
+	public class JobDriver_AttendSermon : JobDriver_Spectate
+	{
+		private BuildingAltar altar;
 
-        private TargetIndex Preacher = TargetIndex.A;
-        private TargetIndex Altar = TargetIndex.B;
-        private TargetIndex Spot = TargetIndex.C;
-        
+		private CompShrine compShrine => this.altar.TryGetComp<CompShrine>();
 
-        private CompAltar CompAltar => ((ThingWithComps)this.TargetA).GetComp<CompAltar>();
+		public override bool TryMakePreToilReservations(bool errorOnFailed)
+		{
+			BuildingAltar firstThing = this.TargetB.Cell.GetFirstThing<BuildingAltar>(base.Map);
+			this.altar = firstThing;
+			return base.TryMakePreToilReservations(errorOnFailed);
+		}
 
-        public override void ExposeData()
-        {
-            base.ExposeData();
-        }
+		protected override IEnumerable<Toil> MakeNewToils()
+		{
+			Toil lastToil = null;
+			foreach (var toil in base.MakeNewToils())
+			{
+				lastToil = toil;
+				yield return toil;
+			}
 
-        public override bool TryMakePreToilReservations(bool error)
-        {
-            return true; //this.pawn.Reserve(this.TargetC, this.job, this.job.def.joyMaxParticipants, -1, null);
-        }
+			lastToil.AddPreTickAction(delegate
+			{
+				if (this.compShrine != null)
+				{
+					this.pawn.Soul()?.GainCorruption(this.compShrine.CompProps.worshipFactor, this.compShrine.God);
+				}
+			});
+		}
 
-        protected override IEnumerable<Toil> MakeNewToils()
-        {
-            this.EndOnDespawnedOrNull(Spot, JobCondition.Incompletable);
-            Toil gotoPreacher;
-            if (this.TargetC.HasThing)
-            {
-                gotoPreacher = Toils_Goto.GotoThing(Spot, PathEndMode.OnCell);
-            }
-            else
-            {
-                gotoPreacher = Toils_Goto.GotoCell(Spot, PathEndMode.OnCell);
-            }
-            yield return gotoPreacher;
+		public override void ExposeData()
+		{
+			base.ExposeData();
+			Scribe_References.Look<BuildingAltar>(ref this.altar, "altar");
+		}
 
-
-
-            var altarToil = new Toil();
-            altarToil.defaultCompleteMode = ToilCompleteMode.Delay;
-            altarToil.defaultDuration = this.job.def.joyDuration;
-            altarToil.AddPreTickAction(() =>
-            {
-                this.pawn.rotationTracker.FaceCell(this.TargetB.Cell);
-                this.pawn.GainComfortFromCellIfPossible();
-                if (this.CompAltar != null)
-                {
-                    GlobalWorshipTracker.Current.TryAddFavor(this.CompAltar.God, this.CompAltar.CompProps.WorshipRatePerTick);
-                }
-            });
-            yield return altarToil;
-
-            this.AddFinishAction(() =>
-            {
-                SermonUtility.AttendSermonTickCheckEnd(this.pawn, this.TargetA.Thing as Pawn, this.TargetB.Thing as BuildingAltar, Worship.WorshipActType.None);
-
-            });
-        }
-    }
+	}
 }

@@ -8,4 +8,11 @@
     </value>
   </Operation>
 
+  <Operation Class="PatchOperationReplace">
+    <xpath>*/JoyGiverDef[defName="Pray"]/giverClass</xpath>
+    <value>
+      <giverClass>Corruption.Worship.JoyGiver_Prayer</giverClass>
+    </value>
+  </Operation>
+
 </Patch>

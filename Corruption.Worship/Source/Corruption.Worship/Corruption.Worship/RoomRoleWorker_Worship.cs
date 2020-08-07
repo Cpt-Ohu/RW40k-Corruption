@@ -17,7 +17,7 @@ namespace Corruption.Worship
             for (int i = 0; i < containedAndAdjacentThings.Count; i++)
             {
                 BuildingAltar altar = containedAndAdjacentThings[i] as BuildingAltar;
-                if (altar != null || (containedAndAdjacentThings[i].TryGetComp<CompAltar>() != null && !(containedAndAdjacentThings[i] is Building_Bed)))
+                if (altar != null || (containedAndAdjacentThings[i].TryGetComp<CompShrine>() != null && !(containedAndAdjacentThings[i] is Building_Bed)))
                 {
                     num++;
                 }

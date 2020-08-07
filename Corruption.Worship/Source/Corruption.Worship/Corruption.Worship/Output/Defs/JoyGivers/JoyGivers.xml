@@ -2,12 +2,12 @@
 
 <Defs>
 
-  <JoyGiverDef>
+  <!--<JoyGiverDef>
     <defName>PrayToShrine</defName>
     <giverClass>Corruption.Worship.JoyGiver_Prayer</giverClass>
     <baseChance>1.5</baseChance>
     <jobDef>Pray</jobDef>
     <joyKind>Meditative</joyKind>
-  </JoyGiverDef>
+  </JoyGiverDef>-->
 
 </Defs>

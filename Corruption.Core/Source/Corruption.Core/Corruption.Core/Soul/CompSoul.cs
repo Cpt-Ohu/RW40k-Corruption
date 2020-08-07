@@ -69,11 +69,11 @@ namespace Corruption.Core.Soul
 
         }
 
-        public void GainCorruption(float change, GodDef favouredGod = null)
+        public void GainCorruption(float change, GodDef favouredGod = null, bool addFavour = true)
         {
             var adjustedChange = change * _cachedResistanceFactor;
             this._corruption = CorruptionRange.ClampToRange(this._corruption += adjustedChange);
-            if (favouredGod != null)
+            if (favouredGod != null &&  Find.TickManager.TicksGame > 0)
             {
                 this.TryAddFavorProgress(favouredGod, Math.Abs(change * 0.076f));
             }
@@ -89,6 +89,9 @@ namespace Corruption.Core.Soul
                     this.FavourTracker.TryAddProgressFor(chaosFavour.God, change * 0.1f);
                 }
             }
+            LessonAutoActivator.TeachOpportunity(CoreConceptDefOf.CorruptionKnowledge, OpportunityType.GoodToKnow);
+
+
         }
 
         private void FallToChaos()
@@ -101,16 +104,18 @@ namespace Corruption.Core.Soul
 
         public float CorruptionLevel => this._corruption / CorruptionRange.max;
 
+        public CompProperties_Soul Props => this.props as CompProperties_Soul;
+
         public CompSoul()
         {
             this.FavourTracker = new Soul_FavourTracker(this);
             this.PrayerTracker = new Pawn_PrayerTracker(this);
-            this.ChosenPantheon = PantheonDefOf.ImperialCult;
         }
 
         public override void Initialize(CompProperties props)
         {
             base.Initialize(props);
+            this.ChosenPantheon = this.Props?.defaultPantheon ?? PantheonDefOf.ImperialCult;
         }
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
@@ -224,17 +229,19 @@ namespace Corruption.Core.Soul
 
         internal void InitializeDefaultPawn()
         {
-            if (Rand.Value > 0.01f)
+            if (this.Props == null || this.Props.defaultPantheon == null)
             {
-                this.ChosenPantheon = PantheonDefOf.ImperialCult;
-                this.FavourTracker.TryAddProgressFor(GodDefOf.Emperor, Rand.Range(100f, 2500f));
-                this.GainCorruption(this.LoyalistRange.RandomInRange);
-            }
-            else
-            {
-                this.ChosenPantheon = PantheonDefOf.Chaos;
-                var god = PantheonDefOf.Chaos.GodsListForReading.RandomElement();
-                this.GainCorruption(FavourProgress.ProgressRange.RandomInRange, god);
+                if (Rand.Value > 0.01f)
+                {
+                    this.ChosenPantheon = PantheonDefOf.ImperialCult;
+                    this.GainCorruption(this.LoyalistRange.RandomInRange);
+                }
+                else
+                {
+                    this.ChosenPantheon = PantheonDefOf.Chaos;
+                    var god = PantheonDefOf.Chaos.GodsListForReading.RandomElement();
+                    this.GainCorruption(FavourProgress.ProgressRange.RandomInRange, god);
+                }
             }
         }
 
@@ -285,6 +292,16 @@ namespace Corruption.Core.Soul
         private void DiscoverAlignment()
         {
             this.KnownToPlayer = true;
+        }
+    }
+
+    public class CompProperties_Soul : CompProperties
+    {
+        public PantheonDef defaultPantheon;
+
+        public CompProperties_Soul()
+        {
+            this.compClass = typeof(CompSoul);
         }
     }
 }

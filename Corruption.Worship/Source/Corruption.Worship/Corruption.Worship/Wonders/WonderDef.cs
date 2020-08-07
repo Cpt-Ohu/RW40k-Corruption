@@ -17,6 +17,8 @@ namespace Corruption.Worship.Wonders
 
         public List<ThingDefCountClass> thingsToSpawn = new List<ThingDefCountClass>();
 
+        public List<IntVec2> spawnPattern = new List<IntVec2>();
+
         public List<HediffDef> hediffsToAdd = new List<HediffDef>();
 
         private int cooldownTicks;
@@ -57,6 +59,8 @@ namespace Corruption.Worship.Wonders
         }
 
         private WonderWorker workerInt;
+        public bool spawnForPlayerFaction;
+
         public WonderWorker Worker
         {
             get
@@ -84,6 +88,8 @@ namespace Corruption.Worship.Wonders
             get
             {
                 var builder = new StringBuilder();
+                builder.AppendLine(this.LabelCap);
+                builder.AppendLine();
                 builder.AppendLine(this.description);
                 builder.AppendLine();
                 builder.AppendLine("FavourCost".Translate(new NamedArgument(this.favourCost, "COST")));

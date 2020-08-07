@@ -291,11 +291,19 @@
   <ItemGroup>
     <Compile Include="Altar_RecordsTracker.cs" />
     <Compile Include="BuildingAltar.cs" />
-    <Compile Include="Building_ArtRotatable.cs" />
+    <Compile Include="Building_TurretGunInvisible.cs" />
+    <Compile Include="Building_WorshipStatue.cs" />
     <Compile Include="CompAltar.cs" />
     <Compile Include="CompEffigy.cs" />
+    <Compile Include="CompFireOverlayColorable.cs" />
     <Compile Include="Dialog_RenameTemple.cs" />
+    <Compile Include="Dialog_SetReligion.cs" />
+    <Compile Include="DutyDefOf.cs" />
+    <Compile Include="GatheringDefOf.cs" />
+    <Compile Include="GatheringWorker.cs" />
     <Compile Include="GlobalWorshipTracker.cs" />
+    <Compile Include="GodFavourWorker_Global.cs" />
+    <Compile Include="IngestionOutcomeDoer_AffectSoul.cs" />
     <Compile Include="ITab_Altar.cs" />
     <Compile Include="ItemEffigy.cs" />
     <Compile Include="JobDefOf.cs" />
@@ -303,16 +311,19 @@
     <Compile Include="JobDriver_HoldSermon.cs" />
     <Compile Include="JobDriver_PrayToShrine.cs" />
     <Compile Include="JobGiver_HoldSermon.cs" />
+    <Compile Include="JobGiver_SpectateDutySermon.cs" />
     <Compile Include="JoyGiver_Prayer.cs" />
     <Compile Include="LordJob_Sermon.cs" />
     <Compile Include="LordToil_StartSermom.cs" />
     <Compile Include="LordToil_TravelUrgent.cs" />
     <Compile Include="MainTabWindow_Worship.cs" />
+    <Compile Include="PantheonAttributeWorker_Pilgrims.cs" />
     <Compile Include="PawnDutyDefOf.cs" />
     <Compile Include="PilgrimageComp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoomRoleWorker_Worship.cs" />
     <Compile Include="ScenPart_StartingReligion.cs" />
+    <Compile Include="SermonTemplate.cs" />
     <Compile Include="SermonThoughtDefOf.cs" />
     <Compile Include="SermonUtility.cs" />
     <Compile Include="TempleCardUtility.cs" />
@@ -328,18 +339,22 @@
     <Compile Include="Wonders\WonderWorker.cs" />
     <Compile Include="Wonders\WonderWorker_AddHediff.cs" />
     <Compile Include="Wonders\WonderWorker_AddSpecialTrait.cs" />
+    <Compile Include="Wonders\WonderWorker_AmbitiousShuffle.cs" />
     <Compile Include="Wonders\WonderWorker_ChangeRelation.cs" />
-    <Compile Include="Wonders\WonderWorker_CleansePossession.cs" />
+    <Compile Include="Wonders\WonderWorker_CleanseCorruption.cs" />
     <Compile Include="Wonders\WonderWorker_FinishResearch.cs" />
     <Compile Include="Wonders\WonderWorker_FireIncident.cs" />
     <Compile Include="Wonders\WonderWorker_HealAllPawns.cs" />
     <Compile Include="Wonders\WonderWorker_Pilgrimage.cs" />
+    <Compile Include="Wonders\WonderWorker_PoliticalUpheaval.cs" />
     <Compile Include="Wonders\WonderWorker_RaisePassion.cs" />
     <Compile Include="Wonders\WonderWorker_SpawnThing.cs" />
     <Compile Include="Wonders\WonderWorker_StartMentalState.cs" />
     <Compile Include="Wonders\WonderWorker_Targetable.cs" />
     <Compile Include="WorshipActType.cs" />
+    <Compile Include="WorshipConceptDefOf.cs" />
     <Compile Include="WorshipRecordDefOf.cs" />
+    <Compile Include="WorshipThoughtDefOf.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Corruption.Core\Source\Corruption.Core\Corruption.Core\Corruption.Core.csproj">
@@ -357,6 +372,7 @@
     <Content Include="Output\Defs\CorruptionMainTabDefs\WorshipTabDef.xml" />
     <Content Include="Output\Defs\DesignationCategoryDefs\DesignationCategories.xml" />
     <Content Include="Output\Defs\DutyDefs\Duties.xml" />
+    <Content Include="Output\Defs\GatheringDefs\Gatherings.xml" />
     <Content Include="Output\Defs\HediffDefs\MutationHediffs.xml" />
     <Content Include="Output\Defs\HediffDefs\WonderHediffs.xml" />
     <Content Include="Output\Defs\IncidentDefs\Incidents_Good.xml" />
@@ -371,10 +387,15 @@
     <Content Include="Output\Defs\ScenPartDefs\ScenParts.xml" />
     <Content Include="Output\Defs\ThingDefs\Buildings_Worship.xml" />
     <Content Include="Output\Defs\ThingDefs\Items_Effigies.xml" />
+    <Content Include="Output\Defs\ThingDefs\Items_Resources_RawPlant.xml" />
     <Content Include="Output\Defs\ThingDefs\Motes.xml" />
+    <Content Include="Output\Defs\ThingDefs\Plants.xml" />
+    <Content Include="Output\Defs\ThingDefs\Plant_Turrets.xml" />
     <Content Include="Output\Defs\ThingDefs\Vortex.xml" />
+    <Content Include="Output\Defs\ThoughtDefs\Gathering_Thoughts.xml" />
     <Content Include="Output\Defs\ThoughtDefs\Thoughts.xml" />
     <Content Include="Output\Defs\TraitDefs\WorshipTraits.xml" />
+    <Content Include="Output\Defs\TutorDefs\Concepts.xml" />
     <Content Include="Output\Defs\WonderDefs\Wonders_Emperor.xml" />
     <Content Include="Output\Defs\WonderDefs\Wonders_General.xml" />
     <Content Include="Output\Defs\WonderDefs\Wonders_Khorne.xml" />
@@ -382,12 +403,16 @@
     <Content Include="Output\Defs\WonderDefs\Wonders_Slaanesh.xml" />
     <Content Include="Output\Defs\WonderDefs\Wonders_Tzeentch.xml" />
     <Content Include="Output\Languages\English\Keyed\Worship.xml" />
+    <Content Include="Output\Patches\CaravanPatches.xml" />
     <Content Include="Output\Patches\EffigyPatch.xml" />
+    <Content Include="Output\Patches\GodPatches.xml" />
     <Content Include="Output\Patches\PrayerPatches.xml" />
     <Content Include="Output\Patches\ScenarioPatches.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)\Output\*.*" "$(ProjectDir)\..\..\..\" /E /Y /C</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(ProjectDir)\Output\*.*" "$(ProjectDir)\..\..\..\" /E /Y /C
+xcopy "$(ProjectDir)\..\..\..\Assemblies\*.*" "$(ProjectDir)\..\..\..\1.1\Assemblies\" /E /Y /C
+xcopy "$(ProjectDir)\..\..\..\Assemblies\*.*" "$(ProjectDir)\..\..\..\1.2\Assemblies\" /E /Y /C</PostBuildEvent>
   </PropertyGroup>
 </Project>

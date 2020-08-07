@@ -520,6 +520,7 @@
     <label>telekinesis</label>
     <description>Telekinesis manipulates the material world with the power of the mind.</description>
     <practitionerTitle>telekine</practitionerTitle>
+    <color>(0.32,0.13,0.53)</color>
     <abilities>
       <li>
         <ability>TelekAssailI</ability>
@@ -629,6 +630,7 @@
     <description>Telekinesis manipulates the material world with the power of the mind.</description>
     <practitionerTitle>telekine</practitionerTitle>
     <category>Minor</category>
+    <color>(0.32,0.13,0.53)</color>
     <abilities>
       <li>
         <ability>TelekAssailI</ability>
@@ -669,6 +671,7 @@
     <label>telepathy</label>
     <description>Telepaths enter and manipulate the minds of others.</description>
     <practitionerTitle>telepath</practitionerTitle>
+    <color>(0.9,0.9,0.9)</color>
     <abilities>
       <li>
         <ability>TelepDominateI</ability>
@@ -796,6 +799,7 @@
     <description>Telepaths enter and manipulate the minds of others.</description>
     <practitionerTitle>telepath</practitionerTitle>
     <category>Minor</category>
+    <color>(0.9,0.9,0.9)</color>
     <abilities>
       <li>
         <ability>TelepDominateI</ability>

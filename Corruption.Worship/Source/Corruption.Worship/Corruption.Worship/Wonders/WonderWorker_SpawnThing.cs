@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using Corruption.Core.Gods;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace Corruption.Worship.Wonders
 {
     public class WonderWorker_SpawnThing : WonderWorker_Targetable
     {
+        protected virtual List<IntVec2> Pattern => new List<IntVec2>(){IntVec2.Zero};
+
         protected override TargetingParameters GetTargetingParameters()
         {
             return new TargetingParameters()
@@ -19,17 +22,40 @@ namespace Corruption.Worship.Wonders
             };
         }
 
-        protected override void TryDoEffectOnTarget(int worshipPoints)
+        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
             for (int i = 0; i < this.Def.thingsToSpawn.Count; i++)
             {
                 ThingDefCountClass entry = this.Def.thingsToSpawn[i];
                 int countToCreate = entry.count / entry.thingDef.stackLimit;
-                for (int j = 0; j < countToCreate; j++)
+                if (this.Def.spawnPattern.NullOrEmpty())
                 {
-                    Thing thing = ThingMaker.MakeThing(entry.thingDef);
-                    thing.stackCount = Math.Min(thing.def.stackLimit, countToCreate);
-                    GenPlace.TryPlaceThing(thing, this.target.Cell, this.target.Map, ThingPlaceMode.Near);
+
+
+                    for (int j = 0; j < countToCreate; j++)
+                    {
+                        Thing thing = ThingMaker.MakeThing(entry.thingDef);
+                        thing.stackCount = Math.Min(thing.def.stackLimit, countToCreate);
+                        if (this.Def.spawnForPlayerFaction && entry.thingDef.CanHaveFaction)
+                        {
+                            thing.SetFactionDirect(Faction.OfPlayer);
+                        }
+                        GenPlace.TryPlaceThing(thing, this.target.Cell, this.target.Map, ThingPlaceMode.Near);
+                    }
+                }
+                else
+                {
+                    foreach (var position in this.Def.spawnPattern)
+                    {
+                        Thing thing = ThingMaker.MakeThing(entry.thingDef);
+                        if (this.Def.spawnForPlayerFaction && entry.thingDef.CanHaveFaction)
+                        {
+                            thing.SetFactionDirect(Faction.OfPlayer);
+                        }
+                        thing.stackCount = Math.Min(thing.def.stackLimit, countToCreate);
+                        GenPlace.TryPlaceThing(thing, this.target.Cell + new IntVec3(position.x, 0, position.z), this.target.Map, ThingPlaceMode.Near);
+
+                    }
                 }
             }
         }

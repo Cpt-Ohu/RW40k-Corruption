@@ -10,6 +10,7 @@ namespace Corruption.Worship
     {
         None,
         MorningPrayer,
+        NoonPrayer,
         EveningPrayer,
         Confession,
         Conversion

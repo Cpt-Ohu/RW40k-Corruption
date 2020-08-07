@@ -20,7 +20,10 @@ namespace Corruption.Psykers
 
             this.Pawn.SetFaction(setFaction);
 
-            this.Pawn.drafter.Drafted = true;
+            if (this.Pawn.Faction == Faction.OfPlayer)
+            {
+                this.Pawn.drafter.Drafted = true;
+            }
 
             Find.ColonistBar.MarkColonistsDirty();
         }
@@ -37,9 +40,9 @@ namespace Corruption.Psykers
             {
                 if (base.CompShouldRemove)
                 {
-                    if (this.PawnFactionOri == Faction.OfPlayer)
+                    if (this.Pawn.Faction == Faction.OfPlayer)
                     {
-                        //this.Pawn.recr
+                        this.Pawn.drafter.Drafted = false;
                     }
                     this.Pawn.SetFactionDirect(PawnFactionOri);
                     this.Pawn.jobs.EndCurrentJob(Verse.AI.JobCondition.InterruptForced);

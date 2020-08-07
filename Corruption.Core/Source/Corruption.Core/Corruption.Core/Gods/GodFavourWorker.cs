@@ -11,7 +11,7 @@ namespace Corruption.Core.Gods
 {
     public class GodFavourWorker
     {
-        public virtual void PostGainFavour(CompSoul soul, float change)
+        public virtual void PostGainFavour(CompSoul soul, float change, GodDef god = null)
         { 
 
         }
@@ -19,7 +19,7 @@ namespace Corruption.Core.Gods
 
     public class GodFavourWorker_Khorne : GodFavourWorker
     {
-        public override void PostGainFavour(CompSoul soul, float change)
+        public override void PostGainFavour(CompSoul soul, float change, GodDef god = null)
         {
             base.PostGainFavour(soul, change);
             if (soul.Pawn.Spawned && soul.CorruptionLevel >= SoulAfflictionDefOf.Tainted.Threshold  && soul.Pawn.needs.mood.thoughts.memories.GetFirstMemoryOfDef(ThoughtDefOf.KilledHumanlikeBloodlust) == null)

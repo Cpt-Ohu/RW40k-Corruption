@@ -61,6 +61,7 @@ namespace Corruption.Core.Soul
         public override void OnOpen()
         {
             base.OnOpen();
+            LessonAutoActivator.TeachOpportunity(CoreConceptDefOf.SoulKnowledge, OpportunityType.Important);
         }
 
         protected override void UpdateSize()

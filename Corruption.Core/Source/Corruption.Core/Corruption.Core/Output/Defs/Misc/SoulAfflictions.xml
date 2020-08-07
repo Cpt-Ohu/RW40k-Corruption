@@ -11,7 +11,7 @@
   <Corruption.Core.Soul.SoulAfflictionDef>
     <defName>Intrigued</defName>
     <label>intrigued</label>
-    <description>This pawn is pure of soul, untouched by any temptations of the Warp.</description>
+    <description>Thispawn hase been intrigued by the powers of the Warp.</description>
     <Threshold>0.1</Threshold>
     <iconPath>UI/Background/SoulmeterNodeIntrigued</iconPath>
   </Corruption.Core.Soul.SoulAfflictionDef>
@@ -19,7 +19,7 @@
   <Corruption.Core.Soul.SoulAfflictionDef>
     <defName>Warptouched</defName>
     <label>warptouched</label>
-    <description>This pawn is pure of soul, untouched by any temptations of the Warp.</description>
+    <description>This pawn has been touched by the Warp, leading down a dangerous path.</description>
     <Threshold>0.3</Threshold>
     <iconPath>UI/Background/SoulmeterNodeWarptouched</iconPath>
   </Corruption.Core.Soul.SoulAfflictionDef>
@@ -35,7 +35,7 @@
   <Corruption.Core.Soul.SoulAfflictionDef>
     <defName>Corrupted</defName>
     <label>corrupted</label>
-    <description>This pawn is pure of soul, untouched by any temptations of the Warp.</description>
+    <description>This pawn's soul has been corrupted by the Ruinous Powers.</description>
     <Threshold>0.9</Threshold>
     <iconPath>UI/Background/SoulmeterNodeCorrupted</iconPath>
   </Corruption.Core.Soul.SoulAfflictionDef>
@@ -43,7 +43,7 @@
   <Corruption.Core.Soul.SoulAfflictionDef>
     <defName>Lost</defName>
     <label>lost soul</label>
-    <description>This pawn is pure of soul, untouched by any temptations of the Warp.</description>
+    <description>This pawn's soul is forever lost to the Ruinous Powers.</description>
     <Threshold>1.0</Threshold>
     <iconPath>UI/Background/SoulmeterNodeLost</iconPath>
   </Corruption.Core.Soul.SoulAfflictionDef>

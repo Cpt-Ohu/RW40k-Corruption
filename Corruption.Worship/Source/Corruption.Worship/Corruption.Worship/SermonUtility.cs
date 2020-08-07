@@ -13,7 +13,6 @@ using Verse.AI.Group;
 
 namespace Corruption.Worship
 {
-
     public static class SermonUtility
     {
         private const float SermonAreaIfNotInside = 15f;
@@ -26,6 +25,13 @@ namespace Corruption.Worship
             {
                 return Find.World.GetComponent<GlobalWorshipTracker>();
             }
+        }
+
+        public static IEnumerable<SermonTemplate> StandardTemplates()
+        {
+            yield return new SermonTemplate(new IntRange(6, 10), false, 6, 1f, WorshipActType.MorningPrayer);             
+            yield return new SermonTemplate(new IntRange(12, 13), false, 12, 1f, WorshipActType.None );
+            yield return new SermonTemplate(new IntRange(18, 22), false, 19, 1f, WorshipActType.EveningPrayer );
         }
 
         public static List<Building> FreeChairsInRoom(Room room)
@@ -140,28 +146,20 @@ namespace Corruption.Worship
             float num = 0f;
             if (movingSermon(preacher))
             {
-                num -= 10f;
+                num = 100f;
             }
             else
             {
-                num -= 5f;
-            }
-
+                num = 50f;
+            };
             soul.GainCorruption(num);
-            SermonUtility.GlobalWorship.TryAddFavor(altar.DedicatedTo, num * 10000);
-            altar.records.Increment(WorshipRecordDefOf.SermonAttendees);
-            preacher.records.Increment(WorshipRecordDefOf.SermonAttendees);
             if (worshipActType == WorshipActType.Confession)
             {
                 CompSoul.TryDiscoverAlignment(preacher, pawn, -0.2f);
             }
-            else
-            {
-                pawn.needs.mood.thoughts.memories.TryGainMemory(SermonUtility.GetSermonThoughts(preacher, pawn, altar.DedicatedTo));
-            }
         }
 
-        public static void HoldSermonTickCheckEnd(Pawn preacher, GodDef god, BuildingAltar altar)
+        public static void HoldSermonTickCheckEnd(SermonTemplate sermon, Pawn preacher, GodDef god, BuildingAltar altar)
         {
             var soul = preacher.Soul();
             if (soul == null)
@@ -173,17 +171,16 @@ namespace Corruption.Worship
 
             foreach (Pawn l in altar.Map.mapPawns.AllPawnsSpawned.FindAll(x => x.Position.InHorDistOf(preacher.Position, 20f) == true))
             {
-                num -= 2f;
+                num += 20f;
             }
 
             if (movingSermon(preacher))
             {
-                num -= 100f;
+                num += 150f;
             }
 
+            num *= sermon.DedicatedTo.favourCorruptionFactor;
             soul.GainCorruption(num);
-            SermonUtility.GlobalWorship.TryAddFavor(god, num * 10000);
-            altar.activeSermon = false;
         }
 
         public static bool ShouldAttendSermon(Pawn pawn, Pawn preacher)
@@ -194,62 +191,67 @@ namespace Corruption.Worship
                 {
                     return false;
                 }
-                if (!pawn.Drafted)
+                if (pawn.Drafted)
                 {
-                    int num = 0;
-                    CompSoul soul = pawn.Soul();
+                    return false;
+                }
+                int num = 0;
+                CompSoul soul = pawn.Soul();
 
-                    switch (soul.DevotionDegree)
-                    {
-                        case -2:
-                            {
-                                num = 0;
-                                break;
-                            }
-                        case -1:
-                            {
-                                num = 5;
-                                break;
-                            }
-                        case 0:
-                            {
-                                num = 10;
-                                break;
-                            }
-                        case 1:
-                            {
-                                num = 15;
-                                break;
-                            }
-                        case 2:
-                            {
-                                num = 20;
-                                break;
-                            }
-                    }
-
-                    if (pawn.CurJob.playerForced)
-                    {
-                        num = 0;
-                        if (soul.DevotionDegree == 2)
+                switch (soul.DevotionDegree)
+                {
+                    case -2:
                         {
-                            num = 10;
+                            num -= 10;
+                            break;
                         }
-                    }
+                    case -1:
+                        {
+                            num -= 5;
+                            break;
+                        }
+                    case 1:
+                        {
+                            num += 10;
+                            break;
+                        }
+                    case 2:
+                        {
+                            num += 20;
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+                }
 
-                    if (pawn.CurJob.def == JobDefOf.AttendSermon)
+                if (pawn.CurJob.playerForced)
+                {
+                    num = 0;
+                    if (soul.DevotionDegree == 2)
                     {
-                        num = 0;
+                        num += 10;
                     }
+                }
 
-                    if (!SermonUtility.IsBestPreacher(pawn, preacher))
-                    {
-                        num = 0;
-                    }
-                    if ((Rand.RangeInclusive(0, 15) + num) >= 20)
-                    {
-                        return true;
-                    }
+                if (pawn.CurJob?.def.joyKind != null || pawn.CurJob?.workGiverDef == null)
+                {
+                    num = +10;
+                }
+                if (pawn.CurJob.def == JobDefOf.AttendSermon)
+                {
+                    num = 0;
+                }
+
+                if (!SermonUtility.IsBestPreacher(pawn, preacher))
+                {
+                    num -= 2;
+                }
+                Log.Message("Final Value for: " + pawn.Label + " " + num.ToString());
+                if ((Rand.RangeInclusive(2, 5) + num) >= 5)
+                {
+                    return true;
                 }
             }
             return false;
@@ -296,18 +298,10 @@ namespace Corruption.Worship
             return false;
         }
 
-        public static void ForceSermon(BuildingAltar altar, WorshipActType worshipActType)
+        public static bool ForceSermon(BuildingAltar altar, WorshipActType worshipActType)
         {
-            altar.activeSermon = true;
-            List<Pawn> list = new List<Pawn>();
-            if (!list.Contains(altar.preacher))
-            {
-                list.Add(altar.preacher);
-            }
-            list.AddRange(SermonUtility.GetSermonFlock(altar));
-
-            Lord lord = LordMaker.MakeNewLord(altar.Faction, new LordJob_Sermon(altar, worshipActType), altar.Map, list);
-        }
+            return altar.Map.lordsStarter.TryStartGathering(GatheringDefOf.Sermon);
+       }
 
         public static void ForceSermonV2(BuildingAltar altar)
         {

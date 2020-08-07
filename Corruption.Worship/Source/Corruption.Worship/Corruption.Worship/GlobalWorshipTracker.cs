@@ -1,6 +1,7 @@
 ﻿using Corruption.Core.Gods;
 using Corruption.Core.Soul;
 using JetBrains.Annotations;
+using RimWorld;
 using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
@@ -79,11 +80,11 @@ namespace Corruption.Worship
             var favor = this.Favours.FirstOrDefault(x => x.God == god);
             if (favor == null)
             {
-                this.Favours.Add(new FavourProgress(god, value));
+                favor = new FavourProgress(god, value);
+                this.Favours.Add(favor);
             }
-            else
+            if (favor.TryAddProgress(value))
             {
-                favor.TryAddProgress(value);
                 pawn?.records.AddTo(WorshipRecordDefOf.GlobalFavourContributed, value);
             }
         }
@@ -91,11 +92,24 @@ namespace Corruption.Worship
         public override void WorldComponentTick()
         {
             base.WorldComponentTick();
+            int curTick = Find.TickManager.TicksGame;
+            if (curTick % GenDate.TicksPerDay == 0)
+            {
+
+                foreach (var attribute in playerPantheon.pantheonAttributes.Where(x => x.effectWorker != null))
+                {
+                    if (Find.TickManager.TicksGame % attribute.effectTick == 0)
+                    {
+                        attribute.effectWorker.TickDay();
+                    }
+                }
+            }
+            else if (curTick % 2500 == 0)
             foreach (var attribute in playerPantheon.pantheonAttributes.Where(x => x.effectWorker != null))
             {
                 if (Find.TickManager.TicksGame % attribute.effectTick == 0)
                 {
-                    attribute.effectWorker.Tick();
+                    attribute.effectWorker.TickLong();
                 }
             }
         }

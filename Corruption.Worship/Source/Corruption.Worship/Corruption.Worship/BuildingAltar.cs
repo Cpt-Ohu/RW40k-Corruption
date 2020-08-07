@@ -11,40 +11,23 @@ namespace Corruption.Worship
 {
     public class BuildingAltar : Building
     {
-        public bool OptionMorning = false;
+        public SermonTemplate CurrentActiveSermon;
 
-        public bool OptionEvening = false;
+        public List<SermonTemplate> Templates = new List<SermonTemplate>();
 
-        private bool HeldSermon;
-
-        public bool activeSermon;
+        public bool SermonActive => this.CurrentActiveSermon != null;
 
         public string RoomName;
 
-        public bool CalledInFlock = false;
-
         public Pawn preacher = null;
-
-        public GodDef DedicatedTo = GodDefOf.Emperor;
 
         public Altar_RecordsTracker records = new Altar_RecordsTracker();
 
-        public bool DoMorningSermon
+        public override void PostMake()
         {
-            get
-            {
-                return (OptionMorning && (GenLocalDate.HourFloat(this.Map) < 6 && GenLocalDate.HourFloat(this.Map) > 10));
-            }
+            base.PostMake();
+            this.Templates.AddRange(SermonUtility.StandardTemplates().ToList());
         }
-
-        public bool DoEveningSermon
-        {
-            get
-            {
-                return (OptionEvening && (GenLocalDate.HourFloat(this.Map) < 18 && GenLocalDate.HourFloat(this.Map) > 22));
-            }
-        }
-
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
@@ -56,39 +39,32 @@ namespace Corruption.Worship
             TickManager f = Find.TickManager;
 
             f.RegisterAllTickabilityFor(this);
+            LessonAutoActivator.TeachOpportunity(WorshipConceptDefOf.AltarKnowledge, OpportunityType.GoodToKnow);
 
         }
 
-        public override void Tick()
+        public override void TickLong()
         {
             base.Tick();
-            if (this.OptionMorning)
+            if (!this.Spawned)
             {
-                if (Rand.RangeInclusive(6, 10) == GenLocalDate.HourFloat(this.Map))
-                {
-                    if (!HeldSermon)
-                    {
-                        SermonUtility.ForceSermon(this, Worship.WorshipActType.MorningPrayer);
-                        this.HeldSermon = true;
-                    }
-                }
+                return;
             }
 
-            if (this.OptionEvening)
+            if (this.CurrentActiveSermon == null)
             {
-                if (Rand.RangeInclusive(18, 22) == GenLocalDate.HourFloat(this.Map))
+                float curHour = GenLocalDate.HourFloat(this.Map);
+                foreach (var template in this.Templates)
                 {
-                    if (!HeldSermon)
+                    if (template.Active && (int)curHour == template.PreferredStartTime)
                     {
-                        SermonUtility.ForceSermon(this, Worship.WorshipActType.EveningPrayer);
-                        this.HeldSermon = true;
+                        if (SermonUtility.ForceSermon(this, template.WorshipAct))
+                        {
+                            this.CurrentActiveSermon = template;
+                            break;
+                        }
                     }
                 }
-            }
-
-            if (GenLocalDate.HourFloat(this.Map) == 1 || GenLocalDate.HourFloat(this.Map) == 12)
-            {
-                this.HeldSermon = false;
             }
         }
 
@@ -99,13 +75,8 @@ namespace Corruption.Worship
             Scribe_References.Look<Pawn>(ref this.preacher, "preacher", false);
             Scribe_Deep.Look<Altar_RecordsTracker>(ref this.records, "records");
             Scribe_Values.Look<string>(ref this.RoomName, "RoomName", "Temple", false);
-            Scribe_Values.Look<bool>(ref this.OptionEvening, "OptionEvening", false, false);
-            Scribe_Values.Look<bool>(ref this.OptionMorning, "OptionMorning", false, false);
-            Scribe_Values.Look<bool>(ref this.HeldSermon, "HeldSermon", true, false);
-            Scribe_Values.Look<bool>(ref this.CalledInFlock, "CalledInFlock", false, false);
-
-            Scribe_Values.Look<bool>(ref this.HeldSermon, "HeldSermon", true, false);
-
+            Scribe_Deep.Look<SermonTemplate>(ref this.CurrentActiveSermon, "CurrentActiveSermon");
+            Scribe_Collections.Look<SermonTemplate>(ref this.Templates, "Templates", LookMode.Deep);
         }
     }
 }

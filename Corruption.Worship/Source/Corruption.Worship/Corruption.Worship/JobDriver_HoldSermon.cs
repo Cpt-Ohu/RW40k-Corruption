@@ -1,4 +1,5 @@
 ﻿using Corruption.Core.Gods;
+using Corruption.Core.Soul;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ namespace Corruption.Worship
     {
         private TargetIndex AltarIndex = TargetIndex.A;
         private TargetIndex AltarInteractionCell = TargetIndex.B;
+
+        private Effecter effecter;
+        private CompShrine CompShrine => ((ThingWithComps)this.TargetA).GetComp<CompShrine>();
 
         public override void ExposeData()
         {
@@ -38,26 +42,33 @@ namespace Corruption.Worship
             yield return gotoAltarToil;
 
             BuildingAltar altar = this.TargetA.Thing as BuildingAltar;
-            GodDef god = altar.DedicatedTo;
+            GodDef god = altar.CurrentActiveSermon.DedicatedTo;
             var altarToil = new Toil();
+            altarToil.FailOn(() => altar.CurrentActiveSermon == null);
             altarToil.defaultCompleteMode = ToilCompleteMode.Delay;
             altarToil.defaultDuration = this.job.def.joyDuration;
+            altarToil.PlaySustainerOrSound(Core.CoreSoundDefOf.PrayerSustainer);
             altarToil.AddPreTickAction(() =>
             {
                 this.pawn.rotationTracker.FaceCell(this.TargetA.Cell);
                 this.pawn.GainComfortFromCellIfPossible();
                 ThrowPreacherMote(this.pawn, god);
+
+                if (this.CompShrine != null)
+                {
+                    this.pawn.Soul()?.GainCorruption(god.favourCorruptionFactor * this.CompShrine.CompProps.worshipFactor, this.CompShrine.God);
+                }
             });
             yield return altarToil;
 
             this.AddFinishAction(() =>
             {
-                altar.CalledInFlock = false;
                 SermonUtility.HoldSermonTickCheckEnd(this.pawn, god, altar);
                 this.pawn.records.Increment(WorshipRecordDefOf.SermonsHeldPawn);
                 altar.records.Increment(WorshipRecordDefOf.SermonsHeldAltar);
             });
         }
+
 
         protected void ThrowPreacherMote(Pawn pawn, GodDef god)
         {

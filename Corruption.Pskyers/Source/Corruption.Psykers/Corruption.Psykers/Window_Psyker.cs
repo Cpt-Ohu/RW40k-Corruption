@@ -1,4 +1,6 @@
-﻿using RimWorld;
+﻿using Corruption.Core;
+using Corruption.Core.Soul;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,7 @@ using TMPro;
 using UnityEngine;
 using Verse;
 using Verse.Noise;
+using Verse.Sound;
 
 namespace Corruption.Psykers
 {
@@ -25,6 +28,10 @@ namespace Corruption.Psykers
         private int psykerPowerLevel;
 
         private static Vector2 descrScrollPos;
+
+        private static Color PowerLimitColor = new Color(0.3f, 0.3f, 0.3f, 0.3f);
+
+        private static Texture2D LockedTex = SolidColorMaterials.NewSolidColorTexture(TexUI.LockedResearchColor);
 
         public Window_Psyker(CompPsyker comp)
         {
@@ -203,7 +210,10 @@ namespace Corruption.Psykers
         {
             GUI.BeginGroup(powersRect);
 
+            Widgets.DrawLineVertical(16f, 16f, 50f * PsykerTraitDefOf.Psyker.degreeDatas.Count);
+
             DrawPowerLevels(powersRect);
+
 
             foreach (var learnablePower in this.selectedDiscipline.abilities)
             {
@@ -259,11 +269,11 @@ namespace Corruption.Psykers
             {
                 //Rect selectedTitleRect = new Rect(0f, 316f, powersRect.width, Text.LineHeight);
                 //Rect descrRect = new Rect(0f, selectedTitleRect.yMax + 4f, powersRect.width, Text.LineHeight * 2);
-                Rect costRect = new Rect(0f, 318f, powersRect.width, Text.LineHeight);
+                Rect costRect = new Rect(64f, 318f, powersRect.width - 64f, Text.LineHeight);
                 //Widgets.Label(selectedTitleRect, this.selectedPower.ability.LabelCap);
                 //Widgets.TextAreaScrollable(descrRect, this.selectedPower.ability.description, ref descrScrollPos, true);
                 Widgets.Label(costRect, "LearnPowerCost".Translate(new NamedArgument((int)(this.selectedPower.cost), "COST")));
-                Rect buttonRect = new Rect(0f, costRect.yMax + 4f, 196f, 32f);
+                Rect buttonRect = new Rect(64f, costRect.yMax + 4f, 196f, 32f);
 
 
                 if (this.selectedPower.ability.level > this.comp.PsykerPowerTrait.Degree)
@@ -296,7 +306,10 @@ namespace Corruption.Psykers
                 {
                     if (Widgets.ButtonText(buttonRect, "LearnPower".Translate()))
                     {
-                        this.comp.TryLearnPower(this.selectedPower);
+                        if (this.comp.TryLearnPower(this.selectedPower))
+                        {
+                            CoreSoundDefOf.Corruption_UnlockMinor.PlayOneShotOnCamera();
+                        }
                     }
                 }
 
@@ -316,35 +329,75 @@ namespace Corruption.Psykers
 
         private void DrawPowerLevels(Rect inRect)
         {
-            var levelRect = new Rect(0f, 9f, 32f, 32f);
-            Widgets.DrawLineHorizontal(4f, 25f, inRect.width - 8f);
+            float offset = 50f;
+            float lineY = 25f;
+
+            Rect powerLimitRect = new Rect(0f, 0f, inRect.width - 4f, (PsykerTraitDefOf.Psyker.degreeDatas.Max(x => x.degree) - this.comp.PsykerPowerTrait.Degree) / 10 * offset);
+            Widgets.DrawBoxSolid(powerLimitRect, PowerLimitColor);
+
+            Rect barRect = new Rect(0f, 0f, 48f, offset * PsykerTraitDefOf.Psyker.degreeDatas.Count);
+            float curDegree = comp.PsykerPowerTrait.Degree;
+            float maxDegree = PsykerTraitDefOf.Psyker.degreeDatas.Max(x => x.degree);
+            WidgetExtensions.FillableVerticalBar(barRect, curDegree / maxDegree, selectedDiscipline.MainTex, LockedTex, true);
+
+            var levelRect = new Rect(8f, 9f, 32f, 32f);
+            Widgets.DrawLineHorizontal(12f, lineY, inRect.width - 16f);
             GUI.DrawTexture(levelRect, PsykerUtility.PowerLevelBeta);
             TooltipHandler.TipRegion(levelRect, new TipSignal("Beta"));
 
-            levelRect.y += 50f;
-            Widgets.DrawLineHorizontal(4f, 75f, inRect.width - 8f);
+            levelRect.y += offset;
+            lineY += offset;
+            Widgets.DrawLineHorizontal(12f, lineY, inRect.width - 16f);
             GUI.DrawTexture(levelRect, PsykerUtility.PowerLevelDelta);
             TooltipHandler.TipRegion(levelRect, new TipSignal("Delta"));
 
-            levelRect.y += 50f;
-            Widgets.DrawLineHorizontal(4f, 125f, inRect.width - 8f);
+            levelRect.y += offset;
+            lineY += offset;
+            Widgets.DrawLineHorizontal(12f, lineY, inRect.width - 16f);
             GUI.DrawTexture(levelRect, PsykerUtility.PowerLevelEpsilon);
             TooltipHandler.TipRegion(levelRect, new TipSignal("Epsilon"));
 
-            levelRect.y += 50f;
-            Widgets.DrawLineHorizontal(4f, 175f, inRect.width - 8f);
+            levelRect.y += offset;
+            lineY += offset;
+            Widgets.DrawLineHorizontal(12f, lineY, inRect.width - 16f);
             GUI.DrawTexture(levelRect, PsykerUtility.PowerLevelZeta);
             TooltipHandler.TipRegion(levelRect, new TipSignal("Zeta"));
 
-            levelRect.y += 50f;
-            Widgets.DrawLineHorizontal(4f, 225f, inRect.width - 8f);
+            levelRect.y += offset;
+            lineY += offset;
+            Widgets.DrawLineHorizontal(12f, lineY, inRect.width - 16f);
             GUI.DrawTexture(levelRect, PsykerUtility.PowerLevelIota);
             TooltipHandler.TipRegion(levelRect, new TipSignal("Iota"));
 
-            levelRect.y += 50f;
-            Widgets.DrawLineHorizontal(4f, 275f, inRect.width - 8f);
+            levelRect.y += offset;
+            lineY += offset;
+            Widgets.DrawLineHorizontal(12f, lineY, inRect.width - 16f);
             GUI.DrawTexture(levelRect, PsykerUtility.PowerLevelKappa);
             TooltipHandler.TipRegion(levelRect, new TipSignal("Kappa"));
+
+            Rect upgradePsykerLevelRect = new Rect(0f, levelRect.yMax + 1f, 48f, 48f);
+
+            float upgradeCost = PsykerUtility.PowerLevelCostCurve.Evaluate(curDegree + 10);
+            if (comp.PsykerXP < upgradeCost)
+            {
+                if (Widgets.ButtonTextSubtle(upgradePsykerLevelRect, "+", comp.PsykerXP / upgradeCost, upgradePsykerLevelRect.width / 2f - 2f))
+                {
+                    Messages.Message("PsykerLearnXPShortage".Translate(), MessageTypeDefOf.RejectInput, false);
+                }
+            }
+            else if (Widgets.ButtonText(upgradePsykerLevelRect, "+", true, true, comp.PsykerXP >= PsykerUtility.PowerLevelCostCurve.Evaluate(curDegree + 10) && curDegree < maxDegree))
+            {
+                int prevDegree = comp.PsykerPowerTrait.Degree;
+                comp.Pawn.story.traits.allTraits.Remove(comp.PsykerPowerTrait);
+                comp.Pawn.story.traits.GainTrait(new Trait(PsykerTraitDefOf.Psyker, prevDegree + 10, true));
+                comp.PsykerXP -= upgradeCost;
+                CoreSoundDefOf.Corruption_UnlockMajor.PlayOneShotOnCamera();
+            }
+
+            TooltipHandler.TipRegion(upgradePsykerLevelRect, new TipSignal("UpgradePsykerLevel".Translate(upgradeCost)));
+
+
+
         }
 
         private Dictionary<int, float> powerLevelYLookup = new Dictionary<int, float>()

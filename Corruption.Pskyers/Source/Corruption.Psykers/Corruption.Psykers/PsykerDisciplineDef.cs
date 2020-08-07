@@ -26,11 +26,13 @@ namespace Corruption.Psykers
 
         public string practitionerTitle;
 
-        public Color color = Color.white;
+        public Color color = Color.gray;
 
         public string iconPath;
 
         public Texture2D Icon = BaseContent.BadTex;
+
+        public Texture2D MainTex { get; private set; }
 
         public override void ResolveReferences()
         {
@@ -38,6 +40,7 @@ namespace Corruption.Psykers
             LongEventHandler.ExecuteWhenFinished(delegate
             {
                 this.Icon = ContentFinder<Texture2D>.Get(this.iconPath);
+                this.MainTex = SolidColorMaterials.NewSolidColorTexture(this.color);
             });
         }
 

@@ -31,8 +31,10 @@ namespace Corruption.Core.Soul
             }
 
             worship.TryAddProgress(change);
-            god.FavourWorker.PostGainFavour(this.Soul, change);
-
+            foreach (var worker in CorruptionStoryTracker.Current.Gods[god].FavourWorkers)
+            {
+                worker.PostGainFavour(this.Soul, change, god);
+            }
         }
 
         public IEnumerable<FavourProgress> FavorProgressForChosenPantheon()

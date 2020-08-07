@@ -22,4 +22,11 @@
   <SetWorshipPoints>Set points to spend</SetWorshipPoints>
   <RotateThingRight>Rotate Right</RotateThingRight>
   <RotateThingRightDesc>Rotate this object to the righ.</RotateThingRightDesc>
+  <TzeentchRevolutionDescription>A sudden shift of government has caused a change in relations.</TzeentchRevolutionDescription>
+  <SelectReligion>Select Religion</SelectReligion>
+  <MessageWonderPointsMissing>Not enough favour</MessageWonderPointsMissing>
+  <LordReportListeningSermon>Listening to Sermon</LordReportListeningSermon>
+  <LordReportGivingSermon>Holding Sermon</LordReportGivingSermon>
+  <MessageSermonCancelled>A sermon was cancelled</MessageSermonCancelled>
+  <SermonFinished>Preacher {0} finished a {1}</SermonFinished>
 </LanguageData>

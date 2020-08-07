@@ -81,6 +81,15 @@ namespace Corruption.Psykers
             {60, "Beta" }
         };
 
+        public static SimpleCurve PowerLevelCostCurve = new SimpleCurve(){
+            new CurvePoint(10f,100f),
+            new CurvePoint(20f,1000f),
+            new CurvePoint(30f,2000f),
+            new CurvePoint(40f,5000f),
+            new CurvePoint(50f,9000f),
+            new CurvePoint(60f,50000f)
+        };
+
         public static bool TryGetAbilityOpportunity(Pawn pawn, out AbilityOpportunity opportunity)
         {
             if (!pawn.CompPsyker()?.ShouldAutoCast ?? false)

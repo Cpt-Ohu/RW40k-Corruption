@@ -14,6 +14,10 @@ namespace Corruption.Psykers
         {
         }
 
+        public PsykerCastAoE(Pawn pawn) : base(pawn)
+        {
+        }
+
         protected override void ApplyEffects(IEnumerable<CompAbilityEffect> effects, LocalTargetInfo target, LocalTargetInfo dest)
         {
             var effectAoE = effects.FirstOrDefault(x => x is CompAbilityEffect_AroundPsyker);

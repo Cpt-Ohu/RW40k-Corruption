@@ -39,7 +39,7 @@
     <label>exorcise daemon</label>
     <description>Exorcies a daemon.</description>
     <effectWorking>Exorcise</effectWorking>
-    <soundWorking>Recipe_Exorcise</soundWorking>
+    <soundWorking>PrayerSustainer</soundWorking>
     <workSpeedStat>MedicalOperationSpeed</workSpeedStat>
     <workSkill>Intellectual</workSkill>
     <targetsBodyPart>false</targetsBodyPart>

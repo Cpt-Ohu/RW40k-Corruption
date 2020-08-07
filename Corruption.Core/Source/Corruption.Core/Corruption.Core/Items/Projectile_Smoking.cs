@@ -81,7 +81,7 @@ namespace Corruption.Core.Items
                 Graphics.DrawMesh(MeshPool.plane10, this.ActualPosition, this.ExactRotation, this.def.DrawMatSingle, 2);
             }
             if (this.SmokeMaterial != null)
-            { 
+            {
                 Graphics.DrawMesh(drawingMesh, this.SmokeDrawingPos, this.ExactRotation, FadedMaterialPool.FadedVersionOf(this.smokeMaterialInt.MatSingle, this.drawingIntensity), 2);
             }
         }
@@ -101,9 +101,10 @@ namespace Corruption.Core.Items
         }
 
         public override void Tick()
-        { try
+        {
+            try
             {
-                this.DoBaseTick();
+                //this.DoBaseTick();
                 if (tickCounter == 0)
                 {
                     GetParametersFromXml();
@@ -144,7 +145,7 @@ namespace Corruption.Core.Items
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 this.Destroy(DestroyMode.Vanish);
             }
@@ -192,12 +193,17 @@ namespace Corruption.Core.Items
             this.istraveling = false;
         }
 
+        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
+        {;
+            base.DeSpawn(mode);
+        }
+
         protected virtual void Explode()
         {
             Map map = base.Map;
             ThingDef preExplosionSpawnThingDef = this.def.projectile.preExplosionSpawnThingDef;
             float explosionSpawnChance = this.def.projectile.postExplosionSpawnChance;
-            GenExplosion.DoExplosion(base.Position, map, this.def.projectile.explosionRadius, this.def.projectile.damageDef, this.launcher, base.DamageAmount,base.ArmorPenetration, this.def.projectile.soundExplode, this.def, this.equipmentDef,this.intendedTarget.Thing, this.def.projectile.postExplosionSpawnThingDef, this.def.projectile.postExplosionSpawnChance, 1, false, preExplosionSpawnThingDef, explosionSpawnChance, 1);
+            GenExplosion.DoExplosion(base.Position, map, this.def.projectile.explosionRadius, this.def.projectile.damageDef, this.launcher, base.DamageAmount, base.ArmorPenetration, this.def.projectile.soundExplode, this.def, this.equipmentDef, this.intendedTarget.Thing, this.def.projectile.postExplosionSpawnThingDef, this.def.projectile.postExplosionSpawnChance, 1, false, preExplosionSpawnThingDef, explosionSpawnChance, 1);
         }
 
         public override void ExposeData()

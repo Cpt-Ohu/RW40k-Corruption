@@ -86,6 +86,9 @@
     <defName>SlaaneshChampion</defName>
     <commonality>0</commonality>
     <ignoreConfigErrors>true</ignoreConfigErrors>
+    <conflictingTraits>
+      <li>Ascetic</li>
+    </conflictingTraits>
     <degreeDatas>
       <li>
         <label>Champion of Slaanesh</label>

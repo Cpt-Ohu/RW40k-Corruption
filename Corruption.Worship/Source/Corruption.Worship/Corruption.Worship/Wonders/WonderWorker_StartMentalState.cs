@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using Corruption.Core.Gods;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Corruption.Worship.Wonders
             };
         }
 
-        protected override void TryDoEffectOnTarget(int worshipPoints)
+        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
             Pawn pawn = (Pawn)this.target.Thing;
             pawn.mindState.mentalStateHandler.TryStartMentalState(this.Def.mentalStateToStart, null, true);

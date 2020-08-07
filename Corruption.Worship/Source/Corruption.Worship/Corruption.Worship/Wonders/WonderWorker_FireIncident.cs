@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using Corruption.Core.Gods;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,21 @@ namespace Corruption.Worship.Wonders
             };
         }
 
-        protected override void TryDoEffectOnTarget(int worshipPoints)
+        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
             IncidentParms incidentParms = new IncidentParms();
             incidentParms.target = this.target.Map;
             incidentParms.points = this.Def.ResolveWonderPoints(worshipPoints);
-            this.Def.incident.Worker.TryExecute(incidentParms);
+            if (!this.Def.incident.Worker.CanFireNow(incidentParms))
+            {
+                GlobalWorshipTracker.Current.TryAddFavor(god, worshipPoints);
+                return;
+            }
+            if (this.Def.incident.Worker.TryExecute(incidentParms) == false)
+            {
+                GlobalWorshipTracker.Current.TryAddFavor(god, worshipPoints);
+            }
+
         }
     }
 }

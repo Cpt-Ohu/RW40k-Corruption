@@ -1,123 +1,200 @@
-﻿using RimWorld;
+﻿using Corruption.Core.Soul;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
+using Verse.AI;
 using Verse.AI.Group;
 
 namespace Corruption.Worship
 {
-
-    public class LordJob_Sermon : LordJob
+    public class LordJob_Sermon : LordJob_Joinable_Speech
     {
-        public const int ticksToTimeout = 5000;
-
-        public LordJob_Sermon()
-        {
-        }
-
-        public LordJob_Sermon(BuildingAltar altar, WorshipActType worshipType)
-        {
-            this.altar = altar;
-            if (this.altar != null)
-            {
-                this.initialPosition = (WatchBuildingUtility.CalculateWatchCells(altar.def, altar.Position, altar.Rotation, altar.Map)).RandomElement();
-            }
-            else
-            {
-                this.initialPosition = IntVec3.Invalid;
-            }
-            this.worshipType = worshipType;
-        }
-
-        private WorshipActType worshipType;
-
         public BuildingAltar altar;
 
-        public Pawn Preacher
+        private const float durationHours = 0.5f;
+
+        public LordJob_Sermon() { }
+
+        public LordJob_Sermon(BuildingAltar altar, IntVec3 spot, Pawn organizer, GatheringDef gatheringDef) : base(spot, organizer, gatheringDef)
         {
-            get
-            {
-                if (this.altar != null)
-                {
-                    return this.altar.preacher;
-                }
-                return null;
-            }
+            this.altar = altar;
         }
 
-        private string SermonMessageString
+        protected override void ApplyOutcome(float progress)
         {
-            get
+            this.altar.CurrentActiveSermon = null;
+            if (progress < 0.5f)
             {
-                switch (this.worshipType)
+                Messages.Message("MessageSermonCancelled", MessageTypeDefOf.RejectInput, false);
+                return;
+            }
+            ThoughtDef key = OutcomeThoughtChances.RandomElementByWeight((KeyValuePair<ThoughtDef, float> t) => (!PositiveOutcome(t.Key)) ? OutcomeThoughtChances[t.Key] : (OutcomeThoughtChances[t.Key] * organizer.GetStatValue(StatDefOf.SocialImpact) * progress)).Key;
+            foreach (Pawn ownedPawn in lord.ownedPawns)
+            {
+                if (ownedPawn != organizer && organizer.Position.InHorDistOf(ownedPawn.Position, 18f))
                 {
-                    case WorshipActType.MorningPrayer:
-                        {
-                            return "MorningPrayer".Translate();
-                        }
-
-                    case WorshipActType.EveningPrayer:
-                        {
-                            return "EveningPrayer".Translate();
-                        }
-
-                    case WorshipActType.Confession:
-                        {
-                            return "PreacherConfession".Translate();
-                        }
+                    ownedPawn.needs.mood.thoughts.memories.TryGainMemory(key, organizer);
                 }
-                return "";
             }
         }
-
-        private IntVec3 initialPosition;
 
         public override StateGraph CreateGraph()
         {
-            string message = "StartedSermonMessage".Translate(this.Preacher.Name, this.SermonMessageString, this.altar.RoomName);
-            
-            Messages.Message(message, this.altar, MessageTypeDefOf.PositiveEvent);
             StateGraph stateGraph = new StateGraph();
-            LordToil startingToil = new LordToil_TravelUrgent(this.altar.Position);
-            stateGraph.AddToil(startingToil);
-            stateGraph.StartingToil = startingToil;
-            LordToil_StartSermom sermonToil = new LordToil_StartSermom(this.Preacher, this.altar);
-            stateGraph.AddToil(sermonToil);
-            Transition startSermonTransition = new Transition(startingToil, sermonToil);
-            startSermonTransition.AddTrigger(new Trigger_Memo("TravelArrived"));
-            stateGraph.AddTransition(startSermonTransition);
+            LordToil lordToil = CreateGatheringToil(spot, organizer, gatheringDef);
+            stateGraph.AddToil(lordToil);
             LordToil_End lordToil_End = new LordToil_End();
             stateGraph.AddToil(lordToil_End);
-            Transition failedTransition = new Transition(startingToil, lordToil_End);
-            failedTransition.AddSource(sermonToil);
-            failedTransition.AddTrigger(new Trigger_TicksPassed(ticksToTimeout));
-            failedTransition.AddTrigger(new Trigger_TickCondition(() => this.ShouldBeCalledOff()));
-            failedTransition.AddTrigger(new Trigger_PawnLostViolently());
-            failedTransition.AddPreAction(new TransitionAction_Message("MessageSermonInterrupted".Translate(), MessageTypeDefOf.NegativeEvent, new TargetInfo(this.altar.Position, base.Map, false)));
-            stateGraph.AddTransition(failedTransition);
-            Transition transition2 = new Transition(sermonToil, lordToil_End);
-            transition2.AddTrigger(new Trigger_TickCondition(() => !this.altar.activeSermon));
-            transition2.AddTrigger(new Trigger_TicksPassed(ticksToTimeout));
-            transition2.AddPreAction(new TransitionAction_Message("MessageSermonFinished".Translate(), MessageTypeDefOf.NegativeEvent, new TargetInfo(this.altar.Position, base.Map, false)));
-
+            float speechDuration = durationHours * GenDate.TicksPerHour;
+            Transition transition = new Transition(lordToil, lordToil_End);
+            transition.AddTrigger(new Trigger_TickCondition(ShouldBeCalledOff));
+            transition.AddTrigger(new Trigger_PawnKilled());
+            transition.AddTrigger(new Trigger_PawnLost(PawnLostCondition.LeftVoluntarily, organizer));
+            transition.AddPreAction(new TransitionAction_Custom((Action)delegate
+            {
+                ApplyOutcome((float)lord.ticksInToil / speechDuration);
+            }));
+            stateGraph.AddTransition(transition);
+            timeoutTrigger = new Trigger_TicksPassedAfterConditionMet((int)speechDuration, () => GatheringsUtility.InGatheringArea(organizer.Position, spot, organizer.Map), 60);
+            Transition transition2 = new Transition(lordToil, lordToil_End);
+            transition2.AddTrigger(timeoutTrigger);
+            transition2.AddPreAction(new TransitionAction_Custom((Action)delegate
+            {
+                ApplyOutcome(1f);
+            }));
             stateGraph.AddTransition(transition2);
             return stateGraph;
         }
 
-        private bool ShouldBeCalledOff()
+
+        public override float VoluntaryJoinPriorityFor(Pawn p)
         {
-            return !GatheringsUtility.AcceptableGameConditionsToContinueGathering(base.Map) || (!this.altar.Position.Roofed(base.Map) && !JoyUtility.EnjoyableOutsideNow(base.Map, null));
+            if (!GatheringsUtility.ShouldPawnKeepGathering(p, gatheringDef))
+            {
+                return 0f;
+            }
+            if (spot.IsForbidden(p))
+            {
+                return 0f;
+            }
+            if (!lord.ownedPawns.Contains(p) && IsGatheringAboutToEnd())
+            {
+                return 0f;
+            }
+
+            float devotionFactor = p.Soul()?.DevotionDegree * 5 ?? 0;
+            float result = 100f + VoluntarilyJoinableLordJobJoinPriorities.SocialGathering + devotionFactor;
+            return result;
+        }
+
+        private bool IsGatheringAboutToEnd()
+        {
+            if (timeoutTrigger.TicksLeft < 600)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool PositiveOutcome(ThoughtDef outcome)
+        {
+            return outcome != WorshipThoughtDefOf.DisturbingSermon && outcome != WorshipThoughtDefOf.UninspiredSermon;
+        }
+
+        public override string GetReport(Pawn pawn)
+        {
+            if (pawn != organizer)
+            {
+                return "LordReportListeningSermon".Translate(organizer.Named("ORGANIZER"));
+            }
+            return "LordReportGivingSermon".Translate();
+        }
+
+        protected override LordToil CreateGatheringToil(IntVec3 spot, Pawn organizer, GatheringDef gatheringDef)
+        {
+            return new LordToil_Sermon(spot, gatheringDef, organizer);
         }
 
         public override void ExposeData()
         {
             base.ExposeData();
             Scribe_References.Look<BuildingAltar>(ref this.altar, "altar");
-            Scribe_Values.Look<IntVec3>(ref this.initialPosition, "initialPosition", IntVec3.Zero);
-            Scribe_Values.Look<WorshipActType>(ref this.worshipType, "worshipType", 0);
+        }
+
+
+        private static readonly Dictionary<ThoughtDef, float> SermonOutcomeThoughtChances = new Dictionary<ThoughtDef, float>
+        {
+            {
+                WorshipThoughtDefOf.UninspiredSermon,
+                0.2f
+            },
+            {
+                WorshipThoughtDefOf.EncouragingSermon,
+                0.6f
+            },
+            {
+                WorshipThoughtDefOf.InspiringSermon,
+                0.2f
+            }
+        };
+    }
+
+    public class LordToil_Sermon : LordToil_Gathering
+    {
+        public Pawn organizer;
+
+        public LordToilData_Speech Data => (LordToilData_Speech)data;
+
+        public LordToil_Sermon(IntVec3 spot, GatheringDef gatheringDef, Pawn organizer) : base(spot, gatheringDef)
+        {
+            this.organizer = organizer;
+            data = new LordToilData_Speech();
+        }
+
+        public override void Init()
+        {
+            base.Init();
+            Data.spectateRect = CellRect.CenteredOn(spot, 0);
+            Rot4 rotation = spot.GetFirstThing<BuildingAltar>(organizer.MapHeld).Rotation;
+            SpectateRectSide asSpectateSide = rotation.Opposite.AsSpectateSide;
+            Data.spectateRectAllowedSides = (SpectateRectSide.All & ~asSpectateSide);
+            Data.spectateRectPreferredSide = rotation.AsSpectateSide;
+        }
+
+        public override ThinkTreeDutyHook VoluntaryJoinDutyHookFor(Pawn p)
+        {
+            if (p == organizer)
+            {
+                return Worship.DutyDefOf.HoldSermon.hook;
+            }
+            return RimWorld.DutyDefOf.Spectate.hook;
+        }
+
+        public override void UpdateAllDuties()
+        {
+            for (int i = 0; i < lord.ownedPawns.Count; i++)
+            {
+                Pawn pawn = lord.ownedPawns[i];
+                if (pawn == organizer)
+                {
+                    BuildingAltar firstThing = spot.GetFirstThing<BuildingAltar>(base.Map);
+                    pawn.mindState.duty = new PawnDuty(DutyDefOf.HoldSermon, firstThing.InteractionCell, firstThing);
+                    pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
+                }
+                else
+                {
+                    PawnDuty pawnDuty = new PawnDuty(DutyDefOf.AttendSermon);
+                    pawnDuty.spectateRect = Data.spectateRect;
+                    pawnDuty.spectateRectAllowedSides = Data.spectateRectAllowedSides;
+                    pawnDuty.spectateRectPreferredSide = Data.spectateRectPreferredSide;
+                    pawn.mindState.duty = pawnDuty;
+                    pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
+                }
+            }
         }
     }
 }

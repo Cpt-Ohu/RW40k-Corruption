@@ -11,7 +11,7 @@ using Verse;
 namespace Corruption.Core
 {
 
-    public class HediffComp_NurglesRot : HediffComp
+    public class HediffComp_NurglesRot : HediffComp_SeverityPerDay
     {
 
         private Pawn Victim;
@@ -41,15 +41,13 @@ namespace Corruption.Core
             base.CompPostTick(ref severityAdjustment);
             if (this.Pawn.def.race.Humanlike)
             {
-                soul.GainCorruption(5f);
-                if (this.parent.Severity > 0.4f)
+                soul.GainCorruption(5f, GodDefOf.Nurgle);
+                if (this.parent.Severity > 0.8f)
                 {
-                    if (soul.CorruptionLevel < 0.5f)
+                    if (soul.Corrupted)
                     {
                         this.Pawn.health.AddHediff(HediffDefOf.MarkNurgle);
-                        soul.ChosenPantheon = PantheonDefOf.Chaos;
-                        soul.TryAddFavorProgress(GodDefOf.Nurgle, 2000f); 
-                        soul.GainCorruption(10000f);
+                        soul.GainCorruption(10000f, GodDefOf.Nurgle);
                         this.parent.Heal(1f);
                     }
                 }
@@ -80,7 +78,7 @@ namespace Corruption.Core
         public override void CompPostTick(ref float severityAdjustment)
         {
             base.CompPostTick(ref severityAdjustment);
-            if (Find.TickManager.TicksGame % 60000 == 0)
+            if (this.Pawn.IsHashIntervalTick(1200))
             {
                 FilthMaker.TryMakeFilth(this.Pawn.DrawPos.ToIntVec3(), this.Pawn.Map, ThingDefOf.Filth_Vomit, 1);
             }

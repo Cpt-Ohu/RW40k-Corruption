@@ -14,7 +14,8 @@ namespace Corruption.Worship
     [StaticConstructorOnStartup]
     public class TempleCardUtility
     {
-        public static Vector2 TempleCardSize = new Vector2(570f, 250f);
+        public static readonly Texture2D Rename = ContentFinder<Texture2D>.Get("UI/Buttons/Rename");
+        public static Vector2 TempleCardSize = new Vector2(570f, 400f);
 
         public static void DrawTempleCard(Rect rect, BuildingAltar altar)
         {
@@ -35,40 +36,37 @@ namespace Corruption.Worship
             {
                 TempleCardUtility.OpenPreacherSelectMenu(altar);
             }
-            Rect rect4 = rect3;
-            rect4.y += 35f;
-            rect4.width = 200f;
-            if (Widgets.ButtonText(rect4, "RenameTemple".Translate(), true, false, true))
+
+            if (altar.Faction == Faction.OfPlayer)
             {
-                Find.WindowStack.Add(new Dialog_RenameTemple(altar));
-            }
-            Rect rectDebug1 = rect4;
-            rectDebug1.y += 25f;
-            if (DebugSettings.godMode)
-            {
-                if (Widgets.ButtonText(rectDebug1, "ForceSermonDebug".Translate(), true, false, true))
+                Rect rect8 = new Rect(rect.width - 36f, 0f, 30f, 30f);
+                TooltipHandler.TipRegion(rect8, () => "RenameTemple".Translate(), altar.thingIDNumber);
+                if (Widgets.ButtonImage(rect8, Rename))
                 {
-                    SermonUtility.ForceSermon(altar, Worship.WorshipActType.MorningPrayer);
-                }
-                Rect rectDebug2 = rectDebug1;
-                rectDebug2.y += 25f;
-                if (Widgets.ButtonText(rectDebug2, "ForceListenersDebug".Translate(), true, false, true))
-                {
-                    TempleCardUtility.ForceListenersTest(altar);
+                    Find.WindowStack.Add(new Dialog_RenameTemple(altar));
                 }
             }
 
-            Rect rect5 = rect4;
-            rect5.x = rect4.xMax + 5f;
-            rect5.width = 200f;
-            rect5.y -= 20f;
-            Widgets.CheckboxLabeled(rect5, "MorningSermons".Translate(), ref altar.OptionMorning, false);
-            Rect rect6 = rect5;
-            rect6.y += 20f;
-            Widgets.CheckboxLabeled(rect6, "EveningSermons".Translate(), ref altar.OptionEvening, false);
+            Rect morningRect = new Rect(0f, rect3.yMax + 4f, rect.width, Text.LineHeight * 2f + 8f);
 
-
+            foreach (var template in altar.Templates)
+            {
+                float curY = DrawSermonTemplate(morningRect, template);
+            }
             GUI.EndGroup();
+        }
+
+        private static float DrawSermonTemplate(Rect morningRect, SermonTemplate template)
+        {
+            Rect valRect = new Rect(morningRect.x, morningRect.y, morningRect.width / 2f, morningRect.height);
+            Widgets.HorizontalSlider(valRect, template.PreferredStartTime, template.AvailableRange.min, template.AvailableRange.max, true, "SermonStartingTime".Translate(),null, null, 1f);
+
+            Rect checkRect = valRect;
+            checkRect.x += valRect.width + 4f;
+
+            Widgets.CheckboxLabeled(checkRect, "Active".Translate(), ref template.Active, false);
+
+            return checkRect.yMax + 4f;
         }
 
         public static string PreacherLabel(BuildingAltar altar)

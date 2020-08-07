@@ -28,23 +28,13 @@ namespace Corruption.Core
             harmony.Patch(AccessTools.Method(typeof(RimWorld.MemoryThoughtHandler), "TryGainMemory", new Type[] { typeof(Thought_Memory), typeof(Pawn) }), null, new HarmonyMethod(typeof(HarmonyPatches), "TryGainMemoryPostfix", null));
             harmony.Patch(AccessTools.Method(typeof(RimWorld.JobGiver_Work), "TryIssueJobPackage", null), null, new HarmonyMethod(typeof(HarmonyPatches), "TryIssueJobPackagePostfix", null));
 
-            var gods = DefDatabase<GodDef>.AllDefs;
-
-            //foreach (var god in gods)
+            //var gods = DefDatabase<GodDef>.AllDefs;
+            //foreach (GodDef god in gods)
             //{
-            //    foreach (var thought in god.pleasedByThought)
+            //    if (!god.FavourWorkers.Any(x => x is GodFavourWorker))
             //    {
-            //        if (thought.description != null)
-            //        {
-            //            thought.description += "\n " + "PleasesGod".Translate(new NamedArgument(god.LabelCap, "GOD"));
-            //        }
-            //        foreach (var stage in thought.stages)
-            //        {
-            //            if (stage.description != null)
-            //            {
-            //                stage.description += "PleasesGod".Translate(new NamedArgument(god.LabelCap, "GOD"));
-            //            }
-            //        }
+            //        god.FavourWorkers.Add(new GodFavourWorker_Global());
+            //        god.ResolveReferences();
             //    }
             //}
         }
@@ -108,7 +98,7 @@ namespace Corruption.Core
             {
                 foreach (var god in DefDatabase<GodDef>.AllDefsListForReading.Where(x => x.pleasedByThought.Contains(newThought.def) || x.pleasedByThoughtTags.Any(y => newThought.def.defName.Contains(y))))
                 {
-                    soul.GainCorruption(god.favourCorruptionFactor  * 20 * Math.Abs(newThought.MoodOffset() / 10f), god);
+                    soul.GainCorruption(god.favourCorruptionFactor  * 20 * Math.Abs(newThought.CurStage.baseMoodEffect / 10f), god);
                 }
             }
         }

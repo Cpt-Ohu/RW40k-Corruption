@@ -11,15 +11,13 @@ using Verse.AI;
 
 namespace Corruption.Worship
 {
-    public class CompAltar : ThingComp, IThingHolder, IOpenable
+    public class CompShrine : ThingComp, IThingHolder, IOpenable
     {
-
-
-        public CompProperties_Altar CompProps
+        public CompProperties_Shrine CompProps
         {
             get
             {
-                return this.props as CompProperties_Altar;
+                return this.props as CompProperties_Shrine;
             }
         }
 
@@ -43,7 +41,7 @@ namespace Corruption.Worship
 
         protected ThingOwner innerContainer;
 
-        public CompAltar()
+        public CompShrine()
         {
             this.innerContainer = new ThingOwner<Thing>(this, false, LookMode.Deep);
         }
@@ -89,7 +87,7 @@ namespace Corruption.Worship
             {
                 foreach (var effigy in selPawn.inventory.GetDirectlyHeldThings().Where(x => x is ItemEffigy))
                 {
-                    yield return new FloatMenuOption("InstallEffigy".Translate(), delegate
+                    yield return new FloatMenuOption("InstallEffigy".Translate(effigy.Label), delegate
                     {
                         selPawn.inventory.innerContainer.TryDrop(effigy, selPawn.Position, selPawn.Map, ThingPlaceMode.Near, out Thing _);
                         Job job = ItemEffigy.InstallEffigyJob(selPawn, effigy, this.parent);
@@ -99,7 +97,7 @@ namespace Corruption.Worship
 
                 foreach (var effigy in selPawn.Map.listerHaulables.ThingsPotentiallyNeedingHauling().Where(x => x is ItemEffigy))
                 {
-                    yield return new FloatMenuOption("InstallEffigy".Translate(), delegate
+                    yield return new FloatMenuOption("InstallEffigy".Translate(effigy.Label), delegate
                     {
                         Job job = ItemEffigy.InstallEffigyJob(selPawn, effigy, this.parent);
                         selPawn.jobs.StartJob(job, JobCondition.InterruptForced, null, true);
@@ -175,20 +173,19 @@ namespace Corruption.Worship
         }
     }
 
-    public class CompProperties_Altar : CompProperties
+    public class CompProperties_Shrine : CompProperties
     {
         public Vector3 EffigyDrawOffset;
 
-        public float WorshipRatePerTick;
+        public float worshipFactor = 10f;
 
         public bool requiresEffigy = true;
 
         public GodDef dedicatedTo;
 
-        public CompProperties_Altar()
+        public CompProperties_Shrine()
         {
-            this.compClass = typeof(CompAltar);
+            this.compClass = typeof(CompShrine);
         }
-
     }
 }

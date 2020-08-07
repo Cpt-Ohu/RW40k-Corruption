@@ -12,9 +12,7 @@ namespace Corruption.Core.Gods
 {
     public class GodDef : Def
     {
-        private Type favourWorkerClass;
-
-        public GodFavourWorker FavourWorker { get; private set; }
+        public List<Type> favourWorkerClasses = new List<Type>();
 
         public float favourCorruptionFactor = 1f;
 
@@ -58,7 +56,11 @@ namespace Corruption.Core.Gods
 
         public List<string> favourSourceDescriptions = new List<string>();
 
+        public ThingDef effectMote;
+
         public GameConditionDef wonderOverlayDef;
+
+        public List<BuildableDef> UnlockableBuildables = new List<BuildableDef>();
 
         public override void ResolveReferences()
         {
@@ -71,7 +73,6 @@ namespace Corruption.Core.Gods
                 this.prayerMote = ContentFinder<Texture2D>.Get(this.prayerIconPath, true);
                 this.worshipBarFillTexture = SolidColorMaterials.NewSolidColorTexture(this.mainColor);
                 this.buttonTex = ContentFinder<Texture2D>.Get(this.buttonPath, true);
-                this.FavourWorker = (GodFavourWorker)Activator.CreateInstance(this.favourWorkerClass ?? typeof(GodFavourWorker));
             });
         }
     }

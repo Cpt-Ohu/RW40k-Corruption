@@ -303,7 +303,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Output\Assemblies\" />
-    <Folder Include="Output\Defs\RecipeDefs\" />
     <Folder Include="Output\Textures\" />
   </ItemGroup>
   <ItemGroup>
@@ -331,6 +330,7 @@
     <Content Include="Output\Defs\PsykerClassDefs\GenericPsykers.xml" />
     <Content Include="Output\Defs\PsykerDisciplineDefs\PsykerDisciplinesChaos.xml" />
     <Content Include="Output\Defs\PsykerDisciplineDefs\PsykerDisciplinesImperial.xml" />
+    <Content Include="Output\Defs\RecipeDefs\Recipes_Psyker.xml" />
     <Content Include="Output\Defs\ResearchDefs\Research.xml" />
     <Content Include="Output\Defs\ResearchDefs\ResearchTabs.xml" />
     <Content Include="Output\Defs\ScenPartDefs\ScenParts.xml" />
@@ -365,6 +365,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)\Output\*.*" "$(ProjectDir)\..\..\..\" /E /Y /C</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(ProjectDir)\Output\*.*" "$(ProjectDir)\..\..\..\" /E /Y /C
+xcopy "$(ProjectDir)\..\..\..\Assemblies\*.*" "$(ProjectDir)\..\..\..\1.1\Assemblies\" /E /Y /C
+xcopy "$(ProjectDir)\..\..\..\Assemblies\*.*" "$(ProjectDir)\..\..\..\1.2\Assemblies\" /E /Y /C</PostBuildEvent>
   </PropertyGroup>
 </Project>

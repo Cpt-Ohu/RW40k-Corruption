@@ -68,9 +68,6 @@ namespace Corruption.Psykers
                 var patternTarget = (target.Cell + new IntVec3(item.x, 0, item.z)).ToVector3();
                 var fromCenter = patternTarget - targetVector;
                 var rotated = fromCenter.RotatedBy(angleRef);
-                //var targetVector = (target.Cell + new IntVec3(item.x, 0, item.z)).ToVector3();
-
-                //Vector3 rotatedTarget = targetVector.RotatedBy(angleRef);
 
                 yield return (targetVector + rotated).ToIntVec3();
             } 

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 using Verse;
 
 namespace Corruption.Worship.Wonders
@@ -11,6 +12,8 @@ namespace Corruption.Worship.Wonders
     public class WonderWorker_Targetable : WonderWorker
     {
         protected TargetInfo target;
+
+        private bool cancelled = false;
 
         protected virtual TargetingParameters GetTargetingParameters()
         {
@@ -24,22 +27,28 @@ namespace Corruption.Worship.Wonders
 
         protected void StartTargeting(GodDef god, int worshipPoints)
         {
-            if (this.target == null)
+            cancelled = false;
+            if (this.target == null || this.target == TargetInfo.Invalid)
             {
-                Log.Message("Returning Favour");
+                return;
+            }
+            if (!this.GetTargetingParameters().CanTarget(this.target))
+            {
                 GlobalWorshipTracker.Current.TryAddFavor(god, worshipPoints);
                 return;
             }
-            if (this.target != null && !this.GetTargetingParameters().CanTarget(this.target))
+            if (this.target.HasThing)
             {
-                Log.Message("Returning Favour");
-                GlobalWorshipTracker.Current.TryAddFavor(god, worshipPoints);
-                return;
+                MoteMaker.MakeAttachedOverlay(this.target.Thing, god.effectMote, Vector3.zero);
             }
-            TryDoEffectOnTarget(worshipPoints);
+            else
+            {
+                MoteMaker.MakeStaticMote(this.target.Cell, this.target.Map, god.effectMote);
+            }
+            TryDoEffectOnTarget(god, worshipPoints);
         }
 
-        protected virtual void TryDoEffectOnTarget(int worshipPoints)
+        protected virtual void TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
 
         }
@@ -51,12 +60,21 @@ namespace Corruption.Worship.Wonders
 
         public override bool TryExecuteWonder(GodDef god, int worshipPoints)
         {
+            cancelled = true;
             Find.Targeter.BeginTargeting(this.GetTargetingParameters(), delegate (LocalTargetInfo t)
             {
                 this.target = t.ToTargetInfo(Find.CurrentMap);
                 this.StartTargeting(god, worshipPoints);
-            }, null, null, null);
+            },null, delegate { this.CheckCancelled(god, worshipPoints); }, null);
             return true;
+        }
+
+        private void CheckCancelled(GodDef god, int worshipPoints)
+        {
+            if (this.cancelled)
+            {
+                GlobalWorshipTracker.Current.TryAddFavor(god, worshipPoints);
+            }
         }
     }
 }

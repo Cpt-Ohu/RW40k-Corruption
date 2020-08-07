@@ -97,7 +97,84 @@
     </mote>
   </ThingDef>
 
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrownAttached</thingClass>
+    <defName>Mote_Emperor</defName>
+    <graphicData>
+      <texPath>UI/Glow_Emperor</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>2.0</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>0.1</growthRate>
+    </mote>
+  </ThingDef>
 
-  
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrownAttached</thingClass>
+    <defName>Mote_Khorne</defName>
+    <graphicData>
+      <texPath>UI/Glow_Khorne</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>2.0</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>0.1</growthRate>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrownAttached</thingClass>
+    <defName>Mote_Nurgle</defName>
+    <graphicData>
+      <texPath>UI/Glow_Nurgle</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>2.0</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>0.1</growthRate>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrownAttached</thingClass>
+    <defName>Mote_Tzeentch</defName>
+    <graphicData>
+      <texPath>UI/Glow_Tzeentch</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>2.0</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>0.1</growthRate>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrownAttached</thingClass>
+    <defName>Mote_Slaanesh</defName>
+    <graphicData>
+      <texPath>UI/Glow_Slaanesh</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>2.0</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>0.1</growthRate>
+    </mote>
+  </ThingDef>
 
 </Defs>

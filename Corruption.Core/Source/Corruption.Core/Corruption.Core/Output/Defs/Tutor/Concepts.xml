@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <ConceptDef>
+    <defName>SoulKnowledge</defName>
+    <label>Soul</label>
+    <priority>100</priority>
+    <helpText>Pawns of humanlike intelligence may have a projection in the warp. Humankind calls this projection the Soul.\n The soul gets affected by emotions, thoughts and the tucking of the chaotic warp itself. It is a source of great power, and great danger.</helpText>
+  </ConceptDef>
+
+  <ConceptDef>
+    <defName>CorruptionKnowledge</defName>
+    <label>Corruption</label>
+    <priority>100</priority>
+    <helpText>The malign gods of Chaos prey on any soul they can get their hands on. A pawn who lets his emotions and desires get the better of it gains corruption. Corruption is a gradual process, at the end of which the pawn is forever lost, enslaved to Chaos and an enemy of all forces of order.</helpText>
+  </ConceptDef>
+
+  
+</Defs>

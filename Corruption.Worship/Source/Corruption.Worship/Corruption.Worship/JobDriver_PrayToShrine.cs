@@ -1,4 +1,5 @@
 ﻿using Corruption.Core.Soul;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,13 @@ namespace Corruption.Worship
 {
     public class JobDriver_PrayToShrine : JobDriver_Prayer
     {
-        private CompAltar compAltar
+        private CompShrine CompShrine
         {
             get
             {
                 if (this.TargetB.HasThing)
                 {
-                    return this.TargetB.Thing.TryGetComp<CompAltar>();
+                    return this.TargetB.Thing.TryGetComp<CompShrine>();
                 }
                 return null;
             }
@@ -25,38 +26,35 @@ namespace Corruption.Worship
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            Toil lastToil = new Toil();
-            IEnumerator<Toil> enumerator = base.MakeNewToils().GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                lastToil = enumerator.Current;
-                yield return enumerator.Current;
-            }
-            
-            if(this.compAltar != null)
+            CompSoul soul = this.GetActor().Soul();
+            var toils = base.MakeNewToils().ToList();
+
+            Toil lastToil = toils.Last();
+
+            if (this.CompShrine != null)
             {
                 lastToil.initAction = delegate
                 {
-                    float angle = (compAltar.parent.Position - pawn.Position).ToVector3().AngleFlat();
+                    float angle = (CompShrine.parent.Position - pawn.Position).ToVector3().AngleFlat();
                     faceDir = Pawn_RotationTracker.RotFromAngleBiased(angle);
-                };
-
-                lastToil.finishActions[0] = delegate
-                {
-                    CompSoul soul = this.GetActor().Soul();
-                    if (soul != null)
-                    {
-                        float num = 100f + (compAltar?.CompProps.WorshipRatePerTick * lastToil.defaultDuration * 0.008f) ?? 0f;
-                        if (!soul.Corrupted)
-                        {
-                            num *= -1f * Rand.Range(0.5f, 1);
-                        }
-                        soul.GainCorruption(num, targetedGod);
-                    }
+                    soul?.PrayerTracker.StartRandomPrayer(this.job, true);
                 };
             }
+
+            lastToil.AddFinishAction(delegate { AddPrayerFinish(soul, lastToil); });
+
+
+            return toils;
         }
 
-
+        private void AddPrayerFinish(CompSoul soul, Toil lastToil)
+        {
+            if (soul != null)
+            {
+                float num = 100f + (CompShrine?.CompProps.worshipFactor * lastToil.defaultDuration / 3600f) ?? 0f;
+                num *= targetedGod.favourCorruptionFactor;
+                soul.GainCorruption(num, targetedGod);
+            }
+        }
     }
 }

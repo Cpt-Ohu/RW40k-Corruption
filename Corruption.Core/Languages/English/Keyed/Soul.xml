@@ -1,6 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <LanguageData>
+
+  <CorruptionModName>40K Corruption</CorruptionModName>
+  
+  <SoulSettings>Soul Settings</SoulSettings>
+
+  <SoulSettingsDesc>Select races which should have a soul and default pantheon. Humans always have a soul and default to the Imperial Cult.</SoulSettingsDesc>
+  
   <WorshipStandingUnknown>Unknown</WorshipStandingUnknown>
   <WorshipStandingNoticed>Noticed</WorshipStandingNoticed>
   <WorshipStandingAcknowledged>Acknowledged</WorshipStandingAcknowledged>
@@ -13,8 +20,6 @@
   <AfflictionTainted>Tainted</AfflictionTainted>
   <AfflictionCorrupted>Corrupted</AfflictionCorrupted>
   <AfflictionLost>Lost</AfflictionLost>
-  
-  
   
   <TabSoul>Soul</TabSoul>
   <NextLevel>Next Level</NextLevel>

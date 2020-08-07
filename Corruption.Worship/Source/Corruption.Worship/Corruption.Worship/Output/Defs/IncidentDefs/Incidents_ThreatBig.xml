@@ -30,7 +30,8 @@
   <IncidentDef>
     <defName>NurgleBreath</defName>
     <label>Breath of Nurgle</label>
-    <workerClass>IncidentWorker_Disease</workerClass>
+    <workerClass>IncidentWorker_DiseaseHuman</workerClass>
+    <letterLabel>Disease: Flu</letterLabel>
     <category>DiseaseHuman</category>
     <targetTags>
       <li>Map_PlayerHome</li>

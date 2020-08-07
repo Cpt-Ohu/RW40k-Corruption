@@ -5,6 +5,7 @@
     <author>Cpt. Ohu</author>
     <supportedVersions>
       <li>1.1</li>
+	  <li>1.2</li>
     </supportedVersions>
     <packageId>CptOhu.CorruptionPsyker</packageId>
     <description>A Warhammer 40k conversion mod. This module includes new psyker powers and traits.
@@ -16,7 +17,7 @@
   x) OttersHoldHands - Brainstorming
   x) Tal'Raziid - Descriptions   
   
-  Version: 0.14
+  Version: 0.21
 	</description>
     <modDependencies>
       <li>

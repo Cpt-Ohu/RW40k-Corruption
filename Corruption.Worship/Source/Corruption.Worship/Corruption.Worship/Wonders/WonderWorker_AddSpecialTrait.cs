@@ -22,11 +22,20 @@ namespace Corruption.Worship.Wonders
             };
         }
 
-        protected override void TryDoEffectOnTarget(int worshipPoints)
+        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
             Pawn pawn = this.target.Thing as Pawn;
             if (pawn != null)
             {
+                foreach (var incompatible in this.Def.traitToGive.conflictingTraits)
+                {
+                    Trait incTrait = pawn.story.traits.GetTrait(incompatible);
+                    if (incTrait != null)
+                    {
+                        pawn.story.traits.allTraits.Remove(incTrait);
+                    }
+                }
+
                 Trait trait = new Trait(this.Def.traitToGive, 0, true);
                 pawn.story.traits.GainTrait(trait);
             }

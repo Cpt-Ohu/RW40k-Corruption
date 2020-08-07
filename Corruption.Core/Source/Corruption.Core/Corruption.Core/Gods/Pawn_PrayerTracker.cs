@@ -85,9 +85,9 @@ namespace Corruption.Core.Gods
             this.cooldownTicks = COOLDOWN_TICKS;
         }
 
-        public void StartPrayer(PrayerDef prayerDef)
+        public void StartPrayer(PrayerDef prayerDef, bool forced = false)
         {
-            if (this.AllowPraying && !this.isPraying && this.cooldownTicks == 0)
+            if (forced || (this.AllowPraying && !this.isPraying && this.cooldownTicks == 0))
             {
                 this.currentLineIndex = 0;
                 this.currentPrayer = prayerDef;
@@ -95,7 +95,7 @@ namespace Corruption.Core.Gods
             }
         }
 
-        public void StartRandomPrayer(Job initializedJob = null)
+        public void StartRandomPrayer(Job initializedJob = null, bool forced = false)
         {
             GodDef god = this.compSoul.Pawn.Soul()?.ChosenPantheon.GodsListForReading.RandomElementByWeight(x => 1f + this.compSoul.FavourTracker.FavourValueFor(x));
             if (god != null)
@@ -103,7 +103,7 @@ namespace Corruption.Core.Gods
                 PrayerDef prayerDef = DefDatabase<PrayerDef>.AllDefsListForReading.Where(x => x.dedicatedTo == god && (initializedJob != null || initializedJob.workGiverDef.workTags.HasFlag(x.preferredWorktags))).RandomElement();
                 if (prayerDef != null)
                 {
-                    this.StartPrayer(prayerDef);
+                    this.StartPrayer(prayerDef, forced);
                 }
             }
         }

@@ -4,6 +4,7 @@
   <author>Cpt. Ohu</author>
   <supportedVersions>
    <li>1.1</li>
+   <li>1.2</li>
   </supportedVersions>
    <packageId>CptOhu.CorruptionCore</packageId>
   <description>A Warhammer 40k conversion mod. Bring your RW colony into the 41st Millenium of the Warhammer 40k universe.
@@ -19,7 +20,7 @@
   Special Thanks:
   x) Rikiki for Mining Lasers
   
-  Version: 0.20
+  Version: 0.23
   </description>
     <modDependencies>
       <li>
