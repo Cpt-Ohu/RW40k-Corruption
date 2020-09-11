@@ -11,19 +11,19 @@ namespace Corruption.Worship.Wonders
 {
     public class WonderWorker_ChangeRelation : WonderWorker_Targetable
     {
-        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
+        protected override bool TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
             Pawn pawn = this.target.Thing as Pawn;
             if (pawn != null && pawn.Faction != Faction.OfPlayer)
             {
-                float change = this.Def.ResolveWonderPoints(worshipPoints);
-                pawn.Faction.TryAffectGoodwillWith(Faction.OfPlayer, (int)change);
+                float change = this.Def.ResolveWonderPoints(this.target.Map, worshipPoints);
+                return pawn.Faction.TryAffectGoodwillWith(Faction.OfPlayer, (int)change);
 
             }
             else
             {
                 Messages.Message("MessageInvalidWonderTargetDesc".Translate(), MessageTypeDefOf.RejectInput, historical: false);
-                GlobalWorshipTracker.Current.TryAddFavor(god, worshipPoints);
+                return GlobalWorshipTracker.Current.TryAddFavor(god, worshipPoints);
             }
 
         }

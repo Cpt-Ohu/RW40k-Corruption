@@ -98,21 +98,6 @@ namespace Corruption.Core.Soul
             Rect progressRect = new Rect(0f, godsTitleRect.yMax, godsTitleRect.width / 2, innerRect.height - godsTitleRect.yMax);
             DrawFavorProgress(progressRect);
 
-            Rect changeReligionRect = new Rect(pantheonRect.xMax - 168f, pantheonRect.y + 4f, 168f, 32f);
-            if (Prefs.DevMode)
-            {
-                if (Widgets.ButtonText(changeReligionRect, "Debug: Change Religion"))
-                {
-                    if (this.SoulToShow.ChosenPantheon == PantheonDefOf.ImperialCult)
-                    {
-                        this.SoulToShow.ChosenPantheon = PantheonDefOf.Chaos;
-                    }
-                    else
-                    {
-                        this.SoulToShow.ChosenPantheon = PantheonDefOf.ImperialCult;
-                    }
-                }
-            }
             Rect settingsRect = new Rect(progressRect.xMax + 4f, godsTitleRect.yMax, godsTitleRect.width / 2f - 16f, progressRect.height);
 
             this.DrawSettings(settingsRect);
@@ -164,7 +149,7 @@ namespace Corruption.Core.Soul
                 Rect labelRect = new Rect(0f, 0f, inRect.width / 2f, holdingRect.height);
                 Widgets.Label(labelRect, progress.God.label.CapitalizeFirst());
                 Rect position = new Rect(labelRect.xMax, 0f, inRect.width / 2, holdingRect.height);
-                Widgets.FillableBar(position, progress.FavourPercentage, progress.God.worshipBarFillTexture, null, false);
+                Widgets.FillableBar(position, progress.FavourPercentage, progress.God.WorshipBarFillTexture, null, false);
                 Rect valRect = new Rect(position);
                 valRect.yMin += 2f;
                 GenUI.SetLabelAlign(TextAnchor.MiddleLeft);
@@ -189,7 +174,13 @@ namespace Corruption.Core.Soul
                         favour.TryAddProgress(FavourProgress.ProgressRange.max / 100f);
                     }
                 }
+                debugRect.y += debugRect.height + 4f;
+                if (Widgets.ButtonText(debugRect, "Debug: Change Religion"))
+                {
+                    Find.WindowStack.Add(new Dialog_SetPawnPantheon(this.SoulToShow, this.SoulToShow.ChosenPantheon));
+                }
             }
+
             GUI.EndGroup();
             return curY;
         }

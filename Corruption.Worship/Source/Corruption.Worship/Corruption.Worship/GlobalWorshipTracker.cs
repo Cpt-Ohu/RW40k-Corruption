@@ -1,4 +1,5 @@
-﻿using Corruption.Core.Gods;
+﻿using Corruption.Core;
+using Corruption.Core.Gods;
 using Corruption.Core.Soul;
 using JetBrains.Annotations;
 using RimWorld;
@@ -75,8 +76,9 @@ namespace Corruption.Worship
             return null;
         }
 
-        public void TryAddFavor(GodDef god, float value, Pawn pawn = null)
+        public bool TryAddFavor(GodDef god, float value, Pawn pawn = null)
         {
+            value *= ModSettings_Corruption.WorshipGainSpeedFactor;
             var favor = this.Favours.FirstOrDefault(x => x.God == god);
             if (favor == null)
             {
@@ -86,6 +88,11 @@ namespace Corruption.Worship
             if (favor.TryAddProgress(value))
             {
                 pawn?.records.AddTo(WorshipRecordDefOf.GlobalFavourContributed, value);
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -95,7 +102,6 @@ namespace Corruption.Worship
             int curTick = Find.TickManager.TicksGame;
             if (curTick % GenDate.TicksPerDay == 0)
             {
-
                 foreach (var attribute in playerPantheon.pantheonAttributes.Where(x => x.effectWorker != null))
                 {
                     if (Find.TickManager.TicksGame % attribute.effectTick == 0)
@@ -105,13 +111,20 @@ namespace Corruption.Worship
                 }
             }
             else if (curTick % 2500 == 0)
-            foreach (var attribute in playerPantheon.pantheonAttributes.Where(x => x.effectWorker != null))
             {
-                if (Find.TickManager.TicksGame % attribute.effectTick == 0)
+                foreach (var attribute in playerPantheon.pantheonAttributes.Where(x => x.effectWorker != null))
                 {
-                    attribute.effectWorker.TickLong();
+                    if (Find.TickManager.TicksGame % attribute.effectTick == 0)
+                    {
+                        attribute.effectWorker.TickLong();
+                    }
                 }
-            }
+
+                foreach (var favour in this.Favours)
+                {
+                    favour.Deteriorate();
+                }
+            }            
         }
 
         public override void ExposeData()

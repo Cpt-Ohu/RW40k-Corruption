@@ -27,7 +27,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Psykers.CompAbilityEffect_PsyProjectile</compClass>
+        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -104,8 +104,8 @@
   </AbilityDef>
 
 
-  <ThingDef ParentName="BaseBullet" Class="Corruption.Core.Items.ThingDef_LaserProjectile" Name="BoltOfChangeProj">
-    <thingClass>Corruption.Core.Items.Projectile_Smoking</thingClass>
+  <ThingDef ParentName="BaseBullet" Name="BoltOfChangeProj">
+    <thingClass>Corruption.Core.Items.Projectile_Trail</thingClass>
     <defName>BoltOfChangeI</defName>
     <label>Bolt of Change</label>
     <graphicData>
@@ -114,25 +114,22 @@
     </graphicData>
     <projectile>
       <flyOverhead>false</flyOverhead>
-      <damageDef>MutatingBurn</damageDef>
+      <damageDef>MutatingExplosion</damageDef>
       <damageAmountBase>20</damageAmountBase>
       <armorPenetrationBase>1.0</armorPenetrationBase>
       <speed>40</speed>
       <explosionRadius>1.0</explosionRadius>
     </projectile>
-    <preFiringInitialIntensity>0</preFiringInitialIntensity>
-    <preFiringFinalIntensity>2</preFiringFinalIntensity>
-    <postFiringInitialIntensity>2</postFiringInitialIntensity>
-    <postFiringFinalIntensity>0</postFiringFinalIntensity>
-    <preFiringDuration>2</preFiringDuration>
-    <postFiringDuration>60</postFiringDuration>
-    <StartFireChance>0.000</StartFireChance>
-    <causesExplosion>true</causesExplosion>
-    <smokeGraphicPath>Things/Projectiles/BoltOfChange_Shadow</smokeGraphicPath>
+    <comps>
+      <li Class="Corruption.Core.Items.CompProperties_ProjectileTrail">
+        <trailTexPath>Things/Projectiles/BoltOfChange_Shadow</trailTexPath>
+        <postImpactLifetime>10</postImpactLifetime>
+      </li>
+    </comps>
   </ThingDef>
 
-  <ThingDef ParentName="BoltOfChangeProj" Class="Corruption.Core.Items.ThingDef_LaserProjectile">
-    <thingClass>Corruption.Core.Items.Projectile_Smoking</thingClass>
+  <ThingDef ParentName="BoltOfChangeProj">
+    <thingClass>Corruption.Core.Items.Projectile_Trail</thingClass>
     <defName>BoltOfChangeII</defName>
     <label>Bolt of Change</label>
     <projectile>
@@ -142,8 +139,8 @@
     </projectile>
   </ThingDef>
 
-  <ThingDef ParentName="BoltOfChangeProj" Class="Corruption.Core.Items.ThingDef_LaserProjectile">
-    <thingClass>Corruption.Core.Items.Projectile_Smoking</thingClass>
+  <ThingDef ParentName="BoltOfChangeProj">
+    <thingClass>Corruption.Core.Items.Projectile_Trail</thingClass>
     <defName>BoltOfChangeIII</defName>
     <label>Bolt of Change</label>
     <projectile>
@@ -153,8 +150,8 @@
     </projectile>
   </ThingDef>
 
-  <ThingDef ParentName="BoltOfChangeProj" Class="Corruption.Core.Items.ThingDef_LaserProjectile">
-    <thingClass>Corruption.Core.Items.Projectile_Smoking</thingClass>
+  <ThingDef ParentName="BoltOfChangeProj">
+    <thingClass>Corruption.Core.Items.Projectile_Trail</thingClass>
     <defName>BoltOfChangeIV</defName>
     <label>Bolt of Change</label>
     <projectile>
@@ -429,7 +426,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Psykers.CompAbilityEffect_PsyProjectile</compClass>
+        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -458,8 +455,8 @@
   </AbilityDef>
   
 
-  <ThingDef ParentName="BaseBullet" Class="Corruption.Core.Items.ThingDef_LaserProjectile" Name="PinkFireProj">
-    <thingClass>Corruption.Core.Items.Projectile_Smoking</thingClass>
+  <ThingDef ParentName="BaseBullet" Name="PinkFireProj">
+    <thingClass>Corruption.Core.Items.Projectile_Trail</thingClass>
     <defName>PinkFireI</defName>
     <label>pink fire</label>
     <graphicData>
@@ -474,19 +471,16 @@
       <explosionRadius>1.0</explosionRadius>
       <armorPenetrationBase>1.0</armorPenetrationBase>
     </projectile>
-    <preFiringInitialIntensity>0</preFiringInitialIntensity>
-    <preFiringFinalIntensity>2</preFiringFinalIntensity>
-    <postFiringInitialIntensity>2</postFiringInitialIntensity>
-    <postFiringFinalIntensity>0</postFiringFinalIntensity>
-    <preFiringDuration>2</preFiringDuration>
-    <postFiringDuration>60</postFiringDuration>
-    <StartFireChance>1.000</StartFireChance>
-    <causesExplosion>False</causesExplosion>
-    <smokeGraphicPath>Things/Projectiles/PinkFire_Trail</smokeGraphicPath>
+    <comps>
+      <li Class="Corruption.Core.Items.CompProperties_ProjectileTrail">
+        <trailTexPath>Things/Projectiles/PinkFire_Trail</trailTexPath>
+        <postImpactLifetime>10</postImpactLifetime>
+      </li>
+    </comps>
   </ThingDef>
 
-  <ThingDef ParentName="PinkFireProj" Class="Corruption.Core.Items.ThingDef_LaserProjectile">
-    <thingClass>Corruption.Core.Items.Projectile_Smoking</thingClass>
+  <ThingDef ParentName="PinkFireProj">
+    <thingClass>Corruption.Core.Items.Projectile_Trail</thingClass>
     <defName>PinkFireII</defName>
     <label>molten beam</label>
     <graphicData>
@@ -676,6 +670,7 @@
       </li>
       <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
         <abilityCastType>Defend</abilityCastType>
+        <compClass>Corruption.Psykers.AbilityComp_AICastBuffSelf</compClass>
       </li>
     </comps>
   </AbilityDef>
@@ -716,6 +711,7 @@
       </li>
       <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
         <abilityCastType>Defend</abilityCastType>
+        <compClass>Corruption.Psykers.AbilityComp_AICastBuffSelf</compClass>
       </li>
     </comps>
   </AbilityDef>
@@ -754,6 +750,7 @@
       </li>
       <li Class="Corruption.Psykers.AbilityCompProperties_AICast">
         <abilityCastType>Defend</abilityCastType>
+        <compClass>Corruption.Psykers.AbilityComp_AICastBuffSelf</compClass>
       </li>
     </comps>
   </AbilityDef>

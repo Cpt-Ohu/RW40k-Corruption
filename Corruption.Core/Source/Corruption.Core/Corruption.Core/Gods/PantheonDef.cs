@@ -21,8 +21,14 @@ namespace Corruption.Core.Gods
 
         public List<PantheonAttributeDef> pantheonAttributes = new List<PantheonAttributeDef>();
 
+        public List<PantheonDef> approvingPantheons = new List<PantheonDef>();
+        public List<PantheonDef> rejectingPantheons = new List<PantheonDef>();
         public List<FactionDef> approvingFactions = new List<FactionDef>();
         public List<FactionDef> rejectingFactions = new List<FactionDef>();
+
+        public SimpleCurve takeoverThresholds = new SimpleCurve(new List<CurvePoint>() { new CurvePoint(0.8f,1f) });
+
+        public bool violentTakeover;
 
         public int approvingGoodwill;
 
@@ -32,7 +38,13 @@ namespace Corruption.Core.Gods
 
         public string iconPath = "UI/Pantheons/ChaosIcon";
 
+        public string prayerTitle;
+
         public Texture2D Icon;
+
+        public string requiresMod = null;
+
+        public bool immuneToChaos = false;
 
         public override void ResolveReferences()
         {

@@ -28,15 +28,6 @@ namespace Corruption.Core
             harmony.Patch(AccessTools.Method(typeof(RimWorld.MemoryThoughtHandler), "TryGainMemory", new Type[] { typeof(Thought_Memory), typeof(Pawn) }), null, new HarmonyMethod(typeof(HarmonyPatches), "TryGainMemoryPostfix", null));
             harmony.Patch(AccessTools.Method(typeof(RimWorld.JobGiver_Work), "TryIssueJobPackage", null), null, new HarmonyMethod(typeof(HarmonyPatches), "TryIssueJobPackagePostfix", null));
 
-            //var gods = DefDatabase<GodDef>.AllDefs;
-            //foreach (GodDef god in gods)
-            //{
-            //    if (!god.FavourWorkers.Any(x => x is GodFavourWorker))
-            //    {
-            //        god.FavourWorkers.Add(new GodFavourWorker_Global());
-            //        god.ResolveReferences();
-            //    }
-            //}
         }
 
         private static void GenerateTraitSoulPostfix(Pawn pawn, PawnGenerationRequest request)
@@ -114,6 +105,7 @@ namespace Corruption.Core
                 }
             }
         }
+
     }
 
     //[HarmonyPatch(typeof(PawnGraphicSet), "RenderPawnInternal")]

@@ -42,10 +42,10 @@ namespace Corruption.Worship
 
         private bool pilgrimageResolved;
 
-        private float accumulatedSuccessChange = 0f;
+        private float accumulatedSuccessChange => this.travelledTicks / this.ticksToTravel;
 
         private GodDef pilgrimGod;
-        private PantheonDef pilgrimPathenon; 
+        private PantheonDef pilgrimPathenon;
 
         private bool pilgrimageActive;
 
@@ -58,6 +58,7 @@ namespace Corruption.Worship
                 if (soul != null && soul.IsOnPilgrimage)
                 {
                     this.pilgrimageActive = true;
+                    this.ticksToTravel = Rand.Range(GenDate.TicksPerDay * 2, GenDate.TicksPerDay * 5);
                     this.caravan.SetFaction(CorruptionStoryTrackerUtilities.IoM_NPC);
                     this.pilgrimPathenon = soul.ChosenPantheon;
                     this.pilgrimGod = soul.FavourTracker.HighestFavour.God;
@@ -65,11 +66,25 @@ namespace Corruption.Worship
                 }
             }
             this.pilgrimageResolved = true;
+            if (pilgrimageActive)
+            {
+                foreach (var pawn in this.caravan.PawnsListForReading)
+                {
+                    pawn.SetFactionDirect(CorruptionStoryTrackerUtilities.IoM_NPC);
+                }
+            }
 
         }
 
         public override void CompTick()
         {
+
+            if (this.caravan.IsHashIntervalTick(GenDate.TicksPerDay))
+            {
+                UpdatePilgrimageInventory();
+            }
+
+
             if (!this.pilgrimageResolved)
             {
                 CheckPilgrimageActive();
@@ -77,7 +92,7 @@ namespace Corruption.Worship
             base.CompTick();
             if (!this.returningHome)
             {
-                if (this.parent.Tile == currentDestinationTile)
+                if (this.parent.Tile == this.caravan.pather.Destination)
                 {
                     this.PilgrimageDecisionPoint();
                 }
@@ -104,17 +119,15 @@ namespace Corruption.Worship
             string text;
             if (this.caravan.needs.AnyPawnOutOfFood(out text))
             {
-                if (Rand.Value > 0.5f)
-                {
-                    ThingDef eatableDef = DefDatabase<ThingDef>.AllDefsListForReading.Where(x => x.IsNutritionGivingIngestible).RandomElement();
-                    Thing food = ThingMaker.MakeThing(eatableDef);
-                    food.stackCount = eatableDef.stackLimit;
-                    this.caravan?.AddPawnOrItem(food, false);
-                    Messages.Message("PilgrimsForagedFood".Translate(), this.caravan, MessageTypeDefOf.PositiveEvent);
-                }
+                ThingDef eatableDef = DefDatabase<ThingDef>.AllDefsListForReading.Where(x => x.IsNutritionGivingIngestible).RandomElement();
+                Thing food = ThingMaker.MakeThing(eatableDef);
+                food.stackCount = eatableDef.stackLimit;
+                this.caravan?.AddPawnOrItem(food, false);
+                Messages.Message("PilgrimsForagedFood".Translate(), this.caravan, MessageTypeDefOf.PositiveEvent);
+
             }
 
-            if (Rand.Value > accumulatedSuccessChange)
+            if (Rand.Value < accumulatedSuccessChange)
             {
                 if (Rand.Value > 0.2f)
                 {
@@ -129,7 +142,7 @@ namespace Corruption.Worship
                     CompSoul newSoul = newFollower.Soul();
                     if (newFollower.skills.GetSkill(SkillDefOf.Social).Level < this.caravan?.pawns.InnerListForReading.Max(x => x.skills.GetSkill(SkillDefOf.Social).Level) + Rand.Range(-2, 2))
                     {
-                        newSoul.ChosenPantheon=this.pilgrimPathenon;
+                        newSoul.ChosenPantheon = this.pilgrimPathenon;
                     }
 
                     this.caravan?.AddPawn(newFollower, true);
@@ -155,6 +168,10 @@ namespace Corruption.Worship
             this.caravan?.pather.StartPath(this.OriginalMapTile, new CaravanArrivalAction_Enter(Find.World.worldObjects.MapParentAt(this.OriginalMapTile)));
             this.returningHome = true;
             this.caravan?.SetFaction(Faction.OfPlayer);
+            foreach (var pawn in caravan.PawnsListForReading)
+            {
+                pawn.SetFactionDirect(Faction.OfPlayer);
+            }
             List<Pawn> Pawns = this.caravan?.PawnsListForReading.FindAll(x => x.RaceProps.Humanlike);
             for (int i = 0; i < Pawns.Count; i++)
             {
@@ -162,6 +179,8 @@ namespace Corruption.Worship
                 if (soul != null)
                 {
                     soul.IsOnPilgrimage = false;
+                    var god = soul.ChosenPantheon.GodsListForReading.RandomElementByWeight(x => soul.FavourTracker.FavourValueFor(x) + 1f);
+                    soul.GainCorruption(god.favourCorruptionFactor * ticksToTravel / 1000f, god);
                 }
             }
         }

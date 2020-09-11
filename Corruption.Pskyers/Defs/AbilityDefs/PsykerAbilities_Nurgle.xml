@@ -559,7 +559,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Psykers.CompAbilityEffect_PsyProjectile</compClass>
+        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -606,8 +606,8 @@
     </verbProperties>
   </AbilityDef>
 
-  <ThingDef ParentName="BaseBullet" Class="Corruption.Core.Items.ThingDef_LaserProjectile">
-    <thingClass>Corruption.Core.Items.Projectile_Smoking</thingClass>
+  <ThingDef ParentName="BaseBullet">
+    <thingClass>Corruption.Core.Items.Projectile_Trail</thingClass>
     <defName>NurgleStreamOfCorruption</defName>
     <label>stream of corruption</label>
     <graphicData>
@@ -622,15 +622,12 @@
       <armorPenetrationBase>10.0</armorPenetrationBase>
       <speed>30</speed>
     </projectile>
-    <preFiringInitialIntensity>0</preFiringInitialIntensity>
-    <preFiringFinalIntensity>2</preFiringFinalIntensity>
-    <postFiringInitialIntensity>2</postFiringInitialIntensity>
-    <postFiringFinalIntensity>0</postFiringFinalIntensity>
-    <preFiringDuration>2</preFiringDuration>
-    <postFiringDuration>60</postFiringDuration>
-    <StartFireChance>0.000</StartFireChance>
-    <causesExplosion>False</causesExplosion>
-    <smokeGraphicPath>Things/Projectiles/StreamOfCorruption_Trail</smokeGraphicPath>
+    <comps>
+      <li Class="Corruption.Core.Items.CompProperties_ProjectileTrail">
+        <trailTexPath>Things/Projectiles/StreamOfCorruption_Trail</trailTexPath>
+        <postImpactLifetime>10</postImpactLifetime>
+      </li>
+    </comps>
   </ThingDef>
 
 
@@ -664,7 +661,7 @@
     <targetRequired>False</targetRequired>
     <comps>
       <li Class="Corruption.Psykers.CompProperties_AroundPsyker">
-        <compClass>Corruption.Psykers.CompAbilityEffect_AroundPsyker</compClass>
+        <compClass>Corruption.Core.CompAbilityEffect_AreaOfEffect</compClass>
         <mote>Mote_Miasma</mote>
       </li>
       <li Class = "CompProperties_AbilityEffectWithDuration">

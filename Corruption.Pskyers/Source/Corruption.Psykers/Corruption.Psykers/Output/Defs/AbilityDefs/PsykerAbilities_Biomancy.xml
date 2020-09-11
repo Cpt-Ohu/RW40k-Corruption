@@ -22,7 +22,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Psykers.CompAbilityEffect_PsyProjectile</compClass>
+        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -76,18 +76,28 @@
     </verbProperties>
   </AbilityDef>
 
-  <ThingDef ParentName="PSYWarpBoltBase"  Class="Corruption.Core.Items.ThingDef_LaserProjectile">
+  <ThingDef  ParentName="BaseBullet">
+    <thingClass>Corruption.Core.Items.Projectile_Trail</thingClass>
     <defName>PSYBioLightning</defName>
+    <label>Bio-Lightning</label>
     <graphicData>
       <texPath>Things/Projectiles/BioLightning</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>TransparentPostLight</shaderType>
     </graphicData>
     <projectile>
-      <damageAmountBase>20</damageAmountBase>
+      <flyOverhead>false</flyOverhead>
       <damageDef>Burn</damageDef>
+      <damageAmountBase>10</damageAmountBase>
+      <speed>80</speed>
       <armorPenetrationBase>1.0</armorPenetrationBase>
     </projectile>
+    <comps>
+      <li Class="Corruption.Core.Items.CompProperties_ProjectileTrail">
+        <trailTexPath>Things/Projectiles/BioLightning</trailTexPath>
+        <postImpactLifetime>10</postImpactLifetime>
+      </li>
+    </comps>
   </ThingDef>
 
   <!-- ========================= BloodBoil ===================================== -->

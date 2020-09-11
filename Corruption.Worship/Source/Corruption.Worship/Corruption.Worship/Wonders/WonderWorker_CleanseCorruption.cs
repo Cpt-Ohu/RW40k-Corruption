@@ -12,14 +12,15 @@ namespace Corruption.Worship.Wonders
 {
     public class WonderWorker_CleanseCorruption : WonderWorker_Targetable
     {
-        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
+        protected override bool TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
             Pawn pawn = this.target.Thing as Pawn;
             if (pawn != null)
             {
-                pawn.Soul()?.GainCorruption(god.favourCorruptionFactor * worshipPoints);
-                PossessionUtiltiy.TryRemovePossession(pawn, 1f);
+                pawn.Soul()?.GainCorruption(god.favourCorruptionFactor * worshipPoints, null, false);
+               return PossessionUtiltiy.TryRemovePossession(pawn, 1f);
             }
+            return false;
         }
     }
 }

@@ -21,6 +21,15 @@ namespace Corruption.Core.Soul
             {10000f, 0.3f }
         };
 
+        private static SimpleCurve ProgressDeteriorationRate = new SimpleCurve()
+        {
+            {0f, 0f },
+            {1000f, 0.05f },
+            {5000f, 0.5f },
+            {9000f, 1.0f },
+            {10000f, 2.0f }
+        };
+
         public GodDef God;
 
         public FavourProgress()
@@ -105,5 +114,10 @@ namespace Corruption.Core.Soul
             {GodsFavourLevel.Favoured, 0.8f },
             {GodsFavourLevel.Blessed, 0.95f }
         };
+
+        public void Deteriorate(float change = 20f)
+        {
+            this.Favour -= change * ProgressDeteriorationRate.Evaluate(this.favourValue);
+        }
     }
 }

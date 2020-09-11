@@ -43,12 +43,15 @@ namespace Corruption.Psykers
                     MoteMaker.ThrowMicroSparks(loc, map);
                     MoteMaker.ThrowLightningGlow(loc, map, 1.0f);
                     var mote = MoteMaker.MakeStaticMote(loc, map, this.Props.mote) as MoteThrown;
-                    mote.rotationRate = 180f;
-                    SoundInfo info = SoundInfo.InMap(new TargetInfo(loc.ToIntVec3(), map));
-
-                    if (this.Props.sound != null)
+                    if (mote != null)
                     {
-                        this.Props.sound.PlayOneShot(info);
+                        mote.rotationRate = 180f;
+                        SoundInfo info = SoundInfo.InMap(new TargetInfo(loc.ToIntVec3(), map));
+
+                        if (this.Props.sound != null)
+                        {
+                            this.Props.sound.PlayOneShot(info);
+                        }
                     }
                 }
             }

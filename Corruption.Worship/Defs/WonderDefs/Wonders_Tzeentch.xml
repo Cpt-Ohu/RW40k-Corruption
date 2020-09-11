@@ -8,7 +8,7 @@
   </Corruption.Worship.Wonders.WonderDef>
 
   <Corruption.Worship.Wonders.WonderDef  ParentName="TzeentchWonder">
-    <defName>TzeentchGiftMutation</defName>
+    <defName>TzeentchMutation</defName>
     <label>Tzeentchian Mutation</label>
     <description>Give a pawn over to Tzeentch to be transformed by his will.</description>
     <workerClass>Corruption.Worship.Wonders.WonderWorker_AddHediff</workerClass>
@@ -55,6 +55,24 @@
         <li>(10000,100)</li>
       </points>
     </pointsCurve>
+  </Corruption.Worship.Wonders.WonderDef>
+
+  <Corruption.Worship.Wonders.WonderDef ParentName="TzeentchWonder">
+    <defName>TzeentchAmbitiousShuffle</defName>
+    <label>Ambitious Shuffle</label>
+    <description>Rearrange a pawns skills to fuel its political ambition. This will raise Social and Intelligence by reducing all other skills by one.</description>
+    <workerClass>Corruption.Worship.Wonders.WonderWorker_AmbitiousShuffle</workerClass>
+    <wonderIconPath>UI/Wonders/WondersTzeentchAmbitiousShuffle</wonderIconPath>
+    <favourCost>4000</favourCost>
+  </Corruption.Worship.Wonders.WonderDef>
+
+  <Corruption.Worship.Wonders.WonderDef ParentName="TzeentchWonder">
+    <defName>TzeentchPoliticalUpheaval</defName>
+    <label>Political Upheaval</label>
+    <description>Cause coups and rebellions to errupt on the planet, leading to new alliances and enemies.</description>
+    <workerClass>Corruption.Worship.Wonders.WonderWorker_PoliticalUpheaval</workerClass>
+    <wonderIconPath>UI/Wonders/WondersTzeentchRevolution</wonderIconPath>
+    <favourCost>6000</favourCost>
   </Corruption.Worship.Wonders.WonderDef>
 
   <Corruption.Worship.Wonders.WonderDef ParentName="TzeentchWonder">

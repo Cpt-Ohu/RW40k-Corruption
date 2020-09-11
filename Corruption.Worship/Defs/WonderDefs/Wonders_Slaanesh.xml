@@ -15,7 +15,7 @@
     <wonderIconPath>UI/Wonders/WondersSlaaneshOrgy</wonderIconPath>
     <favourCost>0</favourCost>
     <incident>SlaaneshOrgy</incident>
-    <incidentPoints>0</incidentPoints>
+    <fixedIncidentPoints>0</fixedIncidentPoints>
   </Corruption.Worship.Wonders.WonderDef>
 
   <Corruption.Worship.Wonders.WonderDef  ParentName="SlaaneshWonder">
@@ -47,7 +47,16 @@
     <wonderIconPath>UI/Wonders/WondersSlaaneshChoir</wonderIconPath>
     <favourCost>4000</favourCost>
     <incident>RaidFriendly</incident>
-    <incidentPoints>1000</incidentPoints>
+    <fixedIncidentPoints>1000</fixedIncidentPoints>
+    <pointsScalable>True</pointsScalable>
+    <pointsCurve>
+      <points>
+        <li>(1000,0)</li>
+        <li>(4000,1000)</li>
+        <li>(5000,1200)</li>
+        <li>(20000,2000)</li>
+      </points>
+    </pointsCurve>
   </Corruption.Worship.Wonders.WonderDef>
 
   <Corruption.Worship.Wonders.WonderDef ParentName="SlaaneshWonder">

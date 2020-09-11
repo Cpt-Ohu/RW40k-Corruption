@@ -12,5 +12,6 @@ namespace Corruption.Core
     {
         public static ConceptDef SoulKnowledge;
         public static ConceptDef CorruptionKnowledge;
+        public static ConceptDef Prayers;
     }
 }

@@ -12,7 +12,9 @@ namespace Corruption.Worship
     public static class JobDefOf
     {
         public static JobDef HoldSermon;
+        public static JobDef AssistPreacher;
         public static JobDef AttendSermon;
         public static JobDef InstallEffigy;
+        public static JobDef RingBellTower;
     }
 }

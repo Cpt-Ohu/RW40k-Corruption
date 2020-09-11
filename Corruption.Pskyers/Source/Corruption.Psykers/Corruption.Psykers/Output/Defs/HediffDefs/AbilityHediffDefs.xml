@@ -4,62 +4,6 @@
 
   <!--=============== Minor PowerHediffs ====================-->
   
-  <HediffDef ParentName="HediffPsykerBuff">
-    <defName>HealingBuffMinor</defName>
-    <hediffClass>HediffWithComps</hediffClass>
-    <defaultLabelColor>(0.1, 0.7, 0.0)</defaultLabelColor>
-    <label>minor healing</label>
-    <description>This being is slowly healing from an otherworldly power.</description>
-    <comps>
-      <li Class="Corruption.Psykers.HediffCompProperties_Heal">
-        <compClass>Corruption.Psykers.HediffComp_Heal</compClass>
-      </li>
-      <li Class="HediffCompProperties_Disappears">
-        <disappearsAfterTicks>3600~3600</disappearsAfterTicks>
-      </li>
-    </comps>
-    <stages>
-      <li>
-        <painOffset>0.1</painOffset>
-        <capMods>
-          <li>
-            <capacity>BloodPumping</capacity>
-            <offset>1.0</offset>
-          </li>
-        </capMods>
-      </li>
-    </stages>
-  </HediffDef>
-
-  <HediffDef ParentName="HediffPsykerBuff">
-    <defName>HealingBuffMajor</defName>
-    <hediffClass>HediffWithComps</hediffClass>
-    <defaultLabelColor>(0.1, 0.7, 0.0)</defaultLabelColor>
-    <label>major healing</label>
-    <description>This being is healing from an otherworldly power.</description>
-    <comps>
-      <li Class="Corruption.Psykers.HediffCompProperties_Heal">
-        <compClass>Corruption.Psykers.HediffComp_Heal</compClass>
-        <healingPower>36</healingPower>
-      </li>
-      <li Class="HediffCompProperties_Disappears">
-        <disappearsAfterTicks>1800~1800</disappearsAfterTicks>
-      </li>
-    </comps>
-    <stages>
-      <li>
-        <painOffset>0.2</painOffset>
-        <capMods>
-          <li>
-            <capacity>BloodPumping</capacity>
-            <offset>1.0</offset>
-          </li>
-        </capMods>
-      </li>
-    </stages>
-  </HediffDef>
-
- 
 
   <HediffDef ParentName="DiseaseBase">
     <defName>PsychicPain</defName>

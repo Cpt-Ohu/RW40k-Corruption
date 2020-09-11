@@ -11,7 +11,7 @@ namespace Corruption.Worship.Wonders
 {
     public class WonderWorker_AmbitiousShuffle : WonderWorker_Targetable
     {
-        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
+        protected override bool TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
             Pawn pawn = this.target.Thing as Pawn;
             if (pawn != null)
@@ -24,8 +24,10 @@ namespace Corruption.Worship.Wonders
                 }
 
                 pawn.skills.Learn(SkillDefOf.Social, siphonedPoints / 2f);
-                pawn.skills.Learn(SkillDefOf.Intellectual, siphonedPoints / 2f); 
+                pawn.skills.Learn(SkillDefOf.Intellectual, siphonedPoints / 2f);
+                return true;
             }
+            return false;
         }
     }
 }

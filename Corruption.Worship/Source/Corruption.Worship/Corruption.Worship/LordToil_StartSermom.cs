@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,13 +11,13 @@ using Verse.AI.Group;
 namespace Corruption.Worship
 {
 
-    public class LordToil_StartSermom : LordToil
+    public class LordToil_StartSermom : LordToil_Speech
     {
         private Pawn preacher;
 
         private BuildingAltar altar;
 
-        public LordToil_StartSermom(Pawn preacher, BuildingAltar altar)
+        public LordToil_StartSermom(Pawn preacher, BuildingAltar altar) : base(altar.Position, GatheringDefOf.Sermon, preacher)
         {
             this.preacher = preacher;
             this.altar = altar;
@@ -26,11 +27,30 @@ namespace Corruption.Worship
         {
             for (int i = 0; i < this.lord.ownedPawns.Count; i++)
             {
-                Pawn pawn = this.lord.ownedPawns[i];
-                PawnDuty pawnDuty = new PawnDuty(PawnDutyDefOf.JoinSermon, preacher, altar);
-                pawnDuty.maxDanger = Danger.Some;
-                pawn.mindState.duty = pawnDuty;
+                Pawn pawn = lord.ownedPawns[i];
+                if (pawn == preacher)
+                {
+                    pawn.mindState.duty = new PawnDuty(DutyDefOf.HoldSermon, altar.InteractionCell, altar);
+                    pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
+                }
+                else
+                {
+                    PawnDuty pawnDuty = pawn == altar.CurrentActiveSermon.Assistant ? new PawnDuty(DutyDefOf.AssistSermon, altar) : new PawnDuty(DutyDefOf.AttendSermon, altar);
+                    pawnDuty.spectateRect = Data.spectateRect;
+                    pawnDuty.spectateRectAllowedSides = Data.spectateRectAllowedSides;
+                    pawnDuty.spectateRectPreferredSide = Data.spectateRectPreferredSide;
+                    pawn.mindState.duty = pawnDuty;
+                }
             }
+        }
+
+        public override ThinkTreeDutyHook VoluntaryJoinDutyHookFor(Pawn p)
+        {
+            if (p == this.preacher)
+            {
+                return DutyDefOf.HoldSermon.hook;
+            }
+            return DutyDefOf.AttendSermon.hook;
         }
     }
 }

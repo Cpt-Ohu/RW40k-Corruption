@@ -16,6 +16,7 @@ namespace Corruption.Worship
     {
         private TargetIndex AltarIndex = TargetIndex.A;
         private TargetIndex AltarInteractionCell = TargetIndex.B;
+        private static readonly IntRange MoteInterval = new IntRange(300, 500);
 
         private Effecter effecter;
         private CompShrine CompShrine => ((ThingWithComps)this.TargetA).GetComp<CompShrine>();
@@ -35,45 +36,53 @@ namespace Corruption.Worship
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            this.EndOnDespawnedOrNull(AltarIndex, JobCondition.Incompletable);
-            Toil gotoAltarToil;
-            gotoAltarToil = Toils_Goto.GotoThing(AltarInteractionCell, PathEndMode.OnCell);
-
-            yield return gotoAltarToil;
-
             BuildingAltar altar = this.TargetA.Thing as BuildingAltar;
-            GodDef god = altar.CurrentActiveSermon.DedicatedTo;
-            var altarToil = new Toil();
-            altarToil.FailOn(() => altar.CurrentActiveSermon == null);
-            altarToil.defaultCompleteMode = ToilCompleteMode.Delay;
-            altarToil.defaultDuration = this.job.def.joyDuration;
-            altarToil.PlaySustainerOrSound(Core.CoreSoundDefOf.PrayerSustainer);
-            altarToil.AddPreTickAction(() =>
+            this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
+            yield return Toils_General.Do(delegate
             {
-                this.pawn.rotationTracker.FaceCell(this.TargetA.Cell);
-                this.pawn.GainComfortFromCellIfPossible();
-                ThrowPreacherMote(this.pawn, god);
+                job.SetTarget(TargetIndex.B, altar.InteractionCell + altar.Rotation.FacingCell);
+            });
+            Toil toil = new Toil();
+            toil.FailOnCannotTouch(TargetIndex.A, PathEndMode.InteractionCell);
+            toil.FailOn(() => altar.CurrentActiveSermon?.Preacher != pawn);
+            toil.FailOn(() => altar.CurrentActiveSermon == null);
+            toil.PlaySustainerOrSound(Core.CoreSoundDefOf.PrayerSustainer);
+            if (altar.CurrentActiveSermon == null)
+            {
+            }
+            if (altar.CurrentActiveSermon.DedicatedTo == null)
+            {
+            }
+            GodDef god = altar.CurrentActiveSermon.DedicatedTo;
+            toil.tickAction = delegate
+            {
+                pawn.GainComfortFromCellIfPossible();
+                pawn.skills.Learn(SkillDefOf.Social, 0.3f);
+                if (pawn.IsHashIntervalTick(MoteInterval.RandomInRange))
+                {
+                    MoteMaker.MakeSpeechBubble(pawn, god.PrayerMote);
+                }
 
                 if (this.CompShrine != null)
                 {
-                    this.pawn.Soul()?.GainCorruption(god.favourCorruptionFactor * this.CompShrine.CompProps.worshipFactor, this.CompShrine.God);
+                    this.pawn.Soul()?.GainCorruption(god.favourCorruptionFactor * this.CompShrine.Props.worshipFactor, god);
                 }
-            });
-            yield return altarToil;
-
-            this.AddFinishAction(() =>
-            {
-                SermonUtility.HoldSermonTickCheckEnd(this.pawn, god, altar);
-                this.pawn.records.Increment(WorshipRecordDefOf.SermonsHeldPawn);
-                altar.records.Increment(WorshipRecordDefOf.SermonsHeldAltar);
-            });
+                rotateToFace = TargetIndex.B;
+            };
+            toil.defaultCompleteMode = ToilCompleteMode.Never;
+            yield return toil;
         }
 
 
         protected void ThrowPreacherMote(Pawn pawn, GodDef god)
         {
+            if (pawn.IsHashIntervalTick(MoteInterval.RandomInRange))
+            {
+                MoteMaker.MakeSpeechBubble(pawn, god.PrayerMote);
+            }
+
             MoteBubble moteBubble2 = (MoteBubble)ThingMaker.MakeThing(ThingDefOf.Mote_Speech, null);
-            moteBubble2.SetupMoteBubble(god.prayerMote, pawn);
+            moteBubble2.SetupMoteBubble(god.PrayerMote, pawn);
             moteBubble2.Attach(pawn);
             GenSpawn.Spawn(moteBubble2, pawn.Position, pawn.Map);
         }

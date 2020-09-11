@@ -7,7 +7,7 @@
       <Ability_DetectChancePerEntropy>0.005</Ability_DetectChancePerEntropy>
     </statBases>
     <verbProperties>
-      <verbClass>Verb_CastAbility</verbClass>
+      <verbClass>Corruption.Psykers.Verb_CastPsykerAbility</verbClass>
       <range>24.9</range>
       <requireLineOfSight>True</requireLineOfSight>
       <warmupTime>1</warmupTime>
@@ -367,7 +367,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Psykers.CompAbilityEffect_PsyProjectile</compClass>
+        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>

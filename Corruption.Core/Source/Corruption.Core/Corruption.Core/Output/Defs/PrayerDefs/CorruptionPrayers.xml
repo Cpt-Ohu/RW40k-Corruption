@@ -3,12 +3,14 @@
 
   <Corruption.Core.Gods.PrayerDef Name="KhornePrayerBase" Abstract="True">
     <dedicatedTo>Khorne</dedicatedTo>
-    <preferredWorktags>8</preferredWorktags>
+    <preferredWorktags>
+      <li>Violent</li>
+    </preferredWorktags>
   </Corruption.Core.Gods.PrayerDef>
 
-  <Corruption.Core.Gods.PrayerDef ParentName="KhornePrayerBase" Abstract="True">
+  <Corruption.Core.Gods.PrayerDef ParentName="KhornePrayerBase">
     <defName>Prayer_KhornateRambling</defName>
-    <label>Khorante rambling</label>
+    <label>Khornate rambling</label>
     <prayerLines>
       <li>Kill!</li>
       <li>Maim!</li>
@@ -16,4 +18,39 @@
       <li>Skulls!</li>
     </prayerLines>
   </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef ParentName="KhornePrayerBase">
+    <defName>Prayer_KhornateGlory</defName>
+    <label>Khorante rambling</label>
+    <prayerLines>
+      <li>Blood for the Blood God!</li>
+      <li></li>
+      <li></li>
+      <li>Skulls for the Skull Throne!</li>
+    </prayerLines>
+  </Corruption.Core.Gods.PrayerDef>
+  
+  <Corruption.Core.Gods.PrayerDef>
+    <defName>Prayer_NurgleBattleCry</defName>
+    <label>nurglite battlecry</label>
+    <dedicatedTo>Nurgle</dedicatedTo>
+    <prayerLines>
+      <li>Join Us</li>
+      <li>Join the grandfather</li>
+      <li>Give in to his embrace!</li>
+    </prayerLines>
+    <preferredWorktags>8</preferredWorktags>
+  </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef>
+    <defName>Prayer_SlaaneshBattleCry</defName>
+    <label>slaaneshi battlecry</label>
+    <dedicatedTo>Slaanesh</dedicatedTo>
+    <prayerLines>
+      <li>Yees</li>
+      <li>Give me a taste</li>
+    </prayerLines>
+    <preferredWorktags>8</preferredWorktags>
+  </Corruption.Core.Gods.PrayerDef>
+  
 </Defs>

@@ -29,9 +29,9 @@ namespace Corruption.Worship
 
         public static IEnumerable<SermonTemplate> StandardTemplates()
         {
-            yield return new SermonTemplate(new IntRange(6, 10), false, 6, 1f, WorshipActType.MorningPrayer);             
-            yield return new SermonTemplate(new IntRange(12, 13), false, 12, 1f, WorshipActType.None );
-            yield return new SermonTemplate(new IntRange(18, 22), false, 19, 1f, WorshipActType.EveningPrayer );
+            yield return new SermonTemplate("SermonOfDawn".Translate(), null, false, 6, 1f, WorshipActType.Prayer);
+            yield return new SermonTemplate("SermonOfNoon".Translate(), null, false, 12, 1f, WorshipActType.Prayer);
+            yield return new SermonTemplate("SermonOfDusk".Translate(), null, false, 19, 1f, WorshipActType.Prayer);
         }
 
         public static List<Building> FreeChairsInRoom(Room room)
@@ -75,7 +75,7 @@ namespace Corruption.Worship
                     }
                     else if (s1.DevotionDegree == -1)
                     {
-                        if (SermonUtility.movingSermon(preacher))
+                        if (SermonUtility.MovingSermon(preacher))
                         {
                             return SermonThoughtDefOf.AttendedSermonPureMoving;
                         }
@@ -83,7 +83,7 @@ namespace Corruption.Worship
                     }
                     else
                     {
-                        if (movingSermon(preacher))
+                        if (MovingSermon(preacher))
                         {
                             return SermonThoughtDefOf.AttendedSermonPureMoving;
                         }
@@ -107,7 +107,7 @@ namespace Corruption.Worship
                     {
                         return SermonThoughtDefOf.AttendedSermonPureHereticalForced;
                     }
-                    if (movingSermon(preacher))
+                    if (MovingSermon(preacher))
                     {
                         return SermonThoughtDefOf.AttendedSermonPureHeretical;
                     }
@@ -115,7 +115,7 @@ namespace Corruption.Worship
                 }
                 else
                 {
-                    if (movingSermon(preacher))
+                    if (MovingSermon(preacher))
                     {
                         return SermonThoughtDefOf.AttendedSermonDarkGlorious;
                     }
@@ -124,7 +124,7 @@ namespace Corruption.Worship
             }
         }
 
-        private static bool movingSermon(Pawn pr)
+        private static bool MovingSermon(Pawn pr)
         {
             var f = pr.skills.GetSkill(SkillDefOf.Social).Level;
             int x = Rand.RangeInclusive(0, 35);
@@ -135,31 +135,7 @@ namespace Corruption.Worship
             return false;
         }
 
-        public static void AttendSermonTickCheckEnd(Pawn pawn, Pawn preacher, BuildingAltar altar, WorshipActType worshipActType)
-        {
-            var soul = pawn.Soul();
-            if (soul == null)
-            {
-                return;
-            }
-
-            float num = 0f;
-            if (movingSermon(preacher))
-            {
-                num = 100f;
-            }
-            else
-            {
-                num = 50f;
-            };
-            soul.GainCorruption(num);
-            if (worshipActType == WorshipActType.Confession)
-            {
-                CompSoul.TryDiscoverAlignment(preacher, pawn, -0.2f);
-            }
-        }
-
-        public static void HoldSermonTickCheckEnd(SermonTemplate sermon, Pawn preacher, GodDef god, BuildingAltar altar)
+        public static void HoldSermonTickCheckEnd(Pawn preacher, int listeners, GodDef god, BuildingAltar altar)
         {
             var soul = preacher.Soul();
             if (soul == null)
@@ -169,18 +145,21 @@ namespace Corruption.Worship
 
             float num = 0f;
 
-            foreach (Pawn l in altar.Map.mapPawns.AllPawnsSpawned.FindAll(x => x.Position.InHorDistOf(preacher.Position, 20f) == true))
-            {
-                num += 20f;
-            }
+            num += listeners * 20f;
 
-            if (movingSermon(preacher))
+
+            if (MovingSermon(preacher))
             {
                 num += 150f;
             }
 
-            num *= sermon.DedicatedTo.favourCorruptionFactor;
+            num *= altar.CurrentActiveSermon.DedicatedTo.favourCorruptionFactor;
             soul.GainCorruption(num);
+
+            altar.records.AddTo(WorshipRecordDefOf.SermonsHeldAltar, 1);
+            altar.records.AddTo(WorshipRecordDefOf.SermonAttendees, listeners);
+
+            altar.EndSermon();
         }
 
         public static bool ShouldAttendSermon(Pawn pawn, Pawn preacher)
@@ -248,7 +227,6 @@ namespace Corruption.Worship
                 {
                     num -= 2;
                 }
-                Log.Message("Final Value for: " + pawn.Label + " " + num.ToString());
                 if ((Rand.RangeInclusive(2, 5) + num) >= 5)
                 {
                     return true;
@@ -274,13 +252,13 @@ namespace Corruption.Worship
                 }
                 if (chair != null)
                 {
-                    Job J = new Job(JobDefOf.AttendSermon, altar.preacher, altar, chair);
+                    Job J = new Job(JobDefOf.AttendSermon, altar.CurrentActiveSermon.Preacher, altar, chair);
                     attendee.jobs.jobQueue.EnqueueLast(J);
                     attendee.jobs.EndCurrentJob(JobCondition.InterruptForced);
                 }
                 else
                 {
-                    Job J = new Job(JobDefOf.AttendSermon, altar.preacher, altar, result);
+                    Job J = new Job(JobDefOf.AttendSermon, altar.CurrentActiveSermon.Preacher, altar, result);
                     attendee.jobs.jobQueue.EnqueueLast(J);
                     attendee.jobs.EndCurrentJob(JobCondition.InterruptForced);
                 }
@@ -301,15 +279,14 @@ namespace Corruption.Worship
         public static bool ForceSermon(BuildingAltar altar, WorshipActType worshipActType)
         {
             return altar.Map.lordsStarter.TryStartGathering(GatheringDefOf.Sermon);
-       }
+        }
 
         public static void ForceSermonV2(BuildingAltar altar)
         {
             IntVec3 b = altar.def.interactionCellOffset.RotatedBy(altar.Rotation) + altar.Position;
             Job job = new Job(JobDefOf.HoldSermon, altar, b);
-            altar.preacher.jobs.jobQueue.EnqueueLast(job);
-            altar.preacher.jobs.EndCurrentJob(JobCondition.InterruptForced);
-            //    BuildingAltar.GetSermonFlock(altar);
+            altar.CurrentActiveSermon.Preacher.jobs.jobQueue.EnqueueLast(job);
+            altar.CurrentActiveSermon.Preacher.jobs.EndCurrentJob(JobCondition.InterruptForced);
         }
 
         public static bool IsPreacher(Pawn p)
@@ -317,7 +294,7 @@ namespace Corruption.Worship
             List<Thing> list = p.Map.listerThings.AllThings.FindAll(s => s.GetType() == typeof(BuildingAltar));
             foreach (BuildingAltar b in list)
             {
-                if (b.preacher == p) return true;
+                if (b.CurrentActiveSermon?.Preacher == p) return true;
             }
             return false;
         }
@@ -333,7 +310,7 @@ namespace Corruption.Worship
                 bool[] flag = new bool[listeners.Count];
                 for (int i = 0; i < listeners.Count; i++)
                 {
-                    if (!flag[i] && SermonUtility.ShouldAttendSermon(listeners[i], altar.preacher))
+                    if (!flag[i] && SermonUtility.ShouldAttendSermon(listeners[i], altar.CurrentActiveSermon.Preacher))
                     {
                         tmp.Add(listeners[i]);
                         flag[i] = true;
@@ -346,7 +323,7 @@ namespace Corruption.Worship
                 bool[] flag2 = new bool[prisoners.Count];
                 for (int i = 0; i < prisoners.Count; i++)
                 {
-                    if (!flag2[i] && SermonUtility.ShouldAttendSermon(prisoners[i], altar.preacher))
+                    if (!flag2[i] && SermonUtility.ShouldAttendSermon(prisoners[i], altar.CurrentActiveSermon.Preacher))
                     {
                         tmp.Add(prisoners[i]);
                         flag2[i] = true;
@@ -409,7 +386,7 @@ namespace Corruption.Worship
             List<BuildingAltar> altars = pawn.Map.listerBuildings.allBuildingsColonist.FindAll(x => x is BuildingAltar).Cast<BuildingAltar>().ToList();
             foreach (BuildingAltar altar in altars)
             {
-                if (altar.preacher == pawn)
+                if (altar.CurrentActiveSermon.Preacher == pawn)
                 {
                     return true;
                 }
@@ -419,7 +396,7 @@ namespace Corruption.Worship
 
         public static BuildingAltar chosenAltar(Pawn preacher)
         {
-            return SermonUtility.allAltars(preacher).Find(x => x.preacher == preacher);
+            return SermonUtility.allAltars(preacher).Find(x => x.CurrentActiveSermon.Preacher == preacher);
         }
 
         public static List<BuildingAltar> allAltars(Pawn preacher)

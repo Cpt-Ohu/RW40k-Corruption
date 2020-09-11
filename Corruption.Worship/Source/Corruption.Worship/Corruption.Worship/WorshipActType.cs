@@ -9,10 +9,9 @@ namespace Corruption.Worship
     public enum WorshipActType
     {
         None,
-        MorningPrayer,
-        NoonPrayer,
-        EveningPrayer,
+        Prayer,
         Confession,
-        Conversion
+        Conversion,
+        Ritual
     }
 }

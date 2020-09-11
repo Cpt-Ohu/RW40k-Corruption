@@ -301,6 +301,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AfflictionProperty.cs" />
+    <Compile Include="CompAbilityEffect_AreaOfEffect.cs" />
+    <Compile Include="CompAbilityEffect_LaunchProjectile.cs" />
     <Compile Include="CompAffectSoil.cs" />
     <Compile Include="CompDamageLInker.cs" />
     <Compile Include="CompNotSpawnable.cs" />
@@ -310,11 +312,14 @@
     <Compile Include="CoreSoundDefOf.cs" />
     <Compile Include="CorruptionPawnKindDef.cs" />
     <Compile Include="CorruptionStoryTracker.cs" />
+    <Compile Include="CorruptionStoryTrackerComponent.cs" />
     <Compile Include="CorruptionStoryTrackerUtilities.cs" />
     <Compile Include="CorruptionTraitDefOf.cs" />
     <Compile Include="DamageDefOf.cs" />
     <Compile Include="DamageWorker_Mutate.cs" />
     <Compile Include="FactionsDefOf.cs" />
+    <Compile Include="GenDrawExtension.cs" />
+    <Compile Include="Gods\Dialog_SetReligion.cs" />
     <Compile Include="Gods\God.cs" />
     <Compile Include="Gods\GodDef.cs" />
     <Compile Include="Gods\GodDefOf.cs" />
@@ -337,9 +342,8 @@
     <Compile Include="HediffDefOf.cs" />
     <Compile Include="HediffDemonicAttention.cs" />
     <Compile Include="Items\CompEmpyreal.cs" />
-    <Compile Include="Items\Projectile_Expanding.cs" />
-    <Compile Include="Items\Projectile_Laser.cs" />
-    <Compile Include="Items\Projectile_Smoking.cs" />
+    <Compile Include="Items\PowerBeamConfigurable.cs" />
+    <Compile Include="Items\Projectile_Trail.cs" />
     <Compile Include="ModSettings_Corruption.cs" />
     <Compile Include="MoteAttachedText.cs" />
     <Compile Include="MotePulse.cs" />
@@ -354,8 +358,10 @@
     <Compile Include="MutationUtility.cs" />
     <Compile Include="Gods\Pawn_PrayerTracker.cs" />
     <Compile Include="Gods\PrayerDef.cs" />
+    <Compile Include="Soul\Pawn_ChosenTracker.cs" />
     <Compile Include="Soul\SoulAfflictionDef.cs" />
     <Compile Include="Soul\SoulTraitDefOf.cs" />
+    <Compile Include="TEXUI_Core.cs" />
     <Compile Include="ThingDefOf.cs" />
     <Compile Include="ThoughtWorker_PsychicBlank.cs" />
     <Compile Include="ThoughtWorker_Tzeentchian.cs" />
@@ -418,6 +424,8 @@
     <Content Include="Output\Defs\FactionDefs\Factions_Hidden.xml" />
     <Content Include="Output\Defs\FactionDefs\Factions_Player.xml" />
     <Content Include="Output\Defs\GodDefs\PantheonAttributes.xml" />
+    <Content Include="Output\Defs\GodDefs\Xenos.xml" />
+    <Content Include="Output\Defs\HediffDefs\GenericHediffs.xml" />
     <Content Include="Output\Defs\HediffDefs\GodHediffs.xml" />
     <Content Include="Output\Defs\HediffDefs\MutationHediffDefs.xml" />
     <Content Include="Output\Defs\HediffDefs\PossesssionHediffs.xml" />
@@ -426,6 +434,7 @@
     <Content Include="Output\Defs\PawnKindDefs\PawnKindDefs.xml" />
     <Content Include="Output\Defs\PrayerDefs\CorruptionPrayers.xml" />
     <Content Include="Output\Defs\PrayerDefs\EmperorPrayers.xml" />
+    <Content Include="Output\Defs\PrayerDefs\XenoPrayers.xml" />
     <Content Include="Output\Defs\RecipeDefs\Recipes_Possession.xml" />
     <Content Include="Output\Defs\RecipeDefs\Recipes_SynthBinder.xml" />
     <Content Include="Output\Defs\Scenarios\Secnarios_Special.xml" />
@@ -434,7 +443,9 @@
     <Content Include="Output\Defs\ThingCategoryDefs\ThingCategories.xml" />
     <Content Include="Output\Defs\ThingDefs\Apparel.xml" />
     <Content Include="Output\Defs\ThingDefs\Buildings_Structure.xml" />
+    <Content Include="Output\Defs\ThingDefs\Ethereal_Skyfallers.xml" />
     <Content Include="Output\Defs\ThingDefs\Items.xml" />
+    <Content Include="Output\Defs\ThingDefs\Items_Artifacts.xml" />
     <Content Include="Output\Defs\ThingDefs\MeleeWeapons_Demonic.xml" />
     <Content Include="Output\Defs\ThingDefs\Motes.xml" />
     <Content Include="Output\Defs\ThingDefs\Races_Demonkind.xml" />

@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <AbilityDef Name="FavouredAbility" Abstract="True">
+    <gizmoClass>Command_Ability</gizmoClass>
+    <displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>    
+  </AbilityDef>
+  
+  
+  <AbilityDef ParentName="FavouredAbility">
+    <defName>CleanseCorruption</defName>
+    <label>cleanse corruption</label>
+    <description>Use the Emperor's light to cleanse corruption from a pawn.</description>
+    <iconPath>UI/Glow_Emperor</iconPath>
+    <hotKey>Misc12</hotKey>
+    <cooldownTicksRange>2500~3500</cooldownTicksRange>
+    <targetRequired>True</targetRequired>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>4.0</range>
+      <warmupTime>30</warmupTime>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+        <canTargetAnimals>False</canTargetAnimals>
+        <canTargetPawns>True</canTargetPawns>
+        <canTargetLocations>False</canTargetLocations>
+        <canTargetMechs>False</canTargetMechs>
+        <canTargetItems>False</canTargetItems>
+        <canTargetBuildings>False</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="Corruption.Worship.Abilities.CompProperties_GainCorruption">        
+        <goodwillImpact>10</goodwillImpact>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="FavouredAbility">
+    <defName>KhornateChallenge</defName>
+    <label>khornate challenge</label>
+    <description>Challenge a pawn to a .</description>
+    <iconPath>UI/Abilities/KhornateDuel</iconPath>
+    <hotKey>Misc12</hotKey>
+    <cooldownTicksRange>2500~3500</cooldownTicksRange>
+    <targetRequired>True</targetRequired>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>4.0</range>
+      <warmupTime>30</warmupTime>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+        <canTargetAnimals>False</canTargetAnimals>
+        <canTargetPawns>True</canTargetPawns>
+        <canTargetLocations>False</canTargetLocations>
+        <canTargetMechs>False</canTargetMechs>
+        <canTargetItems>False</canTargetItems>
+        <canTargetBuildings>False</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class = "CompProperties_AbilityGiveMentalState">
+        <compClass>CompAbilityEffect_GiveMentalState</compClass>
+        <stateDef>KhornateDuel</stateDef>
+        <stateDefForMechs>KhornateDuel</stateDefForMechs>
+        <psychic>False</psychic>
+        <goodwillImpact>-75</goodwillImpact>
+      </li>
+      <li Class="CompProperties_AbilityMoteOnTarget">
+        <moteDef>Mote_PsycastPsychicEffect</moteDef>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="FavouredAbility">
+    <defName>NurgliteRegrowth</defName>
+    <label>regenerate</label>
+    <description>Maggots and flies burrow into the flesh of the Nurglite, reforming parts that were lost.</description>
+    <level>30</level>
+    <iconPath>UI/Abilities/BioMancyRegenerate</iconPath>
+    <hotKey>Misc1</hotKey>
+    <statBases>
+      <Ability_Duration>120</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <range>1.0</range>
+      <warmupTime>3.25</warmupTime>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+        <canTargetPawns>True</canTargetPawns>
+        <canTargetAnimals>False</canTargetAnimals>
+        <canTargetLocations>False</canTargetLocations>
+        <canTargetMechs>False</canTargetMechs>
+      </targetParams>
+      <soundCast>HealPulse</soundCast>
+    </verbProperties>
+    <cooldownTicksRange>1600~2000</cooldownTicksRange>
+    <targetRequired>False</targetRequired>
+    <comps>
+      <li Class = "CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>HealingBuffMinor</hediffDef>
+        <durationMultiplier>PsychicSensitivity</durationMultiplier>
+        <psychic>True</psychic>
+        <applicableToMechs>False</applicableToMechs>
+      </li>
+      <li Class="Corruption.Psykers.AbilityCompProperties_AICast" MayRequire="CptOhu.CorruptionPsyker">
+        <compClass>Corruption.Psykers.AbilityComp_AICastHealSelf</compClass>
+        <abilityCastType>SelfHeal</abilityCastType>
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

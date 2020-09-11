@@ -29,4 +29,27 @@
   <LordReportGivingSermon>Holding Sermon</LordReportGivingSermon>
   <MessageSermonCancelled>A sermon was cancelled</MessageSermonCancelled>
   <SermonFinished>Preacher {0} finished a {1}</SermonFinished>
+  <SermonTitle>Title: {0}</SermonTitle>
+  <SermonActive>Sermon Active</SermonActive>
+  <SermonStartingTime>Starting Time: {0}:00</SermonStartingTime>
+  <RenameTemple>Name this temple.</RenameTemple>
+  <RenameSermon>Name this sermon.</RenameSermon>
+  <SermonOfDawn>Sermon of Dawn</SermonOfDawn>
+  <SermonOfNoon>Sermon of Noon</SermonOfNoon>
+  <SermonOfDusk>Sermon of Dusk</SermonOfDusk>
+  <SermonDedication>Dedicated to:</SermonDedication>
+  <SermonsOverview>Sermons</SermonsOverview>
+  <SermonDuration>Sermon Duration ({0})</SermonDuration>
+  <InitialChaosPatron>Initial Chaos Patron</InitialChaosPatron>
+  <PreacherAptitude>Qualification: {0}</PreacherAptitude>
+  <RingBellTower>Ring Bell</RingBellTower>
+  <Assistant>Assistant</Assistant>
+  <ReligiousRiot>Religious Revolt</ReligiousRiot>
+  <ReligiousRiotDesc>A revolt is starting among your colonists. The followers of {0} under their leader {1} are discontent with your chosen religion. They are trying to usurp the faction.\n\nYou have to choose which Religion you intend to follow. Choosing a side will cause the opposing colonists to turn their backs on you. They may even react violently.</ReligiousRiotDesc>
+  <NewColonyReligion>New Colony Religion</NewColonyReligion>
+  <NewColonyReligionDesc>Your colony has a new Religion: {0}</NewColonyReligionDesc>
+  <DefendedColonyReligion>Defended Colony Religion</DefendedColonyReligion>
+  <DefendedColonyReligionDesc>You have defended {0} against the Followers of {1}.</DefendedColonyReligionDesc>
+  <ChaosUprising>Chaos Uprising</ChaosUprising>
+  <CultistUprising>You have banished Chaos Cultists from your colony. They have drawn their weapons and try to take over your faction by force. </CultistUprising>
 </LanguageData>

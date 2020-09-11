@@ -85,7 +85,7 @@
           <max>10</max>
         </avgLifetime>
         <ticksPerEffectCycle>60</ticksPerEffectCycle>
-        <sustainerSound>MoltenBeam</sustainerSound>
+        <sustainerSound>HellfireSustainer</sustainerSound>
       </li>
       <li Class="CompProperties_MoteEmitter">
         <mote>Mote_PsychicEmanatorEffect</mote>

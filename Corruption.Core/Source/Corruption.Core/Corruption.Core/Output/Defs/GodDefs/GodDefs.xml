@@ -31,6 +31,10 @@
       <li>Altruism</li>
     </favourSourceDescriptions>
     <effectMote>Mote_Emperor</effectMote>
+    <approvesBattlingPantheon>
+      <li>Chaos</li>
+      <li>OrkPantheon</li>
+    </approvesBattlingPantheon>
   </Corruption.Core.Gods.GodDef>
 
   <Corruption.Core.Gods.GodDef>
@@ -60,6 +64,10 @@
     <favourWorkerClasses>
       <li>Corruption.Core.Gods.GodFavourWorker_Khorne</li>
     </favourWorkerClasses>
+    <acceptsPrayers>false</acceptsPrayers>
+    <approvesBattlingPantheon>
+      <li>ImperialCult</li>
+    </approvesBattlingPantheon>
   </Corruption.Core.Gods.GodDef>
 
   <Corruption.Core.Gods.GodDef>
@@ -103,6 +111,10 @@
       <li>Despair (mood lower 50% and negative offset greater 20)</li>
     </favourSourceDescriptions>
     <effectMote>Mote_Nurgle</effectMote>
+    <prayerIconPath>UI/Motes/MotePrayerDark</prayerIconPath>
+    <approvesBattlingPantheon>
+      <li>ImperialCult</li>
+    </approvesBattlingPantheon>
   </Corruption.Core.Gods.GodDef>
 
   <Corruption.Core.Gods.GodDef>
@@ -141,6 +153,10 @@
       <li>Betraying non-hostile pawns (banishing, executing, enslaving, selling)</li>
     </favourSourceDescriptions>
     <effectMote>Mote_Tzeentch</effectMote>
+    <prayerIconPath>UI/Motes/MotePrayerDark</prayerIconPath>
+    <approvesBattlingPantheon>
+      <li>ImperialCult</li>
+    </approvesBattlingPantheon>
   </Corruption.Core.Gods.GodDef>
 
   <Corruption.Core.Gods.GodDef>
@@ -180,6 +196,10 @@
       <li>Cannibalism</li>
     </favourSourceDescriptions>
     <effectMote>Mote_Slaanesh</effectMote>
+    <prayerIconPath>UI/Motes/MotePrayerDark</prayerIconPath>
+    <approvesBattlingPantheon>
+      <li>ImperialCult</li>
+    </approvesBattlingPantheon>
   </Corruption.Core.Gods.GodDef>
 
 

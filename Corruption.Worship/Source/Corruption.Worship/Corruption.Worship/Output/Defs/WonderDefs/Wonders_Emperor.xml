@@ -25,7 +25,7 @@
     <wonderIconPath>UI/Wonders/WonderGiftMaterials</wonderIconPath>
     <favourCost>1000</favourCost>
     <incident>ResourcePodCrash</incident>
-    <incidentPoints>3000</incidentPoints>
+    <fixedIncidentPoints>3000</fixedIncidentPoints>
   </Corruption.Worship.Wonders.WonderDef>
 
 

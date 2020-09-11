@@ -7,12 +7,14 @@
     <description>A lethal disease not only of the body, but of the soul, corrupting both to serve the Grandfather</description>
     <makesSickThought>true</makesSickThought>
     <tendable>true</tendable>
+    <lethalSeverity>1</lethalSeverity>
     <comps>
       <li Class="HediffCompProperties_TendDuration">
         <baseTendDurationHours>168</baseTendDurationHours>
         <tendAllAtOnce>true</tendAllAtOnce>
       </li>
-      <li>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>0.01</severityPerDay>
         <compClass>Corruption.Core.HediffComp_NurglesRot</compClass>
       </li>
     </comps>
@@ -40,7 +42,7 @@
         <minSeverity>0.4</minSeverity>
         <label>final stage</label>
         <lifeThreatening>true</lifeThreatening>
-        <painOffset>0.9</painOffset>
+        <painOffset>0.5</painOffset>
         <capMods>
           <li>
             <capacity>Consciousness</capacity>
@@ -68,6 +70,11 @@
         <painFactor>0.5</painFactor>
       </li>
     </stages>
+    <comps>
+      <li>
+        <compClass>Corruption.Core.CompNurgleRevivable</compClass>
+      </li>
+    </comps>
   </HediffDef>
 
   <HediffDef>
@@ -84,6 +91,9 @@
     <comps>
       <li>
         <compClass>Corruption.Core.HediffComp_NurglesMark</compClass>
+      </li>
+      <li>
+        <compClass>Corruption.Core.CompNurgleRevivable</compClass>
       </li>
     </comps>
   </HediffDef>

@@ -14,6 +14,7 @@ namespace Corruption.Worship
     {
 		protected CompRefuelable refuelableComp;
 		protected CompFlickable flickableComp;
+		protected BuildingAltar altar;
 
 		public static readonly Graphic FireGraphicGreen = GraphicDatabase.Get<Graphic_Flicker>("Things/Overlays/FireGreen", ShaderDatabase.TransparentPostLight, Vector2.one, Color.white);
 		public static readonly Graphic FireGraphicBlue = GraphicDatabase.Get<Graphic_Flicker>("Things/Overlays/FireBlue", ShaderDatabase.TransparentPostLight, Vector2.one, Color.white);
@@ -51,7 +52,7 @@ namespace Corruption.Worship
 		public override void PostDraw()
 		{
 			base.PostDraw();
-			if ((refuelableComp == null || refuelableComp.HasFuel) && ( flickableComp == null || flickableComp.SwitchIsOn ))
+			if ((refuelableComp == null || refuelableComp.HasFuel) && ( flickableComp == null || flickableComp.SwitchIsOn ) && (this.altar == null || this.altar.CurrentActiveSermon != null))
 			{
 				foreach (var pos in this.firePositions)
 				{
@@ -67,6 +68,7 @@ namespace Corruption.Worship
 			base.PostSpawnSetup(respawningAfterLoad);
 			refuelableComp = parent.GetComp<CompRefuelable>();
 			flickableComp = parent.GetComp<CompFlickable>();
+			altar = this.parent as BuildingAltar;
 			this.firePositions.Clear();
 			this.firePositions = this.Props.firePositions.FindAll(x => x.rotation == this.parent.Rotation);
 			if (this.firePositions.NullOrEmpty())

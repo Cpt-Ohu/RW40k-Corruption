@@ -24,8 +24,8 @@ namespace Corruption.Core
 
         public static void ApplyMutation(Pawn pawn, List<HediffDef> mutations, float severityChange, float newMutationChance = 0.01f)
         {
-            var existingHediffs = pawn.health.hediffSet.hediffs.FindAll(x => mutations.Exists(y => y == x.def));
-            var selectedHediff = existingHediffs.Count > 0 ? existingHediffs.FindAll(x => x.Severity < x.def.maxSeverity).RandomElement() : null;
+            var existingHediffs = pawn.health.hediffSet.hediffs.FindAll(x => mutations.Exists(y => y == x.def && x.Severity < x.def.maxSeverity));
+            var selectedHediff = existingHediffs.Count > 0 ? existingHediffs.RandomElement() : null;
 
             float severity = 0f;
             if (selectedHediff != null && Rand.Value > newMutationChance)

@@ -19,7 +19,7 @@ namespace Corruption.Core
         public override void Notify_EntropyGained(float baseAmount, float finalAmount, Thing source = null)
         {
             base.Notify_EntropyGained(baseAmount, finalAmount, source);
-            this.parent.Severity += finalAmount / 200f;
+            this.parent.Severity += finalAmount / 200f * ModSettings_Corruption.PossessionGainFactor; 
         }
 
         public override void CompPostTick(ref float severityAdjustment)

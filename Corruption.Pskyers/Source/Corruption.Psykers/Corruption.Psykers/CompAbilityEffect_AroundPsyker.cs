@@ -20,7 +20,7 @@ namespace Corruption.Psykers
                 MoteMaker.MakeAttachedOverlay(this.parent.pawn, this.Props.mote, Vector3.zero);
             }
             List<LocalTargetInfo> targets = new List<LocalTargetInfo>();
-            foreach (var thing in GenRadial.RadialDistinctThingsAround(target.Cell, this.parent.pawn.Map, this.parent.def.EffectRadius, true))
+            foreach (var thing in GenRadial.RadialDistinctThingsAround(target.Cell, this.parent.pawn.Map, Math.Min(150f, this.parent.def.EffectRadius), true))
             {
                 if (this.parent.def.verbProperties.targetParams.CanTarget(thing))
                 {

@@ -9,12 +9,12 @@
   <Corruption.Worship.Wonders.WonderDef ParentName="KhorneWonder">
     <defName>KhornePredators</defName>
     <label>Predators</label>
-    <description>Khorne sends in a pack of savage beasts</description>
+    <description>Khorne sends in a pack of savage beasts to test your might.</description>
     <workerClass>Corruption.Worship.Wonders.WonderWorker_FireIncident</workerClass>
     <wonderIconPath>UI/Wonders/WondersKhorneBeasts</wonderIconPath>
     <favourCost>0</favourCost>
     <incident>ManhunterPack</incident>
-    <incidentPoints>3000</incidentPoints>
+    <pointsScalable>True</pointsScalable>
   </Corruption.Worship.Wonders.WonderDef>
 
   <Corruption.Worship.Wonders.WonderDef ParentName="KhorneWonder">
@@ -37,7 +37,7 @@
     <wonderIconPath>UI/Wonders/WonderKhorneFrenzy</wonderIconPath>
     <favourCost>5000</favourCost>
     <incident>KhorneFrenzy</incident>
-    <incidentPoints>3000</incidentPoints>
+    <fixedIncidentPoints>3000</fixedIncidentPoints>
   </Corruption.Worship.Wonders.WonderDef>
 
   <Corruption.Worship.Wonders.WonderDef ParentName="KhorneWonder">

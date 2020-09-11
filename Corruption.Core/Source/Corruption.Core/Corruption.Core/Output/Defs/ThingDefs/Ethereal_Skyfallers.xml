@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="SkyfallerBase"   MayRequire="Ogliss.AdMech.Xenobiologis.Orkz">
+    <defName>FootOfGork</defName>
+    <label>foot of gork (incoming)</label>
+    <size>(2, 2)</size>
+    <graphicData>
+      <texPath>Things/Motes/FootOfGork</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
+      <drawSize>(10, 10)</drawSize>
+    </graphicData>
+    <skyfaller>
+      <shadowSize>(3, 3)</shadowSize>
+      <explosionRadius>5</explosionRadius>
+      <explosionDamage>Bomb</explosionDamage>
+      <rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+      <speed>1.2</speed>
+    </skyfaller>
+  </ThingDef>
+
+  <ThingDef ParentName="OrbitalStrikeBase">
+    <defName>GazeOfMork</defName>
+    <label>gaze of mork</label>
+    <thingClass>Corruption.Core.Items.PowerBeamConfigurable</thingClass>
+    <comps>
+      <li Class="Corruption.Core.Items.CompProperties_OrbitalBeamConfigurable">
+        <width>3</width>
+        <color>(255, 245, 214, 242)</color>
+        <sound>OrbitalBeam</sound>
+      </li>
+      <li Class="CompProperties_CameraShaker">
+        <mag>0.03</mag>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+</Defs>

@@ -15,7 +15,7 @@ namespace Corruption.Worship
         public override void PostWorldGenerate()
         {
             base.PostWorldGenerate();
-            GlobalWorshipTracker.Current.PlayerPantheon = this.pantheon;
+            GlobalWorshipTracker.Current.PlayerPantheon = this.pantheon ?? PantheonDefOf.ImperialCult;
         }
 
         private PantheonDef pantheon;
@@ -23,7 +23,7 @@ namespace Corruption.Worship
         public override void DoEditInterface(Listing_ScenEdit listing)
 		{
 			Rect scenPartRect = listing.GetScenPartRect(this, ScenPart.RowHeight * 3f + 31f);
-			if (Widgets.ButtonText(scenPartRect.TopPartPixels(ScenPart.RowHeight), pantheon.LabelCap))
+			if (Widgets.ButtonText(scenPartRect.TopPartPixels(ScenPart.RowHeight), pantheon?.LabelCap ?? "None"))
 			{
 				FloatMenuUtility.MakeMenu(PossiblePantheons(), (PantheonDef pantheon) => pantheon.LabelCap, delegate (PantheonDef pantheon)
 				{
@@ -39,7 +39,7 @@ namespace Corruption.Worship
 
 		private IEnumerable<PantheonDef> PossiblePantheons()
 		{
-			foreach (var pantheon in DefDatabase<PantheonDef>.AllDefs)
+			foreach (var pantheon in DefDatabase<PantheonDef>.AllDefs.Where(x => x.requiresMod == null || (ModLister.GetModWithIdentifier(x.requiresMod)?.Active ?? false)))
 			{
 				yield return pantheon;
 			}

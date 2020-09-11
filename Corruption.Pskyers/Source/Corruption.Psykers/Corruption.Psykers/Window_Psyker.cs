@@ -267,64 +267,63 @@ namespace Corruption.Psykers
 
             if (this.selectedPower != null)
             {
-                //Rect selectedTitleRect = new Rect(0f, 316f, powersRect.width, Text.LineHeight);
-                //Rect descrRect = new Rect(0f, selectedTitleRect.yMax + 4f, powersRect.width, Text.LineHeight * 2);
-                Rect costRect = new Rect(64f, 318f, powersRect.width - 64f, Text.LineHeight);
-                //Widgets.Label(selectedTitleRect, this.selectedPower.ability.LabelCap);
-                //Widgets.TextAreaScrollable(descrRect, this.selectedPower.ability.description, ref descrScrollPos, true);
-                Widgets.Label(costRect, "LearnPowerCost".Translate(new NamedArgument((int)(this.selectedPower.cost), "COST")));
-                Rect buttonRect = new Rect(64f, costRect.yMax + 4f, 196f, 32f);
-
-
-                if (this.selectedPower.ability.level > this.comp.PsykerPowerTrait.Degree)
-                {
-                    Widgets.CustomButtonText(ref buttonRect, "LearnPower".Translate(), TexUI.LockedResearchColor, TexUI.HighlightBorderResearchColor, TexUI.DefaultLineResearchColor);
-                    TooltipHandler.TipRegion(buttonRect, new TipSignal("PsykerLearnAboveLevel".Translate()));
-                }
-                else if (this.selectedPower.cost > this.comp.PsykerXP)
-                {
-                    Widgets.CustomButtonText(ref buttonRect, "LearnPower".Translate(), TexUI.LockedResearchColor, TexUI.HighlightBorderResearchColor, TexUI.DefaultLineResearchColor);
-                    TooltipHandler.TipRegion(buttonRect, new TipSignal("PsykerLearnXPShortage".Translate()));
-                }
-                else if (this.comp.HasLearnedAbility(selectedPower.ability))
-                {
-                    Widgets.CustomButtonText(ref buttonRect, "LearntPower".Translate(), TexUI.LockedResearchColor, TexUI.HighlightBorderResearchColor, TexUI.HighlightBorderResearchColor);
-                }
-                else if (this.selectedPower.conflictsWith.Any(x => this.comp.HasLearnedAbility(x)))
-                {
-                    Widgets.CustomButtonText(ref buttonRect, "LearntExcludingPower".Translate(new NamedArgument(this.selectedPower.conflictsWith.FirstOrDefault(x => this.comp.HasLearnedAbility(x)).label, "ABILITY")), TexUI.LockedResearchColor, TexUI.HighlightBorderResearchColor, TexUI.HighlightBorderResearchColor);
-                }
-                else if (this.comp.Pawn.WorkTagIsDisabled(WorkTags.Violent) && this.selectedPower.ability.comps.Any(x => x.compClass == typeof(CompAbilityEffect_PsyProjectile) || x.compClass == typeof(CompAbilityEffect_DirectDamage)))
-                {
-                    Widgets.CustomButtonText(ref buttonRect, "CannotLearnViolentPower".Translate(new NamedArgument(this.selectedPower.conflictsWith.FirstOrDefault(x => this.comp.HasLearnedAbility(x)).label, "ABILITY")), TexUI.LockedResearchColor, TexUI.HighlightBorderResearchColor, TexUI.HighlightBorderResearchColor);
-                }
-                else if (!this.comp.LearningRequirementsMet(selectedPower))
-                {
-                    Widgets.CustomButtonText(ref buttonRect, "PowerPerequisitesMissing".Translate(), TexUI.LockedResearchColor, TexUI.HighlightBorderResearchColor, TexUI.HighlightBorderResearchColor);
-                }
-                else
-                {
-                    if (Widgets.ButtonText(buttonRect, "LearnPower".Translate()))
-                    {
-                        if (this.comp.TryLearnPower(this.selectedPower))
-                        {
-                            CoreSoundDefOf.Corruption_UnlockMinor.PlayOneShotOnCamera();
-                        }
-                    }
-                }
-
-                Rect debugRect = new Rect(buttonRect);
-                debugRect.x = buttonRect.xMax + 8f;
-                if (Prefs.DevMode)
-                {
-                    if (Widgets.ButtonText(debugRect, "Debug: +100XP"))
-                    {
-                        this.comp.AddXP(100f);
-                    }
-                }
-
+                DrawSelectedPower(powersRect);
             }
             GUI.EndGroup();
+        }
+
+        private void DrawSelectedPower(Rect powersRect)
+        {
+            Rect costRect = new Rect(64f, 318f, powersRect.width - 64f, Text.LineHeight);
+            Widgets.Label(costRect, "LearnPowerCost".Translate(new NamedArgument((int)(this.selectedPower.cost), "COST")));
+            Rect buttonRect = new Rect(64f, costRect.yMax + 4f, 196f, 32f);
+
+            if (this.selectedPower.ability.level > this.comp.PsykerPowerTrait.Degree)
+            {
+                Widgets.CustomButtonText(ref buttonRect, "LearnPower".Translate(), TexUI.LockedResearchColor, TexUI.HighlightBorderResearchColor, TexUI.DefaultLineResearchColor);
+                TooltipHandler.TipRegion(buttonRect, new TipSignal("PsykerLearnAboveLevel".Translate()));
+            }
+            else if (this.selectedPower.cost > this.comp.PsykerXP)
+            {
+                Widgets.CustomButtonText(ref buttonRect, "LearnPower".Translate(), TexUI.LockedResearchColor, TexUI.HighlightBorderResearchColor, TexUI.DefaultLineResearchColor);
+                TooltipHandler.TipRegion(buttonRect, new TipSignal("PsykerLearnXPShortage".Translate()));
+            }
+            else if (this.comp.HasLearnedAbility(selectedPower.ability))
+            {
+                Widgets.CustomButtonText(ref buttonRect, "LearntPower".Translate(), TexUI.LockedResearchColor, TexUI.HighlightBorderResearchColor, TexUI.HighlightBorderResearchColor);
+            }
+            else if (this.selectedPower.conflictsWith.Any(x => this.comp.HasLearnedAbility(x)))
+            {
+                Widgets.CustomButtonText(ref buttonRect, "LearntExcludingPower".Translate(new NamedArgument(this.selectedPower.conflictsWith.FirstOrDefault(x => this.comp.HasLearnedAbility(x)).label, "ABILITY")), TexUI.LockedResearchColor, TexUI.HighlightBorderResearchColor, TexUI.HighlightBorderResearchColor);
+            }
+            else if (this.comp.Pawn.WorkTagIsDisabled(WorkTags.Violent) && this.selectedPower.ability.comps.Any(x => x.compClass == typeof(CompAbilityEffect_PsyProjectile) || x.compClass == typeof(CompAbilityEffect_DirectDamage)))
+            {
+                Widgets.CustomButtonText(ref buttonRect, "CannotLearnViolentPower".Translate(), TexUI.LockedResearchColor, TexUI.HighlightBorderResearchColor, TexUI.HighlightBorderResearchColor);
+            }
+            else if (!this.comp.LearningRequirementsMet(selectedPower))
+            {
+                Widgets.CustomButtonText(ref buttonRect, "PowerPerequisitesMissing".Translate(), TexUI.LockedResearchColor, TexUI.HighlightBorderResearchColor, TexUI.HighlightBorderResearchColor);
+            }
+            else
+            {
+                if (Widgets.ButtonText(buttonRect, "LearnPower".Translate()))
+                {
+                    if (this.comp.TryLearnPower(this.selectedPower))
+                    {
+                        CoreSoundDefOf.Corruption_UnlockMinor.PlayOneShotOnCamera();
+                    }
+                }
+            }
+
+            Rect debugRect = new Rect(buttonRect);
+            debugRect.x = buttonRect.xMax + 8f;
+            if (Prefs.DevMode)
+            {
+                if (Widgets.ButtonText(debugRect, "Debug: +100XP"))
+                {
+                    this.comp.AddXP(100f);
+                }
+            }
         }
 
         private void DrawPowerLevels(Rect inRect)

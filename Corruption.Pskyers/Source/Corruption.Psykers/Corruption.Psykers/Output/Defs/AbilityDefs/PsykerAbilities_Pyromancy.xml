@@ -23,7 +23,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Psykers.CompAbilityEffect_PsyProjectile</compClass>
+        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -75,12 +75,12 @@
 
   <!-- ========================= Warpfire Projectile ===================================== -->
 
-  <ThingDef ParentName="BaseBullet" Name="PSYWarpfireJet" Class="Corruption.Core.Items.ThingDef_LaserProjectile">
-    <thingClass>Corruption.Core.Items.Projectile_Laser</thingClass>
+  <ThingDef ParentName="BaseBullet" Name="PSYWarpfireJet">
+    <thingClass>Corruption.Core.Items.Projectile_Trail</thingClass>
     <defName>PSYWarpfireJetI</defName>
     <label>Warp Flame</label>
     <graphicData>
-      <texPath>Things/Projectiles/WarpFlame</texPath>
+      <texPath>Things/Projectiles/MoltenBeam</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <projectile>
@@ -89,17 +89,16 @@
       <damageAmountBase>8</damageAmountBase>
       <speed>50</speed>
     </projectile>
-    <preFiringInitialIntensity>0</preFiringInitialIntensity>
-    <preFiringFinalIntensity>2</preFiringFinalIntensity>
-    <postFiringInitialIntensity>2</postFiringInitialIntensity>
-    <postFiringFinalIntensity>0</postFiringFinalIntensity>
-    <preFiringDuration>2</preFiringDuration>
-    <postFiringDuration>63</postFiringDuration>
-    <StartFireChance>1.00</StartFireChance>
+    <comps>
+      <li Class="Corruption.Core.Items.CompProperties_ProjectileTrail">
+        <trailTexPath>Things/Projectiles/WarpFlame</trailTexPath>
+        <postImpactLifetime>10</postImpactLifetime>
+      </li>
+    </comps>
   </ThingDef>
 
-  <ThingDef ParentName="PSYWarpfireJet" Class="Corruption.Core.Items.ThingDef_LaserProjectile">
-    <thingClass>Corruption.Core.Items.Projectile_Laser</thingClass>
+  <ThingDef ParentName="PSYWarpfireJet">
+    <thingClass>Corruption.Core.Items.Projectile_Trail</thingClass>
     <defName>PSYWarpfireJetII</defName>
     <label>Warp Flame</label>
     <graphicData>
@@ -246,7 +245,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Psykers.CompAbilityEffect_PsyProjectile</compClass>
+        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -281,8 +280,8 @@
 
   <!-- ========================= Projectile MoltenBeam ===================================== -->
 
-  <ThingDef ParentName="BaseBullet" Class="Corruption.Core.Items.ThingDef_LaserProjectile" Name="MoltenBeamBase">
-    <thingClass>Corruption.Core.Items.Projectile_Smoking</thingClass>
+  <ThingDef ParentName="BaseBullet" Name="MoltenBeamBase">
+    <thingClass>Corruption.Core.Items.Projectile_Trail</thingClass>
     <defName>PSYMoltenBeamI</defName>
     <label>molten beam</label>
     <graphicData>
@@ -291,25 +290,22 @@
     </graphicData>
     <projectile>
       <flyOverhead>false</flyOverhead>
-      <damageDef>Burn</damageDef>
+      <damageDef>BurningExplosion</damageDef>
       <damageAmountBase>35</damageAmountBase>
       <speed>40</speed>
       <armorPenetrationBase>0.2</armorPenetrationBase>
       <explosionRadius>1.0</explosionRadius>
     </projectile>
-    <preFiringInitialIntensity>0</preFiringInitialIntensity>
-    <preFiringFinalIntensity>2</preFiringFinalIntensity>
-    <postFiringInitialIntensity>2</postFiringInitialIntensity>
-    <postFiringFinalIntensity>0</postFiringFinalIntensity>
-    <preFiringDuration>2</preFiringDuration>
-    <postFiringDuration>60</postFiringDuration>
-    <StartFireChance>1.000</StartFireChance>
-    <causesExplosion>true</causesExplosion>
-    <smokeGraphicPath>Things/Projectiles/MoltenBeam_Trail</smokeGraphicPath>
+    <comps>
+      <li Class="Corruption.Core.Items.CompProperties_ProjectileTrail">
+        <trailTexPath>Things/Projectiles/MoltenBeam_Trail</trailTexPath>
+        <postImpactLifetime>10</postImpactLifetime>
+      </li>
+    </comps>
   </ThingDef>
 
-  <ThingDef ParentName="MoltenBeamBase" Class="Corruption.Core.Items.ThingDef_LaserProjectile">
-    <thingClass>Corruption.Core.Items.Projectile_Smoking</thingClass>
+  <ThingDef ParentName="MoltenBeamBase">
+    <thingClass>Corruption.Core.Items.Projectile_Trail</thingClass>
     <defName>PSYMoltenBeamII</defName>
     <label>molten beam</label>
     <graphicData>
@@ -318,7 +314,7 @@
     </graphicData>
     <projectile>
       <flyOverhead>false</flyOverhead>
-      <damageDef>Burn</damageDef>
+      <damageDef>BurningExplosion</damageDef>
       <damageAmountBase>55</damageAmountBase>
       <speed>40</speed>
       <armorPenetrationBase>0.25</armorPenetrationBase>
@@ -356,7 +352,7 @@
     <targetRequired>False</targetRequired>
     <comps>
       <li Class="Corruption.Psykers.CompProperties_AroundPsyker">
-        <compClass>Corruption.Psykers.CompAbilityEffect_AroundPsyker</compClass>
+        <compClass>Corruption.Core.CompAbilityEffect_AreaOfEffect</compClass>
         <mote>Mote_Sunburst</mote>
       </li>
       <li Class = "CompProperties_AbilityGiveHediff">

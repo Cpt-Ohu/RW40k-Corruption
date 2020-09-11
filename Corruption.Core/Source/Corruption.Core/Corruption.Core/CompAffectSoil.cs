@@ -10,7 +10,6 @@ namespace Corruption.Core
 {
     public class CompAffectSurroundings : ThingComp
     {
-
         private int ticksSinceLastEffect;
 
         public CompProperties_AffectSurroundings Props => this.props as CompProperties_AffectSurroundings;
@@ -30,7 +29,8 @@ namespace Corruption.Core
                         return;
                     }
                     intVec = position + GenRadial.RadialPattern[num];
-                    if (intVec.InBounds(parent.Map) && parent.Map.terrainGrid.TerrainAt(intVec) != this.Props.terrainToSet)
+                    var existingTerrain = parent.Map.terrainGrid.TerrainAt(intVec);
+                    if (intVec.InBounds(parent.Map) && existingTerrain != this.Props.terrainToSet &&  (this.Props.ignoreTerrain == null || existingTerrain != this.Props.ignoreTerrain))
                     {
                         break;
                     }
@@ -105,6 +105,8 @@ namespace Corruption.Core
     public class CompProperties_AffectSurroundings : CompProperties
     {
         public TerrainDef terrainToSet;
+
+        public TerrainDef ignoreTerrain;
 
         public int ticksToEffect = 2000;
 

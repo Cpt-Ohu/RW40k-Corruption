@@ -55,10 +55,10 @@ namespace Corruption.Psykers
 
         public override void GizmoUpdateOnMouseover()
         {
-            base.GizmoUpdateOnMouseover();
-            if (this.ability.CompsOfType<CompAbilityEffect_AroundPsyker>().Count() > 0)
+            Verb_CastPsykerAbility verb_CastAbility;
+            if ((verb_CastAbility = (ability.verb as Verb_CastPsykerAbility)) != null || this.ability.CompsOfType<CompAbilityEffect_AroundPsyker>().Count() > 0)
             {
-                GenDraw.DrawRadiusRing(this.ability.pawn.Position, this.ability.def.EffectRadius);
+                verb_CastAbility.DrawRadiusCapped();
             }
         }
     }

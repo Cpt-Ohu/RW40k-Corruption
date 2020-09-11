@@ -48,7 +48,6 @@
   </ThingDef>
 
 
-
   <ThingDef ParentName="ResourceBase">
     <defName>Armaplas</defName>
     <label>armaplas</label>

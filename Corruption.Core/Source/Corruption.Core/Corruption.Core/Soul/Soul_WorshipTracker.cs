@@ -12,7 +12,7 @@ namespace Corruption.Core.Soul
     {
         private List<FavourProgress> Favours;
         private CompSoul Soul;
-
+        
         public FavourProgress HighestFavour => this.Favours.MaxBy(x => x.Favour);
 
         public Soul_FavourTracker(CompSoul soul)
@@ -83,6 +83,5 @@ namespace Corruption.Core.Soul
         {
             Scribe_Collections.Look<FavourProgress>(ref this.Favours, "favours", LookMode.Deep);
         }
-
     }
 }

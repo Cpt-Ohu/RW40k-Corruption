@@ -21,10 +21,11 @@ namespace Corruption.Worship.Wonders
             };
         }
 
-        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
+        protected override bool TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
             Dialog_FormAndSendPilgrims PilgrimageDialog = new Dialog_FormAndSendPilgrims(this.target.Map);
             Find.WindowStack.Add(PilgrimageDialog);
+            return true;
         }
     }
 }

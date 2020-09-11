@@ -40,9 +40,9 @@ namespace Corruption.Worship
                 flag = true;
                 Event.current.Use();
             }
-            Widgets.Label(new Rect(0f, 0f, rect.width, rect.height), "NameTempleMessage".Translate());
+            Widgets.Label(new Rect(0f, 0f, rect.width, rect.height), "RenameTemple".Translate());
             this.curName = Widgets.TextField(new Rect(0f, rect.height - 35f, rect.width / 2f - 20f, 35f), this.curName);
-            if (Widgets.ButtonText(new Rect(rect.width / 2f + 20f, rect.height - 35f, rect.width / 2f - 20f, 35f), "OK".Translate(), true, false, true) || flag)
+            if (Widgets.ButtonText(new Rect(rect.width / 2f + 20f, rect.height - 35f, rect.width / 2f - 20f, 35f), "Accept".Translate(), true, false, true) || flag)
             {
                 if (this.IsValidRoomName(this.curName))
                 {
@@ -51,7 +51,7 @@ namespace Corruption.Worship
                 }
                 else
                 {
-                    Messages.Message("ColonyNameIsInvalid".Translate(), MessageTypeDefOf.NegativeEvent);
+                    Messages.Message("NameIsInvalid".Translate(), MessageTypeDefOf.NegativeEvent);
                 }
                 Event.current.Use();
             }

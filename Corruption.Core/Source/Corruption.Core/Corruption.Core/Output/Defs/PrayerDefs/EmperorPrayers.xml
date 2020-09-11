@@ -47,6 +47,45 @@
       <li>I pledge myself to thee.</li>
     </prayerLines>
   </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef ParentName="EmperorPrayerBase">
+    <defName>Prayer_LitanyToLight</defName>
+    <label>litany to light</label>
+    <prayerLines>
+      <li>Let his light shine.</li>
+      <li>Let the darkness fade.</li>
+      <li>Bring forth what is good.</li>
+      <li>To lay before him.</li>
+    </prayerLines>
+  </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef ParentName="EmperorPrayerBase">
+    <defName>Prayer_WarriorI</defName>
+    <label>warriors prayer I</label>
+    <prayerLines>
+      <li>I offer my life to the Emperor.</li>
+      <li>I pray that He accepts it.</li>
+      <li>I offer my strength to the Emperor.</li>
+      <li>I pray that he redresses it.</li>
+    </prayerLines>
+    <preferredWorktags>
+      <li>Violent</li>
+    </preferredWorktags>
+  </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef ParentName="EmperorPrayerBase">
+    <defName>Prayer_WarriorII</defName>
+    <label>warriors prayer II</label>
+    <prayerLines>
+      <li>I offer my blood to the Emperor.</li>
+      <li>I pray that it quenches His thirst.</li>
+      <li>I offer my body on the altar of the battlefield.</li>
+      <li>I pray He grants me a noble death.</li>      
+    </prayerLines>
+    <preferredWorktags>
+      <li>Violent</li>
+    </preferredWorktags>
+  </Corruption.Core.Gods.PrayerDef>
   
   
 </Defs>

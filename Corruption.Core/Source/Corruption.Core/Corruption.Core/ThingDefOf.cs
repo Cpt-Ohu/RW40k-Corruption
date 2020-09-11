@@ -13,5 +13,6 @@ namespace Corruption.Core
     {
         public static ThingDef Mote_AttachedText;
         public static ThingDef Mote_DemonicPossessionBlast;
+        public static ThingDef Mote_HolyExorcise;
     }
 }

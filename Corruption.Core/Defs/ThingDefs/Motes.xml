@@ -97,7 +97,168 @@
     </mote>
   </ThingDef>
 
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrownAttached</thingClass>
+    <defName>Mote_Emperor</defName>
+    <graphicData>
+      <texPath>UI/Glow_Emperor</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>2.0</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>0.1</growthRate>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrownAttached</thingClass>
+    <defName>Mote_Ynnead</defName>
+    <graphicData>
+      <texPath>UI/Glow_Ynnead</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>2.0</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>0.1</growthRate>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrownAttached</thingClass>
+    <defName>Mote_Cegorach</defName>
+    <graphicData>
+      <texPath>UI/Glow_Cegorach</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>2.0</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>0.1</growthRate>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrownAttached</thingClass>
+    <defName>Mote_Khaine</defName>
+    <graphicData>
+      <texPath>UI/Glow_Cegorach</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>2.0</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>0.1</growthRate>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrownAttached</thingClass>
+    <defName>Mote_Ork</defName>
+    <graphicData>
+      <texPath>UI/Glow_Orkish</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>2.0</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>0.1</growthRate>
+    </mote>
+  </ThingDef>
+
+
 
   
+
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrownAttached</thingClass>
+    <defName>Mote_Khorne</defName>
+    <graphicData>
+      <texPath>UI/Glow_Khorne</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>2.0</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>0.1</growthRate>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrownAttached</thingClass>
+    <defName>Mote_Nurgle</defName>
+    <graphicData>
+      <texPath>UI/Glow_Nurgle</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>2.0</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>0.1</growthRate>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrownAttached</thingClass>
+    <defName>Mote_Tzeentch</defName>
+    <graphicData>
+      <texPath>UI/Glow_Tzeentch</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>2.0</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>0.1</growthRate>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteThrownAttached</thingClass>
+    <defName>Mote_Slaanesh</defName>
+    <graphicData>
+      <texPath>UI/Glow_Slaanesh</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>2.0</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>0.1</growthRate>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase"   MayRequire="Ogliss.AdMech.Xenobiologis.Orkz">
+    <thingClass>MoteThrown</thingClass>
+    <defName>Mote_FootOfGork</defName>
+    <graphicData>
+      <texPath>Things/Motes/FootOfGork</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>2.0</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>1</growthRate>
+    </mote>
+  </ThingDef>
 
 </Defs>

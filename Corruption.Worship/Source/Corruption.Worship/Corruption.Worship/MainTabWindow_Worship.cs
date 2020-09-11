@@ -174,7 +174,7 @@ namespace Corruption.Worship
                 debugRectAdd.y += debugRectAdd.height + 4f;
                 if (Widgets.ButtonText(debugRectAdd, "Debug: Change Religion"))
                 {
-                    Find.WindowStack.Add(new Dialog_SetReligion());
+                    Find.WindowStack.Add(new Dialog_SetReligion(GlobalWorshipTracker.Current.PlayerPantheon));
                 }
             }
 
@@ -276,7 +276,7 @@ namespace Corruption.Worship
                 Rect borderRect = new Rect(48f, favourLabelRect.yMax + 6f, godsRect.width - 96f, 32f);
                 GUI.DrawTexture(borderRect, BackgroundTile);
                 Rect progressRect = new Rect(borderRect).ContractedBy(4f);
-                Widgets.FillableBar(progressRect, GlobalWorshipTracker.Current.GetFavourProgressFor(member.god).FavourPercentage, member.god.worshipBarFillTexture, null, false);
+                Widgets.FillableBar(progressRect, GlobalWorshipTracker.Current.GetFavourProgressFor(member.god).FavourPercentage, member.god.WorshipBarFillTexture, null, false);
 
                 //TooltipHandler.TipRegion(progressRect, new TipSignal(string.Concat(godsFavour, " / ", FavourProgress.ProgressRange.max)));
 
@@ -310,7 +310,7 @@ namespace Corruption.Worship
 
                         Messages.Message("MessageWonderPointsMissing".Translate(), MessageTypeDefOf.RejectInput, historical: false);
                     }
-                    else if (wonder.pointsScalable)
+                    else if (wonder.pointsScalable && wonder.pointsCurve != null)
                     {
                         Func<int, string> textGetter;
                         textGetter = ((int x) => "SetWorshipPoints".Translate());
@@ -384,11 +384,11 @@ namespace Corruption.Worship
             GUI.BeginGroup(altarsRect);
             altarsRect = new Rect(0f, 0f, altarsRect.width, altarsRect.height);
             Text.Font = GameFont.Medium;
-            Rect altarTitleRect = new Rect(0f, 0f, altarsRect.width, Text.LineHeight);
+            Rect altarTitleRect = new Rect(4f, 0f, altarsRect.width, Text.LineHeight);
             Widgets.Label(altarTitleRect, "PlacesOfWorship".Translate());
             Text.Font = GameFont.Small;
-            Rect outerAltarRect = new Rect(0f, altarTitleRect.yMax + 4f, altarsRect.width, altarsRect.height - altarTitleRect.yMax - 4f);
-            Rect altarViewRect = new Rect(4f, 2f, altarsRect.width - 8f, altars.Count * 128f);
+            Rect outerAltarRect = new Rect(0f, altarTitleRect.yMax + 4f, altarsRect.width - 8f, altarsRect.height - altarTitleRect.yMax - 4f);
+            Rect altarViewRect = new Rect(0f, 0f, altarsRect.width - 16f, altars.Count * 128f);
             Widgets.BeginScrollView(outerAltarRect, ref altarsScrollPos, altarViewRect);
             curY = 0f;
             foreach (var altar in altars)
@@ -397,39 +397,31 @@ namespace Corruption.Worship
                 Widgets.DrawWindowBackground(altarRect);
 
                 Widgets.DrawLineHorizontal(4f, curY, altarViewRect.width - 8f);
-                Rect iconRect = new Rect(0f, curY + 2f, 64f, 64f);
+                Rect iconRect = new Rect(4f, curY + 2f, 64f, 64f);
                 Widgets.ThingIcon(iconRect, altar);
-                Rect titleRect = new Rect(68f, curY + 2f, altarViewRect.width, Text.LineHeight);
-                Widgets.Label(titleRect, altar.RoomName.Colorize(altar.DedicatedTo.cultColorOne));
+                Rect titleRect = new Rect(4f, curY + 2f, altarViewRect.width, Text.LineHeight);
+                Widgets.Label(titleRect, altar.RoomName);
 
                 Rect rect3 = new Rect(68f, titleRect.yMax + 2f, 200f, 25f);
-                Widgets.Label(rect3, "CurrentPreacher".Translate());
-                rect3.y += Text.LineHeight + 4f;
-                string label2 = TempleCardUtility.PreacherLabel(altar);
-                if (Widgets.ButtonText(rect3, label2, true, false, true))
-                {
-                    TempleCardUtility.OpenPreacherSelectMenu(altar);
-                }
 
-                Rect statRect = new Rect(rect3.xMax + 4f, titleRect.yMax + 2f, altarViewRect.width - 38f, Text.LineHeight * 5);
-                //Widgets.DrawWindowBackground(statRect);
+                Rect statRect = new Rect(rect3.xMax + 4f, titleRect.yMax + 2f, altarViewRect.width - 38f, Text.LineHeight * 6);
                 GUI.BeginGroup(statRect);
 
                 var room = altar.GetRoom();
                 Widgets.ListSeparator(ref curY, viewRect.width, "AltarStats".Translate());
-                curY += 24f;
+                curY += 4f;
                 float recordY = curY;
                 if (room != null)
                 {
-                    WorshipUIUtility.DrawRoomRecord(ref recordY, room, RoomStatDefOf.Impressiveness, statRect.width, altar);
-                    WorshipUIUtility.DrawRoomRecord(ref recordY, room, RoomStatDefOf.Wealth, statRect.width, altar);
+                    WorshipUIUtility.DrawRoomRecord(ref recordY, room, RoomStatDefOf.Impressiveness, statRect.width - 32f, altar);
+                    WorshipUIUtility.DrawRoomRecord(ref recordY, room, RoomStatDefOf.Wealth, statRect.width - 32f, altar);
                 }
 
-                WorshipUIUtility.DrawAltarRecord(ref recordY, statRect.width, altar, WorshipRecordDefOf.SermonsHeldAltar);
-                WorshipUIUtility.DrawAltarRecord(ref recordY, statRect.width, altar, WorshipRecordDefOf.SermonAttendees);
+                WorshipUIUtility.DrawAltarRecord(ref recordY, statRect.width - 32f, altar, WorshipRecordDefOf.SermonsHeldAltar);
+                WorshipUIUtility.DrawAltarRecord(ref recordY, statRect.width - 32f, altar, WorshipRecordDefOf.SermonAttendees);
 
                 GUI.EndGroup();
-                curY = altarRect.yMax + 4f;
+                curY = altarRect.yMax + 8f;
             }
             Widgets.EndScrollView();
             GUI.EndGroup();
@@ -442,10 +434,10 @@ namespace Corruption.Worship
         {
             float num = width * 0.45f;
             string text = room.GetStat(stat).ToString();
-            Rect rect = new Rect(8f, curY, width, Text.CalcHeight(text, num));
+            Rect rect = new Rect(8f, curY, width -8f, Text.CalcHeight(text, num));
             if (Mouse.IsOver(rect))
             {
-                Widgets.DrawHighlight(rect);
+                Widgets.DrawHighlight(new Rect(rect.x, rect.y, width * 0.8f, rect.height));
             }
             Rect rect2 = rect;
             rect2.width -= num;
@@ -465,10 +457,10 @@ namespace Corruption.Worship
         {
             float num = width * 0.45f;
             string text = (record.type != 0) ? altar.records.GetValue(record).ToString("0.##") : altar.records.GetAsInt(record).ToStringTicksToPeriod();
-            Rect rect = new Rect(8f, curY, width, Text.CalcHeight(text, num));
+            Rect rect = new Rect(8f, curY, width - 8f, Text.CalcHeight(text, num));
             if (Mouse.IsOver(rect))
             {
-                Widgets.DrawHighlight(rect);
+                Widgets.DrawHighlight(new Rect(rect.x, rect.y, width * 0.8f, rect.height));
             }
             Rect rect2 = rect;
             rect2.width -= num;

@@ -28,4 +28,183 @@
     <commonality>0</commonality>
   </TraitDef>
 
+  <Corruption.Core.Soul.SoulTraitDef>
+    <defName>HumanSaint</defName>
+    <degreeDatas>
+      <li>
+        <label>Aspiring Saint</label>
+        <description>This individual was selected by the Emperor to fulfill a purpose. What this purpose is, remains unclear.</description>
+        <statFactors>
+          <MarketValue>2.0</MarketValue>
+          <MentalBreakThreshold>1.2</MentalBreakThreshold>
+          <SocialImpact>1.1</SocialImpact>
+          <TameAnimalChance>1.1</TameAnimalChance>
+        </statFactors>
+      </li>
+      <li>
+        <label>Living Saint</label>
+        <description>This individual has braved its trials and has become an Imperial saint walking among mere mortals.</description>
+        <statFactors>
+          <MarketValue>10.0</MarketValue>
+          <MentalBreakThreshold>2.12</MentalBreakThreshold>
+          <SocialImpact>2.5</SocialImpact>
+          <TameAnimalChance>2.0</TameAnimalChance>
+        </statFactors>
+      </li>
+    </degreeDatas>
+    <commonality>0</commonality>
+    <ignoreConfigErrors>true</ignoreConfigErrors>
+  </Corruption.Core.Soul.SoulTraitDef>
+
+
+  <Corruption.Core.Soul.SoulTraitDef>
+    <defName>KhorneChampion</defName>
+    <degreeDatas>
+      <li>
+        <label>Aspiring Champion</label>
+        <description>This individual was selected by Khorne to do battle in his name.</description>
+        <statFactors>
+          <MentalBreakThreshold>1.12</MentalBreakThreshold>
+          <MoveSpeed>1.05</MoveSpeed>
+          <MeleeHitChance>1.05</MeleeHitChance>
+          <MeleeDodgeChance>1.05</MeleeDodgeChance>
+          <MeleeHitChance>1.05</MeleeHitChance>
+        </statFactors>
+      </li>
+      <li>
+        <label>Champion of Khorne</label>
+        <description>This individual has proven its worth in the eyes of the Blood God.</description>
+        <statFactors>
+          <MarketValue>10.0</MarketValue>
+          <MentalBreakThreshold>3.12</MentalBreakThreshold>
+          <MoveSpeed>1.3</MoveSpeed>
+          <MeleeHitChance>3.0</MeleeHitChance>
+          <MeleeDodgeChance>3.0</MeleeDodgeChance>
+          <MeleeHitChance>2.0</MeleeHitChance>
+        </statFactors>
+      </li>
+    </degreeDatas>
+    <commonality>0</commonality>
+    <ignoreConfigErrors>true</ignoreConfigErrors>
+  </Corruption.Core.Soul.SoulTraitDef>
+
+
+  <Corruption.Core.Soul.SoulTraitDef>
+    <defName>NurgleChampion</defName>
+    <degreeDatas>
+      <li>
+        <label>Aspiring Champion</label>
+        <description>This individual was selected by Nurgle to spread pestilence.</description>
+        <statFactors>
+          <MentalBreakThreshold>1.12</MentalBreakThreshold>
+          <MoveSpeed>0.8</MoveSpeed>
+          <PainShockThreshold>1.1</PainShockThreshold>
+        </statFactors>
+      </li>
+      <li>
+        <label>Champion of Nurgle</label>
+        <description>This individual has proven its worth to the Grandfather.</description>
+        <statFactors>
+          <MarketValue>10.0</MarketValue>
+          <MentalBreakThreshold>3.12</MentalBreakThreshold>
+          <MoveSpeed>0.5</MoveSpeed>
+          <PainShockThreshold>1.5</PainShockThreshold>
+        </statFactors>
+      </li>
+    </degreeDatas>
+    <commonality>0</commonality>
+    <ignoreConfigErrors>true</ignoreConfigErrors>
+  </Corruption.Core.Soul.SoulTraitDef>
+
+
+
+  <Corruption.Core.Soul.SoulTraitDef>
+    <defName>YnneadChosen</defName>
+    <degreeDatas>
+      <li>
+        <label>prophet of Ynnead</label>
+        <description>{PAWN_nameDef} walks under the gaze of Ynnead, the Aeldari god of death.</description>
+        <statOffsets>
+          <SocialImpact>10.0</SocialImpact>
+          <TameAnimalChance>2.0</TameAnimalChance>
+          <TrainAnimalChance>2.0</TrainAnimalChance>
+          <ImmunityGainSpeed>2.0</ImmunityGainSpeed>
+          <MoveSpeed>1.3</MoveSpeed>
+          <MeleeHitChance>3.0</MeleeHitChance>
+          <MeleeDodgeChance>3.0</MeleeDodgeChance>
+        </statOffsets>
+        <skillGains>
+          <li>
+            <key>Melee</key>
+            <value>2</value>
+          </li>
+          <li>
+            <key>Shooting</key>
+            <value>2</value>
+          </li>
+        </skillGains>
+      </li>
+    </degreeDatas>
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+  </Corruption.Core.Soul.SoulTraitDef>
+
+  <Corruption.Core.Soul.SoulTraitDef>
+    <defName>CegorachChosen</defName>
+    <degreeDatas>
+      <li>
+        <label>puppeteer of Cegorach</label>
+        <description>{PAWN_nameDef} embodies Cegorach, the Aeldari god of mischief.</description>
+        <degree>2</degree>
+        <statOffsets>
+          <MeleeHitChance>2</MeleeHitChance>
+          <MentalBreakThreshold>5.12</MentalBreakThreshold>
+          <MoveSpeed>1.3</MoveSpeed>
+          <MeleeHitChance>3.0</MeleeHitChance>
+          <MeleeDodgeChance>3.0</MeleeDodgeChance>
+        </statOffsets>
+        <skillGains>
+          <li>
+            <key>Melee</key>
+            <value>4</value>
+          </li>
+          <li>
+            <key>Shooting</key>
+            <value>4</value>
+          </li>
+        </skillGains>
+      </li>
+    </degreeDatas>
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+  </Corruption.Core.Soul.SoulTraitDef>
+  
+  <Corruption.Core.Soul.SoulTraitDef>
+    <defName>KhaineChosen</defName>
+    <degreeDatas>
+      <li>
+        <label>scion of khaine</label>
+        <description>{PAWN_nameDef} embodies Khaine, the Aeldari god of war.</description>
+        <statOffsets>
+          <MeleeHitChance>4</MeleeHitChance>
+          <MeleeDPS>3.0</MeleeDPS>
+        </statOffsets>
+        <skillGains>
+          <li>
+            <key>Melee</key>
+            <value>8</value>
+          </li>
+          <li>
+            <key>Shooting</key>
+            <value>4</value>
+          </li>
+        </skillGains>
+      </li>
+    </degreeDatas>
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+  </Corruption.Core.Soul.SoulTraitDef>
 </Defs>

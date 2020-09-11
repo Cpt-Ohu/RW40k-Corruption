@@ -10,6 +10,17 @@
     <joyMaxParticipants>20</joyMaxParticipants>
     <joyKind>Worship</joyKind>
   </JobDef>
+  
+  <JobDef>
+    <defName>AssistPreacher</defName>
+    <driverClass>Corruption.Worship.JobDriver_AttendSermon</driverClass>
+    <reportString>assisting preacher.</reportString>
+    <joyDuration>600</joyDuration>
+    <joyGainRate>2</joyGainRate>
+    <joyMaxParticipants>20</joyMaxParticipants>
+    <joyKind>Worship</joyKind>
+  </JobDef>
+
 
   <JobDef>
     <defName>AttendSermon</defName>
@@ -27,6 +38,12 @@
     <reportString>installing TargetA on TargetB.</reportString>
     <suspendable>false</suspendable>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  <JobDef>
+    <defName>RingBellTower</defName>
+    <driverClass>Corruption.Worship.JobDriver_RingBellTower</driverClass>
+    <reportString>ringing bell.</reportString>
   </JobDef>
   
 </Defs>

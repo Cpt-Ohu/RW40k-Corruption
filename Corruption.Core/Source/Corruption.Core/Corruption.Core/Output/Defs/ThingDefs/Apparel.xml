@@ -6,7 +6,10 @@
     <selectable>False</selectable>
     <pathCost>10</pathCost>
     <useHitPoints>False</useHitPoints>
-    <techLevel>Neolithic</techLevel>
+    <techLevel>Undefined</techLevel>
+    <costList>
+      <Apparel_PowerArmor>100</Apparel_PowerArmor>
+    </costList>
     <graphicData>
       <onGroundRandomRotateAngle>35</onGroundRandomRotateAngle>
       <texPath>Things/Pawn/Humanlike/Apparel/TribalA/TribalA</texPath>
@@ -485,7 +488,6 @@
         </li>
       </options>
     </colorGenerator>
-
     <comps>
       <li Class="FactionColors.CompProperties_FactionColor">
         <compClass>FactionColors.CompFactionColor</compClass>

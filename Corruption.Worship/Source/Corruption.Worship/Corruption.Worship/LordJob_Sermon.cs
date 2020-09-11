@@ -15,8 +15,6 @@ namespace Corruption.Worship
     {
         public BuildingAltar altar;
 
-        private const float durationHours = 0.5f;
-
         public LordJob_Sermon() { }
 
         public LordJob_Sermon(BuildingAltar altar, IntVec3 spot, Pawn organizer, GatheringDef gatheringDef) : base(spot, organizer, gatheringDef)
@@ -26,10 +24,10 @@ namespace Corruption.Worship
 
         protected override void ApplyOutcome(float progress)
         {
-            this.altar.CurrentActiveSermon = null;
             if (progress < 0.5f)
             {
                 Messages.Message("MessageSermonCancelled", MessageTypeDefOf.RejectInput, false);
+                this.altar.EndSermon();
                 return;
             }
             ThoughtDef key = OutcomeThoughtChances.RandomElementByWeight((KeyValuePair<ThoughtDef, float> t) => (!PositiveOutcome(t.Key)) ? OutcomeThoughtChances[t.Key] : (OutcomeThoughtChances[t.Key] * organizer.GetStatValue(StatDefOf.SocialImpact) * progress)).Key;
@@ -40,6 +38,7 @@ namespace Corruption.Worship
                     ownedPawn.needs.mood.thoughts.memories.TryGainMemory(key, organizer);
                 }
             }
+            SermonUtility.HoldSermonTickCheckEnd(this.organizer, lord.ownedPawns.Count, altar.CurrentActiveSermon.DedicatedTo, altar);
         }
 
         public override StateGraph CreateGraph()
@@ -49,7 +48,7 @@ namespace Corruption.Worship
             stateGraph.AddToil(lordToil);
             LordToil_End lordToil_End = new LordToil_End();
             stateGraph.AddToil(lordToil_End);
-            float speechDuration = durationHours * GenDate.TicksPerHour;
+            float speechDuration = altar.CurrentActiveSermon.SermonDurationHours * GenDate.TicksPerHour;
             Transition transition = new Transition(lordToil, lordToil_End);
             transition.AddTrigger(new Trigger_TickCondition(ShouldBeCalledOff));
             transition.AddTrigger(new Trigger_PawnKilled());
@@ -64,12 +63,11 @@ namespace Corruption.Worship
             transition2.AddTrigger(timeoutTrigger);
             transition2.AddPreAction(new TransitionAction_Custom((Action)delegate
             {
-                ApplyOutcome(1f);
+                ApplyOutcome((float)lord.ticksInToil / speechDuration);
             }));
             stateGraph.AddTransition(transition2);
             return stateGraph;
         }
-
 
         public override float VoluntaryJoinPriorityFor(Pawn p)
         {

@@ -21,7 +21,36 @@ namespace Corruption.Core
         public override void PreConfigure()
         {
             base.PreConfigure();
-            this.initialPatron = PantheonDefOf.Chaos.GodsListForReading.RandomElement();
+            if (this.initialPatron == null) this.initialPatron = PantheonDefOf.Chaos.GodsListForReading.RandomElement();
+        }
+
+        public override void DoEditInterface(Listing_ScenEdit listing)
+        {
+            Rect scenPartRect = listing.GetScenPartRect(this, ScenPart.RowHeight * 3f + 31f);
+            Rect titleRect = scenPartRect.TopPartPixels(ScenPart.RowHeight);
+            Widgets.Label(titleRect, "InitialChaosPatron".Translate());
+            Rect buttonRect = titleRect;
+            buttonRect.y = titleRect.yMax + 8f;
+            if (Widgets.ButtonText(buttonRect, initialPatron?.LabelCap ?? "None"))
+            {
+                FloatMenuUtility.MakeMenu(PossiblePatrons(), (GodDef god) => god.LabelCap, delegate (GodDef god)
+                {
+                    ScenPart_ChaosColony scenPart = this;
+                    return delegate
+                    {
+                        scenPart.initialPatron = god;
+                    };
+                });
+            }
+
+        }
+
+        private IEnumerable<GodDef> PossiblePatrons()
+        {
+            foreach (var pantheon in DefDatabase<GodDef>.AllDefs.Where(x => PantheonDefOf.Chaos.GodsListForReading.Contains(x)))
+            {
+                yield return pantheon;
+            }
         }
 
         public override void PostWorldGenerate()
@@ -39,7 +68,7 @@ namespace Corruption.Core
         public override void Notify_PawnGenerated(Pawn pawn, PawnGenerationContext context, bool redressed)
         {
             base.Notify_PawnGenerated(pawn, context, redressed);
-            if(this.initialPatron != null && context == PawnGenerationContext.PlayerStarter)
+            if (this.initialPatron != null && context == PawnGenerationContext.PlayerStarter)
             {
                 foreach (var apparel in pawn.apparel.WornApparel)
                 {
@@ -58,7 +87,7 @@ namespace Corruption.Core
                     {
                         float startingProgress = FavourProgress.ProgressRange.LerpThroughRange(Rand.Range(0.1f, 0.3f));
                         soul.TryAddFavorProgress(this.initialPatron, startingProgress);
-                   }
+                    }
                 });
             }
         }

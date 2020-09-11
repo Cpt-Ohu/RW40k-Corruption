@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <Corruption.Core.Gods.PrayerDef Name="GorkPrayerBase" Abstract="True" MayRequire="Ogliss.AdMech.Xenobiologis.Orkz">
+    <dedicatedTo>Gork</dedicatedTo>    
+    <preferredWorktags>
+      <li>Violent</li>
+    </preferredWorktags>
+  </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef Name="MorkPrayerBase" Abstract="True" MayRequire="Ogliss.AdMech.Xenobiologis.Orkz">
+    <dedicatedTo>Mork</dedicatedTo>
+    <preferredWorktags>
+      <li>Violent</li>
+    </preferredWorktags>
+  </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef ParentName="GorkPrayerBase" MayRequire="Ogliss.AdMech.Xenobiologis.Orkz">
+    <defName>Prayer_OrkBattleCryI</defName>
+    <label>Orkish Battlecry</label>
+    <prayerLines>
+      <li>WAAAAAAAAAGH!</li>
+      <li></li>
+      <li></li>
+      <li>WAAAAAAAAAGH!</li>
+      <li></li>
+      <li></li>
+    </prayerLines>
+  </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef ParentName="GorkPrayerBase" MayRequire="Ogliss.AdMech.Xenobiologis.Orkz">
+    <defName>Prayer_OrkBattleCryII</defName>
+    <label>Orkish Battlecry</label>
+    <prayerLines>
+      <li>Bash it and smash it!</li>
+      <li>Crush da Gruntz!</li>
+      <li>Fraq 'em to Zog!</li>
+      <li>Come on ya gitz!</li>
+    </prayerLines>
+  </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef ParentName="GorkPrayerBase" MayRequire="Ogliss.AdMech.Xenobiologis.Orkz">
+    <defName>Prayer_OrkBattleCryIII</defName>
+    <label>Orkish Battlecry</label>
+    <prayerLines>
+      <li>Let's get da killing!</li>
+      <li></li>
+      <li>Get ov'ere ya git!</li>
+      <li></li>
+    </prayerLines>
+  </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef ParentName="GorkPrayerBase" MayRequire="Ogliss.AdMech.Xenobiologis.Orkz">
+    <defName>Prayer_OrkBattleCryIV</defName>
+    <label>Orkish Battlecry</label>
+    <prayerLines>
+      <li>Chop 'em!</li>
+      <li>Stomp 'em</li>
+      <li>Bash 'em</li>
+      <li>Kill 'em</li>
+    </prayerLines>
+  </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef ParentName="MorkPrayerBase" MayRequire="Ogliss.AdMech.Xenobiologis.Orkz">
+    <defName>Prayer_OrkBattleCryV</defName>
+    <label>Orkish Battlecry</label>
+    <prayerLines>
+      <li>Ima gut ya!</li>
+      <li>Dozy git!</li>
+      <li>Right in ya guts!</li>
+    </prayerLines>
+  </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef ParentName="MorkPrayerBase" MayRequire="Ogliss.AdMech.Xenobiologis.Orkz">
+    <defName>Prayer_OrkBattleCryVI</defName>
+    <label>Orkish Battlecry</label>
+    <prayerLines>
+      <li>Oi ya git!</li>
+      <li>Da boyz are ere!</li>
+      <li>Waaaaaagh!</li>
+    </prayerLines>
+  </Corruption.Core.Gods.PrayerDef>
+
+  <Corruption.Core.Gods.PrayerDef ParentName="MorkPrayerBase" MayRequire="Ogliss.AdMech.Xenobiologis.Orkz">
+    <defName>Prayer_OrkBattleCryVII</defName>
+    <label>Orkish Battlecry</label>
+    <prayerLines>
+      <li>Didn't see da kunning, did ya!?</li>
+      <li>Da boss sends 'is regards!</li>
+      <li>Waaaaaagh!</li>
+    </prayerLines>
+  </Corruption.Core.Gods.PrayerDef>
+
+</Defs>

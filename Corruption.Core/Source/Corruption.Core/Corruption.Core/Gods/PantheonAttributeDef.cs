@@ -37,6 +37,7 @@ namespace Corruption.Core.Gods
                 if (this.workerClass != null)
                 {
                     this.effectWorker = (PantheonAttributeTickWorker)Activator.CreateInstance(this.workerClass);
+                    this.effectWorker.Def = this;
                 }
             });
         }
@@ -44,6 +45,8 @@ namespace Corruption.Core.Gods
 
     public class PantheonAttributeTickWorker
     {
+        public PantheonAttributeDef Def;
+
         public virtual void TickLong() { }
 
         public virtual void TickDay() { }
@@ -51,17 +54,20 @@ namespace Corruption.Core.Gods
     
     public class PantheonAttributeTickWorker_Trait : PantheonAttributeTickWorker
     {
-        private PantheonAttributeDef Def;
 
         public override void TickDay()
         { 
             foreach (var map in Find.Maps)
             {
                 Pawn pawn;
-                if(map.mapPawns.FreeColonists.Where(x => !x.story.traits.HasTrait(this.Def.trait)).TryRandomElement(out pawn))
+                var playerPawns = map.mapPawns.FreeColonists.Where(x => x.story != null && !x.story.traits.HasTrait(this.Def.trait));
+                if (playerPawns.Count() > 0)
                 {
-                    pawn.story.traits.GainTrait(new Trait(this.Def.trait));
-                    break;
+                    if (playerPawns.TryRandomElement(out pawn))
+                    {
+                        pawn.story.traits.GainTrait(new Trait(this.Def.trait));
+                        break;
+                    }
                 }
             }
         }
@@ -82,8 +88,8 @@ namespace Corruption.Core.Gods
                     CompSoul soul = pawn.Soul();
                     if (soul != null)
                     {
-                        var traits = PantheonDefOf.Chaos.GodsListForReading.Select(x => x.patronTraits);
                         var favouredPatron = PantheonDefOf.Chaos.GodsListForReading.RandomElementByWeight(x => soul.FavourTracker.FavourValueFor(x));
+
                         var patronTrait = favouredPatron.patronTraits.RandomElement();
                         if (patronTrait != null && !pawn.story.traits.allTraits.Any(x => x.def.ConflictsWith(patronTrait)))
                         {

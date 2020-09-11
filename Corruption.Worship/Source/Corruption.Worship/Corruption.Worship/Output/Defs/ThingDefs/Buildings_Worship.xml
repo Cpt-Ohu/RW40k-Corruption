@@ -1,58 +1,97 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <ThingDef ParentName="ArtableFurnitureBase">
-    <defName>ChurchBenchGeneric</defName>
+  <ThingDef ParentName="BuildingBase" Name="ChurchBenchLinkable">
+    <defName>ChurchBenchLinkable</defName>
     <label>church bench</label>
     <description>A bench designed to be placed at a place of worship.</description>
+    <thingClass>Building</thingClass>
+    <category>Building</category>
     <graphicData>
-      <texPath>Things/Worship/Benches/Bench_Generic</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(2.3,1.2)</drawSize>
-      <damageData>
-        <rectN>(0.25,0.234375,0.5,0.28125)</rectN>
-        <rectS>(0.25,0.234375,0.5,0.28125)</rectS>
-        <rectE>(0.28125,0.25,0.453125,0.25)</rectE>
-        <rectW>(0.28125,0.25,0.453125,0.25)</rectW>
-      </damageData>
-      <shadowData>
-        <volume>(0.23, 0.26, 0.23)</volume>
-      </shadowData>
+      <texPath>Things/Worship/Benches/Bench_Atlas</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <linkType>Basic</linkType>
+      <linkFlags>
+        <li>Custom2</li>
+      </linkFlags>
+      <color>(139,122,87)</color>
     </graphicData>
-    <size>(2,1)</size>
+    <uiIconPath>Things/Worship/Benches/Bench_MenuIcon</uiIconPath>
+    <uiIconScale>1.2</uiIconScale>
     <altitudeLayer>Building</altitudeLayer>
+    <pathCost>30</pathCost>
+    <pathCostIgnoreRepeat>true</pathCostIgnoreRepeat>
+    <castEdgeShadows>true</castEdgeShadows>
+    <fillPercent>0.2</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
     <statBases>
-      <MaxHitPoints>220</MaxHitPoints>
-      <WorkToBuild>1800</WorkToBuild>
-      <Mass>20</Mass>
+      <MaxHitPoints>75</MaxHitPoints>
+      <WorkToBuild>450</WorkToBuild>
+      <Mass>3</Mass>
       <Flammability>1.0</Flammability>
-      <Beauty>8</Beauty>
-      <Comfort>0.70</Comfort>
+      <Beauty>0</Beauty>
+      <Comfort>0.5</Comfort>
     </statBases>
+    <building>
+      <ai_chillDestination>false</ai_chillDestination>
+      <isInert>true</isInert>
+      <blueprintGraphicData>
+        <texPath>Things/Building/Linked/Barricade_Blueprint_Atlas</texPath>
+      </blueprintGraphicData>
+      <isSittable>true</isSittable>
+    </building>
+    <placingDraggableDimensions>1</placingDraggableDimensions>
     <socialPropernessMatters>true</socialPropernessMatters>
     <stuffCategories>
       <li>Metallic</li>
       <li>Woody</li>
+      <li>Stony</li>
     </stuffCategories>
-    <costStuffCount>45</costStuffCount>
-    <pathCost>30</pathCost>
-    <designationHotKey>Misc7</designationHotKey>
-    <fillPercent>0.35</fillPercent>
-    <defaultPlacingRot>South</defaultPlacingRot>
-    <building>
-      <isSittable>true</isSittable>
-    </building>
-    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
-    <researchPrerequisites>
-      <li>ComplexFurniture</li>
-    </researchPrerequisites>
+    <costStuffCount>20</costStuffCount>
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+    <rotatable>false</rotatable>
+    <selectable>true</selectable>
+    <neverMultiSelect>true</neverMultiSelect>
+    <useStuffTerrainAffordance>true</useStuffTerrainAffordance>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <!-- Best affordance needed for stone -->
     <designationCategory>Worship</designationCategory>
+    <staticSunShadowHeight>0.20</staticSunShadowHeight>
+    <designationHotKey>Misc1</designationHotKey>
   </ThingDef>
 
+  <ThingDef ParentName="ChurchBenchLinkable">
+    <defName>ChurchBenchFineLinkable</defName>
+    <label>fine church bench</label>
+    <description>A bench designed to be placed at a place of worship. A cloth layer adds more comfort.</description>
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <graphicData>
+      <texPath>Things/Worship/Benches/BenchFine_Atlas</texPath>
+      <shaderType>CutoutComplex</shaderType>
+      <colorTwo>(143,20,20)</colorTwo>
+    </graphicData>
+    <uiIconPath>Things/Worship/Benches/BenchFine_MenuIcon</uiIconPath>
+    <fillPercent>0.2</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <MaxHitPoints>75</MaxHitPoints>
+      <WorkToBuild>450</WorkToBuild>
+      <Mass>3</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>3</Beauty>
+      <Comfort>0.8</Comfort>
+    </statBases>
+    <costList>
+      <Cloth>5</Cloth>
+    </costList>
+    <designationHotKey>Misc2</designationHotKey>
+  </ThingDef>
 
   <ThingDef ParentName="ArtableFurnitureBase" Abstract ="true" Name="AltarBase">
     <building>
       <watchBuildingInSameRoom>true</watchBuildingInSameRoom>
+      <joyKind>Worship</joyKind>
     </building>
   </ThingDef>
 
@@ -98,17 +137,7 @@
       <li>Woody</li>
       <li>Stony</li>
     </stuffCategories>
-    <building>
-      <watchBuildingStandDistanceRange>
-        <min>1</min>
-        <max>5</max>
-      </watchBuildingStandDistanceRange>
-      <watchBuildingStandRectWidth>5</watchBuildingStandRectWidth>
-    </building>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    <placeWorkers>
-      <li>PlaceWorker_WatchArea</li>
-    </placeWorkers>
     <comps>
       <li Class="Corruption.Worship.CompProperties_Shrine">
         <compClass>Corruption.Worship.CompShrine</compClass>
@@ -166,17 +195,7 @@
       <li>Woody</li>
       <li>Stony</li>
     </stuffCategories>
-    <building>
-      <watchBuildingStandDistanceRange>
-        <min>1</min>
-        <max>7</max>
-      </watchBuildingStandDistanceRange>
-      <watchBuildingStandRectWidth>7</watchBuildingStandRectWidth>
-    </building>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    <placeWorkers>
-      <li>PlaceWorker_WatchArea</li>
-    </placeWorkers>
     <comps>
       <li Class="Corruption.Worship.CompProperties_Shrine">
         <compClass>Corruption.Worship.CompShrine</compClass>
@@ -321,7 +340,7 @@
         <worshipFactor>1</worshipFactor>
       </li>
       <li Class="CompProperties_Refuelable">
-        <fuelConsumptionRate>0.1</fuelConsumptionRate>
+        <fuelConsumptionRate>0.01</fuelConsumptionRate>
         <fuelCapacity>5.0</fuelCapacity>
         <fuelConsumptionPerTickInRain>0.0006</fuelConsumptionPerTickInRain>
         <fuelFilter>
@@ -420,7 +439,9 @@
       <li Class="Corruption.Worship.CompProperties_Shrine">
         <compClass>Corruption.Worship.CompShrine</compClass>
         <requiresEffigy>false</requiresEffigy>
-        <dedicatedTo>Emperor</dedicatedTo>
+        <dedicatedTo>
+          <li>Emperor</li>
+        </dedicatedTo>
         <worshipFactor>0.5</worshipFactor>
       </li>
       <li Class="Corruption.Core.Items.CompProperties_Empyreal">
@@ -459,12 +480,14 @@
     </stuffCategories>
     <costStuffCount>135</costStuffCount>
     <hasInteractionCell>true</hasInteractionCell>
-    <interactionCellOffset>(0,0,1)</interactionCellOffset>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
     <comps>
       <li Class="Corruption.Worship.CompProperties_Shrine">
         <compClass>Corruption.Worship.CompShrine</compClass>
         <requiresEffigy>false</requiresEffigy>
-        <dedicatedTo>Emperor</dedicatedTo>
+        <dedicatedTo>
+          <li>Emperor</li>
+        </dedicatedTo>
         <worshipFactor>0.5</worshipFactor>
       </li>
       <li Class="Corruption.Core.Items.CompProperties_Empyreal">
@@ -503,20 +526,21 @@
       <li>Metallic</li>
       <li>Stony</li>
     </stuffCategories>
-    <costStuffCount>150</costStuffCount>    
-    <costList>
-      <Effigy_Tzeentch>1</Effigy_Tzeentch>
-    </costList>
+    <costStuffCount>150</costStuffCount>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
     <placeWorkers>
-      <li>Corruption.Core.PlaceWorker_Hidden</li>
+      <li>Corruption.Worship.PlaceWorker_RequiresChaos</li>
     </placeWorkers>
     <comps>
       <li Class="Corruption.Worship.CompProperties_Shrine">
         <compClass>Corruption.Worship.CompShrine</compClass>
-        <dedicatedTo>Tzeentch</dedicatedTo>
+        <dedicatedTo>
+          <li>Tzeentch</li>
+        </dedicatedTo>
         <requiresEffigy>false</requiresEffigy>
-        <worshipFactor>0.1</worshipFactor>
+        <worshipFactor>0.5</worshipFactor>
       </li>
       <li Class="CompProperties_Glower">
         <glowRadius>3</glowRadius>
@@ -533,12 +557,16 @@
         </firePositions>
       </li>
     </comps>
+    <inspectorTabs>
+      <li>Corruption.Worship.ITab_Altar</li>
+    </inspectorTabs>
     <designationCategory>Worship</designationCategory>
   </ThingDef>
   <!--================================ Idol of Change ======================================-->
 
 
   <ThingDef ParentName="AltarBase">
+    <thingClass>Corruption.Worship.BuildingAltar</thingClass>
     <defName>MirrorOfPleasure</defName>
     <label>mirror of pleasures</label>
     <tickerType>Normal</tickerType>
@@ -565,17 +593,20 @@
     </stuffCategories>
     <costStuffCount>150</costStuffCount>
     <costList>
-      <Effigy_Slaanesh>1</Effigy_Slaanesh>
       <Silver>50</Silver>
     </costList>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <placeWorkers>
-      <li>Corruption.Core.PlaceWorker_Hidden</li>
+      <li>Corruption.Worship.PlaceWorker_RequiresChaos</li>
     </placeWorkers>
     <comps>
       <li Class="Corruption.Worship.CompProperties_Shrine">
         <compClass>Corruption.Worship.CompShrine</compClass>
-        <dedicatedTo>Slaanesh</dedicatedTo>
+        <dedicatedTo>
+          <li>Slaanesh</li>
+        </dedicatedTo>
         <requiresEffigy>false</requiresEffigy>
         <worshipFactor>0.1</worshipFactor>
       </li>
@@ -585,6 +616,217 @@
       </li>
     </comps>
     <designationCategory>Worship</designationCategory>
+    <inspectorTabs>
+      <li>Corruption.Worship.ITab_Altar</li>
+    </inspectorTabs>
+  </ThingDef>
+
+  <!--============================== Belltowers ==============================-->
+
+  <ThingDef Name="BelltowerBase" ParentName="BuildingBase" Abstract="True">
+    <designationCategory>Worship</designationCategory>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <tickerType>Normal</tickerType>
+    <fillPercent>1.00</fillPercent>
+    <stuffCategories>
+      <li>Stony</li>
+      <li>Woody</li>
+      <li>Metallic</li>
+    </stuffCategories>
+    <canOverlapZones>false</canOverlapZones>
+    <pathCost>50</pathCost>
+    <rotatable>false</rotatable>
+    <castEdgeShadows>True</castEdgeShadows>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Art">
+        <nameMaker>NamerArtFurniture</nameMaker>
+        <descriptionMaker>ArtDescription_Furniture</descriptionMaker>
+        <minQualityForArtistic>Awful</minQualityForArtistic>
+      </li>
+    </comps>
+    <inspectorTabs>
+      <li>ITab_Art</li>
+    </inspectorTabs>
+  </ThingDef>
+
+  <ThingDef ParentName="BelltowerBase">
+    <defName>BelltowerSmall</defName>
+    <label>small belltower</label>
+    <description>A simple tower with a bell at the top. May be rung for drawing crowds or signalling danger.</description>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>8000</WorkToBuild>
+      <Beauty>15</Beauty>
+      <MeditationFocusStrength>0.15</MeditationFocusStrength>
+    </statBases>
+    <costStuffCount>125</costStuffCount>
+    <uiIconScale>0.8</uiIconScale>
+    <uiIconOffset>(0, 0.04)</uiIconOffset>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Worship/Belltower/Belltower_small</texPath>
+      <drawSize>(4,4)</drawSize>
+      <drawOffset>(0,0,0.05)</drawOffset>
+      <shadowData>
+        <volume>(1.5, 0.6, 1.5)</volume>
+        <offset>(0, 0, -0.15)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.1,0.1,1.9,1.9)</rect>
+      </damageData>
+    </graphicData>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <comps>
+      <li Class="CompProperties_MeditationFocus">
+        <statDef>MeditationFocusStrength</statDef>
+        <focusTypes>
+          <li>Artistic</li>
+        </focusTypes>
+      </li>
+      <li Class="Corruption.Worship.CompProperties_BellTower">
+        <maxDistance>24</maxDistance>
+        <graphicData>
+           <graphicClass>Graphic_Single</graphicClass>
+           <texPath>Things/Worship/Belltower/Bell_small</texPath>
+           <drawSize>(1,1)</drawSize>
+           <drawOffset>(0,0,1.5)</drawOffset>
+        </graphicData>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="BelltowerBase">
+    <defName>BelltowerLarge</defName>
+    <label>large belltower</label>
+    <description>A large tower with a moderately sized bell.</description>
+    <size>(3,3)</size>
+    <statBases>
+      <MaxHitPoints>400</MaxHitPoints>
+      <WorkToBuild>16000</WorkToBuild>
+      <Beauty>30</Beauty>
+      <MeditationFocusStrength>0.18</MeditationFocusStrength>
+    </statBases>
+    <costStuffCount>250</costStuffCount>
+    <uiIconScale>0.7</uiIconScale>
+    <uiIconOffset>(0, 0.02)</uiIconOffset>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Worship/Belltower/Belltower_large</texPath>
+      <drawSize>(5,5)</drawSize>
+      <drawOffset>(0,0,0.25)</drawOffset>
+      <shadowData>
+        <volume>(2.2, 1, 2.2)</volume>
+        <offset>(0, 0, -0.1)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.1,0.1,2.9,2.9)</rect>
+      </damageData>
+    </graphicData>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-2)</interactionCellOffset>
+    <comps>
+      <li Class="CompProperties_MeditationFocus">
+        <statDef>MeditationFocusStrength</statDef>
+        <focusTypes>
+          <li>Artistic</li>
+        </focusTypes>
+      </li>
+      <li Class="Corruption.Worship.CompProperties_BellTower">
+        <maxDistance>24</maxDistance>
+        <graphicData>
+           <graphicClass>Graphic_Single</graphicClass>
+           <texPath>Things/Worship/Belltower/Bell_large</texPath>
+           <drawSize>(2,2)</drawSize>
+           <drawOffset>(0,0,0.0)</drawOffset>
+        </graphicData>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>ColumnOfBones</defName>
+    <label>column of bones</label>
+    <description>A column capable of holding a roof. Does not block sight or movement. Adorned with human bones.</description>
+    <designationCategory>Structure</designationCategory>
+    <altitudeLayer>Building</altitudeLayer>
+    <tickerType>Normal</tickerType>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.25</fillPercent>
+    <pathCost>0</pathCost>
+    <statBases>
+      <MaxHitPoints>160</MaxHitPoints>
+      <WorkToBuild>750</WorkToBuild>
+      <Mass>10</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>5</Beauty>
+    </statBases>
+    <costList>
+      <HumanSkull>1</HumanSkull>
+      <HumanBones>2</HumanBones>
+    </costList>    
+    <holdsRoof>true</holdsRoof>
+    <canOverlapZones>false</canOverlapZones>
+    <rotatable>false</rotatable>
+    <fertility>0</fertility>
+    <specialDisplayRadius>6.9</specialDisplayRadius>
+    <!-- must be kept in sync with roof hold-up radius -->
+    <building>
+      <isInert>true</isInert>
+      <ai_chillDestination>false</ai_chillDestination>
+    </building>
+    <graphicData>
+      <drawSize>(1.25,1.25)</drawSize>
+      <drawOffset>(0,0,0.2)</drawOffset>
+      <texPath>Things/Worship/BoneColumn/BoneColumn</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <shadowData>
+        <volume>(0.3, 0.5, 0.3)</volume>
+        <offset>(0,0,-0.23)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+    </graphicData>
+    <placeWorkers>
+      <li>Corruption.Worship.PlaceWorker_RequiresChaos</li>
+      <li>PlaceWorker_MeditationOffsetBuildingsNear</li>
+    </placeWorkers>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <comps>
+      <li Class="CompProperties_MeditationFocus">
+        <statDef>MeditationFocusStrength</statDef>
+        <focusTypes>
+          <li>Flame</li>
+        </focusTypes>
+        <offsets>
+          <li Class="FocusStrengthOffset_Lit">
+            <offset>0.1</offset>
+          </li>
+          <li Class="FocusStrengthOffset_BuildingDefsLit">
+            <defs>
+              <li>Campfire</li>
+              <li>TorchLamp</li>
+              <li MayRequire="Ludeon.RimWorld.Royalty">Brazier</li>
+            </defs>
+            <radius>9.9</radius>
+            <maxBuildings>8</maxBuildings>
+            <offsetPerBuilding>0.01</offsetPerBuilding>
+            <explanationKey>MeditationFocusPerFlame</explanationKey>
+            <explanationKeyAbstract>MeditationFocusPerFlameAbstract</explanationKeyAbstract>
+          </li>
+        </offsets>
+      </li>
+    </comps>
   </ThingDef>
 
 </Defs>

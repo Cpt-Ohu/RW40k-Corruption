@@ -7,45 +7,39 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 using Verse.AI;
+using Verse.AI.Group;
 
 namespace Corruption.Worship
 {
-	public class JobDriver_AttendSermon : JobDriver_Spectate
-	{
-		private BuildingAltar altar;
+    public class JobDriver_AttendSermon : JobDriver_Spectate
+    {
+        private BuildingAltar altar => this.TargetB.Cell.GetFirstThing<BuildingAltar>(base.Map);
+        private CompShrine compShrine => this.altar.TryGetComp<CompShrine>();
 
-		private CompShrine compShrine => this.altar.TryGetComp<CompShrine>();
+        public override bool TryMakePreToilReservations(bool errorOnFailed)
+        {
+            return base.TryMakePreToilReservations(errorOnFailed);
+        }
 
-		public override bool TryMakePreToilReservations(bool errorOnFailed)
-		{
-			BuildingAltar firstThing = this.TargetB.Cell.GetFirstThing<BuildingAltar>(base.Map);
-			this.altar = firstThing;
-			return base.TryMakePreToilReservations(errorOnFailed);
-		}
+        protected override IEnumerable<Toil> MakeNewToils()
+        {
+            Toil lastToil = null;
+            foreach (var toil in base.MakeNewToils())
+            {
+                lastToil = toil;
+                yield return toil;
+            }
 
-		protected override IEnumerable<Toil> MakeNewToils()
-		{
-			Toil lastToil = null;
-			foreach (var toil in base.MakeNewToils())
-			{
-				lastToil = toil;
-				yield return toil;
-			}
+            Lord lord = pawn.GetLord();
+            LordJob_Sermon lordJob = lord.LordJob as LordJob_Sermon;
+            lastToil.AddPreTickAction(delegate
+            {
+                if (this.compShrine != null)
+                {
+                    this.pawn.Soul()?.GainCorruption(this.compShrine.Props.worshipFactor * lordJob.altar.CurrentActiveSermon.DedicatedTo.favourCorruptionFactor, lordJob.altar.CurrentActiveSermon.DedicatedTo);
+                }
+            });
+        }
 
-			lastToil.AddPreTickAction(delegate
-			{
-				if (this.compShrine != null)
-				{
-					this.pawn.Soul()?.GainCorruption(this.compShrine.CompProps.worshipFactor, this.compShrine.God);
-				}
-			});
-		}
-
-		public override void ExposeData()
-		{
-			base.ExposeData();
-			Scribe_References.Look<BuildingAltar>(ref this.altar, "altar");
-		}
-
-	}
+    }
 }

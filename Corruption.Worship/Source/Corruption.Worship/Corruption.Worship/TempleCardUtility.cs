@@ -1,21 +1,20 @@
-﻿using Corruption.Core.Soul;
+﻿
+using Corruption.Core;
+using Corruption.Core.Gods;
 using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
-using Verse.AI;
 
 namespace Corruption.Worship
 {
     [StaticConstructorOnStartup]
     public class TempleCardUtility
     {
-        public static readonly Texture2D Rename = ContentFinder<Texture2D>.Get("UI/Buttons/Rename");
         public static Vector2 TempleCardSize = new Vector2(570f, 400f);
+        private static Vector2 SermonsScrollPos;
 
         public static void DrawTempleCard(Rect rect, BuildingAltar altar)
         {
@@ -24,121 +23,139 @@ namespace Corruption.Worship
             Text.Font = GameFont.Medium;
             Widgets.Label(rect2, altar.RoomName);
             Text.Font = GameFont.Small;
-
-            Rect rect3 = rect2;
-            rect3.y = rect2.yMax + 30f;
-            rect3.width = 200f;
-            rect3.height = 25f;
-            Widgets.Label(rect3, "Preacher".Translate() + ": ");
-            rect3.xMin = rect3.center.x + 10f;
-            string label2 = PreacherLabel(altar);
-            if (Widgets.ButtonText(rect3, label2, true, false, true))
-            {
-                TempleCardUtility.OpenPreacherSelectMenu(altar);
-            }
-
             if (altar.Faction == Faction.OfPlayer)
             {
-                Rect rect8 = new Rect(rect.width - 36f, 0f, 30f, 30f);
+                Rect rect8 = new Rect(rect.width - 60f, 0f, 30f, 30f);
                 TooltipHandler.TipRegion(rect8, () => "RenameTemple".Translate(), altar.thingIDNumber);
-                if (Widgets.ButtonImage(rect8, Rename))
+                if (Widgets.ButtonImage(rect8, TexUI_Core.Rename))
                 {
                     Find.WindowStack.Add(new Dialog_RenameTemple(altar));
                 }
             }
 
-            Rect morningRect = new Rect(0f, rect3.yMax + 4f, rect.width, Text.LineHeight * 2f + 8f);
+            Text.Font = GameFont.Medium;
+            Rect overviewRect = new Rect(0f, rect2.yMax + 4f, rect.width, Text.LineHeight);
+            Widgets.Label(overviewRect, "SermonsOverview".Translate());
+            Text.Font = GameFont.Small;
 
+            Rect outerRect = new Rect(0f, overviewRect.yMax + 8f, rect.width, rect.height - overviewRect.yMax - 8f);
+            Rect viewRect = new Rect(0f, 0f, outerRect.width - 16f, altar.Templates.Count * 232f);
+
+
+            Widgets.DrawMenuSection(outerRect);
+
+            Widgets.BeginScrollView(outerRect, ref SermonsScrollPos, viewRect);
+
+            float curY = 0f;
             foreach (var template in altar.Templates)
             {
-                float curY = DrawSermonTemplate(morningRect, template);
+                curY = DrawSermonTemplate(altar,curY, viewRect.width, template);
             }
+            Widgets.EndScrollView();
+
             GUI.EndGroup();
         }
 
-        private static float DrawSermonTemplate(Rect morningRect, SermonTemplate template)
+        private static float DrawSermonTemplate(BuildingAltar altar, float curY, float width, SermonTemplate sermon)
         {
-            Rect valRect = new Rect(morningRect.x, morningRect.y, morningRect.width / 2f, morningRect.height);
-            Widgets.HorizontalSlider(valRect, template.PreferredStartTime, template.AvailableRange.min, template.AvailableRange.max, true, "SermonStartingTime".Translate(),null, null, 1f);
-
-            Rect checkRect = valRect;
-            checkRect.x += valRect.width + 4f;
-
-            Widgets.CheckboxLabeled(checkRect, "Active".Translate(), ref template.Active, false);
-
-            return checkRect.yMax + 4f;
-        }
-
-        public static string PreacherLabel(BuildingAltar altar)
-        {
-            if (altar.preacher == null)
+            Rect nameRect = new Rect(4f, curY + 4f, width, Text.LineHeight);
+            Widgets.Label(nameRect, "SermonTitle".Translate(sermon.Name));
+            if (altar.Faction == Faction.OfPlayer)
             {
-                return "None";
-            }
-            else
-            {
-                return altar.preacher.NameShortColored;
-            }
-        }
-
-        private static void ForceListenersTest(BuildingAltar altar)
-        {
-
-            IntVec3 result;
-            Building chair;
-            foreach (Pawn p in altar.Map.mapPawns.AllPawnsSpawned.FindAll(x => x.RaceProps.intelligence == Intelligence.Humanlike))
-            {
-                if (!SermonUtility.IsPreacher(p))
+                Rect renameRect = new Rect(width - 34f, curY, 30f, 30f);
+                TooltipHandler.TipRegion(renameRect, () => "RenameSermon".Translate(), altar.thingIDNumber);
+                if (Widgets.ButtonImage(renameRect, TexUI_Core.Rename))
                 {
-                    if (!WatchBuildingUtility.TryFindBestWatchCell(altar, p, true, out result, out chair))
-                    {
-
-                        if (!WatchBuildingUtility.TryFindBestWatchCell(altar as Thing, p, false, out result, out chair))
-                        {
-                            return;
-                        }
-                    }
-                    if (chair != null)
-                    {
-                        Job J = new Job(JobDefOf.AttendSermon, altar.preacher, altar, chair);
-                        p.jobs.jobQueue.EnqueueLast(J);
-                        p.jobs.EndCurrentJob(JobCondition.InterruptForced);
-                    }
-                    else
-                    {
-                        Job J = new Job(JobDefOf.AttendSermon, altar.preacher, altar, result);
-                        p.jobs.jobQueue.EnqueueLast(J);
-                        p.jobs.EndCurrentJob(JobCondition.InterruptForced);
-                    }
+                    Find.WindowStack.Add(new Dialog_RenameSermon(sermon));
                 }
             }
+
+            Rect preacherLabel = new Rect(4f, nameRect.yMax + 8f, 200f, Text.LineHeight + 2f);
+            Widgets.Label(preacherLabel, "Preacher".Translate());
+
+
+            Rect preacherButtonRect = new Rect(4f, preacherLabel.yMax + 4f, 200f, 35f);
+
+            if (Widgets.ButtonText(preacherButtonRect,sermon.Preacher?.LabelCap ?? "None".Translate()))
+            {
+                OpenPreacherSelectMenu(altar, sermon);
+            }
+
+            //Rect assistantlbRect = new Rect(width - 208f, preacherLabel.y, 208f, 35f);
+            //Widgets.Label(assistantlbRect, "Assistant".Translate());
+            //Rect assistantButtonRect = new Rect(width - 208f, preacherLabel.yMax + 4f, 200f, 35f);
+
+            //if (Widgets.ButtonText(assistantButtonRect, sermon.Assistant?.LabelCap ?? "None".Translate()))
+            //{
+            //    OpenAssistantSelectMenu(altar, sermon);
+            //}
+
+            Rect dedicationRect = new Rect(4f, preacherButtonRect.yMax + 8f, 200f, 35f);
+
+            Widgets.Label(dedicationRect, "SermonDedication".Translate());
+            Rect dedicationBtnRect = new Rect(dedicationRect);
+            dedicationBtnRect.x = width - 208f;
+
+            if (Widgets.ButtonText(dedicationBtnRect, sermon.DedicatedTo.LabelCap))
+            {
+                OpenDedicationSelectMenu(altar, sermon);
+            }
+
+            GUI.color = Color.white;
+
+            Rect sliderRect = new Rect(16f, dedicationRect.yMax + 8f, width - 32f, 16f);
+            float startingTime = Widgets.HorizontalSlider(sliderRect, sermon.PreferredStartTime, 0f, 23f, false, "SermonStartingTime".Translate(sermon.PreferredStartTime.ToString("D2")), "0", "23", 1);
+            sermon.SetStartTime((int)startingTime);
+
+            Rect durationRect = new Rect(sliderRect);
+            durationRect.y = sliderRect.yMax + 8f;
+
+            string currentDurationText = sermon.SermonDurationHours < 1f ? string.Concat(sermon.SermonDurationHours * 60, " min") : string.Concat(sermon.SermonDurationHours.ToString("0.0"), " h");
+
+            float duration = Widgets.HorizontalSlider(durationRect, sermon.SermonDurationHours, 0.5f, 8f, false, "SermonDuration".Translate(currentDurationText), "30 min", "8h", 0.5f);
+            sermon.SermonDurationHours = duration;
+
+            Rect activeRect = new Rect(4f, durationRect.yMax + 8f, width, Text.LineHeight);
+            Widgets.CheckboxLabeled(activeRect, "SermonActive".Translate(), ref sermon.Active, false, null, null, true);
+            if (Prefs.DevMode)
+            {
+                Rect debugRect = new Rect(activeRect.xMax - 128f, activeRect.y, 128f, 25f);
+                if (Widgets.ButtonText(debugRect, "Debug: Force Start"))
+                {
+                    altar.TryStartSermon(sermon);
+                }
+            }
+
+            Widgets.DrawLineHorizontal(6f, activeRect.yMax + 4f, width - 6f);
+            return activeRect.yMax + 16f;
         }
 
-        public static void OpenPreacherSelectMenu(BuildingAltar altar)
+        public static void OpenDedicationSelectMenu(BuildingAltar altar, SermonTemplate template)
         {
             List<FloatMenuOption> list = new List<FloatMenuOption>();
-            list.Add(new FloatMenuOption("(" + "NoneLower".Translate() + ")", delegate
-            {
-                altar.preacher = null;
-            }, MenuOptionPriority.Default, null, null, 0f, null));
 
-            foreach (Pawn current in altar.Map.mapPawns.FreeColonistsSpawned)
+            foreach (GodDef god in GlobalWorshipTracker.Current.PlayerPantheon.GodsListForReading.Where(x => x.acceptsPrayers && (altar.CompShrine.Props.dedicatedTo.NullOrEmpty() || altar.CompShrine.Props.dedicatedTo.Contains(x))))
             {
-                if (!SermonUtility.IsPreacher(current))
-                {
-                    CompSoul nsoul = current.Soul();
-                    string text1 = current.NameShortColored;
+                    string text1 = god.LabelCap;
 
                     Action action;
-                    Pawn localCol = current;
                     action = delegate
                     {
-                        altar.preacher = localCol;
+                        template.DedicatedTo = god;
                     };
                     list.Add(new FloatMenuOption(text1, action, MenuOptionPriority.Default, null, null, 0f, null));
-                }
+                
             }
             Find.WindowStack.Add(new FloatMenu(list));
+        }
+
+        public static void OpenPreacherSelectMenu(BuildingAltar altar, SermonTemplate sermon)
+        {
+            Find.WindowStack.Add(new Dialog_AssignPreacher(altar, sermon));
+        }
+        public static void OpenAssistantSelectMenu(BuildingAltar altar, SermonTemplate sermon)
+        {
+            Find.WindowStack.Add(new Dialog_AssignAssistant(altar, sermon));
         }
     }
 }

@@ -181,7 +181,7 @@
     </mutationHediffs>
   </DamageDef>
 
-  <DamageDef ParentName="Mutation"  Class="Corruption.Core.DamageDefMutation">
+  <DamageDef ParentName="Mutation" Name="MutatingBurn" Class="Corruption.Core.DamageDefMutation">
     <defName>MutatingBurn</defName>
     <label>mutating burn</label>
     <externalViolence>true</externalViolence>
@@ -199,6 +199,10 @@
     <soundExplosion>Explosion_Flame</soundExplosion>
   </DamageDef>
 
+  <DamageDef ParentName="MutatingBurn"  Class="Corruption.Core.DamageDefMutation">
+    <defName>MutatingExplosion</defName>
+    <isExplosive>true</isExplosive>
+  </DamageDef>
 
   <DamageDef>
     <defName>StreamOfNurgle</defName>
@@ -219,5 +223,12 @@
     </additionalHediffs>
   </DamageDef>
 
+  <DamageDef ParentName="Flame">
+    <defName>BurningExplosion</defName>
+    <label>burn</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <isExplosive>true</isExplosive>
+  </DamageDef>
   
+
 </Defs>

@@ -9,7 +9,7 @@ using Verse;
 
 namespace Corruption.Psykers
 {
-    class Verb_CastPsykerAbility : Verb_CastAbility
+    public class Verb_CastPsykerAbility : Verb_CastAbility
     {
 		public PsykerCast PsykerCast => ability as PsykerCast;
 
@@ -36,6 +36,33 @@ namespace Corruption.Psykers
 			}
 		}
 
+		public override void DrawHighlight(LocalTargetInfo target)
+		{
+			AbilityDef def = ability.def;
+			if (verbProps.range > 0f)
+			{
+				DrawRadiusCapped();
+			}
+			if (CanHitTarget(target) && IsApplicableTo(target))
+			{
+				if (def.HasAreaOfEffect)
+				{
+					if (target.IsValid)
+					{
+						GenDraw.DrawTargetHighlightWithLayer(target.CenterVector3, AltitudeLayer.MetaOverlays);
+						GenDraw.DrawRadiusRing(target.Cell, def.EffectRadius, RadiusHighlightColor);
+					}
+				}
+				else
+				{
+					GenDraw.DrawTargetHighlightWithLayer(target.CenterVector3, AltitudeLayer.MetaOverlays);
+				}
+			}
+			if (target.IsValid)
+			{
+				ability.DrawEffectPreviews(target);
+			}
+		}
 
 		public override void OnGUI(LocalTargetInfo target)
 		{
@@ -97,5 +124,15 @@ namespace Corruption.Psykers
 				GenMapUI.DrawText(new Vector2(drawPos.x, drawPos.z), (string)(StatDefOf.PsychicSensitivity.LabelCap + ": ") + statValue, (statValue > float.Epsilon) ? Color.white : Color.red);
 			}
 		}
+
+
+		public void DrawRadiusCapped()
+		{
+			if (ability.pawn.Spawned && verbProps.range <55f)
+			{
+				GenDraw.DrawRadiusRing(ability.pawn.Position, Math.Min(54f, verbProps.range));
+			}
+		}
+
 	}
 }

@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <Corruption.Core.Gods.GodDef  MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">
+    <defName>Ynnead</defName>
+    <label>Ynnead</label>
+    <description>Ynnead is the Aeldari emerging god of death, the final hope of defeating Slaanesh.</description>
+    <texturePath>UI/Glow_Holy</texturePath>
+    <smallTexturePath>UI/Glow_Holy</smallTexturePath>
+    <mainColor>(0.32, 0.65, 0.68)</mainColor>
+    <cultColorOne>RGBA(0.32,0.65,0.68,1)</cultColorOne>
+    <cultColorTwo>RGBA(0.9,0.9,0.9,1)</cultColorTwo>
+    <favourCorruptionFactor>-10</favourCorruptionFactor>
+    <patronTraits>
+      <li>Ynnead_Hope</li>
+    </patronTraits>
+    <psykerPowers>
+    </psykerPowers>
+    <favourSourceDescriptions>
+      <li>Fighting Chaos</li>
+    </favourSourceDescriptions>
+    <effectMote>Mote_Ynnead</effectMote>
+    <approvesBattlingPantheon>
+      <li>Chaos</li>
+    </approvesBattlingPantheon>
+  </Corruption.Core.Gods.GodDef>
+
+  <Corruption.Core.Gods.GodDef  MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">
+    <defName>Cegorach</defName>
+    <label>Cegorach</label>
+    <description>Czegorach is the Aeldari trickster god. He has escaped the grasp of Slaanesh and has survided thus far by cunning.</description>
+    <texturePath>UI/Glow_Holy</texturePath>
+    <smallTexturePath>UI/Glow_Holy</smallTexturePath>
+    <mainColor>(0.32, 0.65, 0.68)</mainColor>
+    <cultColorOne>RGBA(0.39,0.32,0.68,1)</cultColorOne>
+    <cultColorTwo>RGBA(0.9,0.9,0.9,1)</cultColorTwo>
+    <favourCorruptionFactor>-10</favourCorruptionFactor>
+    <patronTraits>
+      <li>Cegorach_Laughter</li>
+    </patronTraits>
+    <psykerPowers>
+    </psykerPowers>
+    <favourSourceDescriptions>
+      <li>Fighting Chaos</li>
+    </favourSourceDescriptions>
+    <effectMote>Mote_Cegorach</effectMote>
+    <approvesBattlingPantheon>
+      <li>Chaos</li>
+    </approvesBattlingPantheon>
+  </Corruption.Core.Gods.GodDef>
+
+  <Corruption.Core.Gods.GodDef MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">
+    <defName>Khaine</defName>
+    <label>Khaine</label>
+    <description>Khaine is the Aeldari god of war.</description>
+    <texturePath>UI/Glow_Holy</texturePath>
+    <smallTexturePath>UI/Glow_Holy</smallTexturePath>
+    <mainColor>(0.7, 0.0, 0.0)</mainColor>
+    <cultColorOne>RGBA(0.7,0.0,0.0,1)</cultColorOne>
+    <cultColorTwo>RGBA(1.0,0.7,0.0,1)</cultColorTwo>
+    <favourCorruptionFactor>-10</favourCorruptionFactor>
+    <patronTraits>
+      <li>Khaine_Fervor</li>
+    </patronTraits>
+    <psykerPowers>
+    </psykerPowers>
+    <favourSourceDescriptions>
+      <li>Fighting</li>
+    </favourSourceDescriptions>
+    <effectMote>Mote_Khaine</effectMote>
+    <approvesBattlingPantheon>
+      <li>Chaos</li>
+      <li>OrkPantheon</li>
+      <li>ImperialCult</li>
+    </approvesBattlingPantheon>
+  </Corruption.Core.Gods.GodDef>
+
+  <Corruption.Core.Gods.GodDef MayRequire="Ogliss.AdMech.Xenobiologis.Orkz">
+    <defName>Gork</defName>
+    <label>Gork</label>
+    <description>Gork is the manifestation of the Orkish desire to fight and destroy.</description>
+    <texturePath>UI/Glow_Orkish</texturePath>
+    <smallTexturePath>UI/Glow_Orkish</smallTexturePath>
+    <mainColor>(0.4, 0.7, 0.0)</mainColor>
+    <cultColorOne>RGBA(0.4,0.7,0.0,1)</cultColorOne>
+    <cultColorTwo>RGBA(0.4,0.7,0.0,1)</cultColorTwo>
+    <favourCorruptionFactor>-10</favourCorruptionFactor>
+    <patronTraits>
+      <li>Bloodlust</li>
+    </patronTraits>
+    <psykerPowers>
+    </psykerPowers>
+    <favourSourceDescriptions>
+      <li>Fighting</li>
+    </favourSourceDescriptions>
+    <effectMote>Mote_Ork</effectMote>
+    <approvesBattlingPantheon>
+      <li>Chaos</li>
+      <li>ImperialCult</li>
+      <li>EldarPantheon</li>
+    </approvesBattlingPantheon>
+  </Corruption.Core.Gods.GodDef>
+
+
+  <Corruption.Core.Gods.GodDef MayRequire="Ogliss.AdMech.Xenobiologis.Orkz">
+    <defName>Mork</defName>
+    <label>Mork</label>
+    <description>Mork is the manifestation of the Orkish cunning and cruelty.</description>
+    <texturePath>UI/Glow_Orkish</texturePath>
+    <smallTexturePath>UI/Glow_Orkish</smallTexturePath>
+    <mainColor>(0.4, 0.7, 0.0)</mainColor>
+    <cultColorOne>RGBA(0.4,0.7,0.0,1)</cultColorOne>
+    <cultColorTwo>RGBA(0.4,0.7,0.0,1)</cultColorTwo>
+    <favourCorruptionFactor>-10</favourCorruptionFactor>
+    <patronTraits>
+      <li>Bloodlust</li>
+    </patronTraits>
+    <psykerPowers>
+    </psykerPowers>
+    <favourSourceDescriptions>
+      <li>Fighting</li>
+    </favourSourceDescriptions>
+    <effectMote>Mote_Ork</effectMote>
+    <approvesBattlingPantheon>
+      <li>Chaos</li>
+      <li>ImperialCult</li>
+      <li>EldarPantheon</li>
+    </approvesBattlingPantheon>
+  </Corruption.Core.Gods.GodDef>
+
+  
+
+</Defs>

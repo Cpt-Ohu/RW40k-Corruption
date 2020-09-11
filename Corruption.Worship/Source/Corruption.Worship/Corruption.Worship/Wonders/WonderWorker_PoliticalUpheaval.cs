@@ -23,7 +23,7 @@ namespace Corruption.Worship.Wonders
                 {
                     bool sent;
                     relation.goodwill = Rand.Range(-100, 50);
-                    relation.CheckKindThresholds(relation.other, true, "TzeentchRevolutionDescription".Translate(), GlobalTargetInfo.Invalid, out sent);                    
+                    relation.CheckKindThresholds(faction, true, "TzeentchRevolutionDescription".Translate(), GlobalTargetInfo.Invalid, out sent);                    
                 }
             }
 

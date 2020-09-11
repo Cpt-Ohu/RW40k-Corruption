@@ -48,11 +48,31 @@
           <exactCell>true</exactCell>
           <locomotionUrgency>Jog</locomotionUrgency>
         </li>
-
         <!-- Arrived -->
         <li Class="ThinkNode_ConditionalAtDutyLocation">
           <subNodes>
             <li Class="Corruption.Worship.JobGiver_HoldSermon" />
+          </subNodes>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+  
+  <DutyDef>
+    <defName>AssistSermon</defName>
+    <socialModeMax>Off</socialModeMax>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- Goto my spot -->
+        <li Class="JobGiver_GotoTravelDestination">
+          <exactCell>true</exactCell>
+          <locomotionUrgency>Jog</locomotionUrgency>
+        </li>
+        <li Class="Corruption.Worship.JobGiver_RingBells" />
+        <!-- Arrived -->
+        <li Class="ThinkNode_ConditionalAtDutyLocation">
+          <subNodes>
+            <li Class="Corruption.Worship.JobGiver_AssistSermon" />
           </subNodes>
         </li>
       </subNodes>

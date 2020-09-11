@@ -21,13 +21,14 @@ namespace Corruption.Worship.Wonders
             };
         }
 
-        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
+        protected override bool TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
+            Pawn pawn = (Pawn)this.target.Thing;
             for (int i = 0; i < this.Def.hediffsToAdd.Count; i++)
             {
-                Pawn pawn = (Pawn)this.target.Thing;
-                pawn.health.AddHediff(this.Def.hediffsToAdd[i]);
+                pawn?.health.AddHediff(this.Def.hediffsToAdd[i]);
             }
+            return pawn != null;
         }
     }
 
@@ -44,7 +45,7 @@ namespace Corruption.Worship.Wonders
             };
         }
 
-        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
+        protected override bool TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
             Map map = this.target.Map;
             foreach (var colonist in map.mapPawns.FreeColonistsSpawned)
@@ -54,6 +55,7 @@ namespace Corruption.Worship.Wonders
                     colonist.health.AddHediff(this.Def.hediffsToAdd[i]);
                 }
             }
+            return true;
         }
     }
 }

@@ -110,5 +110,14 @@
   </Operation>
 
 
+  <Operation Class="PatchOperationAdd">
+
+    <xpath>*/ThingDef[defName="FabricationBench"]/recipes</xpath>
+    <value>
+      <li>Make_PsiConvector</li>
+    </value>
+    
+  </Operation>
+
 </Patch>
 

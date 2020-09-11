@@ -38,6 +38,10 @@ namespace Corruption.Core.Soul
             {
                 _chosenPantheon = value;
                 this.FavourTracker.TryAddGods(_chosenPantheon.GodsListForReading);
+                if (this.Pawn.IsColonistPlayerControlled)
+                {
+                    CorruptionStoryTracker.Current.Notify_PantheonChanged(this);
+                }
             }
         }
 
@@ -71,9 +75,9 @@ namespace Corruption.Core.Soul
 
         public void GainCorruption(float change, GodDef favouredGod = null, bool addFavour = true)
         {
-            var adjustedChange = change * _cachedResistanceFactor;
+            var adjustedChange = change * _cachedResistanceFactor * ModSettings_Corruption.CorruptionGainFactor;
             this._corruption = CorruptionRange.ClampToRange(this._corruption += adjustedChange);
-            if (favouredGod != null &&  Find.TickManager.TicksGame > 0)
+            if (favouredGod != null && Find.TickManager.TicksGame > 0 && addFavour)
             {
                 this.TryAddFavorProgress(favouredGod, Math.Abs(change * 0.076f));
             }
@@ -83,6 +87,7 @@ namespace Corruption.Core.Soul
             }
             else if (adjustedChange < 0f)
             {
+                change *= this.Props?.baseCorruptionResistanceFactor ?? 1f;
                 var chaosFavour = this.FavourTracker.AllFavoursSorted().FirstOrDefault(x => PantheonDefOf.Chaos.GodsListForReading.Contains(x.God));
                 if (chaosFavour != null)
                 {
@@ -201,6 +206,7 @@ namespace Corruption.Core.Soul
             if (this.Pawn.IsFighting())
             {
                 this.GainCorruption(1f, GodDefOf.Khorne);
+                this.PrayerTracker.StartRandomPrayer(this.Pawn.CurJob, this.Pawn.CurJob.playerForced, WorkTags.Violent);
             }
         }
 
@@ -254,6 +260,31 @@ namespace Corruption.Core.Soul
             }
         }
 
+        public override void PostPostApplyDamage(DamageInfo dinfo, float totalDamageDealt)
+        {
+            base.PostPostApplyDamage(dinfo, totalDamageDealt);
+            Pawn enemy = dinfo.Instigator as Pawn;
+            if (enemy != null)
+            {
+                CompSoul soul = enemy.Soul();
+                if (soul != null)
+                {
+                    soul.BattledSoul(this, dinfo);
+                }
+            }
+        }
+
+        private void BattledSoul(CompSoul enemySoul, DamageInfo dinfo)
+        {
+            foreach (var ownGod in this.ChosenPantheon.GodsListForReading)
+            {
+                if (ownGod.approvesBattlingPantheon.Contains(enemySoul.ChosenPantheon))
+                {
+                    this.TryAddFavorProgress(ownGod, Math.Abs(ownGod.favourCorruptionFactor * dinfo.Amount * 0.1f + (enemySoul.Pawn.Dead ? 100f : 0f)));
+                }
+            }
+        }
+
         public override void PostExposeData()
         {
             base.PostExposeData();
@@ -298,6 +329,8 @@ namespace Corruption.Core.Soul
     public class CompProperties_Soul : CompProperties
     {
         public PantheonDef defaultPantheon;
+
+        public float baseCorruptionResistanceFactor = 1f;
 
         public CompProperties_Soul()
         {

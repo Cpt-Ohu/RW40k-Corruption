@@ -15,7 +15,7 @@
     <wonderIconPath>UI/Wonders/WondersNurgleBreath</wonderIconPath>
     <favourCost>0</favourCost>
     <incident>NurgleBreath</incident>
-    <incidentPoints>3000</incidentPoints>
+    <fixedIncidentPoints>3000</fixedIncidentPoints>
   </Corruption.Worship.Wonders.WonderDef>
 
   <Corruption.Worship.Wonders.WonderDef ParentName="NurgleWonder">

@@ -14,7 +14,7 @@ namespace Corruption.Worship
         public override void PostGainFavour(CompSoul soul, float change, GodDef god = null)
         {
             base.PostGainFavour(soul, change);
-            GlobalWorshipTracker.Current.TryAddFavor(god, change / 2f, soul.Pawn);
+            GlobalWorshipTracker.Current.TryAddFavor(god, change / 4f, soul.Pawn);
         }
     }
 }

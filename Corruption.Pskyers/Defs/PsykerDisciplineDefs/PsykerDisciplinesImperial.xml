@@ -45,6 +45,7 @@
     <associatedPantheons>
       <li>ImperialCult</li>
       <li>Chaos</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
     <iconPath>UI/Disciplines/Initiate</iconPath>
   </Corruption.Psykers.PsykerDisciplineDef>
@@ -140,6 +141,7 @@
     <iconPath>UI/Disciplines/Biomancy</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -192,6 +194,7 @@
     <iconPath>UI/Disciplines/Biomancy</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -310,6 +313,7 @@
     <iconPath>UI/Disciplines/Divination</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -373,6 +377,7 @@
     <iconPath>UI/Disciplines/Divination</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -457,6 +462,7 @@
     <iconPath>UI/Disciplines/Pyromancy</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -512,6 +518,7 @@
     <initialXP>300</initialXP>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -520,6 +527,7 @@
     <label>telekinesis</label>
     <description>Telekinesis manipulates the material world with the power of the mind.</description>
     <practitionerTitle>telekine</practitionerTitle>
+    <color>(0.32,0.13,0.53)</color>
     <abilities>
       <li>
         <ability>TelekAssailI</ability>
@@ -620,6 +628,7 @@
     <iconPath>UI/Disciplines/Telekinesis</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -629,6 +638,7 @@
     <description>Telekinesis manipulates the material world with the power of the mind.</description>
     <practitionerTitle>telekine</practitionerTitle>
     <category>Minor</category>
+    <color>(0.32,0.13,0.53)</color>
     <abilities>
       <li>
         <ability>TelekAssailI</ability>
@@ -661,6 +671,7 @@
     <iconPath>UI/Disciplines/Telekinesis</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -669,6 +680,7 @@
     <label>telepathy</label>
     <description>Telepaths enter and manipulate the minds of others.</description>
     <practitionerTitle>telepath</practitionerTitle>
+    <color>(0.9,0.9,0.9)</color>
     <abilities>
       <li>
         <ability>TelepDominateI</ability>
@@ -787,6 +799,7 @@
     <iconPath>UI/Disciplines/Telepathy</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -796,6 +809,7 @@
     <description>Telepaths enter and manipulate the minds of others.</description>
     <practitionerTitle>telepath</practitionerTitle>
     <category>Minor</category>
+    <color>(0.9,0.9,0.9)</color>
     <abilities>
       <li>
         <ability>TelepDominateI</ability>
@@ -854,6 +868,7 @@
     <iconPath>UI/Disciplines/Telepathy</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 

@@ -260,7 +260,9 @@
     <Compile Include="AbilityCompProperties_AICast.cs" />
     <Compile Include="CompDamageOnSpawn.cs" />
     <Compile Include="CompProperties_AbilityEffectWithDurationAdvanced.cs" />
+    <Compile Include="CompProperties_Psyker.cs" />
     <Compile Include="CompPsykerExtension.cs" />
+    <Compile Include="Comp_Weirdboy.cs" />
     <Compile Include="Graphic_Vortex.cs" />
     <Compile Include="HediffComp_AffectSkill.cs" />
     <Compile Include="CompAbilityEffect_DirectDamage.cs" />
@@ -294,6 +296,7 @@
     <Compile Include="PsykerDisciplineDefOf.cs" />
     <Compile Include="PsykerDisciplineCategory.cs" />
     <Compile Include="PsykerProjectiles.cs" />
+    <Compile Include="PsykerStoryTrackerComponent.cs" />
     <Compile Include="PsykerUtility.cs" />
     <Compile Include="ScenPart_PsykerStart.cs" />
     <Compile Include="Thought_MemoryPsionic.cs" />
@@ -312,6 +315,7 @@
     <Content Include="Output\Defs\AbilityDefs\PsykerAbilities_Biomancy.xml" />
     <Content Include="Output\Defs\AbilityDefs\PsykerAbilities_Divination.xml" />
     <Content Include="Output\Defs\AbilityDefs\PsykerAbilities_Nurgle.xml" />
+    <Content Include="Output\Defs\AbilityDefs\PsykerAbilities_Orks.xml" />
     <Content Include="Output\Defs\AbilityDefs\PsykerAbilities_Pyromancy.xml" />
     <Content Include="Output\Defs\AbilityDefs\PsykerAbilities_Slaanesh.xml" />
     <Content Include="Output\Defs\AbilityDefs\PsykerAbilities_Telekinesis.xml" />

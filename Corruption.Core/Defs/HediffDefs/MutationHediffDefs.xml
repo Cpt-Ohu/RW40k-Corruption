@@ -483,6 +483,71 @@
 
   <!-- ========================= Skin ===================================== -->
 
+  <HediffDef ParentName="ChaosMutationBody">
+    <defName>ChaosMutationFeatheryWings</defName>
+    <label>chaos mutation</label>
+    <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
+    <maxSeverity>4</maxSeverity>
+    <stages>
+      <li>
+        <label>stain</label>
+      </li>
+      <li>
+        <label>backpain</label>
+        <painOffset>0.05</painOffset>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.05</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>Portruding shoulderblades</label>
+        <painOffset>0.01</painOffset>
+        <minSeverity>2</minSeverity>
+        <statOffsets>
+          <ArmorRating_Sharp>0.05</ArmorRating_Sharp>
+          <PawnBeauty>-0.5</PawnBeauty>
+          <Insulation_Cold>0.1</Insulation_Cold>
+        </statOffsets>
+      </li>
+      <li>
+        <label>feathered shoulderblades</label>
+        <minSeverity>3</minSeverity>
+        <statOffsets>
+          <ArmorRating_Sharp>0.25</ArmorRating_Sharp>
+          <PawnBeauty>-0.5</PawnBeauty>
+          <Insulation_Cold>0.2</Insulation_Cold>
+        </statOffsets>
+      </li>
+      <li>
+        <label>feathered wings</label>
+        <minSeverity>4</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>0.7</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <MoveSpeed>0.5</MoveSpeed>
+          <ArmorRating_Sharp>-0.05</ArmorRating_Sharp>
+          <PawnBeauty>2</PawnBeauty>
+          <Insulation_Cold>0.3</Insulation_Cold>
+        </statOffsets>
+      </li>
+    </stages>
+    <comps>
+      <li Class="Corruption.Core.HediffCompProperties_DrawPawnExtra">
+        <texPath>Things/Pawn/BodyOverlays/MutationOverlayFeathers/WingsFeathery</texPath>
+        <templateApparelDef>Apparel_SkinOverlay</templateApparelDef>
+        <useBodyTypes>true</useBodyTypes>
+        <minSeverity>3</minSeverity>
+      </li>
+    </comps>
+  </HediffDef>
 
   <HediffDef ParentName="ChaosMutationBody">
     <defName>ChaosMutationFeathers</defName>

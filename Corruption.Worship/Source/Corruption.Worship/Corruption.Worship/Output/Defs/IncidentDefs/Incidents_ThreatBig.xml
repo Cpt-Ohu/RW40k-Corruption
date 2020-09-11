@@ -8,10 +8,11 @@
       <li>Map_PlayerHome</li>
     </targetTags>
     <workerClass>Corruption.Worship.Wonders.IncidentWorker_KhorneFrenzy</workerClass>
-    <baseChance>0.00001</baseChance>
+    <baseChance>0.0</baseChance>
     <minRefireDays>99999</minRefireDays>
     <category>ThreatBig</category>
     <pointsScaleable>true</pointsScaleable>
+    <ignoreConfigErrors>true</ignoreConfigErrors>
   
 </IncidentDef>
 
@@ -23,8 +24,9 @@
     </targetTags>
     <workerClass>Corruption.Worship.Wonders.IncidentWorker_SlaaneshOrgy</workerClass>
     <category>ThreatSmall</category>
-    <baseChance>0.0000001</baseChance>
+    <baseChance>0.0</baseChance>
     <pointsScaleable>false</pointsScaleable>
+    <ignoreConfigErrors>true</ignoreConfigErrors>
   </IncidentDef>
 
   <IncidentDef>
@@ -45,6 +47,7 @@
       <min>0.2</min>
       <max>0.5</max>
     </diseaseVictimFractionRange>
-    <baseChance>0.0000001</baseChance>
+    <baseChance>0.0</baseChance>
+    <ignoreConfigErrors>true</ignoreConfigErrors>
   </IncidentDef>
 </Defs>

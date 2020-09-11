@@ -13,7 +13,7 @@ namespace Corruption.Worship
 {
     public class CompShrine : ThingComp, IThingHolder, IOpenable
     {
-        public CompProperties_Shrine CompProps
+        public CompProperties_Shrine Props
         {
             get
             {
@@ -33,7 +33,7 @@ namespace Corruption.Worship
         {
             get
             {
-                return this.InstalledEffigy != null && this.CompProps.requiresEffigy == true;
+                return this.InstalledEffigy != null && this.Props.requiresEffigy == true;
             }
         }
 
@@ -49,8 +49,6 @@ namespace Corruption.Worship
         public override void Initialize(CompProperties props)
         {
             base.Initialize(props);
-
-            this.God = this.CompProps.dedicatedTo ?? GodDefOf.Emperor;
         }
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
@@ -83,7 +81,7 @@ namespace Corruption.Worship
                 yield return option;
             }
 
-            if (this.CompProps.requiresEffigy && this.InstalledEffigy == null)
+            if (this.Props.requiresEffigy && this.InstalledEffigy == null)
             {
                 foreach (var effigy in selPawn.inventory.GetDirectlyHeldThings().Where(x => x is ItemEffigy))
                 {
@@ -107,13 +105,11 @@ namespace Corruption.Worship
 
         }
 
-        public GodDef God = GodDefOf.Emperor;
-
         public bool CanOpen
         {
             get
             {
-                return this.InstalledEffigy != null && this.CompProps.requiresEffigy == true;
+                return this.InstalledEffigy != null && this.Props.requiresEffigy == true;
             }
         }
 
@@ -181,7 +177,7 @@ namespace Corruption.Worship
 
         public bool requiresEffigy = true;
 
-        public GodDef dedicatedTo;
+        public List<GodDef> dedicatedTo = new List<GodDef>();
 
         public CompProperties_Shrine()
         {

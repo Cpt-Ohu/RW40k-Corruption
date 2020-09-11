@@ -5,9 +5,22 @@
     <commonality>0</commonality>
     <ignoreConfigErrors>true</ignoreConfigErrors>
     <degreeDatas>
+      <li Class="Corruption.Core.Soul.SoulTraitDegreeOptions">
+        <label>Aspiring Saint</label>
+        <description>This individual was selected by the Emperor to fulfill a purpose. What this purpose is, remains unclear.</description>
+        <statFactors>
+          <MarketValue>2.0</MarketValue>
+          <MentalBreakThreshold>1.2</MentalBreakThreshold>
+          <SocialImpact>1.1</SocialImpact>
+          <TameAnimalChance>1.1</TameAnimalChance>
+        </statFactors>
+        <abilityUnlocks>
+          <li>CleanseCorruption</li>
+        </abilityUnlocks>
+      </li>
       <li>
         <label>Living Saint</label>
-        <description>This individual was selected by the Emperor to fulfill a purpose. What this purpose is, remains unclear.</description>
+        <description>This individual has braved its trials and has become an Imperial saint walking among mere mortals.</description>
         <statFactors>
           <MarketValue>10.0</MarketValue>
           <MentalBreakThreshold>2.12</MentalBreakThreshold>
@@ -25,8 +38,19 @@
     <ignoreConfigErrors>true</ignoreConfigErrors>
     <degreeDatas>
       <li>
-        <label>Champion of Khorne</label>
+        <label>Aspiring Champion</label>
         <description>This individual was selected by Khorne to do battle in his name.</description>
+        <statFactors>
+          <MentalBreakThreshold>1.12</MentalBreakThreshold>
+          <MoveSpeed>1.05</MoveSpeed>
+          <MeleeHitChance>1.05</MeleeHitChance>
+          <MeleeDodgeChance>1.05</MeleeDodgeChance>
+          <MeleeHitChance>1.05</MeleeHitChance>
+        </statFactors>
+      </li>
+      <li>
+        <label>Champion of Khorne</label>
+        <description>This individual has proven its worth in the eyes of the Blood God.</description>
         <statFactors>
           <MarketValue>10.0</MarketValue>
           <MentalBreakThreshold>3.12</MentalBreakThreshold>
@@ -46,19 +70,26 @@
     <ignoreConfigErrors>true</ignoreConfigErrors>
     <degreeDatas>
       <li>
-        <label>Champion of Nurgle</label>
+        <label>Aspiring Champion</label>
         <description>This individual was selected by Nurgle to spread pestilence.</description>
         <statFactors>
-          <MarketValue>10.0</MarketValue>
+          <MentalBreakThreshold>1.12</MentalBreakThreshold>
           <MoveSpeed>0.8</MoveSpeed>
+          <PainShockThreshold>1.1</PainShockThreshold>
         </statFactors>
-        <statOffsets>
-          <MentalBreakThreshold>2.0</MentalBreakThreshold>
-        </statOffsets>
+      </li>
+      <li>
+        <label>Champion of Nurgle</label>
+        <description>This individual has proven its worth to the Grandfather.</description>
+        <statFactors>
+          <MarketValue>10.0</MarketValue>
+          <MentalBreakThreshold>3.12</MentalBreakThreshold>
+          <MoveSpeed>0.5</MoveSpeed>
+          <PainShockThreshold>1.5</PainShockThreshold>
+        </statFactors>
       </li>
     </degreeDatas>
   </TraitDef>
-
 
   <TraitDef>
     <defName>TzeentchChampion</defName>
@@ -66,8 +97,20 @@
     <ignoreConfigErrors>true</ignoreConfigErrors>
     <degreeDatas>
       <li>
-        <label>Champion of Tzeentch</label>
+        <label>Aspiring Champion</label>
         <description>This individual was selected by Tzeentch to be a fulcrum of knowledge and sorcery.</description>
+        <statFactors>
+          <MarketValue>10.0</MarketValue>
+          <MoveSpeed>0.8</MoveSpeed>
+        </statFactors>
+        <statOffsets>
+          <MentalBreakThreshold>2.0</MentalBreakThreshold>
+          <PainShockThreshold>3.0</PainShockThreshold>
+        </statOffsets>
+      </li>
+      <li>
+        <label>Champion of Tzeentch</label>
+        <description>This individual has become a master of Sorcery and Trickery.</description>
         <statFactors>
           <MarketValue>10.0</MarketValue>
           <MoveSpeed>0.8</MoveSpeed>
@@ -79,14 +122,28 @@
       </li>
     </degreeDatas>
   </TraitDef>
-
-  
+ 
 
   <TraitDef>
     <defName>SlaaneshChampion</defName>
     <commonality>0</commonality>
     <ignoreConfigErrors>true</ignoreConfigErrors>
+    <conflictingTraits>
+      <li>Ascetic</li>
+    </conflictingTraits>
     <degreeDatas>
+      <li>
+        <label>Aspiring Champion</label>
+        <description>This individual was chosen by Slaanesh to be an idol of lust and perfection.</description>
+        <statOffsets>
+          <PawnBeauty>1</PawnBeauty>
+          <WorkSpeedGlobal>0.10</WorkSpeedGlobal>
+          <MentalBreakThreshold>0.05</MentalBreakThreshold>
+          <ShootingAccuracyPawn>2</ShootingAccuracyPawn>
+          <MeleeHitChance>2</MeleeHitChance>
+          <MeleeDodgeChance>2</MeleeDodgeChance>
+        </statOffsets>
+      </li>
       <li>
         <label>Champion of Slaanesh</label>
         <description>This individual was chosen by Slaanesh to be an idol of lust and perfection.</description>

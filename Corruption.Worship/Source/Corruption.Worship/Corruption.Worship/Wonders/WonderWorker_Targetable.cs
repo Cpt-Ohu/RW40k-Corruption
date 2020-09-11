@@ -45,12 +45,15 @@ namespace Corruption.Worship.Wonders
             {
                 MoteMaker.MakeStaticMote(this.target.Cell, this.target.Map, god.effectMote);
             }
-            TryDoEffectOnTarget(god, worshipPoints);
+            if (TryDoEffectOnTarget(god, worshipPoints))
+            {
+                GlobalWorshipTracker.Current.TryAddFavor(god, this.Def.yieldFavour);
+            }
         }
 
-        protected virtual void TryDoEffectOnTarget(GodDef god, int worshipPoints)
+        protected virtual bool TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
-
+            return true;
         }
 
         public bool BaseTargetValidator(Thing t)

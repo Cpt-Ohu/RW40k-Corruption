@@ -12,6 +12,9 @@
     </members>
     <approvingFactions>
     </approvingFactions>
+    <rejectingPantheons>
+      <li>Chaos</li>
+    </rejectingPantheons>
     <approvingGoodwill>10</approvingGoodwill>
     <rejectingGoodwill>-20</rejectingGoodwill>
     <pantheonAttributes>
@@ -42,6 +45,18 @@
     </members>
     <approvingFactions>
     </approvingFactions>
+    <rejectingPantheons>
+      <li>ImperialCult</li>
+    </rejectingPantheons>
+    <violentTakeover>true</violentTakeover>
+    <takeoverThresholds>
+      <points>
+        <li>(0.32,0.0)</li>
+        <li>(0.33,0.2)</li>
+        <li>(0.5,0.5)</li>
+        <li>(1.0,1.0)</li>
+      </points>
+    </takeoverThresholds>
     <approvingGoodwill>10</approvingGoodwill>
     <rejectingGoodwill>-20</rejectingGoodwill>
     <pantheonAttributes>
@@ -53,5 +68,50 @@
   </Corruption.Core.Gods.PantheonDef>
 
 
+  <Corruption.Core.Gods.PantheonDef MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">
+    <defName>EldarPantheon</defName>
+    <label>Aeldar Mythology</label>
+    <description>The Aeldar Mythology is an ancient cultural force which binds the surviving members of the Aeldari race together and forms a basis for much of their thinking about their ancient past. Most of their gods have perished.</description>
+    <members>
+      <li>
+        <god>Ynnead</god>
+      </li>
+      <li>
+        <god>Khaine</god>
+      </li>
+      <li>
+        <god>Cegorach</god>
+      </li>
+    </members>
+    <approvingFactions>
+    </approvingFactions>
+    <approvingGoodwill>10</approvingGoodwill>
+    <rejectingGoodwill>-20</rejectingGoodwill>
+    <iconPath>UI/Pantheons/AeldariIcon</iconPath>
+    <mainColor>(0.32, 0.65, 0.68)</mainColor>
+    <requiresMod>Ogliss.AdMech.Xenobiologis.Eldar</requiresMod>
+    <!--<requiresMod>UNAVAILABLEMODRIGHTNOW</requiresMod>-->
+  </Corruption.Core.Gods.PantheonDef>
+
+  <Corruption.Core.Gods.PantheonDef MayRequire="Ogliss.AdMech.Xenobiologis.Orkz">
+    <defName>OrkPantheon</defName>
+    <label>Gork and Mork</label>
+    <description>Orks are single-minded in their path on destruction. Their collective psyche manifests in the warp in the form of two towering Orkish gods, locked in an eternal brawl.</description>
+    <members>
+      <li>
+        <god>Gork</god>
+      </li>
+      <li>
+        <god>Mork</god>
+      </li>
+    </members>
+    <approvingFactions>
+    </approvingFactions>
+    <approvingGoodwill>50</approvingGoodwill>
+    <rejectingGoodwill>-50</rejectingGoodwill>
+    <iconPath>UI/Pantheons/OrkIcon</iconPath>
+    <mainColor>(0.4, 0.7, 0.0)</mainColor>
+    <requiresMod>Ogliss.AdMech.Xenobiologis.Orkz</requiresMod>
+  </Corruption.Core.Gods.PantheonDef>
 
 </Defs>

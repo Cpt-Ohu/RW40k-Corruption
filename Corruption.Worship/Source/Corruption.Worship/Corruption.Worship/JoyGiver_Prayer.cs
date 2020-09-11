@@ -49,7 +49,7 @@ namespace Corruption.Worship
             {
                 result = cell;
             }
-            if (shrineTarget == null || shrineTarget == LocalTargetInfo.Invalid)
+            if (shrineTarget == null || shrineTarget == LocalTargetInfo.Invalid || (!pawn.CanReserveAndReach(shrineTarget, PathEndMode.ClosestTouch, Danger.None, 1)))
             {
                 return JobMaker.MakeJob(def.jobDef, result);
             }

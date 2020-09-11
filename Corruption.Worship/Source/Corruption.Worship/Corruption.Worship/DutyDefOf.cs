@@ -13,5 +13,6 @@ namespace Corruption.Worship
     {
         public static DutyDef HoldSermon;
         public static DutyDef AttendSermon;
+        public static DutyDef AssistSermon;
     }
 }

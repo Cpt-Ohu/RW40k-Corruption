@@ -10,7 +10,7 @@ namespace Corruption.Worship.Wonders
 {
     public class WonderWorker_SpawnThing : WonderWorker_Targetable
     {
-        protected virtual List<IntVec2> Pattern => new List<IntVec2>(){IntVec2.Zero};
+        protected virtual List<IntVec2> Pattern => new List<IntVec2>() { IntVec2.Zero };
 
         protected override TargetingParameters GetTargetingParameters()
         {
@@ -22,8 +22,9 @@ namespace Corruption.Worship.Wonders
             };
         }
 
-        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
+        protected override bool TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
+            bool spawnedOne = false;
             for (int i = 0; i < this.Def.thingsToSpawn.Count; i++)
             {
                 ThingDefCountClass entry = this.Def.thingsToSpawn[i];
@@ -40,7 +41,7 @@ namespace Corruption.Worship.Wonders
                         {
                             thing.SetFactionDirect(Faction.OfPlayer);
                         }
-                        GenPlace.TryPlaceThing(thing, this.target.Cell, this.target.Map, ThingPlaceMode.Near);
+                        spawnedOne = spawnedOne || GenPlace.TryPlaceThing(thing, this.target.Cell, this.target.Map, ThingPlaceMode.Near);
                     }
                 }
                 else
@@ -53,11 +54,32 @@ namespace Corruption.Worship.Wonders
                             thing.SetFactionDirect(Faction.OfPlayer);
                         }
                         thing.stackCount = Math.Min(thing.def.stackLimit, countToCreate);
-                        GenPlace.TryPlaceThing(thing, this.target.Cell + new IntVec3(position.x, 0, position.z), this.target.Map, ThingPlaceMode.Near);
+                        spawnedOne = spawnedOne || GenPlace.TryPlaceThing(thing, this.target.Cell + new IntVec3(position.x, 0, position.z), this.target.Map, ThingPlaceMode.Near);
 
                     }
                 }
             }
+
+            return spawnedOne;
         }
+    }
+
+    public class WonderWorker_OrbitalStrike : WonderWorker_SpawnThing
+    {
+        protected override bool TryDoEffectOnTarget(GodDef god, int worshipPoints)
+        {
+            var toSpawn = this.Def.thingsToSpawn[0].thingDef;
+            if (!typeof(OrbitalStrike).IsAssignableFrom(toSpawn.thingClass))
+            {
+                return false;
+            }
+            OrbitalStrike obj = (OrbitalStrike)GenSpawn.Spawn(this.Def.thingsToSpawn[0].thingDef, this.target.Cell, this.target.Map);
+            obj.duration = this.Def.effectDurationRange.RandomInRange;
+            obj.instigator = null;
+            obj.weaponDef = null;
+            obj.StartStrike();
+            return true;
+        }
+
     }
 }

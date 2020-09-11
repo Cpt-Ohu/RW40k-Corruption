@@ -13,10 +13,8 @@ namespace Corruption.Core.Soul
         public List<SoulTraitDegreeOptions> soulTraitDegreeOptions;
     }
 
-    public class SoulTraitDegreeOptions
+    public class SoulTraitDegreeOptions : TraitDegreeData
     {
-        public int availableAtDegree;
-
         public List<AbilityDef> abilityUnlocks = new List<AbilityDef>();
     }
 }

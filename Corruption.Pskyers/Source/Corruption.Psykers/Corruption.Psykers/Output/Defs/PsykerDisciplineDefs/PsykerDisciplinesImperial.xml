@@ -45,6 +45,7 @@
     <associatedPantheons>
       <li>ImperialCult</li>
       <li>Chaos</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
     <iconPath>UI/Disciplines/Initiate</iconPath>
   </Corruption.Psykers.PsykerDisciplineDef>
@@ -140,6 +141,7 @@
     <iconPath>UI/Disciplines/Biomancy</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -192,6 +194,7 @@
     <iconPath>UI/Disciplines/Biomancy</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -310,6 +313,7 @@
     <iconPath>UI/Disciplines/Divination</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -373,6 +377,7 @@
     <iconPath>UI/Disciplines/Divination</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -457,6 +462,7 @@
     <iconPath>UI/Disciplines/Pyromancy</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -512,6 +518,7 @@
     <initialXP>300</initialXP>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -621,6 +628,7 @@
     <iconPath>UI/Disciplines/Telekinesis</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -663,6 +671,7 @@
     <iconPath>UI/Disciplines/Telekinesis</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -790,6 +799,7 @@
     <iconPath>UI/Disciplines/Telepathy</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 
@@ -858,6 +868,7 @@
     <iconPath>UI/Disciplines/Telepathy</iconPath>
     <associatedPantheons>
       <li>ImperialCult</li>
+      <li MayRequire="Ogliss.AdMech.Xenobiologis.Eldar">EldarPantheon</li>
     </associatedPantheons>
   </Corruption.Psykers.PsykerDisciplineDef>
 

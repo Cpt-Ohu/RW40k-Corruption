@@ -15,7 +15,7 @@ namespace Corruption.Worship
         protected override Job TryGiveJob(Pawn pawn)
         {
             Lord lord = pawn.GetLord();
-            LordJob_Sermon lordJob = lord.LordJob as LordJob_Sermon;
+            LordJob_Sermon lordJob = lord?.LordJob as LordJob_Sermon;
             if (lordJob != null)
             {
                     return new Job(JobDefOf.HoldSermon, lordJob.altar, lordJob.altar.InteractionCell);                

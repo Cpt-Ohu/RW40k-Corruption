@@ -9,7 +9,6 @@ using Verse.AI.Group;
 
 namespace Corruption.Worship
 {
-
     public class LordToil_TravelUrgent : LordToil
     {
         public Danger maxDanger = Danger.Some;

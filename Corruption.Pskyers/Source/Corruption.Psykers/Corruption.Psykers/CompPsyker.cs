@@ -1,5 +1,4 @@
 ﻿using Corruption.Core;
-using Corruption.Core.Soul;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -62,7 +61,7 @@ namespace Corruption.Psykers
             base.CompTick();
         }
 
-        private void InitializePsyker()
+        protected virtual void InitializePsyker()
         {
             CorruptionPawnKindDef psykerKind = this.Pawn.kindDef as CorruptionPawnKindDef;
             if (psykerKind != null && psykerKind.affliction != null)
@@ -123,7 +122,7 @@ namespace Corruption.Psykers
             }
         }
 
-        private static PsykerClassDef GetPsykerClass(CorruptionPawnKindDef psykerKind)
+        protected static PsykerClassDef GetPsykerClass(CorruptionPawnKindDef psykerKind)
         {
             var availableClasses = DefDatabase<PsykerClassDef>.AllDefsListForReading.Where(x => x.tags.Intersect(psykerKind.additionalTags).Count() > 0);
 

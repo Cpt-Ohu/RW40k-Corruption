@@ -19,24 +19,48 @@ namespace Corruption.Core
             public string Race;
             public string DefaultPantheon;
             public float StartingCorruption;
+            public float BaseCorruptionGainFactor = 1f;
+            public string CorruptionGainBuffer = "1";
+
 
             public void ExposeData()
             {
                 Scribe_Values.Look<string>(ref this.Race, "Race");
                 Scribe_Values.Look<string>(ref this.DefaultPantheon, "DefaultPantheon");
                 Scribe_Values.Look<float>(ref this.StartingCorruption, "StartingCorruption");
+                Scribe_Values.Look<float>(ref this.BaseCorruptionGainFactor, "BaseCorruptionResistanceFactor");
+                if (Scribe.mode == LoadSaveMode.PostLoadInit)
+                {
+                    this.CorruptionGainBuffer = BaseCorruptionGainFactor.ToString();
+                }
             }
         }
 
         public List<SoulRaceEntry> SoulRaceCombinations = new List<SoulRaceEntry>();
 
+        public static float CorruptionGainFactor = 1f;
+        public static float PossessionGainFactor = 1f;
+        public static float WorshipGainSpeedFactor = 1f;
+
+        internal float CorruptionGainFactorInternal = 1f;
+        internal float PossessionGainFactorInternal = 1f;
+        internal float WorshipGainFactorInternal = 1f;
+
+
         public override void ExposeData()
         {
             base.ExposeData();
             Scribe_Collections.Look<SoulRaceEntry>(ref this.SoulRaceCombinations, "soulRaceCombinations", LookMode.Deep);
+            Scribe_Values.Look<float>(ref this.CorruptionGainFactorInternal, "CorruptionGainFactor", 1f);
+            Scribe_Values.Look<float>(ref this.PossessionGainFactorInternal, "PossessionGainFactor", 1f);
+            Scribe_Values.Look<float>(ref this.WorshipGainFactorInternal, "WorshipGainSpeedFactor", 1f);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                ModSettings_Corruption.CorruptionGainFactor = CorruptionGainFactorInternal;
+                ModSettings_Corruption.PossessionGainFactor = PossessionGainFactorInternal;
+                ModSettings_Corruption.WorshipGainSpeedFactor = WorshipGainFactorInternal;
+            }
         }
-
-
     }
 
     public class CorruptionMod : Mod
@@ -55,7 +79,6 @@ namespace Corruption.Core
         public CorruptionMod(ModContentPack content) : base(content)
         {
             settings = ((Mod)this).GetSettings<ModSettings_Corruption>();
-
         }
 
         public override void WriteSettings()
@@ -66,15 +89,27 @@ namespace Corruption.Core
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
+
+            Rect factorSliderRect = new Rect(inRect.x, inRect.y + 32f, inRect.width * 0.5f, 24f);
+            this.settings.CorruptionGainFactorInternal = Widgets.HorizontalSlider(factorSliderRect, settings.CorruptionGainFactorInternal, 0f, 2f, false, "CorruptionGainFactor".Translate(), "0x", "2x");
+            factorSliderRect.y += 32f;
+            this.settings.PossessionGainFactorInternal = Widgets.HorizontalSlider(factorSliderRect, settings.PossessionGainFactorInternal, 0f, 2f, false, "PossessionGainFactor".Translate(), "0x", "2x");
+            factorSliderRect.y += 32f;
+            this.settings.WorshipGainFactorInternal = Widgets.HorizontalSlider(factorSliderRect, settings.WorshipGainFactorInternal, 0f, 2f, false, "WorshipGainFactor".Translate(), "0x", "2x");
+
+
             if (this.AvailablePantheons == null)
             {
-                this.AvailablePantheons = DefDatabase<PantheonDef>.AllDefsListForReading;
+                this.AvailablePantheons = DefDatabase<PantheonDef>.AllDefsListForReading.FindAll(x => x.requiresMod == null || (ModLister.GetModWithIdentifier(x.requiresMod)?.Active ?? false));
             }
             if (this.AvailableRaces == null)
             {
                 this.AvailableRaces = DefDatabase<ThingDef>.AllDefs.Where(x => x.race != null && x.race.Humanlike && x.defName != ThingDefOf.Human.defName).ToList();
             }
-            GUI.BeginGroup(inRect);
+            Rect raceRect = new Rect(inRect);
+            raceRect.y = factorSliderRect.yMax + 8f;
+            raceRect.height = inRect.height - 34f * 3;
+            GUI.BeginGroup(raceRect);
             Text.Font = GameFont.Medium;
             Rect titleRect = new Rect(0f, 0f, inRect.width, Text.LineHeight);
 
@@ -95,14 +130,14 @@ namespace Corruption.Core
 
             allRect = allRect.ContractedBy(4f);
 
-            Rect viewRect = new Rect(0f, 0f, allRect.width - 36f, this.AvailableRaces.Count * Text.LineHeight * 1.02f);
+            Rect viewRect = new Rect(0f, 0f, allRect.width - 36f, this.AvailableRaces.Count * Text.LineHeight * 4.5f);
             listingStandard.BeginScrollView(allRect, ref ScrollPos, ref viewRect);
             foreach (var race in AvailableRaces)
             {
-                Rect rect = listingStandard.GetRect(Text.LineHeight + 4f);
+                Rect rect = listingStandard.GetRect(Text.LineHeight * 4f);
                 Widgets.Label(rect, race.LabelCap);
 
-                Rect btnRect = new Rect(220f, rect.y, 200f, Text.LineHeight + 4f);
+                Rect btnRect = new Rect(220f, rect.y, 200f, Text.LineHeight + 8f);
 
                 var entry = this.settings.SoulRaceCombinations.FirstOrDefault(x => x.Race == race.defName);
 
@@ -123,20 +158,28 @@ namespace Corruption.Core
                     }
                 }
 
-                if (entry.DefaultPantheon != null)
+                if (!string.IsNullOrEmpty(entry?.DefaultPantheon))
                 {
                     Rect sliderRect = new Rect(btnRect);
                     sliderRect.x += btnRect.width + 8f;
-                    sliderRect.width = allRect.width - btnRect.xMax;
+                    sliderRect.width = allRect.width - btnRect.xMax - 32f;
                     if (entry.DefaultPantheon.Equals(PantheonDefOf.Chaos.defName))
                     {
-                        entry.StartingCorruption = Widgets.HorizontalSlider(sliderRect, entry.StartingCorruption, SoulAfflictionDefOf.Corrupted.Threshold, SoulAfflictionDefOf.Lost.Threshold, true, "StartingCorruption".Translate(), SoulAfflictionDefOf.Corrupted.label, SoulAfflictionDefOf.Lost.label);
+                        entry.StartingCorruption = Widgets.HorizontalSlider(sliderRect, entry.StartingCorruption, SoulAfflictionDefOf.Corrupted.Threshold, SoulAfflictionDefOf.Lost.Threshold, true, "StartingCorruption".Translate(), SoulAfflictionDefOf.Corrupted.LabelCap, SoulAfflictionDefOf.Lost.LabelCap);
                     }
                     else
                     {
-                        entry.StartingCorruption = Widgets.HorizontalSlider(sliderRect, entry.StartingCorruption, SoulAfflictionDefOf.Pure.Threshold, SoulAfflictionDefOf.Corrupted.Threshold - 0.05f, true, "StartingCorruption".Translate(), SoulAfflictionDefOf.Pure.label, SoulAfflictionDefOf.Tainted.label);
+                        entry.StartingCorruption = Widgets.HorizontalSlider(sliderRect, entry.StartingCorruption, SoulAfflictionDefOf.Pure.Threshold, SoulAfflictionDefOf.Corrupted.Threshold - 0.05f, true, "StartingCorruption".Translate(), SoulAfflictionDefOf.Pure.LabelCap, SoulAfflictionDefOf.Tainted.LabelCap);
                     }
-               }
+
+                    Rect resistanceRect = new Rect(0f, sliderRect.yMax + 4f, 400f, Text.LineHeight);
+                    Widgets.TextFieldNumericLabeled<float>(resistanceRect, "CorruptionGainFactor".Translate(), ref entry.BaseCorruptionGainFactor, ref entry.CorruptionGainBuffer, 0f, 10f);
+                    
+                    
+                }
+
+                Widgets.DrawLineHorizontal(0f, rect.yMax - 1f, viewRect.width);
+
 
             }
             listingStandard.EndScrollView(ref viewRect);

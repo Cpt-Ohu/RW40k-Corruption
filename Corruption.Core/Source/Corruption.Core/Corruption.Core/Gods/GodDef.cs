@@ -26,21 +26,21 @@ namespace Corruption.Core.Gods
 
         public string buttonPath = "UI/Buttons/ButtonEmperor";
 
-        public Texture2D smallTexture;
+        public Texture2D SmallTexture;
 
-        public Texture2D texture;
+        public Texture2D Texture;
 
-        public Texture2D worshipBarTexture;
+        public Texture2D WorshipBarTexture;
 
-        public Texture2D worshipBarFillTexture;
+        public Texture2D WorshipBarFillTexture;
 
-        public Texture2D prayerMote;
+        public Texture2D PrayerMote;
 
-        public Texture2D buttonTex;
+        public Texture2D ButtonTex;
 
         public List<JobDef> pleasedByJobs = new List<JobDef>();
 
-        public List<SoulTraitDef> patronTraits = new List<SoulTraitDef>();
+        public List<TraitDef> patronTraits = new List<TraitDef>();
 
         public Color mainColor =new Color(0.85f, 0.68f, 12f);
 
@@ -60,19 +60,23 @@ namespace Corruption.Core.Gods
 
         public GameConditionDef wonderOverlayDef;
 
+        public bool acceptsPrayers = true;
+
         public List<BuildableDef> UnlockableBuildables = new List<BuildableDef>();
+
+        public List<PantheonDef> approvesBattlingPantheon = new List<PantheonDef>();
 
         public override void ResolveReferences()
         {
             base.ResolveReferences();
             LongEventHandler.ExecuteWhenFinished(delegate
             {
-                this.smallTexture = ContentFinder<Texture2D>.Get(this.smallTexturePath, true);
-                this.texture = ContentFinder<Texture2D>.Get(this.texturePath, true);
-                this.worshipBarTexture = ContentFinder<Texture2D>.Get(this.worshipBarPath, true);
-                this.prayerMote = ContentFinder<Texture2D>.Get(this.prayerIconPath, true);
-                this.worshipBarFillTexture = SolidColorMaterials.NewSolidColorTexture(this.mainColor);
-                this.buttonTex = ContentFinder<Texture2D>.Get(this.buttonPath, true);
+                this.SmallTexture = ContentFinder<Texture2D>.Get(this.smallTexturePath, true);
+                this.Texture = ContentFinder<Texture2D>.Get(this.texturePath, true);
+                this.WorshipBarTexture = ContentFinder<Texture2D>.Get(this.worshipBarPath, true);
+                this.PrayerMote = ContentFinder<Texture2D>.Get(this.prayerIconPath, true);
+                this.WorshipBarFillTexture = SolidColorMaterials.NewSolidColorTexture(this.mainColor);
+                this.ButtonTex = ContentFinder<Texture2D>.Get(this.buttonPath, true);
             });
         }
     }

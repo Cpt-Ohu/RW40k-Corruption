@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Verse;
 
@@ -11,7 +12,20 @@ namespace Corruption.Worship
 {
     public class BuildingAltar : Building
     {
-        public SermonTemplate CurrentActiveSermon;
+        private SermonTemplate _sermon;
+
+        public SermonTemplate CurrentActiveSermon
+        {
+            get { return _sermon; }
+            set
+            {
+                _sermon = value;
+            }
+        }
+
+        public CompShrine CompShrine => this.TryGetComp<CompShrine>();
+
+        public CompAffectedByFacilities CompAffectedByFacilities => this.TryGetComp<CompAffectedByFacilities>();
 
         public List<SermonTemplate> Templates = new List<SermonTemplate>();
 
@@ -19,7 +33,7 @@ namespace Corruption.Worship
 
         public string RoomName;
 
-        public Pawn preacher = null;
+        public Pawn Deacon = null;
 
         public Altar_RecordsTracker records = new Altar_RecordsTracker();
 
@@ -27,13 +41,17 @@ namespace Corruption.Worship
         {
             base.PostMake();
             this.Templates.AddRange(SermonUtility.StandardTemplates().ToList());
+            foreach (var template in this.Templates)
+            {
+                template.DedicatedTo = GlobalWorshipTracker.Current.PlayerPantheon.GodsListForReading.RandomElement();
+            }
         }
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
             if (!respawningAfterLoad)
             {
-                this.preacher = Map.mapPawns.FreeColonistsSpawned.RandomElement<Pawn>();
+                this.Deacon = Map.mapPawns.FreeColonistsSpawned.RandomElement<Pawn>();
             }
             RoomName = "Temple";
             TickManager f = Find.TickManager;
@@ -43,7 +61,7 @@ namespace Corruption.Worship
 
         }
 
-        public override void TickLong()
+        public override void Tick()
         {
             base.Tick();
             if (!this.Spawned)
@@ -51,31 +69,71 @@ namespace Corruption.Worship
                 return;
             }
 
-            if (this.CurrentActiveSermon == null)
+            if (this.IsHashIntervalTick(600))
             {
                 float curHour = GenLocalDate.HourFloat(this.Map);
-                foreach (var template in this.Templates)
+                if ((int)curHour == 0)
                 {
-                    if (template.Active && (int)curHour == template.PreferredStartTime)
+                    foreach (var template in this.Templates)
                     {
-                        if (SermonUtility.ForceSermon(this, template.WorshipAct))
+                        template.HeldToday = false;
+                    }
+                }
+                if (this.CurrentActiveSermon == null)
+                {
+                    foreach (var template in this.Templates)
+                    {
+                        if (template.Active && !template.HeldToday && (int)curHour >= template.PreferredStartTime)
                         {
-                            this.CurrentActiveSermon = template;
-                            break;
+                            if (this.TryStartSermon(template))
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                this.CurrentActiveSermon = null;
+                            }
                         }
                     }
                 }
+                else
+                {
+                    if (this.CurrentActiveSermon.HeldToday && this.CurrentActiveSermon.PreferredStartTime > curHour + 3f)
+                    {
+                        this.EndSermon();
+                    }
+                }
             }
+        }
+
+        public void EndSermon()
+        {
+            if (this.CurrentActiveSermon != null)
+            {
+                this.CurrentActiveSermon.HeldToday = true;
+            }
+            this.CurrentActiveSermon = null;
+        }
+
+        public bool TryStartSermon(SermonTemplate template)
+        {
+            this.CurrentActiveSermon = template;
+            if (SermonUtility.ForceSermon(this, template.WorshipAct))
+            {
+                return true;
+            }
+            this.CurrentActiveSermon = null;
+            return false;
         }
 
         public override void ExposeData()
         {
             base.ExposeData();
 
-            Scribe_References.Look<Pawn>(ref this.preacher, "preacher", false);
+            Scribe_References.Look<Pawn>(ref this.Deacon, "preacher", false);
             Scribe_Deep.Look<Altar_RecordsTracker>(ref this.records, "records");
             Scribe_Values.Look<string>(ref this.RoomName, "RoomName", "Temple", false);
-            Scribe_Deep.Look<SermonTemplate>(ref this.CurrentActiveSermon, "CurrentActiveSermon");
+            Scribe_Deep.Look<SermonTemplate>(ref this._sermon, "CurrentActiveSermon");
             Scribe_Collections.Look<SermonTemplate>(ref this.Templates, "Templates", LookMode.Deep);
         }
     }

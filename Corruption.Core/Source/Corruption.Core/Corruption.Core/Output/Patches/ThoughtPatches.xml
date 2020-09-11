@@ -7,6 +7,7 @@
       <li>Nurgle_Fervor</li>
       <li>Slaanesh_Fervor</li>
       <li>Tzeentch_Fervor</li>
+      <!--<li  MayRequire="Ogliss.AdMech.Xenobiologis.Orkz">Ork</li>-->
     </value>
   </Operation>
   <Operation Class="PatchOperationAdd">
@@ -235,7 +236,6 @@
     </value>
   </Operation>
 
-
   <Operation Class="PatchOperationAdd">
     <xpath>*/ThoughtDef[defName="Sick"]</xpath>
     <value>
@@ -244,7 +244,6 @@
       </nullifyingTraits>
     </value>
   </Operation>
-
 
   <Operation Class="PatchOperationAdd">
     <xpath>*/ThoughtDef[defName="KilledHumanlikeBloodlust"]</xpath>

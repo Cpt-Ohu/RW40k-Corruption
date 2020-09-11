@@ -22,7 +22,7 @@ namespace Corruption.Worship.Wonders
             };
         }
 
-        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
+        protected override bool TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
             Pawn pawn = this.target.Thing as Pawn;
             if (pawn != null)
@@ -37,8 +37,22 @@ namespace Corruption.Worship.Wonders
                 }
 
                 Trait trait = new Trait(this.Def.traitToGive, 0, true);
+
+                var traitData = trait.CurrentData as Corruption.Core.Soul.SoulTraitDegreeOptions;
+
+                if (traitData != null)
+                {
+                    foreach (var ability in traitData.abilityUnlocks)
+                    {
+                        pawn.abilities.GainAbility(ability);
+                    }
+                }
+
+
                 pawn.story.traits.GainTrait(trait);
+                return true;
             }
+            return false;
         }
     }
 }

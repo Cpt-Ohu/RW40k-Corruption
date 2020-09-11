@@ -28,7 +28,7 @@ namespace Corruption.Core.Soul
         internal static void ThrowPrayerMote(Pawn pawn, GodDef god)
         {
             MoteBubble moteBubble2 = (MoteBubble)ThingMaker.MakeThing(ThingDefOf.Mote_Speech, null);
-            moteBubble2.SetupMoteBubble(god.prayerMote, pawn);
+            moteBubble2.SetupMoteBubble(god.PrayerMote, pawn);
             moteBubble2.Attach(pawn);
             GenSpawn.Spawn(moteBubble2, pawn.Position, pawn.Map);
         }

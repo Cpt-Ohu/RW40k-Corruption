@@ -1,77 +1,101 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <ThingDef ParentName="ArtableFurnitureBase">
-    <thingClass>Corruption.Worship.BuildingAltar</thingClass>
-    <tickerType>Normal</tickerType>
-    <defName>AltarEmperor</defName>
-    <label>Munitorum Altar</label>
-    <description>A small altar dedicated to the worship of the one true Emperor of mankind.</description>
+  <ThingDef ParentName="BuildingBase" Name="ChurchBenchLinkable">
+    <defName>ChurchBenchLinkable</defName>
+    <label>church bench</label>
+    <description>A bench designed to be placed at a place of worship.</description>
+    <thingClass>Building</thingClass>
+    <category>Building</category>
     <graphicData>
-      <texPath>Things/Altars/Altar_Emperor</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
-      <drawSize>(3.5,1.5)</drawSize>
-      <damageData>
-        <cornerTL>Damage/Corner</cornerTL>
-        <cornerTR>Damage/Corner</cornerTR>
-        <cornerBL>Damage/Corner</cornerBL>
-        <cornerBR>Damage/Corner</cornerBR>
-      </damageData>
+      <texPath>Things/Worship/Benches/Bench_Atlas</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <linkType>Basic</linkType>
+      <linkFlags>
+        <li>Custom2</li>
+      </linkFlags>
+      <color>(139,122,87)</color>
     </graphicData>
-    <minifiedDef>MinifiedThing</minifiedDef>
-    <staticSunShadowHeight>0.20</staticSunShadowHeight>
+    <uiIconPath>Things/Worship/Benches/Bench_MenuIcon</uiIconPath>
+    <uiIconScale>1.2</uiIconScale>
     <altitudeLayer>Building</altitudeLayer>
-    <socialPropernessMatters>true</socialPropernessMatters>
-    <fillPercent>0.65</fillPercent>
-    <inspectorTabs>
-      <li>Corruption.Worship.ITab_Altar</li>
-    </inspectorTabs>
+    <pathCost>30</pathCost>
+    <pathCostIgnoreRepeat>true</pathCostIgnoreRepeat>
+    <castEdgeShadows>true</castEdgeShadows>
+    <fillPercent>0.2</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
     <statBases>
-      <MaxHitPoints>350</MaxHitPoints>
-      <WorkToMake>16000</WorkToMake>
+      <MaxHitPoints>75</MaxHitPoints>
+      <WorkToBuild>450</WorkToBuild>
+      <Mass>3</Mass>
       <Flammability>1.0</Flammability>
-      <Beauty>10</Beauty>
-      <JoyGainFactor>1</JoyGainFactor>
-      <Mass>60</Mass>
+      <Beauty>0</Beauty>
+      <Comfort>0.5</Comfort>
     </statBases>
-    <size>(3,1)</size>
-    <hasInteractionCell>true</hasInteractionCell>
-    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <building>
+      <ai_chillDestination>false</ai_chillDestination>
+      <isInert>true</isInert>
+      <blueprintGraphicData>
+        <texPath>Things/Building/Linked/Barricade_Blueprint_Atlas</texPath>
+      </blueprintGraphicData>
+      <isSittable>true</isSittable>
+    </building>
+    <placingDraggableDimensions>1</placingDraggableDimensions>
+    <socialPropernessMatters>true</socialPropernessMatters>
     <stuffCategories>
       <li>Metallic</li>
       <li>Woody</li>
       <li>Stony</li>
     </stuffCategories>
-    <building>
-      <watchBuildingStandDistanceRange>
-        <min>1</min>
-        <max>5</max>
-      </watchBuildingStandDistanceRange>
-      <watchBuildingStandRectWidth>5</watchBuildingStandRectWidth>
-    </building>
-    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    <placeWorkers>
-      <li>PlaceWorker_WatchArea</li>
-      <li>PlaceWorker_NeverAdjacentUnstandable</li>
-    </placeWorkers>
-    <comps>
-      <li>
-        <compClass>CompQuality</compClass>
-      </li>
-    </comps>
-    <costStuffCount>80</costStuffCount>
-    <costList>
-      <Cloth>80</Cloth>
-      <EcclesiarchyIcon>1</EcclesiarchyIcon>
-    </costList>
-    <pathCost>70</pathCost>
-    <passability>PassThroughOnly</passability>
+    <costStuffCount>20</costStuffCount>
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+    <rotatable>false</rotatable>
+    <selectable>true</selectable>
+    <neverMultiSelect>true</neverMultiSelect>
+    <useStuffTerrainAffordance>true</useStuffTerrainAffordance>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <!-- Best affordance needed for stone -->
     <designationCategory>Worship</designationCategory>
+    <staticSunShadowHeight>0.20</staticSunShadowHeight>
+    <designationHotKey>Misc1</designationHotKey>
   </ThingDef>
 
+  <ThingDef ParentName="ChurchBenchLinkable">
+    <defName>ChurchBenchFineLinkable</defName>
+    <label>fine church bench</label>
+    <description>A bench designed to be placed at a place of worship. A cloth layer adds more comfort.</description>
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <graphicData>
+      <texPath>Things/Worship/Benches/BenchFine_Atlas</texPath>
+      <shaderType>CutoutComplex</shaderType>
+      <colorTwo>(143,20,20)</colorTwo>
+    </graphicData>
+    <uiIconPath>Things/Worship/Benches/BenchFine_MenuIcon</uiIconPath>
+    <fillPercent>0.2</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <MaxHitPoints>75</MaxHitPoints>
+      <WorkToBuild>450</WorkToBuild>
+      <Mass>3</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>3</Beauty>
+      <Comfort>0.8</Comfort>
+    </statBases>
+    <costList>
+      <Cloth>5</Cloth>
+    </costList>
+    <designationHotKey>Misc2</designationHotKey>
+  </ThingDef>
 
-  <ThingDef ParentName="ArtableFurnitureBase">
+  <ThingDef ParentName="ArtableFurnitureBase" Abstract ="true" Name="AltarBase">
+    <building>
+      <watchBuildingInSameRoom>true</watchBuildingInSameRoom>
+      <joyKind>Worship</joyKind>
+    </building>
+  </ThingDef>
+
+  <ThingDef ParentName="AltarBase">
     <thingClass>Corruption.Worship.BuildingAltar</thingClass>
     <tickerType>Normal</tickerType>
     <defName>AltarSimple</defName>
@@ -113,26 +137,12 @@
       <li>Woody</li>
       <li>Stony</li>
     </stuffCategories>
-    <building>
-      <watchBuildingStandDistanceRange>
-        <min>1</min>
-        <max>5</max>
-      </watchBuildingStandDistanceRange>
-      <watchBuildingStandRectWidth>5</watchBuildingStandRectWidth>
-    </building>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    <placeWorkers>
-      <li>PlaceWorker_WatchArea</li>
-      <li>PlaceWorker_NeverAdjacentUnstandable</li>
-    </placeWorkers>
     <comps>
-      <li>
-        <compClass>CompQuality</compClass>
-      </li>
-      <li Class="Corruption.Worship.CompProperties_Altar">
-        <compClass>Corruption.Worship.CompAltar</compClass>
+      <li Class="Corruption.Worship.CompProperties_Shrine">
+        <compClass>Corruption.Worship.CompShrine</compClass>
         <requiresEffigy>true</requiresEffigy>
-        <WorshipRatePerTick>1</WorshipRatePerTick>
+        <worshipFactor>1</worshipFactor>
       </li>
     </comps>
     <costStuffCount>80</costStuffCount>
@@ -141,17 +151,19 @@
     <designationCategory>Worship</designationCategory>
   </ThingDef>
 
-  <ThingDef ParentName="ArtableFurnitureBase">
+
+
+  <ThingDef ParentName="AltarBase">
     <thingClass>Corruption.Worship.BuildingAltar</thingClass>
     <tickerType>Normal</tickerType>
-    <defName>AltarNormal</defName>
-    <label>Altar</label>
-    <description>A proper altar for acts of worship.</description>
+    <defName>AltarIntricate</defName>
+    <label>Intricate Altar</label>
+    <description>A beautiful table that may be used as an altar.</description>
     <graphicData>
-      <texPath>Things/Altars/Altar_Simple</texPath>
+      <texPath>Things/Altars/Altar_Intricate</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
-      <drawSize>(3.5,1.5)</drawSize>
+      <shaderType>Cutout</shaderType>
+      <drawSize>(3.5,3.0)</drawSize>
       <damageData>
         <cornerTL>Damage/Corner</cornerTL>
         <cornerTR>Damage/Corner</cornerTR>
@@ -169,11 +181,11 @@
     </inspectorTabs>
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>
-      <WorkToMake>10000</WorkToMake>
+      <WorkToMake>15000</WorkToMake>
       <Flammability>1.0</Flammability>
-      <Beauty>5</Beauty>
+      <Beauty>8</Beauty>
       <JoyGainFactor>1</JoyGainFactor>
-      <Mass>60</Mass>
+      <Mass>40</Mass>
     </statBases>
     <size>(3,1)</size>
     <hasInteractionCell>true</hasInteractionCell>
@@ -183,159 +195,15 @@
       <li>Woody</li>
       <li>Stony</li>
     </stuffCategories>
-    <building>
-      <watchBuildingStandDistanceRange>
-        <min>1</min>
-        <max>5</max>
-      </watchBuildingStandDistanceRange>
-      <watchBuildingStandRectWidth>5</watchBuildingStandRectWidth>
-    </building>
-    <placeWorkers>
-      <li>PlaceWorker_WatchArea</li>
-      <li>PlaceWorker_NeverAdjacentUnstandable</li>
-    </placeWorkers>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <comps>
-      <li>
-        <compClass>CompQuality</compClass>
-      </li>
-      <li Class="Corruption.Worship.CompProperties_Altar">
-        <compClass>Corruption.Worship.CompAltar</compClass>
+      <li Class="Corruption.Worship.CompProperties_Shrine">
+        <compClass>Corruption.Worship.CompShrine</compClass>
         <requiresEffigy>true</requiresEffigy>
-        <WorshipRatePerTick>1</WorshipRatePerTick>
+        <worshipFactor>1</worshipFactor>
       </li>
     </comps>
-    <costStuffCount>80</costStuffCount>
-    <costList>
-      <Cloth>30</Cloth>
-    </costList>
-    <pathCost>70</pathCost>
-    <passability>PassThroughOnly</passability>
-    <designationCategory>Worship</designationCategory>
-  </ThingDef>
-
-  <ThingDef ParentName="ArtableFurnitureBase">
-    <thingClass>Corruption.Worship.BuildingAltar</thingClass>
-    <tickerType>Normal</tickerType>
-    <defName>AltarHeretic</defName>
-    <label>Dark Altar</label>
-    <description>An altar dedicated to the ruinous powers.</description>
-    <graphicData>
-      <texPath>Things/Altars/Altar_Chaos</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
-      <drawSize>(3.5,1.5)</drawSize>
-      <damageData>
-        <cornerTL>Damage/Corner</cornerTL>
-        <cornerTR>Damage/Corner</cornerTR>
-        <cornerBL>Damage/Corner</cornerBL>
-        <cornerBR>Damage/Corner</cornerBR>
-      </damageData>
-    </graphicData>
-    <minifiedDef>MinifiedThing</minifiedDef>
-    <staticSunShadowHeight>0.20</staticSunShadowHeight>
-    <altitudeLayer>Building</altitudeLayer>
-    <socialPropernessMatters>true</socialPropernessMatters>
-    <fillPercent>0.65</fillPercent>
-    <inspectorTabs>
-      <li>Corruption.Worship.ITab_Altar</li>
-    </inspectorTabs>
-    <statBases>
-      <MaxHitPoints>350</MaxHitPoints>
-      <WorkToMake>16000</WorkToMake>
-      <Flammability>1.0</Flammability>
-      <Beauty>5</Beauty>
-      <JoyGainFactor>1</JoyGainFactor>
-      <Mass>60</Mass>
-    </statBases>
-    <size>(3,1)</size>
-    <hasInteractionCell>true</hasInteractionCell>
-    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
-    <stuffCategories>
-      <li>Metallic</li>
-      <li>Woody</li>
-      <li>Stony</li>
-    </stuffCategories>
-    <building>
-      <watchBuildingStandDistanceRange>
-        <min>1</min>
-        <max>5</max>
-      </watchBuildingStandDistanceRange>
-      <watchBuildingStandRectWidth>5</watchBuildingStandRectWidth>
-    </building>
-    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    <placeWorkers>
-      <li>PlaceWorker_WatchArea</li>
-      <li>PlaceWorker_NeverAdjacentUnstandable</li>
-    </placeWorkers>
-    <comps>
-      <li>
-        <compClass>CompQuality</compClass>
-      </li>
-    </comps>
-    <costStuffCount>80</costStuffCount>
-    <costList>
-      <Cloth>30</Cloth>
-      <HumanSkull>5</HumanSkull>
-      <HumanBones>50</HumanBones>
-    </costList>
-    <pathCost>70</pathCost>
-    <passability>PassThroughOnly</passability>
-    <designationCategory>Worship</designationCategory>
-  </ThingDef>
-
-  <ThingDef ParentName="ArtableFurnitureBase">
-    <thingClass>Building</thingClass>
-    <defName>ShrineEmperor</defName>
-    <label>Small Shrine (Emperor)</label>
-    <description>A small shrine dedicated to the worship of the one true Emperor of mankind.</description>
-    <graphicData>
-      <texPath>Things/Altars/ShrineEmperor</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
-      <drawSize>(1,1)</drawSize>
-      <damageData>
-        <cornerTL>Damage/Corner</cornerTL>
-        <cornerTR>Damage/Corner</cornerTR>
-        <cornerBL>Damage/Corner</cornerBL>
-        <cornerBR>Damage/Corner</cornerBR>
-      </damageData>
-    </graphicData>
-    <minifiedDef>MinifiedThing</minifiedDef>
-    <staticSunShadowHeight>0.20</staticSunShadowHeight>
-    <altitudeLayer>Building</altitudeLayer>
-    <socialPropernessMatters>true</socialPropernessMatters>
-    <fillPercent>0.65</fillPercent>
-    <statBases>
-      <MaxHitPoints>350</MaxHitPoints>
-      <WorkToMake>100</WorkToMake>
-      <Flammability>1.0</Flammability>
-      <Beauty>10</Beauty>
-      <JoyGainFactor>1</JoyGainFactor>
-      <Mass>30</Mass>
-    </statBases>
-    <size>(1,1)</size>
-    <hasInteractionCell>true</hasInteractionCell>
-    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
-    <stuffCategories>
-      <li>Metallic</li>
-      <li>Woody</li>
-      <li>Stony</li>
-    </stuffCategories>
-    <comps>
-      <li>
-        <compClass>CompQuality</compClass>
-      </li>
-      <li Class="Corruption.Worship.CompProperties_Altar">
-        <compClass>Corruption.Worship.CompAltar</compClass>
-        <requiresEffigy>false</requiresEffigy>
-        <WorshipRatePerTick>1</WorshipRatePerTick>
-      </li>
-    </comps>
-    <costStuffCount>50</costStuffCount>
-    <costList>
-      <Effigy_Emperor>1</Effigy_Emperor>
-    </costList>
+    <costStuffCount>150</costStuffCount>
     <pathCost>70</pathCost>
     <passability>PassThroughOnly</passability>
     <designationCategory>Worship</designationCategory>
@@ -374,11 +242,6 @@
       <li>Woody</li>
       <li>Stony</li>
     </stuffCategories>
-    <comps>
-      <li>
-        <compClass>CompQuality</compClass>
-      </li>
-    </comps>
     <costStuffCount>20</costStuffCount>
     <costList>
       <HumanSkull>1</HumanSkull>
@@ -421,11 +284,6 @@
       <Mass>2</Mass>
     </statBases>
     <size>(1,1)</size>
-    <comps>
-      <li>
-        <compClass>CompQuality</compClass>
-      </li>
-    </comps>
     <costList>
       <HumanSkull>1</HumanSkull>
     </costList>
@@ -436,7 +294,7 @@
     <uiIconPath>Things/Skeletons/HumanSkull/HumanSkull_a</uiIconPath>
   </ThingDef>
 
-  <ThingDef ParentName="ArtableFurnitureBase">
+  <ThingDef ParentName="AltarBase">
     <thingClass>Building</thingClass>
     <defName>SmallShrine</defName>
     <label>Small Shrine</label>
@@ -453,6 +311,7 @@
         <cornerBR>Damage/Corner</cornerBR>
       </damageData>
     </graphicData>
+    <tickerType>Normal</tickerType>
     <minifiedDef>MinifiedThing</minifiedDef>
     <staticSunShadowHeight>0.20</staticSunShadowHeight>
     <altitudeLayer>Building</altitudeLayer>
@@ -475,14 +334,65 @@
       <li>Stony</li>
     </stuffCategories>
     <comps>
-      <li>
-        <compClass>CompQuality</compClass>
-      </li>
-      <li Class="Corruption.Worship.CompProperties_Altar">
-        <compClass>Corruption.Worship.CompAltar</compClass>
+      <li Class="Corruption.Worship.CompProperties_Shrine">
+        <compClass>Corruption.Worship.CompShrine</compClass>
         <requiresEffigy>true</requiresEffigy>
-        <WorshipRatePerTick>1</WorshipRatePerTick>
+        <worshipFactor>1</worshipFactor>
       </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>0.01</fuelConsumptionRate>
+        <fuelCapacity>5.0</fuelCapacity>
+        <fuelConsumptionPerTickInRain>0.0006</fuelConsumptionPerTickInRain>
+        <fuelFilter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </fuelFilter>
+        <initialFuelPercent>1</initialFuelPercent>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(252,187,113,0)</glowColor>
+      </li>
+      <li Class="Corruption.Worship.CompProperties_FireOverlayColorable">
+        <fireSize>0.2</fireSize>
+        <firePositions>
+          <li>
+            <rotation>North</rotation>
+            <offset>(-0.25,0,0.5)</offset>
+          </li>
+          <li>
+            <rotation>North</rotation>
+            <offset>(0.25,0,0.5)</offset>
+          </li>
+          <li>
+            <rotation>South</rotation>
+            <offset>(-0.25,0,0.0)</offset>
+          </li>
+          <li>
+            <rotation>South</rotation>
+            <offset>(0.25,0,0.0)</offset>
+          </li>
+          <li>
+            <rotation>East</rotation>
+            <offset>(0.35,0,0.30)</offset>
+          </li>
+          <li>
+            <rotation>East</rotation>
+            <offset>(0.35,0,0.0)</offset>
+          </li>
+          <li>
+            <rotation>West</rotation>
+            <offset>(-0.35,0,0.30)</offset>
+          </li>
+          <li>
+            <rotation>West</rotation>
+            <offset>(-0.35,0,0.0)</offset>
+          </li>
+        </firePositions>
+      </li>
+      <li Class="CompProperties_Flickable"/>
     </comps>
     <costStuffCount>50</costStuffCount>
     <pathCost>70</pathCost>
@@ -523,12 +433,16 @@
       <li>Stony</li>
     </stuffCategories>
     <costStuffCount>135</costStuffCount>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,1)</interactionCellOffset>
     <comps>
-      <li Class="Corruption.Worship.CompProperties_Altar">
-        <compClass>Corruption.Worship.CompAltar</compClass>
+      <li Class="Corruption.Worship.CompProperties_Shrine">
+        <compClass>Corruption.Worship.CompShrine</compClass>
         <requiresEffigy>false</requiresEffigy>
-        <dedicatedTo>Emperor</dedicatedTo>
-        <WorshipRatePerTick>0.7</WorshipRatePerTick>
+        <dedicatedTo>
+          <li>Emperor</li>
+        </dedicatedTo>
+        <worshipFactor>0.5</worshipFactor>
       </li>
       <li Class="Corruption.Core.Items.CompProperties_Empyreal">
         <compClass>Corruption.Core.Items.CompEmpyreal</compClass>
@@ -550,7 +464,7 @@
     <drawerType>RealtimeOnly</drawerType>
     <size>(1,1)</size>
     <minifiedDef>MinifiedThing</minifiedDef>
-    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <altitudeLayer>PawnUnused</altitudeLayer>
     <fillPercent>0.5</fillPercent>
     <rotatable>false</rotatable>
     <statBases>
@@ -565,12 +479,16 @@
       <li>Stony</li>
     </stuffCategories>
     <costStuffCount>135</costStuffCount>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
     <comps>
-      <li Class="Corruption.Worship.CompProperties_Altar">
-        <compClass>Corruption.Worship.CompAltar</compClass>
+      <li Class="Corruption.Worship.CompProperties_Shrine">
+        <compClass>Corruption.Worship.CompShrine</compClass>
         <requiresEffigy>false</requiresEffigy>
-        <dedicatedTo>Emperor</dedicatedTo>
-        <WorshipRatePerTick>0.7</WorshipRatePerTick>
+        <dedicatedTo>
+          <li>Emperor</li>
+        </dedicatedTo>
+        <worshipFactor>0.5</worshipFactor>
       </li>
       <li Class="Corruption.Core.Items.CompProperties_Empyreal">
         <compClass>Corruption.Core.Items.CompEmpyreal</compClass>
@@ -579,5 +497,336 @@
     </comps>
   </ThingDef>
 
+
+
+  <!--================================ Idol of Change ======================================-->
+
+
+  <ThingDef ParentName="AltarBase">
+    <defName>IdolOfChange</defName>
+    <label>idol of change</label>
+    <tickerType>Normal</tickerType>
+    <description>A sculpture of a giant floating eye, representing an otherworldly entity.</description>
+    <castEdgeShadows>true</castEdgeShadows>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Altars/IdolOfChange</texPath>
+      <drawSize>(1.5,1.5)</drawSize>
+    </graphicData>
+    <size>(1,1)</size>
+    <fillPercent>0.8</fillPercent>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Mass>7</Mass>
+      <Beauty>20</Beauty>
+      <WorkToMake>30000</WorkToMake>
+    </statBases>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>150</costStuffCount>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <placeWorkers>
+      <li>Corruption.Worship.PlaceWorker_RequiresChaos</li>
+    </placeWorkers>
+    <comps>
+      <li Class="Corruption.Worship.CompProperties_Shrine">
+        <compClass>Corruption.Worship.CompShrine</compClass>
+        <dedicatedTo>
+          <li>Tzeentch</li>
+        </dedicatedTo>
+        <requiresEffigy>false</requiresEffigy>
+        <worshipFactor>0.5</worshipFactor>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(49,185,255,0)</glowColor>
+      </li>
+      <li Class="Corruption.Worship.CompProperties_FireOverlayColorable">
+        <fireSize>1.0</fireSize>
+        <colorOption>Blue</colorOption>
+        <firePositions>
+          <li>
+            <rotation>North</rotation>
+            <offset>(0.0,0,0.5)</offset>
+          </li>
+        </firePositions>
+      </li>
+    </comps>
+    <inspectorTabs>
+      <li>Corruption.Worship.ITab_Altar</li>
+    </inspectorTabs>
+    <designationCategory>Worship</designationCategory>
+  </ThingDef>
+  <!--================================ Idol of Change ======================================-->
+
+
+  <ThingDef ParentName="AltarBase">
+    <thingClass>Corruption.Worship.BuildingAltar</thingClass>
+    <defName>MirrorOfPleasure</defName>
+    <label>mirror of pleasures</label>
+    <tickerType>Normal</tickerType>
+    <description>A mirror of unnatural beauty placed on a pedestal. The reflective surface shows a spectator visions of pleasure, desire and lust.</description>
+    <castEdgeShadows>true</castEdgeShadows>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Altars/MirrorOfLust</texPath>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(3.0,3.0)</drawSize>
+    </graphicData>
+    <size>(3,3)</size>
+    <fillPercent>0.8</fillPercent>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Mass>7</Mass>
+      <Beauty>50</Beauty>
+      <WorkToMake>30000</WorkToMake>
+    </statBases>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>150</costStuffCount>
+    <costList>
+      <Silver>50</Silver>
+    </costList>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <placeWorkers>
+      <li>Corruption.Worship.PlaceWorker_RequiresChaos</li>
+    </placeWorkers>
+    <comps>
+      <li Class="Corruption.Worship.CompProperties_Shrine">
+        <compClass>Corruption.Worship.CompShrine</compClass>
+        <dedicatedTo>
+          <li>Slaanesh</li>
+        </dedicatedTo>
+        <requiresEffigy>false</requiresEffigy>
+        <worshipFactor>0.1</worshipFactor>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(255,125,255,0)</glowColor>
+      </li>
+    </comps>
+    <designationCategory>Worship</designationCategory>
+    <inspectorTabs>
+      <li>Corruption.Worship.ITab_Altar</li>
+    </inspectorTabs>
+  </ThingDef>
+
+  <!--============================== Belltowers ==============================-->
+
+  <ThingDef Name="BelltowerBase" ParentName="BuildingBase" Abstract="True">
+    <designationCategory>Worship</designationCategory>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <tickerType>Normal</tickerType>
+    <fillPercent>1.00</fillPercent>
+    <stuffCategories>
+      <li>Stony</li>
+      <li>Woody</li>
+      <li>Metallic</li>
+    </stuffCategories>
+    <canOverlapZones>false</canOverlapZones>
+    <pathCost>50</pathCost>
+    <rotatable>false</rotatable>
+    <castEdgeShadows>True</castEdgeShadows>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Art">
+        <nameMaker>NamerArtFurniture</nameMaker>
+        <descriptionMaker>ArtDescription_Furniture</descriptionMaker>
+        <minQualityForArtistic>Awful</minQualityForArtistic>
+      </li>
+    </comps>
+    <inspectorTabs>
+      <li>ITab_Art</li>
+    </inspectorTabs>
+  </ThingDef>
+
+  <ThingDef ParentName="BelltowerBase">
+    <defName>BelltowerSmall</defName>
+    <label>small belltower</label>
+    <description>A simple tower with a bell at the top. May be rung for drawing crowds or signalling danger.</description>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>8000</WorkToBuild>
+      <Beauty>15</Beauty>
+      <MeditationFocusStrength>0.15</MeditationFocusStrength>
+    </statBases>
+    <costStuffCount>125</costStuffCount>
+    <uiIconScale>0.8</uiIconScale>
+    <uiIconOffset>(0, 0.04)</uiIconOffset>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Worship/Belltower/Belltower_small</texPath>
+      <drawSize>(4,4)</drawSize>
+      <drawOffset>(0,0,0.05)</drawOffset>
+      <shadowData>
+        <volume>(1.5, 0.6, 1.5)</volume>
+        <offset>(0, 0, -0.15)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.1,0.1,1.9,1.9)</rect>
+      </damageData>
+    </graphicData>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <comps>
+      <li Class="CompProperties_MeditationFocus">
+        <statDef>MeditationFocusStrength</statDef>
+        <focusTypes>
+          <li>Artistic</li>
+        </focusTypes>
+      </li>
+      <li Class="Corruption.Worship.CompProperties_BellTower">
+        <maxDistance>24</maxDistance>
+        <graphicData>
+           <graphicClass>Graphic_Single</graphicClass>
+           <texPath>Things/Worship/Belltower/Bell_small</texPath>
+           <drawSize>(1,1)</drawSize>
+           <drawOffset>(0,0,1.5)</drawOffset>
+        </graphicData>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="BelltowerBase">
+    <defName>BelltowerLarge</defName>
+    <label>large belltower</label>
+    <description>A large tower with a moderately sized bell.</description>
+    <size>(3,3)</size>
+    <statBases>
+      <MaxHitPoints>400</MaxHitPoints>
+      <WorkToBuild>16000</WorkToBuild>
+      <Beauty>30</Beauty>
+      <MeditationFocusStrength>0.18</MeditationFocusStrength>
+    </statBases>
+    <costStuffCount>250</costStuffCount>
+    <uiIconScale>0.7</uiIconScale>
+    <uiIconOffset>(0, 0.02)</uiIconOffset>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Worship/Belltower/Belltower_large</texPath>
+      <drawSize>(5,5)</drawSize>
+      <drawOffset>(0,0,0.25)</drawOffset>
+      <shadowData>
+        <volume>(2.2, 1, 2.2)</volume>
+        <offset>(0, 0, -0.1)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.1,0.1,2.9,2.9)</rect>
+      </damageData>
+    </graphicData>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-2)</interactionCellOffset>
+    <comps>
+      <li Class="CompProperties_MeditationFocus">
+        <statDef>MeditationFocusStrength</statDef>
+        <focusTypes>
+          <li>Artistic</li>
+        </focusTypes>
+      </li>
+      <li Class="Corruption.Worship.CompProperties_BellTower">
+        <maxDistance>24</maxDistance>
+        <graphicData>
+           <graphicClass>Graphic_Single</graphicClass>
+           <texPath>Things/Worship/Belltower/Bell_large</texPath>
+           <drawSize>(2,2)</drawSize>
+           <drawOffset>(0,0,0.0)</drawOffset>
+        </graphicData>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>ColumnOfBones</defName>
+    <label>column of bones</label>
+    <description>A column capable of holding a roof. Does not block sight or movement. Adorned with human bones.</description>
+    <designationCategory>Structure</designationCategory>
+    <altitudeLayer>Building</altitudeLayer>
+    <tickerType>Normal</tickerType>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.25</fillPercent>
+    <pathCost>0</pathCost>
+    <statBases>
+      <MaxHitPoints>160</MaxHitPoints>
+      <WorkToBuild>750</WorkToBuild>
+      <Mass>10</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>5</Beauty>
+    </statBases>
+    <costList>
+      <HumanSkull>1</HumanSkull>
+      <HumanBones>2</HumanBones>
+    </costList>    
+    <holdsRoof>true</holdsRoof>
+    <canOverlapZones>false</canOverlapZones>
+    <rotatable>false</rotatable>
+    <fertility>0</fertility>
+    <specialDisplayRadius>6.9</specialDisplayRadius>
+    <!-- must be kept in sync with roof hold-up radius -->
+    <building>
+      <isInert>true</isInert>
+      <ai_chillDestination>false</ai_chillDestination>
+    </building>
+    <graphicData>
+      <drawSize>(1.25,1.25)</drawSize>
+      <drawOffset>(0,0,0.2)</drawOffset>
+      <texPath>Things/Worship/BoneColumn/BoneColumn</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <shadowData>
+        <volume>(0.3, 0.5, 0.3)</volume>
+        <offset>(0,0,-0.23)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+    </graphicData>
+    <placeWorkers>
+      <li>Corruption.Worship.PlaceWorker_RequiresChaos</li>
+      <li>PlaceWorker_MeditationOffsetBuildingsNear</li>
+    </placeWorkers>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <comps>
+      <li Class="CompProperties_MeditationFocus">
+        <statDef>MeditationFocusStrength</statDef>
+        <focusTypes>
+          <li>Flame</li>
+        </focusTypes>
+        <offsets>
+          <li Class="FocusStrengthOffset_Lit">
+            <offset>0.1</offset>
+          </li>
+          <li Class="FocusStrengthOffset_BuildingDefsLit">
+            <defs>
+              <li>Campfire</li>
+              <li>TorchLamp</li>
+              <li MayRequire="Ludeon.RimWorld.Royalty">Brazier</li>
+            </defs>
+            <radius>9.9</radius>
+            <maxBuildings>8</maxBuildings>
+            <offsetPerBuilding>0.01</offsetPerBuilding>
+            <explanationKey>MeditationFocusPerFlame</explanationKey>
+            <explanationKeyAbstract>MeditationFocusPerFlameAbstract</explanationKeyAbstract>
+          </li>
+        </offsets>
+      </li>
+    </comps>
+  </ThingDef>
 
 </Defs>

@@ -25,26 +25,37 @@
     <wonderIconPath>UI/Wonders/WonderGiftMaterials</wonderIconPath>
     <favourCost>1000</favourCost>
     <incident>ResourcePodCrash</incident>
-    <incidentPoints>3000</incidentPoints>
+    <fixedIncidentPoints>3000</fixedIncidentPoints>
   </Corruption.Worship.Wonders.WonderDef>
 
 
   <Corruption.Worship.Wonders.WonderDef ParentName="EmperorWonder">
-    <defName>EmperorCleansePossession</defName>
-    <label>Cleansing Posession</label>
-    <description>Force a demon to leave the body of a believer.</description>
-    <workerClass>Corruption.Worship.Wonders.WonderWorker_CleansePossession</workerClass>
-    <wonderIconPath>UI/Wonders/WonderPilgrimage</wonderIconPath>
-    <favourCost>2000</favourCost>
+    <defName>EmperorCleanseCorruption</defName>
+    <label>Cleansing Corruption</label>
+    <description>The emperor pulls a soul back to his light, powerful enouhg to even force a demon to leave its victim.</description>
+    <workerClass>Corruption.Worship.Wonders.WonderWorker_CleanseCorruption</workerClass>
+    <wonderIconPath>UI/Wonders/WonderCleanseCorruption</wonderIconPath>
+    <favourCost>2500</favourCost>
   </Corruption.Worship.Wonders.WonderDef>
 
+  <Corruption.Worship.Wonders.WonderDef ParentName="EmperorWonder">
+    <defName>EmperorGiftFood</defName>
+    <label>Creatures of the Emperor</label>
+    <description>The emperor sends lifestock to his servants.</description>
+    <workerClass>Corruption.Worship.Wonders.WonderWorker_FireIncident</workerClass>
+    <wonderIconPath>UI/Wonders/WonderGiftAnimals</wonderIconPath>
+    <favourCost>3500</favourCost>
+    <incident>FarmAnimalsWanderIn</incident>
+  </Corruption.Worship.Wonders.WonderDef>
+  
+  
   <Corruption.Worship.Wonders.WonderDef ParentName="EmperorWonder">
     <defName>EmperorWandererJoin</defName>
     <workerClass>Corruption.Worship.Wonders.WonderWorker_FireIncident</workerClass>
     <label>Growing flock</label>
     <description>The Emperor calls in a loyal soul to offer a hand in building your colony.</description>
     <wonderIconPath>UI/Wonders/WonderGrowingFlock</wonderIconPath>
-    <favourCost>3000</favourCost>
+    <favourCost>4500</favourCost>
     <incident>GrowingFlock</incident>
     <pointsScalable>True</pointsScalable>
     <pointsCurve>
@@ -59,15 +70,6 @@
     </pointsCurve>
   </Corruption.Worship.Wonders.WonderDef>
 
-  <Corruption.Worship.Wonders.WonderDef ParentName="EmperorWonder">
-    <defName>EmperorGiftFood</defName>
-    <label>Creatures of the Emperor</label>
-    <description>The emperor sends lifestock to his servants.</description>
-    <workerClass>Corruption.Worship.Wonders.WonderWorker_FireIncident</workerClass>
-    <wonderIconPath>UI/Wonders/WonderGiftAnimals</wonderIconPath>
-    <favourCost>5000</favourCost>
-    <incident>FarmAnimalsWanderIn</incident>
-  </Corruption.Worship.Wonders.WonderDef>
 
   <Corruption.Worship.Wonders.WonderDef ParentName="EmperorWonder">
     <defName>EmperorHealAll</defName>

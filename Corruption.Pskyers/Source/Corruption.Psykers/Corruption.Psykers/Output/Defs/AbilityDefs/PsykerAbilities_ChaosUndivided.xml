@@ -26,7 +26,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Psykers.CompAbilityEffect_PsyProjectile</compClass>
+        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -85,8 +85,8 @@
 
   <!-- ========================= Doombolt Projectile ===================================== -->
 
-  <ThingDef ParentName="BaseBullet" Class="Corruption.Core.Items.ThingDef_LaserProjectile" Name="PSYWarpBoltBase">
-    <thingClass>Corruption.Core.Items.Projectile_Laser</thingClass>
+  <ThingDef ParentName="BaseBullet" Name="PSYWarpBoltBase">
+    <thingClass>Corruption.Core.Items.Projectile_Trail</thingClass>
     <defName>PSYWarpBolt</defName>
     <label>Warp Bolt</label>
     <graphicData>
@@ -100,16 +100,15 @@
       <speed>125</speed>
       <armorPenetrationBase>1.0</armorPenetrationBase>
     </projectile>
-    <preFiringInitialIntensity>0</preFiringInitialIntensity>
-    <preFiringFinalIntensity>2</preFiringFinalIntensity>
-    <postFiringInitialIntensity>2</postFiringInitialIntensity>
-    <postFiringFinalIntensity>0</postFiringFinalIntensity>
-    <preFiringDuration>2</preFiringDuration>
-    <postFiringDuration>63</postFiringDuration>
-    <StartFireChance>0.000</StartFireChance>
+    <comps>
+      <li Class="Corruption.Core.Items.CompProperties_ProjectileTrail">
+        <trailTexPath>Things/Projectiles/WarpBolt</trailTexPath>
+        <postImpactLifetime>10</postImpactLifetime>
+      </li>
+    </comps>
   </ThingDef>
 
-  <ThingDef ParentName="PSYWarpBoltBase"  Class="Corruption.Core.Items.ThingDef_LaserProjectile">
+  <ThingDef ParentName="PSYWarpBoltBase" >
     <defName>PSYWarpBolt_Medium</defName>
     <projectile>
       <damageAmountBase>20</damageAmountBase>
@@ -117,7 +116,7 @@
   </ThingDef>
 
 
-  <ThingDef ParentName="PSYWarpBoltBase"  Class="Corruption.Core.Items.ThingDef_LaserProjectile">
+  <ThingDef ParentName="PSYWarpBoltBase" >
     <defName>PSYWarpBolt_High</defName>
     <graphicData>
       <texPath>Things/Projectiles/WarpBolt</texPath>
@@ -127,36 +126,33 @@
     </projectile>
   </ThingDef>
 
-  <ThingDef ParentName="BaseBullet" Class="Corruption.Core.Items.ThingDef_LaserProjectile">
-    <thingClass>Corruption.Core.Items.Projectile_Smoking</thingClass>
+  <ThingDef ParentName="BaseBullet">
+    <thingClass>Corruption.Core.Items.Projectile_Trail</thingClass>
     <defName>PSYDoomBolt</defName>
     <label>Doom Bolt</label>
     <graphicData>
-      <texPath>Things/Projectiles/WarpBolt</texPath>
+      <texPath>Things/Projectiles/DoomBolt</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <projectile>
       <flyOverhead>false</flyOverhead>
-      <damageDef>Burn</damageDef>
+      <damageDef>BurningExplosion</damageDef>
       <armorPenetrationBase>2.0</armorPenetrationBase>
       <damageAmountBase>20</damageAmountBase>
       <speed>40</speed>
       <explosionRadius>2.0</explosionRadius>
     </projectile>
-    <preFiringInitialIntensity>0</preFiringInitialIntensity>
-    <preFiringFinalIntensity>2</preFiringFinalIntensity>
-    <postFiringInitialIntensity>2</postFiringInitialIntensity>
-    <postFiringFinalIntensity>0</postFiringFinalIntensity>
-    <preFiringDuration>2</preFiringDuration>
-    <postFiringDuration>60</postFiringDuration>
-    <StartFireChance>0.000</StartFireChance>
-    <causesExplosion>true</causesExplosion>
-    <smokeGraphicPath>Things/Projectiles/DoomBolt_Shadow</smokeGraphicPath>
+    <comps>
+      <li Class="Corruption.Core.Items.CompProperties_ProjectileTrail">
+        <trailTexPath>Things/Projectiles/DoomBolt_Shadow</trailTexPath>
+        <postImpactLifetime>10</postImpactLifetime>
+      </li>
+    </comps>
   </ThingDef>
 
 
   <!-- ========================= Gift Of Chaos ===================================== -->
-  
+
   <AbilityDef ParentName="PsykerAbilityBase">
     <defName>GiftOfChaosI</defName>
     <label>gift of chaos</label>
@@ -341,7 +337,7 @@
       </li>
     </comps>
   </AbilityDef>
-  
+
   <AbilityDef ParentName="PsykerAbilityBase">
     <defName>MassMutation</defName>
     <label>mass mutation</label>

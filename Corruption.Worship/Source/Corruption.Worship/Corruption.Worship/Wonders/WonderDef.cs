@@ -35,7 +35,7 @@ namespace Corruption.Worship.Wonders
 
         public MentalStateDef mentalStateToStart;
 
-        public int incidentPoints;
+        public int fixedIncidentPoints;
 
         public string wonderIconPath;
 
@@ -46,6 +46,8 @@ namespace Corruption.Worship.Wonders
         public SimpleCurve pointsCurve;
 
         public int favourCost;
+
+        public int yieldFavour = 0;
         
         public override void ResolveReferences()
         {
@@ -60,6 +62,7 @@ namespace Corruption.Worship.Wonders
 
         private WonderWorker workerInt;
         public bool spawnForPlayerFaction;
+        internal IntRange effectDurationRange = IntRange.one;
 
         public WonderWorker Worker
         {
@@ -69,17 +72,21 @@ namespace Corruption.Worship.Wonders
             }
         }
 
-        public int ResolveWonderPoints(int worshipPoints)
+        public int ResolveWonderPoints(IIncidentTarget target, int worshipPoints)
         {
-            if (this.pointsScalable)
+            if (this.pointsScalable && this.pointsCurve != null)
             {
 
                 int result = (int)this.pointsCurve.Evaluate(worshipPoints);
                 return result;
             }
+            else if (this.pointsScalable && this.fixedIncidentPoints < 1f)
+            {
+                return (int)(StorytellerUtility.DefaultThreatPointsNow(target));
+            }
             else
             {
-                return this.incidentPoints;
+                return this.fixedIncidentPoints;
             }
         }
 

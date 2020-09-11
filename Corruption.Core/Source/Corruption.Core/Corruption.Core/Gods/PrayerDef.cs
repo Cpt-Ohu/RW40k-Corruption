@@ -19,6 +19,8 @@ namespace Corruption.Core.Gods
         public int ticksPerLine = 180;
 
         public GodDef dedicatedTo;
+
+        public bool allowIfDrafted = false;
     
     }
 }

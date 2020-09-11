@@ -12,4 +12,18 @@
     <baseChance>0.000000001</baseChance>
     <pointsScaleable>true</pointsScaleable>
   </IncidentDef>
+
+  <IncidentDef>
+    <defName>OrkGrowingWaagh</defName>
+    <label>Growing Waaagh</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+      <li>Caravan</li>
+    </targetTags>
+    <workerClass>Corruption.Worship.Wonders.IncidentWorker_GrowingWaaagh</workerClass>
+    <category>Misc</category>
+    <baseChance>0.000000001</baseChance>
+    <pointsScaleable>true</pointsScaleable>
+  </IncidentDef>
+
 </Defs>

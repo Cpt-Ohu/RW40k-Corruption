@@ -21,10 +21,10 @@ namespace Corruption.Worship.Wonders
             };
         }
 
-        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
+        protected override bool TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
             Pawn pawn = (Pawn)this.target.Thing;
-            pawn.mindState.mentalStateHandler.TryStartMentalState(this.Def.mentalStateToStart, null, true);
+            return pawn.mindState.mentalStateHandler.TryStartMentalState(this.Def.mentalStateToStart, null, true);
         }
     }
 }

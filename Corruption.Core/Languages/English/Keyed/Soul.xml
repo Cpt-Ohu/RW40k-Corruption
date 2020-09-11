@@ -7,6 +7,10 @@
   <SoulSettings>Soul Settings</SoulSettings>
 
   <SoulSettingsDesc>Select races which should have a soul and default pantheon. Humans always have a soul and default to the Imperial Cult.</SoulSettingsDesc>
+  <StartingCorruption>Starting Corruption</StartingCorruption>
+  <CorruptionGainFactor>Corruption Gain Factor</CorruptionGainFactor>
+  <PossessionGainFactor>Possession Gain Factor</PossessionGainFactor>
+  <WorshipGainFactor>Favour Gain Factor</WorshipGainFactor>
   
   <WorshipStandingUnknown>Unknown</WorshipStandingUnknown>
   <WorshipStandingNoticed>Noticed</WorshipStandingNoticed>
@@ -30,4 +34,7 @@
   <PossessionSurvivedDesc>{0} has survived daemonic possession and has become an Exorcised.</PossessionSurvivedDesc>
   <PossessionDied>Killed in Exorcism</PossessionDied>
   <PossessionDied>{0} has been killed while being exorcised.</PossessionDied>
+
+  <CorruptionGainFactor>Corruption Gain Factor</CorruptionGainFactor>
+
 </LanguageData>

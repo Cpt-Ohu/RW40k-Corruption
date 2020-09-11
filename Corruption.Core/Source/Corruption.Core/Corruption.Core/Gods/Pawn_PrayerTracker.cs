@@ -24,6 +24,8 @@ namespace Corruption.Core.Gods
         public bool ShowPrayer = true;
         public bool AllowPraying = true;
 
+        public GodDef PreferredGod;
+
         public PrayerDef lastPrayer;
         public int Cooldown => cooldownTicks;
         public float CooldownPercentage => 1f - ((float)this.Cooldown / (float)COOLDOWN_TICKS);
@@ -87,6 +89,7 @@ namespace Corruption.Core.Gods
 
         public void StartPrayer(PrayerDef prayerDef, bool forced = false)
         {
+            LessonAutoActivator.TeachOpportunity(CoreConceptDefOf.Prayers, OpportunityType.GoodToKnow);
             if (forced || (this.AllowPraying && !this.isPraying && this.cooldownTicks == 0))
             {
                 this.currentLineIndex = 0;
@@ -95,17 +98,39 @@ namespace Corruption.Core.Gods
             }
         }
 
-        public void StartRandomPrayer(Job initializedJob = null, bool forced = false)
+        public void StartRandomPrayer(Job initializedJob = null, bool forced = false, WorkTags? forWorkTag = null)
         {
-            GodDef god = this.compSoul.Pawn.Soul()?.ChosenPantheon.GodsListForReading.RandomElementByWeight(x => 1f + this.compSoul.FavourTracker.FavourValueFor(x));
+            if (!this.AllowPraying || this.isPraying || this.cooldownTicks > 0)
+            {
+                return;
+            }
+            GodDef god = this.PreferredGod ?? this.compSoul.ChosenPantheon.GodsListForReading.RandomElementByWeight(x => 1f + this.compSoul.FavourTracker.FavourValueFor(x));
             if (god != null)
             {
-                PrayerDef prayerDef = DefDatabase<PrayerDef>.AllDefsListForReading.Where(x => x.dedicatedTo == god && (initializedJob != null || initializedJob.workGiverDef.workTags.HasFlag(x.preferredWorktags))).RandomElement();
-                if (prayerDef != null)
+                var potentialPrayers = DefDatabase<PrayerDef>.AllDefsListForReading.Where(x => x.dedicatedTo == god && ValidatePrayer(initializedJob, forWorkTag, x));
+                if (potentialPrayers.Count() > 0)
                 {
-                    this.StartPrayer(prayerDef, forced);
+                    PrayerDef prayerDef = potentialPrayers.RandomElement();
+                    if (prayerDef != null)
+                    {
+                        this.StartPrayer(prayerDef, forced);
+                    }
                 }
             }
+        }
+
+
+        private bool ValidatePrayer(Job initializedJob, WorkTags? forWorkTag, PrayerDef x)
+        {
+            if (forWorkTag != null)
+            {
+                return forWorkTag.Value.HasFlag(x.preferredWorktags);
+            }
+            if (initializedJob != null && initializedJob.workGiverDef != null)
+            {
+                return initializedJob.workGiverDef.workTags.HasFlag(x.preferredWorktags) || initializedJob.workGiverDef.workType.workTags.HasFlag(x.preferredWorktags);
+            }
+            return false;
         }
 
         public void ExposeData()

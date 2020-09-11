@@ -20,20 +20,21 @@ namespace Corruption.Worship.Wonders
             };
         }
 
-        protected override void TryDoEffectOnTarget(GodDef god, int worshipPoints)
+        protected override bool TryDoEffectOnTarget(GodDef god, int worshipPoints)
         {
             IncidentParms incidentParms = new IncidentParms();
             incidentParms.target = this.target.Map;
-            incidentParms.points = this.Def.ResolveWonderPoints(worshipPoints);
+            incidentParms.points = this.Def.ResolveWonderPoints(target.Map, worshipPoints);
             if (!this.Def.incident.Worker.CanFireNow(incidentParms))
             {
-                GlobalWorshipTracker.Current.TryAddFavor(god, worshipPoints);
-                return;
+                return GlobalWorshipTracker.Current.TryAddFavor(god, worshipPoints);
+
             }
             if (this.Def.incident.Worker.TryExecute(incidentParms) == false)
             {
-                GlobalWorshipTracker.Current.TryAddFavor(god, worshipPoints);
+                return GlobalWorshipTracker.Current.TryAddFavor(god, worshipPoints);
             }
+            return false;
 
         }
     }

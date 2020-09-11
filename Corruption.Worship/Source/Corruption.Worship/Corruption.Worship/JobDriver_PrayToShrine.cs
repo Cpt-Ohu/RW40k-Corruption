@@ -16,12 +16,18 @@ namespace Corruption.Worship
         {
             get
             {
-                if (this.TargetB.HasThing)
+                if (this.TargetB != LocalTargetInfo.Invalid && this.TargetB.HasThing)
                 {
                     return this.TargetB.Thing.TryGetComp<CompShrine>();
                 }
                 return null;
             }
+        }
+
+        public override bool TryMakePreToilReservations(bool errorOnFailed)
+        {
+
+            return base.TryMakePreToilReservations(errorOnFailed) && (this.TargetB.HasThing == false || pawn.CanReserveAndReach(this.TargetB, PathEndMode.ClosestTouch, Danger.None, 1));
         }
 
         protected override IEnumerable<Toil> MakeNewToils()
@@ -51,7 +57,7 @@ namespace Corruption.Worship
         {
             if (soul != null)
             {
-                float num = 100f + (CompShrine?.CompProps.worshipFactor * lastToil.defaultDuration / 3600f) ?? 0f;
+                float num = 100f + (CompShrine?.Props.worshipFactor * lastToil.defaultDuration / 3600f) ?? 0f;
                 num *= targetedGod.favourCorruptionFactor;
                 soul.GainCorruption(num, targetedGod);
             }
