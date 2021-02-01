@@ -8,8 +8,8 @@
     <label>minor healing</label>
     <description>This being is slowly healing from an otherworldly power.</description>
     <comps>
-      <li Class="Corruption.Psykers.HediffCompProperties_Heal">
-        <compClass>Corruption.Psykers.HediffComp_Heal</compClass>
+      <li Class="Corruption.Core.HediffCompProperties_Heal">
+        <compClass>Corruption.Core.HediffComp_Heal</compClass>
       </li>
       <li Class="HediffCompProperties_Disappears">
         <disappearsAfterTicks>3600~3600</disappearsAfterTicks>
@@ -35,8 +35,8 @@
     <label>major healing</label>
     <description>This being is healing from an otherworldly power.</description>
     <comps>
-      <li Class="Corruption.Psykers.HediffCompProperties_Heal">
-        <compClass>Corruption.Psykers.HediffComp_Heal</compClass>
+      <li Class="Corruption.Core.HediffCompProperties_Heal">
+        <compClass>Corruption.Core.HediffComp_Heal</compClass>
         <healingPower>36</healingPower>
       </li>
       <li Class="HediffCompProperties_Disappears">

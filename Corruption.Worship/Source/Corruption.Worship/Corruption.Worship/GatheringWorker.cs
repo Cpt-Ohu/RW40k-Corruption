@@ -15,6 +15,8 @@ namespace Corruption.Worship
         protected override LordJob CreateLordJob(IntVec3 spot, Pawn organizer)
         {
             BuildingAltar altar = spot.GetFirstThing<BuildingAltar>(organizer.Map);
+
+
             return new LordJob_Sermon(altar, spot, organizer, def);
         }
 
@@ -37,16 +39,42 @@ namespace Corruption.Worship
             {
                 return false;
             }
-            LordJob lordJob = CreateLordJob(spot, organizer);
+            LordJob_Sermon lordJob = CreateLordJob(spot, organizer) as LordJob_Sermon;
             Lord lord = LordMaker.MakeNewLord(organizer.Faction, lordJob, organizer.Map, (!lordJob.OrganizerIsStartingPawn) ? null : new Pawn[1]
             {
             organizer
             });
+
             lord.AddBuilding(altar);
             if (altar.CurrentActiveSermon?.Assistant != null)
             {
                 lord.AddPawn(altar.CurrentActiveSermon.Assistant);
             }
+
+            //foreach (var allyLord in map.lordManager.lords.Where(x => x.LordJob is LordJob_VisitColony))
+            //{
+            //    var defendToil = allyLord.Graph.lordToils.FirstOrDefault(x => x is LordToil_DefendPoint);
+            //    if (defendToil != null)
+            //    {
+
+            //        //allyLord.Graph.AttachSubgraph(lord.Graph);
+
+            //        //Transition transitionIn = new Transition(defendToil, lord.Graph.StartingToil);
+            //        //transitionIn.AddTrigger(new Trigger_Memo("JoinSermon"));
+
+            //        //transitionIn.AddPreAction(new TransitionAction_Message("VisitorsJoinedSermon"));
+
+            //        //Transition transitionOut = new Transition(lord.Graph.lordToils.FirstOrDefault(x => x is LordToil_End), defendToil);
+            //        //transitionOut.AddTrigger(new Trigger_Custom(x => lordJob.Ending));
+            //        //transitionOut.AddPreAction(new TransitionAction_Message("VisitorsReturnToDuty"));
+
+            //        //allyLord.Graph.AddTransition(transitionIn, true);
+            //        //allyLord.Graph.AddTransition(transitionOut, true);
+            //        //allyLord.Graph.ErrorCheck();
+            //        //allyLord.ReceiveMemo("JoinSermon");
+            //    }
+            //}
+
 
             SendLetter(spot, organizer);
             return true;

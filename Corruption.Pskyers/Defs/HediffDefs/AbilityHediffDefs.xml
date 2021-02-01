@@ -122,8 +122,8 @@
       <li Class="Corruption.Core.HediffCompProperties_Mutate">
         <compClass>Corruption.Core.HediffComp_Mutate</compClass>
       </li>
-      <li Class="Corruption.Psykers.HediffCompProperties_Heal">
-        <compClass>Corruption.Psykers.HediffComp_Heal</compClass>
+      <li Class="Corruption.Core.HediffCompProperties_Heal">
+        <compClass>Corruption.Core.HediffComp_Heal</compClass>
         <healingPower>12</healingPower>
       </li>
       <li Class="HediffCompProperties_Disappears">

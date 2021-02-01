@@ -118,7 +118,7 @@ namespace Corruption.Worship
         public bool TryStartSermon(SermonTemplate template)
         {
             this.CurrentActiveSermon = template;
-            if (SermonUtility.ForceSermon(this, template.WorshipAct))
+            if (SermonUtility.ForceSermon(this, template))
             {
                 return true;
             }

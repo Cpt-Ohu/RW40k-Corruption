@@ -74,3 +74,4 @@ C:\Spiele\Steam\steamapps\common\RimWorld\Mods\Corruption.Core\Source\Corruption
 C:\Spiele\Steam\steamapps\common\RimWorld\Mods\Corruption.Core\Source\Corruption.Core\Corruption.Core\obj\Debug\Corruption.Core.csproj.CopyComplete
 C:\Spiele\Steam\steamapps\common\RimWorld\Mods\Corruption.Core\Source\Corruption.Core\Corruption.Core\obj\Debug\Corruption.Core.dll
 C:\Spiele\Steam\steamapps\common\RimWorld\Mods\Corruption.Core\Source\Corruption.Core\Corruption.Core\obj\Debug\Corruption.Core.pdb
+C:\Spiele\Steam\steamapps\common\RimWorld\Mods\Corruption.Core\Source\Corruption.Core\Corruption.Core\obj\Debug\Corruption.Core.csprojAssemblyReference.cache

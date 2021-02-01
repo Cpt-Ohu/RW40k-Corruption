@@ -15,6 +15,8 @@ namespace Corruption.Worship
     {
         public BuildingAltar altar;
 
+        public bool Ending;
+
         public LordJob_Sermon() { }
 
         public LordJob_Sermon(BuildingAltar altar, IntVec3 spot, Pawn organizer, GatheringDef gatheringDef) : base(spot, organizer, gatheringDef)
@@ -24,6 +26,7 @@ namespace Corruption.Worship
 
         protected override void ApplyOutcome(float progress)
         {
+            this.Ending = true;
             if (progress < 0.5f)
             {
                 Messages.Message("MessageSermonCancelled", MessageTypeDefOf.RejectInput, false);
@@ -38,7 +41,7 @@ namespace Corruption.Worship
                     ownedPawn.needs.mood.thoughts.memories.TryGainMemory(key, organizer);
                 }
             }
-            SermonUtility.HoldSermonTickCheckEnd(this.organizer, lord.ownedPawns.Count, altar.CurrentActiveSermon.DedicatedTo, altar);
+            SermonUtility.HoldSermonTickCheckEnd(this.organizer, lord.ownedPawns, altar.CurrentActiveSermon.DedicatedTo, this.altar);
         }
 
         public override StateGraph CreateGraph()
@@ -65,6 +68,7 @@ namespace Corruption.Worship
             {
                 ApplyOutcome((float)lord.ticksInToil / speechDuration);
             }));
+            transition2.AddTrigger(new Trigger_Memo("ForceEndSermon"));
             stateGraph.AddTransition(transition2);
             return stateGraph;
         }
@@ -121,6 +125,7 @@ namespace Corruption.Worship
         {
             base.ExposeData();
             Scribe_References.Look<BuildingAltar>(ref this.altar, "altar");
+            Scribe_Values.Look<bool>(ref this.Ending, "Ending");
         }
 
 

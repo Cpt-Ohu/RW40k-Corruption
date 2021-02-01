@@ -52,4 +52,6 @@
   <DefendedColonyReligionDesc>You have defended {0} against the Followers of {1}.</DefendedColonyReligionDesc>
   <ChaosUprising>Chaos Uprising</ChaosUprising>
   <CultistUprising>You have banished Chaos Cultists from your colony. They have drawn their weapons and try to take over your faction by force. </CultistUprising>
+  <PeacefulPantheonChange>Changed Pantheon</PeacefulPantheonChange>
+  <PeacefulPantheonChange>Your colony now worships {0}</PeacefulPantheonChange>
 </LanguageData>

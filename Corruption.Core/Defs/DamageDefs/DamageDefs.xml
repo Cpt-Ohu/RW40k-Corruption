@@ -24,7 +24,7 @@
     <canUseDeflectMetalEffect>false</canUseDeflectMetalEffect>
   </DamageDef>
 
-  <DamageDef Name="CutBase">
+  <DamageDef>
     <defName>CutNurgle</defName>
     <label>cut</label>
     <workerClass>DamageWorker_Cut</workerClass>

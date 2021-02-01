@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
+using Verse.AI.Group;
 
 namespace Corruption.Worship
 {
@@ -49,7 +50,7 @@ namespace Corruption.Worship
             float curY = 0f;
             foreach (var template in altar.Templates)
             {
-                curY = DrawSermonTemplate(altar,curY, viewRect.width, template);
+                curY = DrawSermonTemplate(altar, curY, viewRect.width, template);
             }
             Widgets.EndScrollView();
 
@@ -76,7 +77,7 @@ namespace Corruption.Worship
 
             Rect preacherButtonRect = new Rect(4f, preacherLabel.yMax + 4f, 200f, 35f);
 
-            if (Widgets.ButtonText(preacherButtonRect,sermon.Preacher?.LabelCap ?? "None".Translate()))
+            if (Widgets.ButtonText(preacherButtonRect, sermon.Preacher?.LabelCap ?? "None".Translate()))
             {
                 OpenPreacherSelectMenu(altar, sermon);
             }
@@ -117,9 +118,17 @@ namespace Corruption.Worship
 
             Rect activeRect = new Rect(4f, durationRect.yMax + 8f, width, Text.LineHeight);
             Widgets.CheckboxLabeled(activeRect, "SermonActive".Translate(), ref sermon.Active, false, null, null, true);
-            if (Prefs.DevMode)
+
+
+            Rect debugRect = new Rect(activeRect.xMax - 128f, activeRect.y, 128f, 25f);
+            if (altar.CurrentActiveSermon == sermon)
             {
-                Rect debugRect = new Rect(activeRect.xMax - 128f, activeRect.y, 128f, 25f);
+                Lord lord = altar.Map.lordManager.LordOf(altar);
+                lord.ReceiveMemo("ForceEndSermon");
+                altar.EndSermon();
+            }
+            else if (Prefs.DevMode)
+            {
                 if (Widgets.ButtonText(debugRect, "Debug: Force Start"))
                 {
                     altar.TryStartSermon(sermon);
@@ -136,15 +145,15 @@ namespace Corruption.Worship
 
             foreach (GodDef god in GlobalWorshipTracker.Current.PlayerPantheon.GodsListForReading.Where(x => x.acceptsPrayers && (altar.CompShrine.Props.dedicatedTo.NullOrEmpty() || altar.CompShrine.Props.dedicatedTo.Contains(x))))
             {
-                    string text1 = god.LabelCap;
+                string text1 = god.LabelCap;
 
-                    Action action;
-                    action = delegate
-                    {
-                        template.DedicatedTo = god;
-                    };
-                    list.Add(new FloatMenuOption(text1, action, MenuOptionPriority.Default, null, null, 0f, null));
-                
+                Action action;
+                action = delegate
+                {
+                    template.DedicatedTo = god;
+                };
+                list.Add(new FloatMenuOption(text1, action, MenuOptionPriority.Default, null, null, 0f, null));
+
             }
             Find.WindowStack.Add(new FloatMenu(list));
         }

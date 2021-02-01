@@ -57,9 +57,30 @@ namespace Corruption.Worship
         {
             if (soul != null)
             {
-                float num = 100f + (CompShrine?.Props.worshipFactor * lastToil.defaultDuration / 3600f) ?? 0f;
-                num *= targetedGod.favourCorruptionFactor;
-                soul.GainCorruption(num, targetedGod);
+                var shrine = this.CompShrine;
+                float num = 100f + lastToil.defaultDuration / 3600f;
+                if (shrine != null)
+                {
+                    num *= shrine.Props.worshipFactor;
+                    var effigy = shrine.InstalledEffigy?.TryGetComp<CompEffigy>();
+
+                    if (effigy != null)
+                    {
+                        foreach (var pantheonMember in effigy.Props.dedicatedPantheon.GodsListForReading)
+                        {
+                            soul.GainCorruption(num * pantheonMember.favourCorruptionFactor / effigy.Props.dedicatedPantheon.GodsListForReading.Count, pantheonMember);
+                        }
+
+                        if (effigy.Props.dedicatedTo != null)
+                        {
+                            soul.GainCorruption(num * effigy.Props.dedicatedTo.favourCorruptionFactor, effigy.Props.dedicatedTo);
+                        }
+                    }
+                }
+                else
+                {
+                    soul.GainCorruption(num * targetedGod.favourCorruptionFactor, targetedGod);
+                }
             }
         }
     }

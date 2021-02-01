@@ -11,6 +11,15 @@ namespace Corruption.Core
     {
         public Thing linkedTo;
 
+        public override void CompTick()
+        {
+            base.CompTick();
+            if (this.linkedTo == null || !this.linkedTo.Spawned)
+            {
+                this.parent.Destroy();
+            }
+        }
+
         public override void PostPreApplyDamage(DamageInfo dinfo, out bool absorbed)
         {
             this.linkedTo.TakeDamage(dinfo);

@@ -10,7 +10,7 @@ using Verse;
 
 namespace Corruption.Worship
 {
-    public class SermonTemplate : IExposable
+    public class SermonTemplate : Ritual
     {
         public string Name = "";
 
@@ -26,8 +26,6 @@ namespace Corruption.Worship
 
         private int preferredStartTime;
 
-        public WorshipActType WorshipAct;
-
         public int PreferredStartTime => preferredStartTime;
 
         public float Length;
@@ -38,7 +36,7 @@ namespace Corruption.Worship
 
         public float SermonDurationHours = 0.5f;
 
-        public SermonTemplate()
+        public SermonTemplate() : base(RitualDefOf.Sermon)
         {
         }
 
@@ -47,19 +45,18 @@ namespace Corruption.Worship
             this.preferredStartTime = Mathf.Clamp(value, AvailableRange.min, AvailableRange.max);
         }
 
-        public SermonTemplate(string name, Pawn preacher, bool active, int startTime, float length, WorshipActType worshipAct)
+        public SermonTemplate(string name, Pawn preacher, bool active, int startTime, float length, RitualDef def) : base(def)
         {
             this.Name = name;
             this.Preacher = preacher;
             Active = active;
             preferredStartTime = startTime;
             Length = length;
-            this.WorshipAct = worshipAct;
         }
 
-        public void ExposeData()
+        public override void ExposeData()
         {
-            Scribe_Values.Look<WorshipActType>(ref WorshipAct, "WorshipAct");
+            base.ExposeData();
             Scribe_Values.Look<int>(ref preferredStartTime, "preferredStartTime");
             Scribe_Values.Look<float>(ref Length, "Length");
             Scribe_Values.Look<bool>(ref Active, "Active");

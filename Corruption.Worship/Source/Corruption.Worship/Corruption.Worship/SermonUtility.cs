@@ -29,9 +29,9 @@ namespace Corruption.Worship
 
         public static IEnumerable<SermonTemplate> StandardTemplates()
         {
-            yield return new SermonTemplate("SermonOfDawn".Translate(), null, false, 6, 1f, WorshipActType.Prayer);
-            yield return new SermonTemplate("SermonOfNoon".Translate(), null, false, 12, 1f, WorshipActType.Prayer);
-            yield return new SermonTemplate("SermonOfDusk".Translate(), null, false, 19, 1f, WorshipActType.Prayer);
+            yield return new SermonTemplate("SermonOfDawn".Translate(), null, false, 6, 1f, RitualDefOf.Sermon);
+            yield return new SermonTemplate("SermonOfNoon".Translate(), null, false, 12, 1f, RitualDefOf.Sermon);
+            yield return new SermonTemplate("SermonOfDusk".Translate(), null, false, 19, 1f, RitualDefOf.Sermon);
         }
 
         public static List<Building> FreeChairsInRoom(Room room)
@@ -124,7 +124,7 @@ namespace Corruption.Worship
             }
         }
 
-        private static bool MovingSermon(Pawn pr)
+        public static bool MovingSermon(Pawn pr)
         {
             var f = pr.skills.GetSkill(SkillDefOf.Social).Level;
             int x = Rand.RangeInclusive(0, 35);
@@ -135,31 +135,9 @@ namespace Corruption.Worship
             return false;
         }
 
-        public static void HoldSermonTickCheckEnd(Pawn preacher, int listeners, GodDef god, BuildingAltar altar)
+        public static void HoldSermonTickCheckEnd(Pawn preacher, List<Pawn> listeners, GodDef god, BuildingAltar altar)
         {
-            var soul = preacher.Soul();
-            if (soul == null)
-            {
-                return;
-            }
-
-            float num = 0f;
-
-            num += listeners * 20f;
-
-
-            if (MovingSermon(preacher))
-            {
-                num += 150f;
-            }
-
-            num *= altar.CurrentActiveSermon.DedicatedTo.favourCorruptionFactor;
-            soul.GainCorruption(num);
-
-            altar.records.AddTo(WorshipRecordDefOf.SermonsHeldAltar, 1);
-            altar.records.AddTo(WorshipRecordDefOf.SermonAttendees, listeners);
-
-            altar.EndSermon();
+            altar.CurrentActiveSermon.Def.Worker.FinishRitual(preacher, altar, listeners);
         }
 
         public static bool ShouldAttendSermon(Pawn pawn, Pawn preacher)
@@ -276,7 +254,7 @@ namespace Corruption.Worship
             return false;
         }
 
-        public static bool ForceSermon(BuildingAltar altar, WorshipActType worshipActType)
+        public static bool ForceSermon(BuildingAltar altar, Ritual ritual)
         {
             return altar.Map.lordsStarter.TryStartGathering(GatheringDefOf.Sermon);
         }

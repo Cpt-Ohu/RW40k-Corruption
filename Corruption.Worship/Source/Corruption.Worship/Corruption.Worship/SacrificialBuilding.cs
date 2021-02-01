@@ -10,7 +10,7 @@ namespace Corruption.Worship
 {
     public class SacrificialBuilding : Building_Storage
     {
-
+        
     }
 
     public class CompSacrificialBuilding : ThingComp

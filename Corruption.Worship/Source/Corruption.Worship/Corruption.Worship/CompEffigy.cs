@@ -12,6 +12,8 @@ namespace Corruption.Worship
 {
     public class CompEffigy : ThingComp
     {
+        public CompProperties_Effigy Props => this.props as CompProperties_Effigy;
+
         public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn selPawn)
         {
             IEnumerator<FloatMenuOption> enumerator = base.CompFloatMenuOptions(selPawn).GetEnumerator();
@@ -49,5 +51,10 @@ namespace Corruption.Worship
         public PantheonDef dedicatedPantheon;
 
         public float worshipFactor = 1f;
+
+        public CompProperties_Effigy()
+        {
+            this.compClass = typeof(CompEffigy);
+        }
     }
 }

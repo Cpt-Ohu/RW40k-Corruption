@@ -754,13 +754,12 @@
   
   <HediffDef ParentName="ChaosMutationBody">
     <defName>ChaosMutationHornedHead</defName>
-    <label>chaos mutation</label>
+    <label>chaos mutation (horns)</label>
     <description>Chaos corrupts the flesh of living creatures. No one can predict what "gifts" they bestow, but the end is almost always dreadful.</description>
     <maxSeverity>2</maxSeverity>
     <stages>
       <li>
-        <label>itching</label>
-        
+        <label>itching</label>        
       </li>
       <li>
         <label>thorny forehead</label>
@@ -808,6 +807,7 @@
         </graphicData>
         <templateApparelDef>Apparel_FaceOverlay</templateApparelDef>
         <minSeverity>2</minSeverity>
+        <isRandomMultiGraphic>true</isRandomMultiGraphic>
       </li>
     </comps>
   </HediffDef>

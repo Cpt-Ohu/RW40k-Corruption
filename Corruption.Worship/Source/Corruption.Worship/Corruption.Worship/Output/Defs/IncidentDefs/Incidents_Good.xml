@@ -26,4 +26,17 @@
     <pointsScaleable>true</pointsScaleable>
   </IncidentDef>
 
+  <IncidentDef>
+    <defName>PilgrimGroup</defName>
+    <label>pilgrims</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>IncidentWorker_VisitorGroup</workerClass>
+    <category>FactionArrival</category>
+    <baseChance>4</baseChance>
+    <pointsScaleable>true</pointsScaleable>
+    <requireColonistsPresent>True</requireColonistsPresent>
+  </IncidentDef>
+
 </Defs>

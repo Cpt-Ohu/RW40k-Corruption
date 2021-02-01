@@ -10,6 +10,7 @@ namespace Corruption.Worship
     {
         None,
         Prayer,
+        Sermon,
         Confession,
         Conversion,
         Ritual

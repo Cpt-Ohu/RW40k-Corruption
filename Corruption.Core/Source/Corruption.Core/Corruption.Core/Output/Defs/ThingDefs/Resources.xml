@@ -48,7 +48,7 @@
   </ThingDef>
 
 
-  <ThingDef ParentName="ResourceBase">
+  <!--<ThingDef ParentName="ResourceBase">
     <defName>Armaplas</defName>
     <label>armaplas</label>
     <description>A heat absorbing plastic and metal composite.</description>
@@ -127,7 +127,7 @@
     </stuffProps>
     <smeltable>false</smeltable>
     <intricate>true</intricate>
-  </ThingDef>
+  </ThingDef-->>
 
 
   <ThingDef ParentName="ResourceBase">

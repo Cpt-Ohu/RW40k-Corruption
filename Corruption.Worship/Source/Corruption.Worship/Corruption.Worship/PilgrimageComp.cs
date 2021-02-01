@@ -9,12 +9,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using Verse;
 
 namespace Corruption.Worship
 {
+    [StaticConstructorOnStartup]
     public class PilgrimageComp : WorldObjectComp
     {
+        public static readonly Texture2D HomeIcon = ContentFinder<Texture2D>.Get("UI/Buttons/AutoHomeArea");
+
         public override void Initialize(WorldObjectCompProperties props)
         {
             base.Initialize(props);
@@ -78,7 +82,7 @@ namespace Corruption.Worship
 
         public override void CompTick()
         {
-
+            this.travelledTicks++;
             if (this.caravan.IsHashIntervalTick(GenDate.TicksPerDay))
             {
                 UpdatePilgrimageInventory();
@@ -101,7 +105,6 @@ namespace Corruption.Worship
 
         private void PilgrimageDecisionPoint()
         {
-
             if (this.travelledTicks >= ticksToTravel)
             {
                 this.ReturnHome();
@@ -183,6 +186,20 @@ namespace Corruption.Worship
                     soul.GainCorruption(god.favourCorruptionFactor * ticksToTravel / 1000f, god);
                 }
             }
+        }
+
+        public override IEnumerable<Gizmo> GetCaravanGizmos(Caravan caravan)
+        {
+            Command_Action command_Action = new Command_Action();
+            command_Action.icon = HomeIcon;
+            command_Action.defaultLabel = "Debug:ReturnHome".Translate();
+            command_Action.defaultDesc = "Debug:ReturnHome".Translate();
+            command_Action.action = delegate
+            {
+                this.ReturnHome();
+            };
+            yield return command_Action;
+
         }
 
         public override void PostExposeData()

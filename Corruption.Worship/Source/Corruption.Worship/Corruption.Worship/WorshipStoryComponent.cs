@@ -130,8 +130,16 @@ namespace Corruption.Worship
 
         private void TryStartRevolt(GlobalPantheonFollowers playerFollowers, GlobalPantheonFollowers rivalFollowers)
         {
-            var dialog = new Dialog_ReligiousRiot(playerFollowers, rivalFollowers);
-            Find.WindowStack.Add(dialog);
+            if (playerFollowers.AllPawns.Count == 0)
+            {
+                GlobalWorshipTracker.Current.PlayerPantheon = rivalFollowers.Pantheon;
+                Find.LetterStack.ReceiveLetter("PeacefulPantheonChange".Translate(), "PeacefulPantheonChangeDesc".Translate(rivalFollowers.Pantheon.LabelCap), LetterDefOf.NeutralEvent);
+            }
+            else
+            {
+                var dialog = new Dialog_ReligiousRiot(playerFollowers, rivalFollowers);
+                Find.WindowStack.Add(dialog);
+            }
         }
     }
 }

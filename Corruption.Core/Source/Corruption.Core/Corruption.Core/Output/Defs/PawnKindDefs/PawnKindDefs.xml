@@ -17,17 +17,8 @@
     <backstoryCryptosleepCommonality>0.01</backstoryCryptosleepCommonality>
     <invNutrition>2.55</invNutrition>
     <biocodeWeaponChance>0.1</biocodeWeaponChance>
-  </PawnKindDef>
+  </PawnKindDef>  
   
-  
-  <PawnKindDef Abstract="True" Name="BasePlayerPawnKind">
-    <race>Human</race>
-    <combatPower>30</combatPower>
-    <isFighter>false</isFighter>
-    <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
-    <forceNormalGearQuality>true</forceNormalGearQuality>
-  </PawnKindDef>
-
   <PawnKindDef ParentName="BasePlayerPawnKind">
     <defName>Colonist_IoM</defName>
     <label>colonist</label>

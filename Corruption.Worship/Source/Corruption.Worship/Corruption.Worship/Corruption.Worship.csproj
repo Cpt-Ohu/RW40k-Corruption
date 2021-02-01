@@ -292,6 +292,7 @@
     <Compile Include="Abilities\CompAbilityEffect_CleanseCorruption.cs" />
     <Compile Include="Altar_RecordsTracker.cs" />
     <Compile Include="BuildingAltar.cs" />
+    <Compile Include="BuildingSacrificialAltar.cs" />
     <Compile Include="Building_TurretGunInvisible.cs" />
     <Compile Include="Building_WorshipStatue.cs" />
     <Compile Include="CompAltar.cs" />
@@ -335,6 +336,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ritual.cs" />
     <Compile Include="RitualDef.cs" />
+    <Compile Include="RitualDefOf.cs" />
+    <Compile Include="RoomRoleDefOf.cs" />
     <Compile Include="RoomRoleWorker_Worship.cs" />
     <Compile Include="SacrificialBuilding.cs" />
     <Compile Include="ScenPart_StartingReligion.cs" />
@@ -403,6 +406,7 @@
     <Content Include="Output\Defs\MentalStateDefs\MentalStates.xml" />
     <Content Include="Output\Defs\RecipeDefs\Recipes.xml" />
     <Content Include="Output\Defs\RecordDefs\WorshipRecords.xml" />
+    <Content Include="Output\Defs\RitualDefs\Rituals.xml" />
     <Content Include="Output\Defs\RoomRoleDefs\RoomRoles.xml" />
     <Content Include="Output\Defs\ScenPartDefs\ScenParts.xml" />
     <Content Include="Output\Defs\SoundDefs\Sounds.xml" />

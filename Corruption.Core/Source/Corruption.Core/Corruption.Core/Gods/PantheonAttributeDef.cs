@@ -75,8 +75,6 @@ namespace Corruption.Core.Gods
 
     public class PantheonAttributeTickWorker_Cultist : PantheonAttributeTickWorker
     {
-        private PantheonAttributeDef Def;
-
         public override void TickDay()
         {
             foreach (var map in Find.Maps)
@@ -101,6 +99,4 @@ namespace Corruption.Core.Gods
             }
         }
     }
-
-
 }

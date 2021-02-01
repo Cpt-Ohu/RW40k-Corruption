@@ -56,17 +56,18 @@ namespace Corruption.Core
                 {
                     if (this.Props.isRandomMultiGraphic)
                     {
-                        List<Texture2D> list = (from x in ContentFinder<Texture2D>.GetAllInFolder(this.Props.graphicData.texPath)
+                        List<Texture2D> list = (from x in ContentFinder<Texture2D>.GetAllInFolder(this.Props.texPath)
                                                 where !x.name.EndsWith(Graphic_Single.MaskSuffix)
                                                 orderby x.name
                                                 select x).ToList();
                         if (list.Count > 0)
                         {
-                            path = path + "/" + list.RandomElement().name;
+                            var randomName = list.RandomElement().name;
+                            path = path + "/" + randomName + "/" + randomName;
                         }
                     }
                     this._graphic = GraphicDatabase.Get(this.Props.graphicData.graphicClass, path, this.Props.graphicData.shaderType.Shader, this.Props.graphicData.drawSize, this.ColorOne, this.ColorTwo);
-                    path = this._graphic.path;
+                    //path = this._graphic.path;
                 }
                 if (this.Props.useBodyTypes)
                 {

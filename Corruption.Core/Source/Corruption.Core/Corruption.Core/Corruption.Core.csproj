@@ -336,6 +336,7 @@
     <Compile Include="HediffComp_GainCorruption.cs" />
     <Compile Include="HediffComp_GiveTrait.cs" />
     <Compile Include="HediffComps_Nurgle.cs" />
+    <Compile Include="HediffComp_Heal.cs" />
     <Compile Include="HediffComp_MoteThrower.cs" />
     <Compile Include="HediffComp_Mutate.cs" />
     <Compile Include="HediffComp_ReplacePart.cs" />
@@ -454,6 +455,7 @@
     <Content Include="Output\Defs\Tutor\Concepts.xml" />
     <Content Include="Output\Languages\English\Keyed\Gods.xml" />
     <Content Include="Output\Languages\English\Keyed\Soul.xml" />
+    <Content Include="Output\Patches\AlienFactionPatches.xml" />
     <Content Include="Output\Patches\JobPatches.xml" />
     <Content Include="Output\Patches\ThoughtPatches.xml" />
   </ItemGroup>

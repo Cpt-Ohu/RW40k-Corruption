@@ -126,18 +126,10 @@ namespace Corruption.Core.Soul
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             base.PostSpawnSetup(respawningAfterLoad);
-            if (!this.soulInitialized && Pawn.RaceProps.Humanlike)
-            {
-                CorruptionPawnKindDef corruptionKind = this.Pawn.kindDef as CorruptionPawnKindDef;
-                if (corruptionKind != null && corruptionKind.affliction != null)
-                {
-                    foreach (var favour in corruptionKind.affliction.favorProgressTemplates)
-                    {
-                        this.TryAddFavorProgress(favour.god, favour.initialProgressRange.RandomInRange);
-                    }
 
-                    this.GainCorruption(corruptionKind.affliction.afflictionRange.RandomInRange);
-                }
+            if (this.Pawn.Faction != Faction.OfPlayer)
+            {
+                this.PrayerTracker.ShowPrayer = false;
             }
         }
 

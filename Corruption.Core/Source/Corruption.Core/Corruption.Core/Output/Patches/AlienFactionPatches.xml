@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Adeptus Mechanicus: Xenobiologis (Playable Eldar)</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationAttributeSet">
+          <xpath>*/FactionDef[defName="OG_Eldar_Craftworld_Faction"]</xpath>
+          <attribute>Class</attribute>
+          <value>FactionColors.FactionDefUniform</value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>*/FactionDef[defName="OG_Eldar_Craftworld_Faction"]</xpath>
+          <value>
+              <FactionColor1>RGBA(0.00,0.32,0.50,1)</FactionColor1>
+              <FactionColor2>RGBA(0.99,0.78,0.09,1)</FactionColor2>
+              <Subfactions>
+                <li>
+                  <SubfactionName>Alatoic</SubfactionName>
+                  <SubfactionLabel>Alatoic</SubfactionLabel>
+                  <SubfactionDescription>Eldar from Alatoic.</SubfactionDescription>
+                  <SubfactionColor1>(0.00,0.32,0.50,1)</SubfactionColor1>
+                  <SubfactionColor2>RGBA(0.99,0.78,0.09,1)</SubfactionColor2>
+                  <weight>10</weight>
+                </li>
+                <li>
+                  <SubfactionName>Biel-Tan</SubfactionName>
+                  <SubfactionLabel>Biel-Tan</SubfactionLabel>
+                  <SubfactionDescription>Eldar from Biel-Tan.</SubfactionDescription>
+                  <SubfactionColor1>(1.00,1.00,1.00,1)</SubfactionColor1>
+                  <SubfactionColor2>RGBA(0.0,0.6,0.2,1)</SubfactionColor2>
+                  <weight>10</weight>
+                </li>
+                <li>
+                  <SubfactionName>Ulthwe</SubfactionName>
+                  <SubfactionLabel>Ulthwe</SubfactionLabel>
+                  <SubfactionDescription>Eldar from Ulthwe.</SubfactionDescription>
+                  <SubfactionColor1>(0.16,0.16,0.16,1)</SubfactionColor1>
+                  <SubfactionColor2>RGBA(0.93,0.87,0.76,1)</SubfactionColor2>
+                  <weight>10</weight>
+                </li>
+                <li>
+                  <SubfactionName>Iyanden</SubfactionName>
+                  <SubfactionLabel>Iyanden</SubfactionLabel>
+                  <SubfactionDescription>Eldar from Iyanden.</SubfactionDescription>
+
+                  <SubfactionColor1>(0.99,0.83,0.01,1)</SubfactionColor1>
+                  <SubfactionColor2>RGBA(0.00,0.32,0.50,1)</SubfactionColor2>
+                  <weight>10</weight>
+                </li>
+                <li>
+                  <SubfactionName>Saim-Hann</SubfactionName>
+                  <SubfactionLabel>Saim-Hann</SubfactionLabel>
+                  <SubfactionDescription>Eldar from Saim-Hann.</SubfactionDescription>
+
+                  <SubfactionColor1>(0.7,0.00,0.00,1)</SubfactionColor1>
+                  <SubfactionColor2>RGBA(0.9,0.9,0.9,1)</SubfactionColor2>
+                  <weight>10</weight>
+                </li>
+              </Subfactions>
+          </value>
+        </li>
+
+
+        <!--Eldar Armors-->
+        <li Class="PatchOperationAdd">
+          <xpath>*/ThingDef[defName="OGE_Apparel_MeshArmour"]</xpath>
+          <value>
+            <thingClass>FactionColors.ApparelUniform</thingClass>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>*/ThingDef[defName="OGE_Apparel_MeshArmour"]/comps</xpath>
+          <value>
+            <li Class="FactionColors.CompProperties_FactionColor">
+              <compClass>FactionColors.CompFactionColor</compClass>
+            </li>
+          </value>
+        </li>
+        
+        <li Class="PatchOperationAdd">
+          <xpath>*/ThingDef[defName="OGE_Apparel_MeshArmourHelmet"]</xpath>
+          <value>
+            <thingClass>FactionColors.ApparelUniform</thingClass>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>*/ThingDef[defName="OGE_Apparel_MeshArmourHelmet"]/comps</xpath>
+          <value>
+            <li Class="FactionColors.CompProperties_FactionColor">
+              <compClass>FactionColors.CompFactionColor</compClass>
+            </li>
+          </value>
+        </li>
+
+        
+
+        <!--<li Class="PatchOperationAdd">
+          <xpath>*/ThingDef[defName="OGE_Apparel_RuneArmourWarlock"]</xpath>
+          <value>
+            <thingClass>FactionColors.ApparelUniform</thingClass>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>*/ThingDef[defName="OGE_Apparel_RuneArmourWarlock"]/comps</xpath>
+          <value>
+            <li Class="FactionColors.CompProperties_FactionColor">
+              <compClass>FactionColors.CompFactionColor</compClass>
+            </li>
+          </value>
+        </li>
+
+        <li Class="PatchOperationAdd">
+          <xpath>*/ThingDef[defName="OGE_Apparel_RuneArmourFarseer"]</xpath>
+          <value>
+            <thingClass>FactionColors.ApparelUniform</thingClass>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>*/ThingDef[defName="OGE_Apparel_RuneArmourFarseer"]/comps</xpath>
+          <value>
+            <li Class="FactionColors.CompProperties_FactionColor">
+              <compClass>FactionColors.CompFactionColor</compClass>
+            </li>
+          </value>
+        </li>-->
+
+        
+
+      </operations>
+    </match>
+  </Operation>
+  
+  
+  
+  
+  
+</Patch>

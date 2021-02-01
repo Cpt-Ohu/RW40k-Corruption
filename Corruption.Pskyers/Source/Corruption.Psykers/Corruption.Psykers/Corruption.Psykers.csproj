@@ -274,7 +274,6 @@
     <Compile Include="CompAbilityEffect_SpawnRadial.cs" />
     <Compile Include="CompImbuedAbility.cs" />
     <Compile Include="HarmonyPatches.cs" />
-    <Compile Include="HediffComp_Heal.cs" />
     <Compile Include="HediffComp_PostBuff.cs" />
     <Compile Include="HediffComp_Shield.cs" />
     <Compile Include="HediffComp_TemporaryRecruit.cs" />
