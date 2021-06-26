@@ -61,7 +61,7 @@ namespace Corruption.Worship.Wonders
             return true;
         }
 
-        public override bool TryExecuteWonder(GodDef god, int worshipPoints)
+        public override bool TryExecuteWonderInt(GodDef god, int worshipPoints)
         {
             cancelled = true;
             Find.Targeter.BeginTargeting(this.GetTargetingParameters(), delegate (LocalTargetInfo t)

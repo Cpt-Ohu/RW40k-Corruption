@@ -18,7 +18,7 @@ namespace Corruption.Worship
             LordJob_Sermon lordJob = lord?.LordJob as LordJob_Sermon;
             if (lordJob != null)
             {
-                    return new Job(JobDefOf.HoldSermon, lordJob.altar, lordJob.altar.InteractionCell);                
+                    return new Job(WorshipJobDefOf.HoldSermon, lordJob.altar, lordJob.altar.InteractionCell);                
             }
             return null;
         }

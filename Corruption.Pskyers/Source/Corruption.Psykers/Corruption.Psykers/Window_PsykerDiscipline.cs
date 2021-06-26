@@ -11,6 +11,7 @@ using RimWorld;
 using RimWorld.IO;
 using System.Linq.Expressions;
 using RimWorld.QuestGen;
+using Corruption.Core.Abilities;
 
 namespace Corruption.Psykers
 {
@@ -111,7 +112,7 @@ namespace Corruption.Psykers
         private void DrawSelectedDiscipline(Rect inRect)
         {
             Rect iconRect = new Rect(inRect.x, inRect.y, 128f, 128f);
-            GUI.DrawTexture(iconRect, PsykerUtility.BGTex);
+            GUI.DrawTexture(iconRect, AbilityUI.BGTex);
             GUI.DrawTexture(iconRect, this.selectedDef.Icon);
             Rect descriptionRect = new Rect(iconRect.x - 38f, iconRect.yMax + 8f, iconRect.width + 76f, Text.LineHeight * 4f);
             Widgets.DrawBox(descriptionRect);

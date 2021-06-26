@@ -13,7 +13,7 @@ namespace Corruption.Worship.Wonders
 {
     public class WonderWorker_PoliticalUpheaval : WonderWorker
     {
-        public override bool TryExecuteWonder(GodDef god, int worshipPoints)
+        public override bool TryExecuteWonderInt(GodDef god, int worshipPoints)
         {
             FieldInfo fieldInfo = typeof(Faction).GetField("relations", BindingFlags.NonPublic| BindingFlags.Instance);
             foreach (var faction in Find.FactionManager.AllFactionsVisible)

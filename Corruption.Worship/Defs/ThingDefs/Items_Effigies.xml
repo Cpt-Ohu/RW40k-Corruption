@@ -25,6 +25,7 @@
     <intricate>true</intricate>
     <thingCategories>
       <li>Manufactured</li>
+      <li>WorshipItems</li>
     </thingCategories>
     <stuffCategories>
       <li>Metallic</li>

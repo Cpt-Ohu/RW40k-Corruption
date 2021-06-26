@@ -14,18 +14,20 @@ namespace Corruption.Worship.Abilities
 {
     public class CompAbilityEffect_GainCorruption : CompAbilityEffect
     {
-        public override void Apply(GlobalTargetInfo target)
+        public new CompProperties_GainCorruption Props => base.props as CompProperties_GainCorruption;
+        public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
-            base.Apply(target);
+            base.Apply(target, dest);
             CompSoul soul = this.parent.pawn.Soul();
             GodDef casterGod = soul.ChosenPantheon.GodsListForReading.RandomElementByWeight(x => 1f + soul.FavourTracker.FavourValueFor(x));
             Pawn pawn = target.Thing as Pawn;
             if (pawn != null)
             {
-                pawn.Soul()?.GainCorruption(casterGod.favourCorruptionFactor * 1500, casterGod, false);
-                MoteMaker.MakeStaticMote(pawn.Position, pawn.Map, CoreThingDefOf.Mote_HolyExorcise);
+                pawn.Soul()?.GainCorruption(casterGod.favourCorruptionFactor * 1500f, casterGod, false);
+                MoteMaker.MakeStaticMote(pawn.Position, pawn.Map, this.Props.mote);
             }
         }
+
     }
 
     public class CompProperties_GainCorruption : CompProperties_AbilityEffect
@@ -34,5 +36,7 @@ namespace Corruption.Worship.Abilities
         {
             this.compClass = typeof(CompAbilityEffect_GainCorruption);
         }
+
+        public ThingDef mote = CoreThingDefOf.Mote_HolyExorcise;
     }
 }

@@ -1,4 +1,5 @@
-﻿using Corruption.Core.Gods;
+﻿using Corruption.Core.Abilities;
+using Corruption.Core.Gods;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Corruption.Psykers
     {
         public List<PantheonDef> associatedPantheons = new List<PantheonDef>();
 
-        public List<PsykerLearnablePower> abilities;
+        public List<LearnableAbility> abilities;
 
         public TraitDef practicionerTrait;
 

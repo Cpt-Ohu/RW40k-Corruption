@@ -23,8 +23,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityEffectWithDurationAdvanced">
-        <compClass>Corruption.Psykers.CompAbilityEffect_StunAdvanced</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityEffectWithDurationAdvanced">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_StunAdvanced</compClass>
         <friendlyFire>False</friendlyFire>
         <affectsSelf>False</affectsSelf>
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
@@ -172,7 +172,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -309,7 +309,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>

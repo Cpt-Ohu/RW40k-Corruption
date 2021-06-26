@@ -21,7 +21,7 @@ namespace Corruption.Worship
                 if (belltowers.Count() > 0)
                 {
                     var belltower = belltowers.MinBy(x => x.Position.DistanceTo(pawn.Position));
-                    return new Job(JobDefOf.RingBellTower, belltower);
+                    return new Job(WorshipJobDefOf.RingBellTower, belltower);
                 }
             }
             return null;

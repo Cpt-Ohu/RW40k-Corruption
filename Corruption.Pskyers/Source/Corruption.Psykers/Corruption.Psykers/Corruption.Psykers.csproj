@@ -331,6 +331,7 @@
     <Content Include="Output\Defs\PawnKindDefs\PawnKinds_Imperium.xml" />
     <Content Include="Output\Defs\PawnKindDefs\PawnKinds_NativePsykers.xml" />
     <Content Include="Output\Defs\PsykerClassDefs\GenericPsykers.xml" />
+    <Content Include="Output\Defs\PsykerDisciplineDefs\PsykerDisciplinesOrks.xml" />
     <Content Include="Output\Defs\PsykerDisciplineDefs\PsykerDisciplinesChaos.xml" />
     <Content Include="Output\Defs\PsykerDisciplineDefs\PsykerDisciplinesImperial.xml" />
     <Content Include="Output\Defs\RecipeDefs\Recipes_Psyker.xml" />

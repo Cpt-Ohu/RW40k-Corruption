@@ -10,7 +10,7 @@ using Verse;
 
 namespace Corruption.Core.Gods
 {
-    public class God
+    public class God : ILoadReferenceable
     {
         public GodDef Def;
 
@@ -25,6 +25,11 @@ namespace Corruption.Core.Gods
             {
                 this.FavourWorkers.Add((GodFavourWorker)Activator.CreateInstance(workClass));
             }
+        }
+
+        public string GetUniqueLoadID()
+        {
+            return string.Join(".", Find.World.GetUniqueLoadID(), this.Def.defName);
         }
     }
 }

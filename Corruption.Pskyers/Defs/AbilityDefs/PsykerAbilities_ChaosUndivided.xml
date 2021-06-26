@@ -26,7 +26,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -171,8 +171,8 @@
       <soundCast>PsychicInsanityLanceCast</soundCast>
     </verbProperties>
     <comps>
-      <li Class="Corruption.Psykers.CompProperties_DirectDamage">
-        <compClass>Corruption.Psykers.CompAbilityEffect_DirectDamage</compClass>
+      <li Class="Corruption.Core.Abilities.CompProperties_DirectDamage">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_DirectDamage</compClass>
         <damageDef>MutatingBurn</damageDef>
         <damage>10</damage>
         <moteDef>Mote_BloodSplash</moteDef>
@@ -203,8 +203,8 @@
     </verbProperties>
     <cooldownTicksRange>800~1200</cooldownTicksRange>
     <comps>
-      <li Class="Corruption.Psykers.CompProperties_DirectDamage">
-        <compClass>Corruption.Psykers.CompAbilityEffect_DirectDamage</compClass>
+      <li Class="Corruption.Core.Abilities.CompProperties_DirectDamage">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_DirectDamage</compClass>
         <damageDef>MutatingBurn</damageDef>
         <damage>30</damage>
         <moteDef>Mote_BloodSplash</moteDef>
@@ -236,8 +236,8 @@
     </verbProperties>
     <cooldownTicksRange>800~1200</cooldownTicksRange>
     <comps>
-      <li Class="Corruption.Psykers.CompProperties_DirectDamage">
-        <compClass>Corruption.Psykers.CompAbilityEffect_DirectDamage</compClass>
+      <li Class="Corruption.Core.Abilities.CompProperties_DirectDamage">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_DirectDamage</compClass>
         <damageDef>MutatingBurn</damageDef>
         <damage>10</damage>
         <moteDef>Mote_BloodSplash</moteDef>
@@ -269,8 +269,8 @@
     </verbProperties>
     <cooldownTicksRange>1000~1600</cooldownTicksRange>
     <comps>
-      <li Class="Corruption.Psykers.CompProperties_DirectDamage">
-        <compClass>Corruption.Psykers.CompAbilityEffect_DirectDamage</compClass>
+      <li Class="Corruption.Core.Abilities.CompProperties_DirectDamage">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_DirectDamage</compClass>
         <damageDef>MutatingBurn</damageDef>
         <damage>30</damage>
         <moteDef>Mote_BloodSplash</moteDef>
@@ -310,7 +310,7 @@
         <psychic>False</psychic>
         <applicableToMechs>False</applicableToMechs>
       </li>
-      <li Class="Corruption.Psykers.CompProperties_AbilityMutate">
+      <li Class="Corruption.Core.Abilities.CompProperties_AbilityMutate">
         <mutationHediffs>
           <li>ChaosMutationClaw</li>
           <li>ChaosMutationTentacledHand</li>
@@ -367,7 +367,7 @@
         <psychic>False</psychic>
         <applicableToMechs>False</applicableToMechs>
       </li>
-      <li Class="Corruption.Psykers.CompProperties_AbilityMutate">
+      <li Class="Corruption.Core.Abilities.CompProperties_AbilityMutate">
         <mutationHediffs>
           <li>ChaosMutationClaw</li>
           <li>ChaosMutationTentacledHand</li>
@@ -501,7 +501,7 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class="Corruption.Psykers.CompProperties_SpawnPawn">
+      <li Class="Corruption.Core.Abilities.CompProperties_SpawnPawn">
         <kindDef>Demon_Fury</kindDef>
         <spawnCount>1</spawnCount>
         <spawningMentalState>Berserk</spawningMentalState>
@@ -535,7 +535,7 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class="Corruption.Psykers.CompProperties_SpawnPawn">
+      <li Class="Corruption.Core.Abilities.CompProperties_SpawnPawn">
         <kindDef>Demon_Brute</kindDef>
         <spawnCount>1</spawnCount>
         <spawningMentalState>Berserk</spawningMentalState>
@@ -569,7 +569,7 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class="Corruption.Psykers.CompProperties_SpawnPawn">
+      <li Class="Corruption.Core.Abilities.CompProperties_SpawnPawn">
         <kindDef>Demon_Brute</kindDef>
         <spawnCount>3</spawnCount>
         <spawningHediffs>
@@ -604,7 +604,7 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class="Corruption.Psykers.CompProperties_SpawnPawn">
+      <li Class="Corruption.Core.Abilities.CompProperties_SpawnPawn">
         <kindDef>Demon_BeastUndivided</kindDef>
         <spawnCount>1</spawnCount>
         <spawningMentalState>Berserk</spawningMentalState>
@@ -638,7 +638,7 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class="Corruption.Psykers.CompProperties_SpawnPawn">
+      <li Class="Corruption.Core.Abilities.CompProperties_SpawnPawn">
         <kindDef>Demon_BeastUndivided</kindDef>
         <spawnCount>1</spawnCount>
         <spawningHediffs>

@@ -30,8 +30,8 @@
       <soundCast>PlagueWind</soundCast>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_SpawnVortex">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnVortex</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_SpawnVortex">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnVortex</compClass>
         <vortexToSpawn>PlagueWind</vortexToSpawn>
         <radius>3</radius>
         <screenShakeIntensity>2.0</screenShakeIntensity>
@@ -63,8 +63,8 @@
       <soundCast>PlagueWind</soundCast>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_SpawnVortex">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnVortex</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_SpawnVortex">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnVortex</compClass>
         <vortexToSpawn>PlagueWind</vortexToSpawn>
         <radius>5</radius>
         <screenShakeIntensity>2.0</screenShakeIntensity>
@@ -96,8 +96,8 @@
       <soundCast>PlagueWind</soundCast>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_SpawnVortex">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnVortex</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_SpawnVortex">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnVortex</compClass>
         <vortexToSpawn>PlagueWind</vortexToSpawn>
         <radius>5</radius>
         <screenShakeIntensity>2.0</screenShakeIntensity>
@@ -129,8 +129,8 @@
       <soundCast>PlagueWind</soundCast>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_SpawnVortex">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnVortex</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_SpawnVortex">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnVortex</compClass>
         <vortexToSpawn>PlagueWind</vortexToSpawn>
         <radius>5</radius>
         <screenShakeIntensity>2.0</screenShakeIntensity>
@@ -215,8 +215,8 @@
       <soundCast>PoisonGas</soundCast>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_SpawnVortex">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnVortex</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_SpawnVortex">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnVortex</compClass>
         <vortexToSpawn>GiftOfContagion</vortexToSpawn>
         <radius>3</radius>
         <screenShakeIntensity>2.0</screenShakeIntensity>
@@ -248,8 +248,8 @@
       <soundCast>PoisonGas</soundCast>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_SpawnVortex">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnVortex</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_SpawnVortex">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnVortex</compClass>
         <vortexToSpawn>GiftOfContagion</vortexToSpawn>
         <radius>5</radius>
         <screenShakeIntensity>2.0</screenShakeIntensity>
@@ -281,8 +281,8 @@
       <soundCast>PoisonGas</soundCast>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_SpawnVortex">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnVortex</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_SpawnVortex">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnVortex</compClass>
         <vortexToSpawn>GiftOfContagion</vortexToSpawn>
         <radius>5</radius>
         <screenShakeIntensity>2.0</screenShakeIntensity>
@@ -559,7 +559,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -660,8 +660,8 @@
     </verbProperties>
     <targetRequired>False</targetRequired>
     <comps>
-      <li Class="Corruption.Psykers.CompProperties_AroundPsyker">
-        <compClass>Corruption.Core.CompAbilityEffect_AreaOfEffect</compClass>
+      <li Class="Corruption.Core.Abilities.CompProperties_AroundPsyker">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_AreaOfEffect</compClass>
         <mote>Mote_Miasma</mote>
       </li>
       <li Class = "CompProperties_AbilityEffectWithDuration">

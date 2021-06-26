@@ -46,4 +46,13 @@
     <reportString>ringing bell.</reportString>
   </JobDef>
   
+  <JobDef>
+    <defName>PrayAtPilgrimage</defName>
+    <driverClass>Corruption.Worship.Quests.JobDriver_PrayAtQuestTarget</driverClass>
+    <reportString>praying.</reportString>
+    <joyDuration>600</joyDuration>
+    <joyKind>Meditative</joyKind>
+    <taleOnCompletion>Prayed</taleOnCompletion>
+  </JobDef>
+  
 </Defs>

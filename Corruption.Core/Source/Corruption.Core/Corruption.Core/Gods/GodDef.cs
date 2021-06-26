@@ -54,6 +54,12 @@ namespace Corruption.Core.Gods
 
         public List<string> pleasedByThoughtTags = new List<string>();
 
+        public bool pleasedByBattle = false;
+
+        public float battleFavourFactor = 1f;
+
+        public List<WorktagFavour> pleasedByWorkTags = new List<WorktagFavour>();
+
         public List<string> favourSourceDescriptions = new List<string>();
 
         public ThingDef effectMote;

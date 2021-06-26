@@ -23,7 +23,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -123,7 +123,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -237,7 +237,7 @@
     <defName>OrkEreWeGo</defName>
     <label>ere we go</label>
     <description>Teleport the targets to a desired position not too far from their starting point.</description>
-    <level>30</level>
+    <level>40</level>
     <iconPath>UI/Abilities/OrkEreWeGo</iconPath>
     <writeCombatLog>True</writeCombatLog>
     <showPsycastEffects>False</showPsycastEffects>
@@ -330,7 +330,7 @@
     </verbProperties>
     <comps>
       <li Class = "Corruption.Psykers.ComProperties_SpawnThing">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnPattern</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnPattern</compClass>
         <thingToSpawn>FootOfGork</thingToSpawn>
         <pattern>
           <li>(0, 0)</li>

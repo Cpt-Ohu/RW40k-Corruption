@@ -7,7 +7,7 @@
     <label>Emperor</label>
     <description>The Emperor of Mankind is the sovereign of the Imperium of Man, and Father, Guardian, and God of the human race. He has sat immobile within the Golden Throne of Terra for ten thousand years.</description>
     <texturePath>UI/Glow_Holy</texturePath>
-    <smallTexturePath>UI/Glow_Holy</smallTexturePath>
+    <smallTexturePath>UI/Glow_Emperor</smallTexturePath>
     <mainColor>(0.93, 0.78, 0.19)</mainColor>
     <cultColorOne>RGBA(0.93,0.78,0.19,1)</cultColorOne>
     <cultColorTwo>RGBA(0.3,0.3,0.3,1)</cultColorTwo>
@@ -42,7 +42,7 @@
     <label>Khorne</label>
     <description>Khorne, also called the Blood God and the Lord of Skulls, is the Chaos God of blood, war and murder.</description>
     <texturePath>UI/Glow_Corrupt</texturePath>
-    <smallTexturePath>UI/Glow_Corrupt</smallTexturePath>
+    <smallTexturePath>UI/Glow_Khorne</smallTexturePath>
     <worshipBarPath>UI/Background/WorshipBarKhorne</worshipBarPath>
     <mainColor>(0.7, 0.0, 0.0)</mainColor>
     <cultColorOne>RGBA(0.75,0.00,0.00,1)</cultColorOne>
@@ -75,7 +75,7 @@
     <label>Nurgle</label>
     <description>Nurgle, also known as the Plague Lord, is the Chaos God of disease, decay, death and destruction.</description>
     <texturePath>UI/Glow_Corrupt</texturePath>
-    <smallTexturePath>UI/Glow_Corrupt</smallTexturePath>
+    <smallTexturePath>UI/Glow_Nurgle</smallTexturePath>
     <worshipBarPath>UI/Background/WorshipBarNurgle</worshipBarPath>
     <mainColor>(0.43, 0.78, 0.43)</mainColor>
     <cultColorOne>RGBA(0.59,0.49,0.34,1)</cultColorOne>
@@ -122,7 +122,7 @@
     <label>Tzeentch</label>
     <description>Tzeentch, also known as the Changer of Ways, and the Architect of Fate, is the Chaos God of change, evolution, intrigue and sorcery, he who weaves the threads that connect every action, plot and subtle intrigue in a galaxy-wide game of manipulation and subterfuge.</description>
     <texturePath>UI/Glow_Corrupt</texturePath>
-    <smallTexturePath>UI/Glow_Corrupt</smallTexturePath>
+    <smallTexturePath>UI/Glow_Tzeentch</smallTexturePath>
     <worshipBarPath>UI/Background/WorshipBarTzeentch</worshipBarPath>
     <mainColor>(0.42, 0.7, 1.0)</mainColor>
     <cultColorOne>RGBA(0.42,0.70,1.00,1)</cultColorOne>
@@ -164,7 +164,7 @@
     <label>Slaanesh</label>
     <description>Slaanesh, also known as the Dark Prince, is the Chaos God of pleasure, excess and decadence. Lust, pride and self-indulgence are the hallmarks of all who follow him.</description>
     <texturePath>UI/Glow_Corrupt</texturePath>
-    <smallTexturePath>UI/Glow_Corrupt</smallTexturePath>
+    <smallTexturePath>UI/Glow_Slaanesh</smallTexturePath>
     <worshipBarPath>UI/Background/WorshipBarSlaanesh</worshipBarPath>
     <mainColor>(1.0, 0.5, 1.0)</mainColor>
     <cultColorOne>RGBA(0.67,0.47,0.60,1)</cultColorOne>

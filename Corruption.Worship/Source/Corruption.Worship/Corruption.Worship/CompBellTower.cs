@@ -180,7 +180,7 @@ namespace Corruption.Worship
                 string text = "RingBellTower".Translate();
                 yield return new FloatMenuOption(text, delegate
                 {
-                    Job job = JobMaker.MakeJob(JobDefOf.RingBellTower, parent);
+                    Job job = JobMaker.MakeJob(WorshipJobDefOf.RingBellTower, parent);
                     selPawn.jobs.TryTakeOrderedJob(job);
                 });
             }

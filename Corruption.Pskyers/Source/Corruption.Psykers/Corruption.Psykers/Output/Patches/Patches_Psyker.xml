@@ -17,12 +17,70 @@
       <li Class="PatchOperationAdd">
         <xpath>*/ThingDef[defName="Human"]/comps</xpath>
         <value>
-          <li>
+          <!--<li>
             <compClass>Corruption.Psykers.CompPsyker</compClass>
-          </li>
+          </li>-->
         </value>
       </li>
     </operations>
+  </Operation>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Adeptus Mechanicus: Xenobiologis (Playable Eldar)</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+        <li Class="PatchOperationConditional">
+          <xpath>*/ThingDef[defName="OG_Alien_Eldar"]/comps</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>*/ThingDef[defName="OG_Alien_Eldar"]</xpath>
+            <value>
+              <comps>
+              </comps>
+            </value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>*/ThingDef[defName="OG_Alien_Eldar"]/comps</xpath>
+          <value>
+            <li>
+              <compClass>Corruption.Psykers.CompPsyker</compClass>
+            </li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Adeptus Mechanicus: Xenobiologis (Playable Orkoids)</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+        <li Class="PatchOperationConditional">
+          <xpath>*/ThingDef[defName="OG_Alien_Ork"]/comps</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>*/ThingDef[defName="OG_Alien_Ork"]</xpath>
+            <value>
+              <comps>
+              </comps>
+            </value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>*/ThingDef[defName="OG_Alien_Ork"]/comps</xpath>
+          <value>
+            <li>
+              <compClass>Corruption.Psykers.CompPsyker</compClass>
+            </li>
+          </value>
+        </li>
+      </operations>
+    </match>
   </Operation>
 
   <Operation Class="PatchOperationAdd">
@@ -116,7 +174,7 @@
     <value>
       <li>Make_PsiConvector</li>
     </value>
-    
+
   </Operation>
 
 </Patch>

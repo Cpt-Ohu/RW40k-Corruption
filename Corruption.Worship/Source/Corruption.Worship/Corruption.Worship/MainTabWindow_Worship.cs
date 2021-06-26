@@ -140,6 +140,7 @@ namespace Corruption.Worship
     {
         private static Vector2 pantheonScrollPos = Vector2.zero;
         private static readonly Texture2D BackgroundTile = ContentFinder<Texture2D>.Get("UI/Background/SoulmeterTile", true);
+        private static readonly Texture2D cooldownBarTex = SolidColorMaterials.NewSolidColorTexture(new Color32(9, 203, 4, 64));
 
         private static List<WonderDef> cachedWonders = DefDatabase<WonderDef>.AllDefsListForReading;
 
@@ -291,6 +292,7 @@ namespace Corruption.Worship
 
         private static void DrawGodWonderNodes(Rect nodesRect, GodDef god, float godsFavour)
         {
+            var tracker = GlobalWorshipTracker.Current;
             float totalWidth = nodesRect.width;
             foreach (var wonder in cachedWonders.Where(x => x.associatedGods.Contains(god)))
             {
@@ -298,12 +300,25 @@ namespace Corruption.Worship
                 float xOffset = nodesRect.x + (wonder.favourCost / FavourProgress.ProgressRange.max * totalWidth) - 24f;
                 Rect nodeRect = new Rect(xOffset, nodesRect.y, 48f, 48f);
                 GUI.DrawTexture(nodeRect, wonder.wonderIcon);
+
+                bool canActivate = tracker.GlobalWonderCooldownTicks[wonder] == 0;
+                if (!canActivate)
+                {
+                    float num = 1f - (tracker.GlobalWonderCooldownTicks[wonder] / (float)wonder.CooldownTicks);
+                    Widgets.FillableBar(nodeRect, Mathf.Clamp01(num), cooldownBarTex, null, doBorder: false);
+
+                    Text.Font = GameFont.Tiny;
+                    Text.Anchor = TextAnchor.UpperCenter;
+                    Widgets.Label(nodeRect, num.ToStringPercent("F0"));
+                    Text.Anchor = TextAnchor.UpperLeft;
+                }
+
                 if (Mouse.IsOver(nodeRect))
                 {
                     GUI.DrawTexture(nodeRect, TexUI.HighlightSelectedTex);
                     TooltipHandler.TipRegion(nodeRect, new TipSignal(wonder.ToolTip, wonder.description.GetHashCode() * 124758));
                 }
-                if (Widgets.ButtonInvisible(nodeRect, true))
+                if (canActivate && Widgets.ButtonInvisible(nodeRect, true))
                 {
                     if (!available)
                     {
@@ -316,17 +331,23 @@ namespace Corruption.Worship
                         textGetter = ((int x) => "SetWorshipPoints".Translate());
                         Dialog_Slider window = new Dialog_Slider(textGetter, wonder.favourCost, (int)godsFavour, delegate (int value)
                         {
-                            wonder.Worker.TryExecuteWonder(god, value);
-                            GlobalWorshipTracker.Current.ConsumeFavourFor(value, god);
+                            TriggerWonder(god, wonder);
                         }, wonder.favourCost);
                         Find.WindowStack.Add(window);
                     }
                     else
                     {
-                        wonder.Worker.TryExecuteWonder(god, wonder.favourCost);
-                        GlobalWorshipTracker.Current.ConsumeFavourFor(wonder.favourCost, god);
+                        TriggerWonder(god, wonder);
                     }
                 }
+            }
+        }
+
+        private static void TriggerWonder(GodDef god, WonderDef wonder)
+        {
+            if (wonder.Worker.TryExecuteWonder(god, wonder.favourCost))
+            {
+                GlobalWorshipTracker.Current.ConsumeFavourFor(wonder.favourCost, god);
             }
         }
 

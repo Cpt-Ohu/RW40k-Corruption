@@ -40,9 +40,6 @@ namespace Corruption.Psykers
 
         public static readonly Texture2D PowerCooldownBarTex = SolidColorMaterials.NewSolidColorTexture(new Color32(9, 203, 4, 64));
 
-        public static readonly Texture2D BGTex = ContentFinder<Texture2D>.Get("UI/Widgets/DesButBG");
-        public static readonly Texture2D BGTexHighlight = ContentFinder<Texture2D>.Get("UI/Widgets/DesButBGHighlight");
-
         public static List<HediffDef> DemonicAttentionHediffs => DefDatabase<HediffDef>.AllDefsListForReading.FindAll(x => x.defName.StartsWith("DemonicAttention"));
         public static List<HediffDef> DemonicPossessionHediffs => DefDatabase<HediffDef>.AllDefsListForReading.FindAll(x => x.defName.StartsWith("DemonicPossession"));
 

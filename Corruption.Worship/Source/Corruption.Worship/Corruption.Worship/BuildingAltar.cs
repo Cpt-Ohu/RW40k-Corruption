@@ -126,6 +126,12 @@ namespace Corruption.Worship
             return false;
         }
 
+        public override IEnumerable<Gizmo> GetGizmos()
+        {
+            
+            return base.GetGizmos();
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();

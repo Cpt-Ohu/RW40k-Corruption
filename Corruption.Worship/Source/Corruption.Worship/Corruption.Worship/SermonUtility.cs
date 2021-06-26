@@ -196,7 +196,7 @@ namespace Corruption.Worship
                 {
                     num = +10;
                 }
-                if (pawn.CurJob.def == JobDefOf.AttendSermon)
+                if (pawn.CurJob.def == WorshipJobDefOf.AttendSermon)
                 {
                     num = 0;
                 }
@@ -230,13 +230,13 @@ namespace Corruption.Worship
                 }
                 if (chair != null)
                 {
-                    Job J = new Job(JobDefOf.AttendSermon, altar.CurrentActiveSermon.Preacher, altar, chair);
+                    Job J = new Job(WorshipJobDefOf.AttendSermon, altar.CurrentActiveSermon.Preacher, altar, chair);
                     attendee.jobs.jobQueue.EnqueueLast(J);
                     attendee.jobs.EndCurrentJob(JobCondition.InterruptForced);
                 }
                 else
                 {
-                    Job J = new Job(JobDefOf.AttendSermon, altar.CurrentActiveSermon.Preacher, altar, result);
+                    Job J = new Job(WorshipJobDefOf.AttendSermon, altar.CurrentActiveSermon.Preacher, altar, result);
                     attendee.jobs.jobQueue.EnqueueLast(J);
                     attendee.jobs.EndCurrentJob(JobCondition.InterruptForced);
                 }
@@ -262,7 +262,7 @@ namespace Corruption.Worship
         public static void ForceSermonV2(BuildingAltar altar)
         {
             IntVec3 b = altar.def.interactionCellOffset.RotatedBy(altar.Rotation) + altar.Position;
-            Job job = new Job(JobDefOf.HoldSermon, altar, b);
+            Job job = new Job(WorshipJobDefOf.HoldSermon, altar, b);
             altar.CurrentActiveSermon.Preacher.jobs.jobQueue.EnqueueLast(job);
             altar.CurrentActiveSermon.Preacher.jobs.EndCurrentJob(JobCondition.InterruptForced);
         }
@@ -315,7 +315,7 @@ namespace Corruption.Worship
 
         public static bool GetBestPreacher(Pawn p, out Pawn bestPreacher, out BuildingAltar altar)
         {
-            List<Pawn> availablePreachers = p.Map.mapPawns.FreeColonistsSpawned.ToList<Pawn>().FindAll(s => s.CurJob.def == JobDefOf.HoldSermon);
+            List<Pawn> availablePreachers = p.Map.mapPawns.FreeColonistsSpawned.ToList<Pawn>().FindAll(s => s.CurJob.def == WorshipJobDefOf.HoldSermon);
 
             //Select best preacher of colony
 

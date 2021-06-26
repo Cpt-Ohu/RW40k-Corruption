@@ -44,30 +44,28 @@ namespace Corruption.Worship
             });
             Toil toil = new Toil();
             toil.FailOnCannotTouch(TargetIndex.A, PathEndMode.InteractionCell);
-            toil.FailOn(() => altar.CurrentActiveSermon?.Preacher != pawn);
+            toil.FailOn(() => altar == null);
             toil.FailOn(() => altar.CurrentActiveSermon == null);
+            toil.FailOn(() => altar.CurrentActiveSermon?.Preacher != pawn);
             toil.PlaySustainerOrSound(Core.CoreSoundDefOf.PrayerSustainer);
-            if (altar.CurrentActiveSermon == null)
-            {
-            }
-            if (altar.CurrentActiveSermon.DedicatedTo == null)
-            {
-            }
             GodDef god = altar.CurrentActiveSermon.DedicatedTo;
             toil.tickAction = delegate
             {
-                pawn.GainComfortFromCellIfPossible();
-                pawn.skills.Learn(SkillDefOf.Social, 0.3f);
-                if (pawn.IsHashIntervalTick(MoteInterval.RandomInRange))
+                if (god != null)
                 {
-                    MoteMaker.MakeSpeechBubble(pawn, god.PrayerMote);
-                }
+                    pawn.GainComfortFromCellIfPossible();
+                    pawn.skills.Learn(SkillDefOf.Social, 0.3f);
+                    if (pawn.IsHashIntervalTick(MoteInterval.RandomInRange))
+                    {
+                        MoteMaker.MakeSpeechBubble(pawn, god.PrayerMote);
+                    }
 
-                if (this.CompShrine != null)
-                {
-                    this.pawn.Soul()?.GainCorruption(god.favourCorruptionFactor * this.CompShrine.Props.worshipFactor, god);
+                    if (this.CompShrine != null)
+                    {
+                        this.pawn.Soul()?.GainCorruption(god.favourCorruptionFactor * this.CompShrine.Props.worshipFactor, god);
+                    }
+                    rotateToFace = TargetIndex.B;
                 }
-                rotateToFace = TargetIndex.B;
             };
             toil.defaultCompleteMode = ToilCompleteMode.Never;
             yield return toil;

@@ -101,7 +101,7 @@ namespace Corruption.Core.Soul
 
         public bool TryAddProgress(float change)
         {
-            var actualChange = change * ProgressProgression.Evaluate(this.favourValue);
+            var actualChange = change > 0f ? change * ProgressProgression.Evaluate(this.favourValue): change;
             this.favourValue = ProgressRange.ClampToRange(favourValue + actualChange);
             return true;
         }

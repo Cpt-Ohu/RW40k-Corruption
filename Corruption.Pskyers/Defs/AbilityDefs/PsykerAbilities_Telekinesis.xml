@@ -32,7 +32,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -153,8 +153,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_DirectDamage">
-        <compClass>Corruption.Psykers.CompAbilityEffect_DirectDamage</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_DirectDamage">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_DirectDamage</compClass>
         <damageDef>Crush</damageDef>
         <damage>8</damage>
         <armorPenetration>0.2</armorPenetration>
@@ -186,8 +186,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_DirectDamage">
-        <compClass>Corruption.Psykers.CompAbilityEffect_DirectDamage</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_DirectDamage">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_DirectDamage</compClass>
         <damageDef>Crush</damageDef>
         <damage>18</damage>
         <armorPenetration>0.2</armorPenetration>
@@ -219,8 +219,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_DirectDamage">
-        <compClass>Corruption.Psykers.CompAbilityEffect_DirectDamage</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_DirectDamage">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_DirectDamage</compClass>
         <damageDef>Crush</damageDef>
         <damage>36</damage>
         <armorPenetration>0.2</armorPenetration>
@@ -257,8 +257,8 @@
       <requireLineOfSight>false</requireLineOfSight>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_Teleport">
-        <compClass>Corruption.Psykers.CompAbilityEffect_Teleport</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_Teleport">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_Teleport</compClass>
         <psychic>False</psychic>
         <mote>Mote_GateOfInfinity</mote>
         <sound>OpenPortal</sound>
@@ -341,7 +341,7 @@
     </verbProperties>
     <targetRequired>False</targetRequired>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
         <compClass>CompAbilityEffect_GiveHediff</compClass>
         <hediffDef>TelekineDome</hediffDef>
         <onlyToSelf>True</onlyToSelf>
@@ -379,8 +379,8 @@
     </verbProperties>
     <targetRequired>False</targetRequired>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveHediffSeverity</compClass>
         <hediffDef>TelekineDome</hediffDef>
         <severity>1</severity>
         <onlyToSelf>True</onlyToSelf>
@@ -417,8 +417,8 @@
     </verbProperties>
     <targetRequired>False</targetRequired>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveHediffSeverity</compClass>
         <hediffDef>TelekineDome</hediffDef>
         <severity>2</severity>
         <onlyToSelf>True</onlyToSelf>
@@ -495,8 +495,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_SpawnVortex">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnVortex</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_SpawnVortex">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnVortex</compClass>
         <vortexToSpawn>VortexOfDoom</vortexToSpawn>
         <radius>3</radius>
         <screenShakeIntensity>2.0</screenShakeIntensity>
@@ -530,8 +530,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_SpawnVortex">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnVortex</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_SpawnVortex">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnVortex</compClass>
         <vortexToSpawn>VortexOfDoom</vortexToSpawn>
         <radius>6</radius>
         <screenShakeIntensity>2.0</screenShakeIntensity>
@@ -565,8 +565,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_SpawnVortex">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnVortex</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_SpawnVortex">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnVortex</compClass>
         <vortexToSpawn>VortexOfDoom</vortexToSpawn>
         <radius>10</radius>
         <screenShakeIntensity>2.0</screenShakeIntensity>

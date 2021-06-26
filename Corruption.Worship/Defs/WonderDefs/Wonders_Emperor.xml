@@ -11,9 +11,14 @@
     <defName>EmperorPilgrimage</defName>
     <label>Pilgrimage</label>
     <description>Send out a caravan to look for signs of the Emperor and new believers.</description>
-    <workerClass>Corruption.Worship.Wonders.WonderWorker_Pilgrimage</workerClass>
+    <workerClass>Corruption.Worship.Wonders.WonderWorker_Quest</workerClass>
     <wonderIconPath>UI/Wonders/WonderPilgrimage</wonderIconPath>
     <favourCost>0</favourCost>
+    <cooldownTicks>180000</cooldownTicks>
+    <questScriptDefs>
+      <li>Mission_Pilgrimage_Vision</li>
+      <li>Mission_Pilgrimage_HereticLair</li>
+  </questScriptDefs>
   </Corruption.Worship.Wonders.WonderDef>
 
 
@@ -88,6 +93,7 @@
     <wonderIconPath>UI/Wonders/WonderSaint</wonderIconPath>
     <favourCost>10000</favourCost>
     <traitToGive>HumanSaint</traitToGive>
+    <taleToCreate>BecomeAspiringSaint</taleToCreate>
   </Corruption.Worship.Wonders.WonderDef>
 
 

@@ -114,7 +114,7 @@
     </verbProperties>
     <comps>
       <li Class="Corruption.Psykers.ComProperties_Growth">
-        <compClass>Corruption.Psykers.CompAbilityEffect_Growth</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_Growth</compClass>
         <growthPower>5</growthPower>
         <psychic>False</psychic>
         <applicableToMechs>False</applicableToMechs>
@@ -367,7 +367,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>

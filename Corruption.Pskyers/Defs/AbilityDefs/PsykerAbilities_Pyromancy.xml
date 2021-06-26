@@ -23,7 +23,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -138,7 +138,7 @@
     </verbProperties>
     <comps>
       <li Class = "Corruption.Psykers.ComProperties_SpawnThing">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnPattern</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnPattern</compClass>
         <thingToSpawn>FireWall</thingToSpawn>
         <thingCategoriesToDespawn>
           <li>Item</li>
@@ -188,7 +188,7 @@
     </verbProperties>
     <comps>
       <li Class = "Corruption.Psykers.ComProperties_SpawnThing">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnPattern</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnPattern</compClass>
         <thingToSpawn>FireWall</thingToSpawn>
         <thingCategoriesToDespawn>
           <li>Item</li>
@@ -245,7 +245,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -351,8 +351,8 @@
     </verbProperties>
     <targetRequired>False</targetRequired>
     <comps>
-      <li Class="Corruption.Psykers.CompProperties_AroundPsyker">
-        <compClass>Corruption.Core.CompAbilityEffect_AreaOfEffect</compClass>
+      <li Class="Corruption.Core.Abilities.CompProperties_AroundPsyker">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_AreaOfEffect</compClass>
         <mote>Mote_Sunburst</mote>
       </li>
       <li Class = "CompProperties_AbilityGiveHediff">
@@ -384,8 +384,8 @@
       <range>8.9</range>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_DirectDamage">
-        <compClass>Corruption.Psykers.CompAbilityEffect_DirectDamage</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_DirectDamage">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_DirectDamage</compClass>
         <damageDef>Burn</damageDef>
         <damage>8</damage>
         <armorPenetration>1</armorPenetration>
@@ -435,7 +435,7 @@
     </verbProperties>
     <comps>
       <li Class = "Corruption.Psykers.ComProperties_SpawnThing">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnPattern</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnPattern</compClass>
         <thingToSpawn>Fire</thingToSpawn>
         <thingCategoriesToDespawn>
           <li>Item</li>
@@ -482,8 +482,8 @@
       <soundCast>Incinerate</soundCast>
     </verbProperties>
     <comps>
-      <li Class="Corruption.Psykers.CompProperties_DirectDamage">
-        <compClass>Corruption.Psykers.CompAbilityEffect_DirectDamage</compClass>
+      <li Class="Corruption.Core.Abilities.CompProperties_DirectDamage">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_DirectDamage</compClass>
         <damageDef>Burn</damageDef>
         <damage>10</damage>
         <moteDef>Mote_FireGlow</moteDef>
@@ -517,8 +517,8 @@
       <soundCast>Incinerate</soundCast>
     </verbProperties>
     <comps>
-      <li Class="Corruption.Psykers.CompProperties_DirectDamage">
-        <compClass>Corruption.Psykers.CompAbilityEffect_DirectDamage</compClass>
+      <li Class="Corruption.Core.Abilities.CompProperties_DirectDamage">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_DirectDamage</compClass>
         <damageDef>Flame</damageDef>
         <damage>10</damage>
         <moteDef>Mote_FireGlow</moteDef>

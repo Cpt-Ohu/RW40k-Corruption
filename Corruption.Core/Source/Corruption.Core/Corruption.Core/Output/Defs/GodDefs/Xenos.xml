@@ -64,6 +64,7 @@
     </patronTraits>
     <psykerPowers>
     </psykerPowers>
+    <pleasedByBattle>true</pleasedByBattle>
     <favourSourceDescriptions>
       <li>Fighting</li>
     </favourSourceDescriptions>
@@ -88,6 +89,7 @@
     <patronTraits>
       <li>Bloodlust</li>
     </patronTraits>
+    <pleasedByBattle>true</pleasedByBattle>
     <psykerPowers>
     </psykerPowers>
     <favourSourceDescriptions>
@@ -115,6 +117,7 @@
     <patronTraits>
       <li>Bloodlust</li>
     </patronTraits>
+    <pleasedByBattle>true</pleasedByBattle>
     <psykerPowers>
     </psykerPowers>
     <favourSourceDescriptions>

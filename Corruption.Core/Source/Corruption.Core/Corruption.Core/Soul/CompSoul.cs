@@ -1,4 +1,5 @@
-﻿using Corruption.Core.Gods;
+﻿using Corruption.Core.Abilities;
+using Corruption.Core.Gods;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -12,17 +13,21 @@ using Verse;
 
 namespace Corruption.Core.Soul
 {
-    public class CompSoul : ThingComp
+    public class CompSoul : ThingComp, IAbilityLearner
     {
         private static FloatRange CorruptionRange = new FloatRange(0f, 25000f);
         private float _corruption;
+        public List<AbilityDef> LearnedAbilities = new List<AbilityDef>();
 
         /// <summary>
         /// Whether the player is allowed to see information about this soul
         /// </summary>
         public bool KnownToPlayer;
 
+        [Obsolete]
         public bool IsOnPilgrimage;
+
+        public GodDef OnPilgrimageFor;
         private bool soulInitialized;
 
         public Soul_FavourTracker FavourTracker;
@@ -199,6 +204,26 @@ namespace Corruption.Core.Soul
             {
                 this.GainCorruption(1f, GodDefOf.Khorne);
                 this.PrayerTracker.StartRandomPrayer(this.Pawn.CurJob, this.Pawn.CurJob.playerForced, WorkTags.Violent);
+
+            }
+
+
+            for (int i = 0; i < this.ChosenPantheon.members.Count; i++)
+            {
+                var workTag = this.Pawn.CurJob?.workGiverDef?.workType.workTags;
+                if (workTag != null)
+                {
+                    var pleasedByWork = this.ChosenPantheon.members[i].god.pleasedByWorkTags.FirstOrDefault(x => x.workTags.HasFlag(workTag));
+                    if (pleasedByWork != null)
+                    {
+                        this.TryAddFavorProgress(this.ChosenPantheon.members[i].god, pleasedByWork.favourFactor);
+                    }
+                }
+                if (this.Pawn.IsFighting() && this.ChosenPantheon.members[i].god.pleasedByBattle)
+                {
+                    Log.Message("Fighting Adding Favour " + this.ChosenPantheon.members[i].god.battleFavourFactor);
+                    this.TryAddFavorProgress(this.ChosenPantheon.members[i].god, this.ChosenPantheon.members[i].god.battleFavourFactor);
+                }
             }
         }
 
@@ -286,6 +311,7 @@ namespace Corruption.Core.Soul
             Scribe_Defs.Look<PantheonDef>(ref this._chosenPantheon, "chosenPantheon");
             Scribe_Values.Look<bool>(ref soulInitialized, "soulInitialized");
             Scribe_Values.Look<float>(ref _corruption, "corruption");
+            Scribe_Defs.Look<GodDef>(ref this.OnPilgrimageFor, null);
 
         }
 
@@ -315,6 +341,75 @@ namespace Corruption.Core.Soul
         private void DiscoverAlignment()
         {
             this.KnownToPlayer = true;
+        }
+
+        public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        {
+            var windowTraits = this.Pawn.story.traits.allTraits.Where(x => x.def is SoulTraitDef sDef && sDef.tabWindowClass != null);
+            foreach (var windows in windowTraits)
+            {
+                var soulTraitDef = windows.def as SoulTraitDef;
+                if (soulTraitDef != null)
+                {
+                    Command_Action command = new Command_Action();
+                    command.defaultLabel = windows.LabelCap;
+                    command.defaultDesc = soulTraitDef.description;
+                    command.icon = soulTraitDef.Icon;
+                    command.action = delegate
+                    {
+                        var window = Activator.CreateInstance(soulTraitDef.tabWindowClass, this, windows) as Window;
+                        Find.WindowStack.Add(window);
+                    };
+                    yield return command;
+                }
+            }
+            yield break;
+
+        }
+
+        public bool HasLearnedAbility(AbilityDef def)
+        {
+            return this.LearnedAbilities.Contains(def);
+        }
+
+        public bool LearningRequirementsMet(LearnableAbility selectedPower)
+        {
+            return selectedPower.perequesiteAbility == null || this.LearnedAbilities.Contains(selectedPower.perequesiteAbility);
+        }
+
+        public bool TryLearnAbility(AbilityDef def)
+        {
+            if (this.LearnedAbilities.Contains(def))
+            {
+                return false;
+            }
+            this.LearnedAbilities.Add(def);
+            this.Pawn.abilities.GainAbility(def);
+
+            return true;
+        }
+
+        public bool TryLearnAbility(LearnableAbility learnablePower)
+        {
+            float previousXP = this.FavourTracker.FavourValueFor(learnablePower.associatedGod);
+
+            if (previousXP -learnablePower.cost <0)
+            {
+                if (this.Pawn.IsColonistPlayerControlled)
+                {
+                    Messages.Message("GiftLearnFavourShortage".Translate(), null, MessageTypeDefOf.RejectInput);
+                }
+                return false;
+            }
+
+            if (learnablePower.replacesPerequisite)
+            {
+                this.Pawn.abilities.RemoveAbility(learnablePower.perequesiteAbility);
+            }
+
+            this.FavourTracker.TryAddProgressFor(learnablePower.associatedGod, -learnablePower.cost);
+            return this.TryLearnAbility(learnablePower.ability);
+
         }
     }
 

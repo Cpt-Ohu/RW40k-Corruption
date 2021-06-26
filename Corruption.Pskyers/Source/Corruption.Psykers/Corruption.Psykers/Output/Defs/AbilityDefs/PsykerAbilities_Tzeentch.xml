@@ -27,7 +27,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -185,8 +185,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class="Corruption.Psykers.CompProperties_DirectDamage">
-        <compClass>Corruption.Psykers.CompAbilityEffect_DirectDamage</compClass>
+      <li Class="Corruption.Core.Abilities.CompProperties_DirectDamage">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_DirectDamage</compClass>
         <damageDef>Flame</damageDef>
         <damage>15</damage>
         <moteDef>Mote_FireGlow</moteDef>
@@ -247,8 +247,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityEffectWithDurationAdvanced">
-        <compClass>Corruption.Psykers.CompAbilityEffect_StunAdvanced</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityEffectWithDurationAdvanced">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_StunAdvanced</compClass>
         <friendlyFire>False</friendlyFire>
         <affectsSelf>False</affectsSelf>
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
@@ -314,8 +314,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_SpawnVortex">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnVortex</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_SpawnVortex">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnVortex</compClass>
         <vortexToSpawn>TzeentchFirestorm</vortexToSpawn>
         <radius>3</radius>
         <screenShakeIntensity>2.0</screenShakeIntensity>
@@ -349,8 +349,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_SpawnVortex">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnVortex</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_SpawnVortex">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnVortex</compClass>
         <vortexToSpawn>TzeentchFirestorm</vortexToSpawn>
         <radius>6</radius>
         <screenShakeIntensity>2.0</screenShakeIntensity>
@@ -384,8 +384,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_SpawnVortex">
-        <compClass>Corruption.Psykers.CompAbilityEffect_SpawnVortex</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_SpawnVortex">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_SpawnVortex</compClass>
         <vortexToSpawn>TzeentchFirestorm</vortexToSpawn>
         <radius>10</radius>
         <screenShakeIntensity>2.0</screenShakeIntensity>
@@ -426,7 +426,7 @@
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityEffect">
-        <compClass>Corruption.Core.CompAbilityEffect_LaunchProjectile</compClass>
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_LaunchProjectile</compClass>
         <psychic>False</psychic>
         <applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
         <applicableToMechs>True</applicableToMechs>
@@ -582,8 +582,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_Teleport">
-        <compClass>Corruption.Psykers.CompAbilityEffect_Teleport</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_Teleport">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_Teleport</compClass>
         <psychic>False</psychic>
         <mote>Mote_SorcererPortal</mote>
         <sound>OpenPortal</sound>
@@ -661,7 +661,7 @@
     </verbProperties>
     <targetRequired>False</targetRequired>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
         <compClass>CompAbilityEffect_GiveHediff</compClass>
         <hediffDef>DaemonicShield</hediffDef>
         <onlyToSelf>True</onlyToSelf>
@@ -700,8 +700,8 @@
     </verbProperties>
     <targetRequired>False</targetRequired>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveHediffSeverity</compClass>
         <hediffDef>DaemonicShield</hediffDef>
         <severity>1</severity>
         <onlyToSelf>True</onlyToSelf>
@@ -739,8 +739,8 @@
     </verbProperties>
     <targetRequired>False</targetRequired>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveHediffSeverity</compClass>
         <hediffDef>DaemonicShield</hediffDef>
         <severity>2</severity>
         <onlyToSelf>True</onlyToSelf>

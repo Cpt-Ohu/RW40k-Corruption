@@ -82,6 +82,7 @@ namespace Corruption.Core.Soul
         public void ExposeData()
         {
             Scribe_Collections.Look<FavourProgress>(ref this.Favours, "favours", LookMode.Deep);
+            
         }
     }
 }

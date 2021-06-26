@@ -37,4 +37,5 @@
 
   <CorruptionGainFactor>Corruption Gain Factor</CorruptionGainFactor>
 
+  <LeaderExperiencedVision>Their leader {0} has experienced a vision.</LeaderExperiencedVision>
 </LanguageData>

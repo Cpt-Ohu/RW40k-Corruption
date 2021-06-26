@@ -31,7 +31,7 @@
   <Corruption.Core.Soul.SoulTraitDef>
     <defName>HumanSaint</defName>
     <degreeDatas>
-      <li>
+      <li>        
         <label>Aspiring Saint</label>
         <description>This individual was selected by the Emperor to fulfill a purpose. What this purpose is, remains unclear.</description>
         <statFactors>
@@ -40,6 +40,7 @@
           <SocialImpact>1.1</SocialImpact>
           <TameAnimalChance>1.1</TameAnimalChance>
         </statFactors>
+        <degree>0</degree>
       </li>
       <li>
         <label>Living Saint</label>
@@ -50,6 +51,7 @@
           <SocialImpact>2.5</SocialImpact>
           <TameAnimalChance>2.0</TameAnimalChance>
         </statFactors>
+        <degree>1</degree>
       </li>
     </degreeDatas>
     <commonality>0</commonality>
@@ -70,6 +72,7 @@
           <MeleeDodgeChance>1.05</MeleeDodgeChance>
           <MeleeHitChance>1.05</MeleeHitChance>
         </statFactors>
+        <degree>0</degree>
       </li>
       <li>
         <label>Champion of Khorne</label>
@@ -82,6 +85,7 @@
           <MeleeDodgeChance>3.0</MeleeDodgeChance>
           <MeleeHitChance>2.0</MeleeHitChance>
         </statFactors>
+        <degree>1</degree>
       </li>
     </degreeDatas>
     <commonality>0</commonality>
@@ -100,6 +104,7 @@
           <MoveSpeed>0.8</MoveSpeed>
           <PainShockThreshold>1.1</PainShockThreshold>
         </statFactors>
+        <degree>0</degree>
       </li>
       <li>
         <label>Champion of Nurgle</label>
@@ -110,6 +115,7 @@
           <MoveSpeed>0.5</MoveSpeed>
           <PainShockThreshold>1.5</PainShockThreshold>
         </statFactors>
+        <degree>1</degree>
       </li>
     </degreeDatas>
     <commonality>0</commonality>
@@ -120,6 +126,8 @@
 
   <Corruption.Core.Soul.SoulTraitDef>
     <defName>YnneadChosen</defName>
+    <commonality>0</commonality>
+    <ignoreConfigErrors>true</ignoreConfigErrors>
     <degreeDatas>
       <li>
         <label>prophet of Ynnead</label>
@@ -152,6 +160,8 @@
 
   <Corruption.Core.Soul.SoulTraitDef>
     <defName>CegorachChosen</defName>
+    <commonality>0</commonality>
+    <ignoreConfigErrors>true</ignoreConfigErrors>
     <degreeDatas>
       <li>
         <label>puppeteer of Cegorach</label>
@@ -183,6 +193,8 @@
   
   <Corruption.Core.Soul.SoulTraitDef>
     <defName>KhaineChosen</defName>
+    <commonality>0</commonality>
+    <ignoreConfigErrors>true</ignoreConfigErrors>
     <degreeDatas>
       <li>
         <label>scion of khaine</label>
@@ -207,4 +219,46 @@
       <li>Violent</li>
     </requiredWorkTags>
   </Corruption.Core.Soul.SoulTraitDef>
+
+
+  <TraitDef>
+    <defName>Exorcised</defName>
+    <commonality>0</commonality>
+    <ignoreConfigErrors>true</ignoreConfigErrors>
+    <degreeDatas>
+      <li>
+        <label>exorcised (faithful)</label>
+        <description>[PAWN_nameDef]'s was possessed and lived. [PAWN_pronoun] bears the scars and is steeled against corruption.</description>
+        <degree>2</degree>
+        <statOffsets>
+          <PsychicSensitivity>1.0</PsychicSensitivity>
+        </statOffsets>
+      </li>
+      <li>
+        <label>exorcised (stable)</label>
+        <description>[PAWN_nameDef]'s was possessed and lived. [PAWN_pronoun] mind and body weren't entirely shattered.</description>
+        <degree>1</degree>
+        <statOffsets>
+          <PsychicSensitivity>1.0</PsychicSensitivity>
+        </statOffsets>
+      </li>
+      <li>
+        <label>exorcised (broken)</label>
+        <description>[PAWN_nameDef]'s was possessed and lived. [PAWN_pronoun] barely survived and bears the scars in body and mind.</description>
+        <degree>-1</degree>
+        <statOffsets>
+          <PsychicSensitivity>1.5</PsychicSensitivity>
+        </statOffsets>
+      </li>
+      <li>
+        <label>exorcised (tormented)</label>
+        <description>[PAWN_nameDef]'s was possessed and lived, though it is a life of torment that [PAWN_pronoun] would gladly end.</description>
+        <degree>-2</degree>
+        <statOffsets>
+          <PsychicSensitivity>2.0</PsychicSensitivity>
+        </statOffsets>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+
 </Defs>

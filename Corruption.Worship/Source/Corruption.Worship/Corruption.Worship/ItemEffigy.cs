@@ -22,7 +22,7 @@ namespace Corruption.Worship
                 Log.Error(container.ToStringSafe() + " gave null ThingOwner.");
                 return null;
             }
-            Job job = JobMaker.MakeJob(Worship.JobDefOf.InstallEffigy, t, container);
+            Job job = JobMaker.MakeJob(Worship.WorshipJobDefOf.InstallEffigy, t, container);
             job.count = 1;
             job.haulMode = HaulMode.ToContainer;
             return job;

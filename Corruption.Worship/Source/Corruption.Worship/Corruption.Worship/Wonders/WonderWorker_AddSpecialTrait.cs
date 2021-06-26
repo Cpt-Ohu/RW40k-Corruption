@@ -36,7 +36,7 @@ namespace Corruption.Worship.Wonders
                     }
                 }
 
-                Trait trait = new Trait(this.Def.traitToGive, 0, true);
+                Trait trait = new Trait(this.Def.traitToGive, this.Def.traitToGive.degreeDatas.FirstOrDefault().degree, true);
 
                 var traitData = trait.CurrentData as Corruption.Core.Soul.SoulTraitDegreeOptions;
 
@@ -45,7 +45,24 @@ namespace Corruption.Worship.Wonders
                     foreach (var ability in traitData.abilityUnlocks)
                     {
                         pawn.abilities.GainAbility(ability);
+                        pawn.Soul()?.LearnedAbilities.Add(ability);
                     }
+                }
+
+                if(this.Def.taleToCreate != null && this.Def.traitToGive is SoulTraitDef sDef)
+                {
+
+                    var tale = TaleFactory.MakeRawTale(this.Def.taleToCreate, pawn);
+                    var traitTale = TaleRecorder.RecordTale(WorshipTaleDefOfs.TraitProgressionTale, sDef, traitData.degree, tale);
+                    Log.Message(traitTale.ShortSummary);
+                }
+
+                if (traitData.associatedTrait != null)
+                {
+                    var existingTrait = pawn.story.traits.GetTrait(traitData.associatedTrait);
+                    if (existingTrait == null)
+
+                        pawn.story.traits.GainTrait(new Trait(traitData.associatedTrait, traitData.associatedTraitDegree, true));
                 }
 
 

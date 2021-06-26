@@ -29,6 +29,8 @@ namespace Corruption.Worship.Wonders
 
         public TraitDef traitToGive;
 
+        public TaleDef taleToCreate;
+
         public List<AbilityDef> unlockedPowers = new List<AbilityDef>();
 
         public IncidentDef incident;
@@ -48,15 +50,17 @@ namespace Corruption.Worship.Wonders
         public int favourCost;
 
         public int yieldFavour = 0;
+
+        public List<QuestScriptDef> questScriptDefs = new List<QuestScriptDef>();
         
         public override void ResolveReferences()
         {
             base.ResolveReferences();
             LongEventHandler.ExecuteWhenFinished(delegate
             {
-                this.wonderIcon = ContentFinder<Texture2D>.Get(this.wonderIconPath, true);
-                this.workerInt = (WonderWorker)Activator.CreateInstance(this.workerClass);
-                this.workerInt.Def = this;
+                    this.wonderIcon = ContentFinder<Texture2D>.Get(this.wonderIconPath, true);
+                    this.workerInt = (WonderWorker)Activator.CreateInstance(this.workerClass);
+                    this.workerInt.Def = this;
             });
         }
 

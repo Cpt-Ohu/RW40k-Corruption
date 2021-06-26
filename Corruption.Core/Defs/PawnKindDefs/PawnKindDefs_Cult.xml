@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <PawnKindDef Name="CultistBase" Abstract="True" Class="Corruption.Core.CorruptionPawnKindDef">
+    <race>Human</race>
+    <combatPower>35</combatPower>
+    <defaultFactionType>Chaos_NPC</defaultFactionType>
+    <chemicalAddictionChance>0.1</chemicalAddictionChance>
+    <invNutrition>2.55</invNutrition>
+    <itemQuality>Normal</itemQuality>
+    <backstoryCryptosleepCommonality>0.08</backstoryCryptosleepCommonality>
+    <maxGenerationAge>65</maxGenerationAge>
+    <combatEnhancingDrugsChance>0.2</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~2</combatEnhancingDrugsCount>
+    <biocodeWeaponChance>0.1</biocodeWeaponChance>
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+    <affliction>
+      <useForcedPantheon>true</useForcedPantheon>
+      <forcedPantheon>Chaos</forcedPantheon>
+    </affliction>
+  </PawnKindDef>
+
+
+  <PawnKindDef ParentName="CultistBase" Class="Corruption.Core.CorruptionPawnKindDef">
+      <defName>Cultist_Slave</defName>
+      <label>slave</label>
+      <combatPower>35</combatPower>
+      <invNutrition>0</invNutrition>
+      <gearHealthRange>0.2~0.6</gearHealthRange>
+      <itemQuality>Poor</itemQuality>
+      <apparelMoney>90~280</apparelMoney>
+      <apparelAllowHeadgearChance>0.2</apparelAllowHeadgearChance>
+      <apparelTags>
+        <li>ChaosBasic</li>
+      </apparelTags>
+      <weaponMoney>60~200</weaponMoney>
+      <weaponTags>
+        <li>MedievalMeleeBasic</li>
+        <li>NeolithicMeleeBasic</li>
+      </weaponTags>
+      <techHediffsMoney>50~50</techHediffsMoney>
+      <techHediffsTags>
+        <li>Poor</li>
+      </techHediffsTags>
+      <techHediffsChance>0.15</techHediffsChance>
+      <inventoryOptions>
+        <skipChance>0.9</skipChance>
+        <subOptionsChooseOne>
+          <li>
+            <thingDef>MedicineHerbal</thingDef>
+            <countRange>1</countRange>
+          </li>
+        </subOptionsChooseOne>
+      </inventoryOptions>
+    </PawnKindDef>
+
+  <PawnKindDef ParentName="CultistBase" Class="Corruption.Core.CorruptionPawnKindDef">
+    <defName>Cultist_Gunner</defName>
+    <label>cultist gunner</label>
+    <combatPower>65</combatPower>
+    <race>Human</race>
+    <defaultFactionType>PlayerColony_Chaos</defaultFactionType>
+    <chemicalAddictionChance>0.3</chemicalAddictionChance>
+    <apparelTags>
+      <li>ChaosBasic</li>
+      <li>ChaosMilitant</li>
+    </apparelTags>
+    <apparelMoney>200~1200</apparelMoney>
+    <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
+    <techHediffsMoney>500~1500</techHediffsMoney>
+    <apparelAllowHeadgearChance>0.4</apparelAllowHeadgearChance>
+    <weaponMoney>200~500</weaponMoney>
+    <weaponTags>
+      <li>Gun</li>
+    </weaponTags>
+    <disallowedTraits>
+      <li>Brawler</li>
+    </disallowedTraits>
+    <techHediffsTags>
+      <li>Corrupted</li>
+    </techHediffsTags>
+    <techHediffsChance>0.02</techHediffsChance>
+  </PawnKindDef>
+  
+  <PawnKindDef ParentName="CultistBase" Class="Corruption.Core.CorruptionPawnKindDef">
+    <defName>Cultist_Brawler</defName>
+    <label>cultist brawler</label>
+    <combatPower>65</combatPower>
+    <race>Human</race>
+    <defaultFactionType>PlayerColony_Chaos</defaultFactionType>
+    <chemicalAddictionChance>0.3</chemicalAddictionChance>
+    <apparelTags>
+      <li>ChaosBasic</li>
+      <li>ChaosMilitant</li>
+    </apparelTags>
+    <apparelMoney>200~1200</apparelMoney>
+    <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
+    <techHediffsMoney>500~1500</techHediffsMoney>
+    <apparelAllowHeadgearChance>0.4</apparelAllowHeadgearChance>
+    <weaponMoney>200~500</weaponMoney>
+    <combatEnhancingDrugsChance>1.0</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>1~2</combatEnhancingDrugsCount>
+    <weaponTags>
+      <li>MedievalMeleeDecent</li>
+    </weaponTags>
+    <techHediffsTags>
+      <li>Corrupted</li>
+    </techHediffsTags>
+    <techHediffsChance>0.02</techHediffsChance>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="CultistBase" Name="CultistGuardBase" Class="Corruption.Core.CorruptionPawnKindDef" Abstract="True">
+    <apparelTags>
+      <li>ChaosBasic</li>
+      <li>ChaosMilitant</li>
+    </apparelTags>
+    <combatPower>90</combatPower>
+    <apparelMoney>1000~1600</apparelMoney>
+    <techHediffsMoney>500~1500</techHediffsMoney>
+    <apparelAllowHeadgearChance>1.0</apparelAllowHeadgearChance>
+    <weaponMoney>330~650</weaponMoney>
+    <techHediffsTags>
+      <li>Corrupted</li>
+    </techHediffsTags>
+    <techHediffsChance>0.3</techHediffsChance>
+    <inventoryOptions>
+      <skipChance>0.9</skipChance>
+      <subOptionsChooseOne>
+        <li>
+          <thingDef>MedicineIndustrial</thingDef>
+          <countRange>1</countRange>
+        </li>
+      </subOptionsChooseOne>
+    </inventoryOptions>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="CultistGuardBase" Class="Corruption.Core.CorruptionPawnKindDef">
+    <defName>Cultist_Guard_Gunner</defName>
+    <label>cultist guard gunner</label>
+    <weaponTags>
+      <li>Gun</li>
+    </weaponTags>
+    <techHediffsTags>
+      <li>Corrupted</li>
+    </techHediffsTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="CultistGuardBase" Class="Corruption.Core.CorruptionPawnKindDef">
+    <defName>Cultist_Guard_Grenadier</defName>
+    <label>cultist guard grenadier</label>
+    <weaponTags>
+      <li>GrenadeDestructive</li>
+    </weaponTags>
+    <techHediffsTags>
+      <li>Corrupted</li>
+    </techHediffsTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="CultistGuardBase" Class="Corruption.Core.CorruptionPawnKindDef">
+    <defName>Cultist_Guard_Slasher</defName>
+    <label>cultist guard slasher</label>
+    <weaponTags>
+      <li>MedievalMeleeAdvanced</li>
+    </weaponTags>
+    <techHediffsTags>
+      <li>Corrupted</li>
+    </techHediffsTags>
+  </PawnKindDef>
+  
+</Defs>

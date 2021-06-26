@@ -17,7 +17,7 @@ namespace Corruption.Worship
             LordJob_Sermon lordJob = lord?.LordJob as LordJob_Sermon;
             if (lordJob != null)
             {
-                return new Job(JobDefOf.AssistPreacher, lordJob.altar);
+                return new Job(WorshipJobDefOf.AssistPreacher, lordJob.altar);
             }
             return null;
         }

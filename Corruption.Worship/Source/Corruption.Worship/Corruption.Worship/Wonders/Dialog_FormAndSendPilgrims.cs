@@ -1,4 +1,5 @@
-﻿using Corruption.Core.Soul;
+﻿using Corruption.Core.Gods;
+using Corruption.Core.Soul;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,10 @@ namespace Corruption.Worship.Wonders
 {
     public class Dialog_FormAndSendPilgrims : Dialog_FormCaravan
     {
-
-        public Dialog_FormAndSendPilgrims(Map map) : base(map)
+        private GodDef god;
+        public Dialog_FormAndSendPilgrims(Map map, GodDef god) : base(map)
         {
-
+            this.god = god;
         }
         public override void PostClose()
         {
@@ -25,10 +26,9 @@ namespace Corruption.Worship.Wonders
 
                 if (soul != null)
                 {
-                    soul.IsOnPilgrimage = true;
+                    soul.OnPilgrimageFor = this.god;
                 }
             }
-
         }
     }
 }

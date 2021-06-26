@@ -14,7 +14,6 @@ namespace Corruption.Worship
     public class JobDriver_AttendSermon : JobDriver_Spectate
     {
         private BuildingAltar altar => this.TargetB.Cell.GetFirstThing<BuildingAltar>(base.Map);
-        private CompShrine compShrine => this.altar.TryGetComp<CompShrine>();
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
@@ -32,11 +31,12 @@ namespace Corruption.Worship
 
             Lord lord = pawn.GetLord();
             LordJob_Sermon lordJob = lord.LordJob as LordJob_Sermon;
+            lastToil.FailOn(x => this.altar == null || altar.CurrentActiveSermon == null);
             lastToil.AddPreTickAction(delegate
             {
-                if (this.compShrine != null)
+                if (this.altar != null && altar.CurrentActiveSermon != null)
                 {
-                    this.pawn.Soul()?.GainCorruption(this.compShrine.Props.worshipFactor * lordJob.altar.CurrentActiveSermon.DedicatedTo.favourCorruptionFactor, lordJob.altar.CurrentActiveSermon.DedicatedTo);
+                    this.pawn.Soul()?.GainCorruption(this.altar.CompShrine.Props.worshipFactor * altar.CurrentActiveSermon.DedicatedTo.favourCorruptionFactor, altar.CurrentActiveSermon.DedicatedTo);
                 }
             });
         }

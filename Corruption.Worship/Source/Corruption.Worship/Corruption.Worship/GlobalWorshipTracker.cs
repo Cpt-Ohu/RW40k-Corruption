@@ -1,6 +1,7 @@
 ﻿using Corruption.Core;
 using Corruption.Core.Gods;
 using Corruption.Core.Soul;
+using Corruption.Worship.Wonders;
 using JetBrains.Annotations;
 using RimWorld;
 using RimWorld.Planet;
@@ -19,6 +20,8 @@ namespace Corruption.Worship
         {
             this.PlayerPantheon = PantheonDefOf.ImperialCult;
         }
+
+        public DefMap<WonderDef, int> GlobalWonderCooldownTicks = new DefMap<WonderDef, int>();
 
         private PantheonDef playerPantheon;
 
@@ -124,7 +127,14 @@ namespace Corruption.Worship
                 {
                     favour.Deteriorate();
                 }
-            }            
+            }
+            foreach (var kvp in this.GlobalWonderCooldownTicks)
+            {
+                if (kvp.Value > 0)
+                {
+                    this.GlobalWonderCooldownTicks[kvp.Key]--;
+                }
+            }
         }
 
         public override void ExposeData()
@@ -132,6 +142,14 @@ namespace Corruption.Worship
             base.ExposeData();
             Scribe_Defs.Look<PantheonDef>(ref this.playerPantheon, "playerPantheon");
             Scribe_Collections.Look<FavourProgress>(ref this.Favours, "favors", LookMode.Deep);
+            Scribe_Deep.Look(ref this.GlobalWonderCooldownTicks, "triggeredWonders");
+            if(Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                if(this.GlobalWonderCooldownTicks == null)
+                {
+                    this.GlobalWonderCooldownTicks = new DefMap<WonderDef, int>();
+                }
+            }
         }
 
         public static GlobalWorshipTracker Current

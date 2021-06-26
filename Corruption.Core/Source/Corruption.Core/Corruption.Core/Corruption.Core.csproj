@@ -300,9 +300,37 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abilities\AbilityUI.cs" />
+    <Compile Include="Abilities\Ability_AoE.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_AffectSettlementRelation.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_Recruit.cs" />
+    <Compile Include="Abilities\IAbilityLearner.cs" />
+    <Compile Include="Abilities\LearnableAbility.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_AroundPsyker.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_DirectDamage.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_GiveHediffSeverity.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_GiveThought.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_Growth.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_LightningStrike.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_Mutate.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_PsyProjectile.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_ReplacePart.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_SatisfyNeed.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_SpawnBeam.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_SpawnPawn.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_SpawnRadial.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_SpawnVortex.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_StunAdvanced.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_Teleport.cs" />
+    <Compile Include="Abilities\CompDamageOnSpawn.cs" />
+    <Compile Include="Abilities\CompProperties_AbilityEffectWithDurationAdvanced.cs" />
+    <Compile Include="Abilities\InfernoBeam.cs" />
+    <Compile Include="Abilities\Thought_MemoryPsionic.cs" />
+    <Compile Include="Abilities\Window_TraitAbilities.cs" />
     <Compile Include="AfflictionProperty.cs" />
-    <Compile Include="CompAbilityEffect_AreaOfEffect.cs" />
-    <Compile Include="CompAbilityEffect_LaunchProjectile.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_AreaOfEffect.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_GiveMentalStateTargeted.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_LaunchProjectile.cs" />
     <Compile Include="CompAffectSoil.cs" />
     <Compile Include="CompDamageLInker.cs" />
     <Compile Include="CompNotSpawnable.cs" />
@@ -362,6 +390,7 @@
     <Compile Include="Soul\Pawn_ChosenTracker.cs" />
     <Compile Include="Soul\SoulAfflictionDef.cs" />
     <Compile Include="Soul\SoulTraitDefOf.cs" />
+    <Compile Include="Soul\WorktagFavour.cs" />
     <Compile Include="TEXUI_Core.cs" />
     <Compile Include="ThingDefOf.cs" />
     <Compile Include="ThoughtWorker_PsychicBlank.cs" />
@@ -433,6 +462,8 @@
     <Content Include="Output\Defs\JoyGiverDefs\JoyGiversPray.xml" />
     <Content Include="Output\Defs\Misc\SoulAfflictions.xml" />
     <Content Include="Output\Defs\PawnKindDefs\PawnKindDefs.xml" />
+    <Content Include="Output\Defs\PawnKindDefs\PawnKindDefs_Cult.xml" />
+    <Content Include="Output\Defs\PawnKindDefs\PawnKindDefs_IoM.xml" />
     <Content Include="Output\Defs\PrayerDefs\CorruptionPrayers.xml" />
     <Content Include="Output\Defs\PrayerDefs\EmperorPrayers.xml" />
     <Content Include="Output\Defs\PrayerDefs\XenoPrayers.xml" />

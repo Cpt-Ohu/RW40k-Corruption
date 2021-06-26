@@ -1,4 +1,5 @@
 ﻿using Corruption.Core;
+using Corruption.Core.Abilities;
 using Corruption.Core.Soul;
 using RimWorld;
 using System;
@@ -22,7 +23,7 @@ namespace Corruption.Psykers
         private const float MINOR_DISCIPLINE_COST = 1000f;
 
         private PsykerDisciplineDef selectedDiscipline = PsykerDisciplineDefOf.Initiate;
-        private PsykerLearnablePower selectedPower;
+        private LearnableAbility selectedPower;
 
         private CompPsyker comp;
         private int psykerPowerLevel;
@@ -74,7 +75,7 @@ namespace Corruption.Psykers
             Widgets.DrawBox(selectionRect);
             Widgets.DrawMenuSection(selectionRect);
             selectionRect = selectionRect.ContractedBy(17f);
-            DrawSelection(selectionRect);
+            Corruption.Core.Abilities.AbilityUI.DrawSelection(selectionRect, this.selectedPower);
 
             GUI.EndGroup();
             if (Widgets.CloseButtonFor(inRect.ExpandedBy(17f).AtZero()))
@@ -83,128 +84,88 @@ namespace Corruption.Psykers
             }
         }
 
-        private void DrawSelection(Rect selectionRect)
-        {
-            GUI.BeginGroup(selectionRect);
-            Rect labelRect = new Rect(0f, 0f, selectionRect.width, 32f);
-            Text.Font = GameFont.Medium;
-            Widgets.Label(labelRect, "SelectedPower".Translate());
-            Text.Font = GameFont.Small;
+        //private void DrawSelection(Rect selectionRect)
+        //{
+        //    GUI.BeginGroup(selectionRect);
+        //    Rect labelRect = new Rect(0f, 0f, selectionRect.width, 32f);
+        //    Text.Font = GameFont.Medium;
+        //    Widgets.Label(labelRect, "SelectedPower".Translate());
+        //    Text.Font = GameFont.Small;
 
-            Rect iconRect = new Rect(selectionRect.width / 2f - 37f, labelRect.yMax + 4f, 74f, 74f);
+        //    Rect iconRect = new Rect(selectionRect.width / 2f - 37f, labelRect.yMax + 4f, 74f, 74f);
 
-            if (this.selectedPower == null)
-            {
-                GUI.DrawTexture(iconRect, PsykerUtility.BGTex);
-                GUI.DrawTexture(iconRect, PsykerDisciplineDefOf.Initiate.Icon);
-            }
-            else
-            {
-                GUI.DrawTexture(iconRect, PsykerUtility.BGTex);
-                GUI.DrawTexture(iconRect, selectedPower.ability.uiIcon);
+        //    if (this.selectedPower == null)
+        //    {
+        //        GUI.DrawTexture(iconRect, Corruption.Core.Abilities.AbilityUI.BGTex);
+        //        GUI.DrawTexture(iconRect, PsykerDisciplineDefOf.Initiate.Icon);
+        //    }
+        //    else
+        //    {
+        //        GUI.DrawTexture(iconRect, Corruption.Core.Abilities.AbilityUI.BGTex);
+        //        GUI.DrawTexture(iconRect, selectedPower.ability.uiIcon);
 
-                Rect powerLabelRect = new Rect(0f, iconRect.yMax + 4f, selectionRect.width, 48f);
-                Text.Anchor = TextAnchor.UpperCenter;
-                Widgets.Label(powerLabelRect, selectedPower.ability.LabelCap);
-                Text.Anchor = TextAnchor.UpperLeft;
+        //        Rect powerLabelRect = new Rect(0f, iconRect.yMax + 4f, selectionRect.width, 48f);
+        //        Text.Anchor = TextAnchor.UpperCenter;
+        //        Widgets.Label(powerLabelRect, selectedPower.ability.LabelCap);
+        //        Text.Anchor = TextAnchor.UpperLeft;
 
-                string description = selectedPower.ability.description;
-                Rect descriptionRect = new Rect(0f, powerLabelRect.yMax + 8f, selectionRect.width, Text.CalcHeight(description, selectionRect.width)); ;
+        //        string description = selectedPower.ability.description;
+        //        Rect descriptionRect = new Rect(0f, powerLabelRect.yMax + 8f, selectionRect.width, Text.CalcHeight(description, selectionRect.width)); ;
 
-                Widgets.Label(descriptionRect, description);
-                float curY = descriptionRect.yMax + 4f;
-                Widgets.ListSeparator(ref curY, selectionRect.width, "TabStats".Translate());
-                Rect factRect = new Rect(0f, curY, selectionRect.width, selectionRect.height - curY);
+        //        Widgets.Label(descriptionRect, description);
+        //        float curY = descriptionRect.yMax + 4f;
+        //        Widgets.ListSeparator(ref curY, selectionRect.width, "TabStats".Translate());
+        //        Rect factRect = new Rect(0f, curY, selectionRect.width, selectionRect.height - curY);
 
-                string toolTip = selectedPower.ability.StatSummary.ToLineList();
+        //        string toolTip = selectedPower.ability.StatSummary.ToLineList();
 
-                if (this.selectedPower.ability.targetRequired)
-                {
-                    toolTip += "\n" + "Range".Translate() + ": " + this.selectedPower.ability.verbProperties.range.ToString("F0");
-                }
+        //        if (this.selectedPower.ability.targetRequired)
+        //        {
+        //            toolTip += "\n" + "Range".Translate() + ": " + this.selectedPower.ability.verbProperties.range.ToString("F0");
+        //        }
 
-                foreach (var directDamageComp in selectedPower.ability.comps.Where(x => x is CompProperties_DirectDamage).Cast<CompProperties_DirectDamage>())
-                {
-                    toolTip += "\n" + "DirectDamageDescr".Translate(new NamedArgument(directDamageComp.damage, "AMOUNT"), new NamedArgument(directDamageComp.damageDef.label, "DAMAGEDEF"));
-                }
+        //        foreach (var directDamageComp in selectedPower.ability.comps.Where(x => x is CompProperties_DirectDamage).Cast<CompProperties_DirectDamage>())
+        //        {
+        //            toolTip += "\n" + "DirectDamageDescr".Translate(new NamedArgument(directDamageComp.damage, "AMOUNT"), new NamedArgument(directDamageComp.damageDef.label, "DAMAGEDEF"));
+        //        }
 
-                foreach (var severityComp in selectedPower.ability.comps.Where(x => x is CompProperties_AbilityGiveHediffSeverity).Cast<CompProperties_AbilityGiveHediffSeverity>())
-                {
-                    var stage = severityComp.hediffDef.stages[0];
-                    if (severityComp is CompProperties_AbilityGiveHediffSeverity compSeverity)
-                    {
-                        stage = compSeverity.hediffDef.stages.FirstOrDefault(x => x.minSeverity >= compSeverity.severity);
-                    }
-                    foreach (var stat in stage.SpecialDisplayStats())
-                    {
-                        toolTip += "\n" + stat.LabelCap + ": " + stat.ValueString;
-                    }
-                    foreach (var cap in stage.capMods)
-                    {
-                        toolTip += "\n" + cap.capacity.LabelCap + ":" + cap.offset;
-                    }
-                }
+        //        foreach (var severityComp in selectedPower.ability.comps.Where(x => x is CompProperties_AbilityGiveHediffSeverity).Cast<CompProperties_AbilityGiveHediffSeverity>())
+        //        {
+        //            var stage = severityComp.hediffDef.stages[0];
+        //            if (severityComp is CompProperties_AbilityGiveHediffSeverity compSeverity)
+        //            {
+        //                stage = compSeverity.hediffDef.stages.FirstOrDefault(x => x.minSeverity >= compSeverity.severity);
+        //            }
+        //            foreach (var stat in stage.SpecialDisplayStats())
+        //            {
+        //                toolTip += "\n" + stat.LabelCap + ": " + stat.ValueString;
+        //            }
+        //            foreach (var cap in stage.capMods)
+        //            {
+        //                toolTip += "\n" + cap.capacity.LabelCap + ":" + cap.offset;
+        //            }
+        //        }
 
-                foreach (var conflictingPower in this.selectedPower.conflictsWith)
-                {
-                    toolTip += "\n" + "LearntExcludingPower".Translate(new NamedArgument(conflictingPower.label, "ABILITY"));
-                }
+        //        foreach (var conflictingPower in this.selectedPower.conflictsWith)
+        //        {
+        //            toolTip += "\n" + "LearntExcludingPower".Translate(new NamedArgument(conflictingPower.label, "ABILITY"));
+        //        }
 
-                if (selectedPower.ability.comps.Any(x => x.compClass == typeof(CompAbilityEffect_PsyProjectile)))
-                {
-                    var projectile = selectedPower.ability.verbProperties.defaultProjectile.projectile;
-                    int maxDamage = projectile.GetDamageAmount(1f) * selectedPower.ability.verbProperties.burstShotCount;
-                    toolTip += "\n" + "ProjectileDamageDescr".Translate(new NamedArgument(maxDamage, "AMOUNT"), new NamedArgument(projectile.damageDef.label, "DAMAGEDEF"));
-                    if (projectile.explosionRadius > 0f) toolTip += "\n" + "ProjectileAoERadius".Translate(new NamedArgument(projectile.explosionRadius, "RADIUS"));
-                }
+        //        if (selectedPower.ability.comps.Any(x => x.compClass == typeof(CompAbilityEffect_PsyProjectile)))
+        //        {
+        //            var projectile = selectedPower.ability.verbProperties.defaultProjectile.projectile;
+        //            int maxDamage = projectile.GetDamageAmount(1f) * selectedPower.ability.verbProperties.burstShotCount;
+        //            toolTip += "\n" + "ProjectileDamageDescr".Translate(new NamedArgument(maxDamage, "AMOUNT"), new NamedArgument(projectile.damageDef.label, "DAMAGEDEF"));
+        //            if (projectile.explosionRadius > 0f) toolTip += "\n" + "ProjectileAoERadius".Translate(new NamedArgument(projectile.explosionRadius, "RADIUS"));
+        //        }
 
-                Widgets.TextAreaScrollable(factRect, toolTip, ref descrScrollPos, true);
+        //        Widgets.TextAreaScrollable(factRect, toolTip, ref descrScrollPos, true);
 
-                toolTip += "\n\n" + "LearnPowerCost".Translate(new NamedArgument((int)(this.selectedPower.cost), "COST"));
+        //        toolTip += "\n\n" + "LearnPowerCost".Translate(new NamedArgument((int)(this.selectedPower.cost), "COST"));
+        //    }
 
-
-                //Widgets.TextAreaScrollable(factRect, toolTip, ref factScrollPos, true) ;
-
-                //    Rect purchaseRect = new Rect(selectionRect.width / 2f - 64f, factRect.yMax + 8f, 128f, 48f);
-
-
-                //    if (this.selectedPower.ability.level > this.comp.PsykerPowerTrait.Degree)
-                //    {
-                //        Widgets.CustomButtonText(ref purchaseRect, "LearnPower".Translate(), TexUI.LockedResearchColor, Color.white, TexUI.DefaultLineResearchColor);
-                //        TooltipHandler.TipRegion(purchaseRect, new TipSignal("PsykerLearnAboveLevel".Translate()));
-                //    }
-                //    else if (this.selectedPower.cost > this.comp.PsykerXP)
-                //    {
-                //        Widgets.CustomButtonText(ref purchaseRect, "LearnPower".Translate(), TexUI.LockedResearchColor, Color.white, TexUI.DefaultLineResearchColor);
-                //        TooltipHandler.TipRegion(purchaseRect, new TipSignal("PsykerLearnXPShortage".Translate()));
-                //    }
-                //    else if (this.comp.HasLearnedAbility(selectedPower.ability))
-                //    {
-                //        Widgets.CustomButtonText(ref purchaseRect, "LearntPower".Translate(), TexUI.LockedResearchColor, Color.white, TexUI.HighlightBorderResearchColor);
-                //    }
-                //    else
-                //    {
-                //        if (Widgets.ButtonText(purchaseRect, "LearnPower".Translate()))
-                //        {
-                //            this.comp.TryLearnPower(this.selectedPower);
-                //        }
-                //    }
-
-                //    Rect debugRect = new Rect(purchaseRect);
-                //    debugRect.y = purchaseRect.yMax + 8f;
-                //    if (Prefs.DevMode)
-                //    {
-                //        if (Widgets.ButtonText(debugRect, "Debug: +100XP"))
-                //        {
-                //            this.comp.AddXP(100f);
-                //        }
-                //    }
-
-
-            }
-
-            GUI.EndGroup();
-        }
+        //    GUI.EndGroup();
+        //}
 
         private void DrawPowersRect(Rect powersRect)
         {
@@ -308,7 +269,7 @@ namespace Corruption.Psykers
             {
                 if (Widgets.ButtonText(buttonRect, "LearnPower".Translate()))
                 {
-                    if (this.comp.TryLearnPower(this.selectedPower))
+                    if (this.comp.TryLearnAbility(this.selectedPower))
                     {
                         CoreSoundDefOf.Corruption_UnlockMinor.PlayOneShotOnCamera();
                     }
@@ -448,7 +409,7 @@ namespace Corruption.Psykers
             Text.Font = GameFont.Small;
 
             Rect disciplineIconRect = new Rect(disciplineRect.width / 2f - 64f, labelRect.yMax + 4f, 128f, 128f);
-            GUI.DrawTexture(disciplineIconRect, PsykerUtility.BGTex);
+            GUI.DrawTexture(disciplineIconRect, AbilityUI.BGTex);
             GUI.DrawTexture(disciplineIconRect, comp.MainDiscipline.Icon);
 
             Widgets.DrawHighlightIfMouseover(disciplineIconRect);
@@ -497,7 +458,7 @@ namespace Corruption.Psykers
             else
             {
 
-                GUI.DrawTexture(minorPowerRect, PsykerUtility.BGTex);
+                GUI.DrawTexture(minorPowerRect, AbilityUI.BGTex);
                 GUI.DrawTexture(minorPowerRect, comp.minorDisciplines[0].Icon);
                 if (this.selectedDiscipline == comp.minorDisciplines[0])
                 {

@@ -212,8 +212,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_GiveThought">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveThought</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_GiveThought">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveThought</compClass>
         <thought>TelepathyFortitude</thought>
         <stage>0</stage>
         <psychic>True</psychic>
@@ -248,8 +248,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_GiveThought">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveThought</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_GiveThought">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveThought</compClass>
         <thought>TelepathyFortitude</thought>
         <stage>1</stage>
         <psychic>True</psychic>
@@ -285,8 +285,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_GiveThought">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveThought</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_GiveThought">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveThought</compClass>
         <thought>TelepathyFortitude</thought>
         <stage>2</stage>
         <psychic>True</psychic>
@@ -322,8 +322,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_GiveThought">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveThought</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_GiveThought">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveThought</compClass>
         <thought>TelepathyFortitude</thought>
         <stage>3</stage>
         <psychic>True</psychic>

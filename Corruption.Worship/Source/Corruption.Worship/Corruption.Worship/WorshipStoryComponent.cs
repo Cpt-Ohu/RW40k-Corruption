@@ -1,6 +1,7 @@
 ﻿using Corruption.Core;
 using Corruption.Core.Gods;
 using Corruption.Core.Soul;
+using Corruption.Worship.Wonders;
 using RimWorld;
 using RimWorld.Planet;
 using System;
@@ -19,12 +20,11 @@ namespace Corruption.Worship
         private static List<Map> tmpMaps = new List<Map>();
 
         private static List<Caravan> tmpCaravans = new List<Caravan>();
-        
+
         private DefMap<PantheonDef, GlobalPantheonFollowers> tmpCachedFollowers;
 
         public override void Notify_PawnCorrupted(CompSoul soul)
         {
-
         }
 
         public override void Notify_PawnPantheonChanged(CompSoul soul)
@@ -141,5 +141,6 @@ namespace Corruption.Worship
                 Find.WindowStack.Add(dialog);
             }
         }
+
     }
 }

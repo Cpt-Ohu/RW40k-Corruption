@@ -12,13 +12,26 @@ namespace Corruption.Worship
 {
     public class JobDriver_PrayToShrine : JobDriver_Prayer
     {
-        private CompShrine CompShrine
+        protected Thing Shrine
         {
             get
             {
+
                 if (this.TargetB != LocalTargetInfo.Invalid && this.TargetB.HasThing)
                 {
-                    return this.TargetB.Thing.TryGetComp<CompShrine>();
+                    return this.TargetB.Thing;
+                }
+                return null;
+            }
+        }
+
+        protected CompShrine CompShrine
+        {
+            get
+            {
+                if (Shrine != null)
+                {
+                    return this.Shrine.TryGetComp<CompShrine>();
                 }
                 return null;
             }
@@ -53,7 +66,7 @@ namespace Corruption.Worship
             return toils;
         }
 
-        private void AddPrayerFinish(CompSoul soul, Toil lastToil)
+        protected virtual void AddPrayerFinish(CompSoul soul, Toil lastToil)
         {
             if (soul != null)
             {

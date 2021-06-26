@@ -3,7 +3,7 @@
 
   <MentalBreakDef>
     <defName>KhornateDuel</defName>
-    <mentalState>KhornateDuel</mentalState>
+    <mentalState>Duel</mentalState>
     <intensity>Extreme</intensity>
     <baseCommonality>0</baseCommonality>
     <ignoreConfigErrors>true</ignoreConfigErrors>
@@ -16,10 +16,10 @@
   </MentalBreakDef>
   
   <MentalStateDef ParentName="BaseMentalState">
-    <defName>KhornateDuel</defName>
-    <stateClass>MentalState_MurderousRage</stateClass>
-    <workerClass>MentalStateWorker_MurderousRage</workerClass>
-    <label>khornate duel</label>
+    <defName>Duel</defName>
+    <stateClass>Corruption.Worship.MentalState_Duel</stateClass>
+    <workerClass>MentalStateWorker</workerClass>
+    <label>duel</label>
     <category>Aggro</category>
     <blockInteractionInitiationExcept>
       <li>Insult</li>

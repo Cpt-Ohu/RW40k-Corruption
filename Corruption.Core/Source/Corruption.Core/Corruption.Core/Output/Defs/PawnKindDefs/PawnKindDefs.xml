@@ -17,6 +17,9 @@
     <backstoryCryptosleepCommonality>0.01</backstoryCryptosleepCommonality>
     <invNutrition>2.55</invNutrition>
     <biocodeWeaponChance>0.1</biocodeWeaponChance>
+    <apparelTags>
+      <li>ImperialBasic</li>
+    </apparelTags>
   </PawnKindDef>  
   
   <PawnKindDef ParentName="BasePlayerPawnKind">

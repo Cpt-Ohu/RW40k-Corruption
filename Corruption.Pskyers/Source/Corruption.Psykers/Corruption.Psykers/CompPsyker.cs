@@ -1,4 +1,5 @@
 ﻿using Corruption.Core;
+using Corruption.Core.Abilities;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using Verse;
 
 namespace Corruption.Psykers
 {
-    public class CompPsyker : ThingComp
+    public class CompPsyker : ThingComp, IAbilityLearner
     {
         public List<AbilityDef> LearnedAbilities = new List<AbilityDef>();
 
@@ -78,7 +79,7 @@ namespace Corruption.Psykers
 
                     foreach (var power in psykerClass.forcedPowers)
                     {
-                        this.TryLearnPower(power);
+                        this.TryLearnAbility(power);
                     }
 
                     this.MainDiscipline = psykerClass.mainDiscipline;
@@ -108,7 +109,7 @@ namespace Corruption.Psykers
                         else
                         {
                             var learnable = learnables.RandomElement();
-                            if (this.TryLearnPower(learnable))
+                            if (this.TryLearnAbility(learnable))
                             {
                                 availableXP -= learnable.cost;
                             }
@@ -133,16 +134,6 @@ namespace Corruption.Psykers
             return null;
         }
 
-        public bool HasLearnedAbility(AbilityDef def)
-        {
-            return this.LearnedAbilities.Contains(def);
-        }
-
-        public bool LearningRequirementsMet(PsykerLearnablePower selectedPower)
-        {
-            return selectedPower.perequesiteAbility == null || this.LearnedAbilities.Contains(selectedPower.perequesiteAbility);
-        }
-
         public float PsykerXP;
 
         public void AddXP(float amount)
@@ -151,24 +142,29 @@ namespace Corruption.Psykers
             this.PsykerXP += Math.Abs(adjustedXP);
         }
 
-        public bool TryLearnPower(AbilityDef def)
+        public bool HasLearnedAbility(AbilityDef def)
+        {
+            return this.LearnedAbilities.Contains(def);
+        }
+
+        public bool LearningRequirementsMet(LearnableAbility selectedPower)
+        {
+            return selectedPower.perequesiteAbility == null || this.LearnedAbilities.Contains(selectedPower.perequesiteAbility);
+        }
+
+        public bool TryLearnAbility(AbilityDef def)
         {
             if (this.LearnedAbilities.Contains(def))
             {
                 return false;
             }
-
-            //if (this.LearnedAbilities.Where(x => x.level == def.level).Count() > PsykerUtility.PsykerAbilitieSlots[def.level])
-            //{
-            //    return false;
-            //}
             this.LearnedAbilities.Add(def);
             this.Pawn.abilities.GainAbility(def);
 
             return true;
         }
 
-        public bool TryLearnPower(PsykerLearnablePower learnablePower)
+        public bool TryLearnAbility(LearnableAbility learnablePower)
         {
             float previousXP = this.PsykerXP;
             this.PsykerXP = this.PsykerXP - learnablePower.cost;
@@ -187,7 +183,7 @@ namespace Corruption.Psykers
                 this.Pawn.abilities.RemoveAbility(learnablePower.perequesiteAbility);
             }
 
-            return this.TryLearnPower(learnablePower.ability);
+            return this.TryLearnAbility(learnablePower.ability);
 
         }
 

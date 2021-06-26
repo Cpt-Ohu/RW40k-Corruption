@@ -9,10 +9,12 @@ using Verse;
 namespace Corruption.Worship
 {
     [DefOf]
-    public static class JobDefOf
+    public static class WorshipJobDefOf
     {
         public static JobDef HoldSermon;
         public static JobDef AssistPreacher;
+        public static JobDef Pray;
+        public static JobDef PrayAtPilgrimage;
         public static JobDef AttendSermon;
         public static JobDef InstallEffigy;
         public static JobDef RingBellTower;

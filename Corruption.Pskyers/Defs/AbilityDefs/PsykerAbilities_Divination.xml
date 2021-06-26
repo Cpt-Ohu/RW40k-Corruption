@@ -37,7 +37,7 @@
     </verbProperties>
     <targetRequired>False</targetRequired>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
         <compClass>CompAbilityEffect_GiveHediff</compClass>
         <hediffDef>DiviForewarning</hediffDef>
         <onlyToSelf>True</onlyToSelf>
@@ -74,8 +74,8 @@
     </verbProperties>
     <targetRequired>False</targetRequired>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveHediffSeverity</compClass>
         <hediffDef>DiviForewarning</hediffDef>
         <severity>1</severity>
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
@@ -112,8 +112,8 @@
     </verbProperties>
     <targetRequired>False</targetRequired>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveHediffSeverity</compClass>
         <hediffDef>DiviForewarning</hediffDef>
         <severity>2</severity>
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
@@ -150,8 +150,8 @@
     </verbProperties>
     <targetRequired>False</targetRequired>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveHediffSeverity</compClass>
         <hediffDef>DiviForewarning</hediffDef>
         <severity>3</severity>
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
@@ -196,7 +196,7 @@
       <Ability_Duration>20</Ability_Duration>
     </statBases>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
         <compClass>CompAbilityEffect_GiveHediff</compClass>
         <hediffDef>DiviMisfortune</hediffDef>
         <onlyToSelf>True</onlyToSelf>
@@ -218,8 +218,8 @@
       <Ability_EffectRadius>3</Ability_EffectRadius>
     </statBases>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveHediffSeverity</compClass>
         <hediffDef>DiviMisfortune</hediffDef>
         <severity>1</severity>
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
@@ -241,8 +241,8 @@
       <Ability_EffectRadius>5</Ability_EffectRadius>
     </statBases>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveHediffSeverity</compClass>
         <hediffDef>DiviMisfortune</hediffDef>
         <severity>2</severity>
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
@@ -263,8 +263,8 @@
       <Ability_EffectRadius>8</Ability_EffectRadius>
     </statBases>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveHediffSeverity</compClass>
         <hediffDef>DiviMisfortune</hediffDef>
         <severity>3</severity>
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
@@ -298,7 +298,7 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
         <compClass>CompAbilityEffect_GiveHediff</compClass>
         <hediffDef>DiviPrescience</hediffDef>
         <psychic>True</psychic>
@@ -330,8 +330,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveHediffSeverity</compClass>
         <hediffDef>DiviPrescience</hediffDef>
         <severity>1</severity>
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
@@ -365,8 +365,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveHediffSeverity</compClass>
         <hediffDef>DiviPrescience</hediffDef>
         <severity>2</severity>
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
@@ -401,8 +401,8 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveHediffSeverity</compClass>
         <hediffDef>DiviPrescience</hediffDef>
         <severity>3</severity>
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
@@ -439,7 +439,7 @@
     </verbProperties>
     <targetRequired>False</targetRequired>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
         <compClass>CompAbilityEffect_GiveHediff</compClass>
         <hediffDef>DiviInsight</hediffDef>
         <onlyToSelf>True</onlyToSelf>
@@ -473,8 +473,8 @@
     </verbProperties>
     <targetRequired>False</targetRequired>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveHediffSeverity</compClass>
         <hediffDef>DiviInsight</hediffDef>
         <severity>0.3</severity>
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
@@ -507,8 +507,8 @@
     </verbProperties>
     <targetRequired>False</targetRequired>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveHediffSeverity</compClass>
         <hediffDef>DiviInsight</hediffDef>
         <severity>0.7</severity>
         <durationMultiplier>PsychicSensitivity</durationMultiplier>
@@ -541,8 +541,8 @@
     </verbProperties>
     <targetRequired>False</targetRequired>
     <comps>
-      <li Class = "Corruption.Psykers.CompProperties_AbilityGiveHediffSeverity">
-        <compClass>Corruption.Psykers.CompAbilityEffect_GiveHediffSeverity</compClass>
+      <li Class = "Corruption.Core.Abilities.CompProperties_AbilityGiveHediffSeverity">
+        <compClass>Corruption.Core.Abilities.CompAbilityEffect_GiveHediffSeverity</compClass>
         <hediffDef>DiviInsight</hediffDef>
         <severity>1.0</severity>
         <durationMultiplier>PsychicSensitivity</durationMultiplier>

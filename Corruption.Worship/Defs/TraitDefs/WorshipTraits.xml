@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-  <TraitDef>
+  <TraitDef Class="Corruption.Core.Soul.SoulTraitDef">
     <defName>HumanSaint</defName>
     <commonality>0</commonality>
     <ignoreConfigErrors>true</ignoreConfigErrors>
@@ -17,27 +17,105 @@
         <abilityUnlocks>
           <li>CleanseCorruption</li>
         </abilityUnlocks>
+        <learnableAbilities>
+          <li>
+            <ability>CleanseCorruption</ability>
+          </li>
+          <li>
+            <ability>SaintlyTouchInspiration</ability>
+          </li>
+        </learnableAbilities>
+        <degree>10</degree>
       </li>
-      <li>
+      <li Class="Corruption.Core.Soul.SoulTraitDegreeOptions">
+        <label>Aspiring Saint</label>
+        <description>This individual was selected by the Emperor to fulfill a purpose. [PAWN_pronoun] has taken the first steps on that path.</description>
+        <statFactors>
+          <MarketValue>2.0</MarketValue>
+          <MentalBreakThreshold>1.2</MentalBreakThreshold>
+          <SocialImpact>1.1</SocialImpact>
+          <TameAnimalChance>1.1</TameAnimalChance>
+        </statFactors>
+        <degree>20</degree>
+        <learnableAbilities>
+          <li>
+            <ability>SaintlyTouchSoothing</ability>
+          </li>
+          <li>
+            <ability>SaintlyGaze</ability>
+          </li>
+        </learnableAbilities>
+      </li>
+      <li Class="Corruption.Core.Soul.SoulTraitDegreeOptions">
+        <label>Aspiring Saint</label>
+        <description>This individual was selected by the Emperor to fulfill a purpose. [PAWN_pronoun] is underway to becoming an actual saint.</description>
+        <statFactors>
+          <MarketValue>2.0</MarketValue>
+          <MentalBreakThreshold>1.2</MentalBreakThreshold>
+          <SocialImpact>1.1</SocialImpact>
+          <TameAnimalChance>1.1</TameAnimalChance>
+        </statFactors>
+        <degree>30</degree>
+        <learnableAbilities>
+          <li>
+            <ability>SaintlyTouchHealing</ability>
+          </li>
+        </learnableAbilities>
+      </li>
+      <li Class="Corruption.Core.Soul.SoulTraitDegreeOptions">
+        <label>Aspiring Saint</label>
+        <description>This individual was selected by the Emperor to fulfill a purpose. [PAWN_pronoun] is close to fulfilling that goal.</description>
+        <statFactors>
+          <MarketValue>2.0</MarketValue>
+          <MentalBreakThreshold>1.2</MentalBreakThreshold>
+          <SocialImpact>1.1</SocialImpact>
+          <TameAnimalChance>1.1</TameAnimalChance>
+        </statFactors>
+        <degree>40</degree>
+        <learnableAbilities>
+          <li>
+            <ability>SaintlyAuraInspiration</ability>
+          </li>
+          <li>
+            <ability>SaintInspiringCharge</ability>
+          </li>
+        </learnableAbilities>
+      </li>
+      <li Class="Corruption.Core.Soul.SoulTraitDegreeOptions">
         <label>Living Saint</label>
-        <description>This individual has braved its trials and has become an Imperial saint walking among mere mortals.</description>
+        <description>[PAWN_nameDef] has braved [PAWN_pronoun] trials and has become an Imperial saint walking among mere mortals.</description>
         <statFactors>
           <MarketValue>10.0</MarketValue>
           <MentalBreakThreshold>2.12</MentalBreakThreshold>
           <SocialImpact>2.5</SocialImpact>
           <TameAnimalChance>2.0</TameAnimalChance>
         </statFactors>
+        <degree>50</degree>
+        <learnableAbilities>
+          <li>
+            <ability>CleanseCorruptionMass</ability>
+          </li>
+          <li>
+            <ability>SaintlyVisionOfPeace</ability>
+          </li>
+          <li>
+            <ability>SaintlyLitanyUnion</ability>
+          </li>
+        </learnableAbilities>
       </li>
     </degreeDatas>
+    <associatedGod>Emperor</associatedGod>
+    <tabWindowClass>Corruption.Worship.Window_ChosenAbilities</tabWindowClass>
+    <iconPath>UI/Widgets/Saint</iconPath>    
   </TraitDef>
 
 
-  <TraitDef>
+  <TraitDef Class="Corruption.Core.Soul.SoulTraitDef">
     <defName>KhorneChampion</defName>
     <commonality>0</commonality>
     <ignoreConfigErrors>true</ignoreConfigErrors>
     <degreeDatas>
-      <li>
+      <li Class="Corruption.Core.Soul.SoulTraitDegreeOptions">
         <label>Aspiring Champion</label>
         <description>This individual was selected by Khorne to do battle in his name.</description>
         <statFactors>
@@ -47,6 +125,9 @@
           <MeleeDodgeChance>1.05</MeleeDodgeChance>
           <MeleeHitChance>1.05</MeleeHitChance>
         </statFactors>
+        <abilityUnlocks>
+          <li>KhornateChallenge</li>
+        </abilityUnlocks>
       </li>
       <li>
         <label>Champion of Khorne</label>
@@ -61,15 +142,18 @@
         </statFactors>
       </li>
     </degreeDatas>
+    <associatedGod>Khorne</associatedGod>
+    <tabWindowClass>Corruption.Worship.Window_ChosenAbilities</tabWindowClass>
+    <iconPath>UI/Widgets/ChampionKhorne</iconPath>
   </TraitDef>
 
 
-  <TraitDef>
+  <TraitDef Class="Corruption.Core.Soul.SoulTraitDef">
     <defName>NurgleChampion</defName>
     <commonality>0</commonality>
     <ignoreConfigErrors>true</ignoreConfigErrors>
     <degreeDatas>
-      <li>
+      <li Class="Corruption.Core.Soul.SoulTraitDegreeOptions">
         <label>Aspiring Champion</label>
         <description>This individual was selected by Nurgle to spread pestilence.</description>
         <statFactors>
@@ -77,6 +161,9 @@
           <MoveSpeed>0.8</MoveSpeed>
           <PainShockThreshold>1.1</PainShockThreshold>
         </statFactors>
+        <abilityUnlocks>
+          <li>NurgliteRegrowth</li>
+        </abilityUnlocks>
       </li>
       <li>
         <label>Champion of Nurgle</label>
@@ -89,14 +176,17 @@
         </statFactors>
       </li>
     </degreeDatas>
+    <associatedGod>Nurgle</associatedGod>
+    <tabWindowClass>Corruption.Worship.Window_ChosenAbilities</tabWindowClass>
+    <iconPath>UI/Widgets/ChampionNurgle</iconPath>
   </TraitDef>
 
-  <TraitDef>
+  <TraitDef Class="Corruption.Core.Soul.SoulTraitDef">
     <defName>TzeentchChampion</defName>
     <commonality>0</commonality>
     <ignoreConfigErrors>true</ignoreConfigErrors>
     <degreeDatas>
-      <li>
+      <li Class="Corruption.Core.Soul.SoulTraitDegreeOptions">
         <label>Aspiring Champion</label>
         <description>This individual was selected by Tzeentch to be a fulcrum of knowledge and sorcery.</description>
         <statFactors>
@@ -107,8 +197,10 @@
           <MentalBreakThreshold>2.0</MentalBreakThreshold>
           <PainShockThreshold>3.0</PainShockThreshold>
         </statOffsets>
+        <associatedTrait MayRequire="CptOhu.CorruptionPsyker">Psyker</associatedTrait>
+        <associatedTraitDegree>40</associatedTraitDegree>
       </li>
-      <li>
+      <li  Class="Corruption.Core.Soul.SoulTraitDegreeOptions">
         <label>Champion of Tzeentch</label>
         <description>This individual has become a master of Sorcery and Trickery.</description>
         <statFactors>
@@ -121,10 +213,13 @@
         </statOffsets>
       </li>
     </degreeDatas>
+    <associatedGod>Tzeentch</associatedGod>
+    <tabWindowClass>Corruption.Worship.Window_ChosenAbilities</tabWindowClass>
+    <iconPath>UI/Widgets/ChampionTzeentch</iconPath>
   </TraitDef>
- 
 
-  <TraitDef>
+
+  <TraitDef Class="Corruption.Core.Soul.SoulTraitDef">
     <defName>SlaaneshChampion</defName>
     <commonality>0</commonality>
     <ignoreConfigErrors>true</ignoreConfigErrors>
@@ -132,7 +227,7 @@
       <li>Ascetic</li>
     </conflictingTraits>
     <degreeDatas>
-      <li>
+      <li Class="Corruption.Core.Soul.SoulTraitDegreeOptions">
         <label>Aspiring Champion</label>
         <description>This individual was chosen by Slaanesh to be an idol of lust and perfection.</description>
         <statOffsets>
@@ -143,6 +238,9 @@
           <MeleeHitChance>2</MeleeHitChance>
           <MeleeDodgeChance>2</MeleeDodgeChance>
         </statOffsets>
+        <abilityUnlocks>
+          <li>SirensScream</li>
+        </abilityUnlocks>        
       </li>
       <li>
         <label>Champion of Slaanesh</label>
@@ -160,6 +258,9 @@
         </statOffsets>
       </li>
     </degreeDatas>
+    <associatedGod>Slaanesh</associatedGod>
+    <tabWindowClass>Corruption.Worship.Window_ChosenAbilities</tabWindowClass>
+    <iconPath>UI/Widgets/ChampionSlaanesh</iconPath>
   </TraitDef>
 
   

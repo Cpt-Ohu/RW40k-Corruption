@@ -82,15 +82,6 @@ namespace Corruption.Worship
                 OpenPreacherSelectMenu(altar, sermon);
             }
 
-            //Rect assistantlbRect = new Rect(width - 208f, preacherLabel.y, 208f, 35f);
-            //Widgets.Label(assistantlbRect, "Assistant".Translate());
-            //Rect assistantButtonRect = new Rect(width - 208f, preacherLabel.yMax + 4f, 200f, 35f);
-
-            //if (Widgets.ButtonText(assistantButtonRect, sermon.Assistant?.LabelCap ?? "None".Translate()))
-            //{
-            //    OpenAssistantSelectMenu(altar, sermon);
-            //}
-
             Rect dedicationRect = new Rect(4f, preacherButtonRect.yMax + 8f, 200f, 35f);
 
             Widgets.Label(dedicationRect, "SermonDedication".Translate());
@@ -120,12 +111,15 @@ namespace Corruption.Worship
             Widgets.CheckboxLabeled(activeRect, "SermonActive".Translate(), ref sermon.Active, false, null, null, true);
 
 
-            Rect debugRect = new Rect(activeRect.xMax - 128f, activeRect.y, 128f, 25f);
+            Rect debugRect = new Rect(activeRect.xMax - 196f, activeRect.y, 196f, 25f);
             if (altar.CurrentActiveSermon == sermon)
             {
-                Lord lord = altar.Map.lordManager.LordOf(altar);
-                lord.ReceiveMemo("ForceEndSermon");
-                altar.EndSermon();
+                if (Widgets.ButtonText(debugRect, "EndSermon".Translate()))
+                {
+                    Lord lord = altar.Map.lordManager.LordOf(altar);
+                    lord.ReceiveMemo("ForceEndSermon");
+                    altar.EndSermon();
+                }
             }
             else if (Prefs.DevMode)
             {

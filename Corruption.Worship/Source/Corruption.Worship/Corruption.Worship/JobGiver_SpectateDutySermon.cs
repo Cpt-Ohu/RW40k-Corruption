@@ -23,12 +23,19 @@ namespace Corruption.Worship
 				return null;
 			}
 			IntVec3 centerCell = duty.spectateRect.CenterCell;
+			BuildingAltar altar = centerCell.GetFirstThing<BuildingAltar>(pawn.Map);
+
+			if(altar == null || altar.CurrentActiveSermon == null)
+			{
+				return null;
+			}
+
 			Building edifice = cell.GetEdifice(pawn.Map);
 			if (edifice != null && edifice.def.category == ThingCategory.Building && edifice.def.building.isSittable && pawn.CanReserve(edifice))
 			{
-				return JobMaker.MakeJob(JobDefOf.AttendSermon, edifice, centerCell);
+				return JobMaker.MakeJob(WorshipJobDefOf.AttendSermon, edifice, centerCell);
 			}
-			return JobMaker.MakeJob(JobDefOf.AttendSermon, cell, centerCell);
+			return JobMaker.MakeJob(WorshipJobDefOf.AttendSermon, cell, centerCell);
 		}
 	}
 }

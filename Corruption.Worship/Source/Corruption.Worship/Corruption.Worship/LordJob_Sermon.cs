@@ -29,7 +29,7 @@ namespace Corruption.Worship
             this.Ending = true;
             if (progress < 0.5f)
             {
-                Messages.Message("MessageSermonCancelled", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("MessageSermonCancelled".Translate(), MessageTypeDefOf.RejectInput, false);
                 this.altar.EndSermon();
                 return;
             }

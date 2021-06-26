@@ -10,7 +10,7 @@ namespace Corruption.Worship.Wonders
 {
     internal class WonderWorker_FinishResearch : WonderWorker
     {
-        public override bool TryExecuteWonder(GodDef god, int worshipPoints)
+        public override bool TryExecuteWonderInt(GodDef god, int worshipPoints)
         {
             var manager = Find.ResearchManager;
             if (manager != null)
